@@ -739,6 +739,10 @@
     `;
 
     const showInputSticker = st.inputStyle !== 'minimal' && bubbleTheme.sticker && !useLivingComposerMascot;
+    const mascotTop = bubbleTheme.stickerTop || -58;
+    const mascotW = bubbleTheme.stickerW || 74;
+    const mascotH = bubbleTheme.stickerH || 70;
+    const ledgeOverlap = Math.max(0, mascotH + mascotTop);
     const inputStickerCss = useLivingComposerMascot ? `
       .surface-composer {
         margin-top: 40px !important;
@@ -748,10 +752,10 @@
       .surface-composer::after { display: none !important; }
       #agy-living-mascot {
         position: absolute;
-        top: ${bubbleTheme.stickerTop || -58}px;
+        top: ${mascotTop}px;
         left: 0;
-        width: ${bubbleTheme.stickerW || 74}px;
-        height: ${bubbleTheme.stickerH || 70}px;
+        width: ${mascotW}px;
+        height: ${mascotH}px;
         z-index: 35;
         cursor: grab;
         user-select: none;
@@ -762,11 +766,38 @@
       #agy-living-mascot[data-dragging="1"] {
         cursor: grabbing;
       }
-      #agy-living-mascot .agy-mascot-flip {
+      #agy-living-mascot[data-phase="ducking"],
+      #agy-living-mascot[data-phase="scurry"],
+      #agy-living-mascot[data-phase="peeking"] {
+        clip-path: inset(-40px -24px ${ledgeOverlap}px -24px);
+        pointer-events: none;
+      }
+      #agy-living-mascot[data-phase="ducking"] .agy-mascot-bubble,
+      #agy-living-mascot[data-phase="scurry"] .agy-mascot-bubble {
+        opacity: 0 !important;
+      }
+      #agy-living-mascot .agy-mascot-stage {
         width: 100%;
         height: 100%;
-        transform: scaleX(var(--agy-mdir, 1));
-        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+        transform-origin: 50% 86%;
+        will-change: transform, opacity;
+        transform: translate3d(0, 0, 0);
+        opacity: 1;
+        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
+      }
+      #agy-living-mascot[data-phase="ducking"] .agy-mascot-stage {
+        transition: transform 250ms cubic-bezier(0.55, 0, 1, 0.45), opacity 180ms ease;
+        transform: translate3d(0, 64px, 0) scale(0.95, 0.94);
+      }
+      #agy-living-mascot[data-phase="scurry"] .agy-mascot-stage {
+        transition: none;
+        transform: translate3d(0, 66px, 0) scale(0.94, 0.94);
+        opacity: 0;
+      }
+      #agy-living-mascot[data-phase="peeking"] .agy-mascot-stage {
+        transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms ease;
+        transform: translate3d(0, 24px, 0) scale(0.99, 1.01);
+        opacity: 1;
       }
       #agy-living-mascot .agy-mascot-sprite {
         width: 100%;
@@ -776,33 +807,33 @@
         background-position: bottom center;
         background-repeat: no-repeat;
         filter: drop-shadow(0 5px 12px rgba(10, 6, 16, 0.55));
-        transform-origin: bottom center;
+        transform-origin: 50% 86%;
         transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms ease;
-        ${isReducedMotion ? '' : 'animation: agyMascotIdle 4.4s ease-in-out infinite;'}
+        ${isReducedMotion ? '' : 'animation: agyMascotBreathe 4.4s ease-in-out infinite;'}
       }
       #agy-living-mascot:hover .agy-mascot-sprite {
-        transform: translateY(-3px) scale(1.04);
+        transform: scale(1.03, 0.985);
         filter: drop-shadow(0 6px 14px ${effGlow});
       }
       #agy-living-mascot[data-dragging="1"] .agy-mascot-sprite {
         animation: none !important;
-        transform: translateY(-8px) scale(1.06) rotate(var(--agy-tilt, 0deg));
-        filter: drop-shadow(0 10px 18px ${effGlow});
-      }
-      #agy-living-mascot[data-state="walking"] .agy-mascot-sprite {
-        ${isReducedMotion ? '' : 'animation: agyMascotWalk 420ms ease-in-out infinite;'}
+        transform: scale(1.035, 0.975) rotate(var(--agy-tilt, 0deg));
+        filter: drop-shadow(0 8px 16px ${effGlow});
       }
       #agy-living-mascot[data-state="listening"] .agy-mascot-sprite {
         ${isReducedMotion ? '' : 'animation: agyMascotListen 1.8s ease-in-out infinite;'}
         filter: drop-shadow(0 5px 14px ${effGlow});
       }
       #agy-living-mascot[data-state="thinking"] .agy-mascot-sprite {
-        ${isReducedMotion ? '' : 'animation: agyMascotThink 1.5s ease-in-out infinite;'}
+        ${isReducedMotion ? '' : 'animation: agyMascotThink 2.0s ease-in-out infinite;'}
         filter: drop-shadow(0 4px 14px ${effGlow});
+      }
+      #agy-living-mascot[data-state="popup"] .agy-mascot-sprite {
+        ${isReducedMotion ? '' : 'animation: agyMascotPopUp 380ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
       }
       #agy-living-mascot[data-state="success"] .agy-mascot-sprite,
       #agy-living-mascot[data-state="happy"] .agy-mascot-sprite {
-        ${isReducedMotion ? '' : 'animation: agyMascotHop 580ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
+        ${isReducedMotion ? '' : 'animation: agyMascotJoy 560ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
         filter: drop-shadow(0 6px 16px ${effGlow});
       }
       #agy-living-mascot .agy-mascot-bubble {
@@ -841,28 +872,30 @@
         opacity: 0;
         animation: agyPetalFloat 1.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
       }
-      @keyframes agyMascotIdle {
-        0%, 100% { transform: translateY(0px); }
-        50% { transform: translateY(-2.5px); }
-      }
-      @keyframes agyMascotWalk {
-        0%, 100% { transform: translateY(0px) rotate(-2deg); }
-        50% { transform: translateY(-4.5px) rotate(2.5deg); }
+      @keyframes agyMascotBreathe {
+        0%, 100% { transform: scale(1, 1); }
+        50% { transform: scale(1.022, 0.975); }
       }
       @keyframes agyMascotListen {
-        0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
-        50% { transform: translateY(-2px) rotate(1.5deg); }
+        0%, 100% { transform: rotate(-1.8deg); }
+        50% { transform: rotate(1.8deg); }
       }
       @keyframes agyMascotThink {
-        0%, 100% { transform: translateY(0px) rotate(0deg); }
-        25% { transform: translateY(-3px) rotate(-2.5deg); }
-        75% { transform: translateY(-2px) rotate(2.5deg); }
+        0%, 100% { transform: rotate(-2.8deg) scale(1.01, 0.99); }
+        50% { transform: rotate(2.8deg) scale(0.99, 1.01); }
       }
-      @keyframes agyMascotHop {
-        0% { transform: translateY(0) scale(1); }
-        35% { transform: translateY(-10px) scale(1.08); }
-        68% { transform: translateY(1px) scale(0.97); }
-        100% { transform: translateY(0) scale(1); }
+      @keyframes agyMascotPopUp {
+        0% { transform: translateY(18px) scale(0.96, 1.04); }
+        55% { transform: translateY(-2px) scale(0.97, 1.05); }
+        80% { transform: translateY(0) scale(1.03, 0.96); }
+        100% { transform: translateY(0) scale(1, 1); }
+      }
+      @keyframes agyMascotJoy {
+        0% { transform: scale(1, 1); }
+        25% { transform: scale(1.07, 0.91); }
+        58% { transform: translateY(-2px) scale(0.95, 1.07); }
+        82% { transform: scale(1.02, 0.98); }
+        100% { transform: scale(1, 1); }
       }
       @keyframes agyPetalFloat {
         0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.6); }
@@ -2339,6 +2372,10 @@
   const STORAGE_MASCOT_RATIO = 'agy_mascot_x_ratio_v3';
 
   function cleanupLivingMascot() {
+    if (Array.isArray(window.__AGY_MASCOT_PHASE_TIMERS__)) {
+      window.__AGY_MASCOT_PHASE_TIMERS__.forEach(id => clearTimeout(id));
+      window.__AGY_MASCOT_PHASE_TIMERS__ = [];
+    }
     if (window.__AGY_MASCOT_ROAM_RAF__) {
       cancelAnimationFrame(window.__AGY_MASCOT_ROAM_RAF__);
       window.__AGY_MASCOT_ROAM_RAF__ = 0;
@@ -2450,9 +2487,10 @@
       mascot.setAttribute('aria-label', 'Sakura Kitsune Mascot');
       mascot.title = 'Sakura Kitsune • Click to pet · Drag along bar · Double-click for Studio';
       mascot.dataset.state = 'idle';
+      mascot.dataset.phase = 'perched';
       mascot.innerHTML = `
         <div class="agy-mascot-bubble" aria-hidden="true">•••</div>
-        <div class="agy-mascot-flip"><div class="agy-mascot-sprite"></div></div>
+        <div class="agy-mascot-stage"><div class="agy-mascot-sprite"></div></div>
       `;
       composer.appendChild(mascot);
 
@@ -2463,20 +2501,25 @@
       }
       ctrl = {
         x: Math.round(minX + (maxX - minX) * savedRatio),
-        dir: 1,
         dragging: false,
-        walking: false,
+        moving: false,
         lastUserInteraction: 0,
         petCount: 0,
         composer
       };
       window.__AGY_MASCOT_CTRL__ = ctrl;
 
+      const clearPhaseTimers = () => {
+        if (Array.isArray(window.__AGY_MASCOT_PHASE_TIMERS__)) {
+          window.__AGY_MASCOT_PHASE_TIMERS__.forEach(id => clearTimeout(id));
+        }
+        window.__AGY_MASCOT_PHASE_TIMERS__ = [];
+      };
+
       const applyPos = (nx, save = false) => {
         const b = getBounds();
         ctrl.x = Math.max(b.minX, Math.min(b.maxX, nx));
         mascot.style.setProperty('--agy-mx', `${Math.round(ctrl.x)}px`);
-        mascot.style.setProperty('--agy-mdir', String(ctrl.dir));
         if (save && b.maxX > b.minX) {
           const ratio = (ctrl.x - b.minX) / (b.maxX - b.minX);
           try { localStorage.setItem(STORAGE_MASCOT_RATIO, ratio.toFixed(4)); } catch (_) {}
@@ -2485,82 +2528,85 @@
       ctrl.applyPos = applyPos;
       applyPos(ctrl.x, false);
 
-      const stopWalk = () => {
-        if (window.__AGY_MASCOT_ROAM_RAF__) {
-          cancelAnimationFrame(window.__AGY_MASCOT_ROAM_RAF__);
-          window.__AGY_MASCOT_ROAM_RAF__ = 0;
-        }
-        ctrl.walking = false;
-        if (mascot.dataset.state === 'walking') {
+      const stopMove = () => {
+        clearPhaseTimers();
+        ctrl.moving = false;
+        mascot.dataset.phase = 'perched';
+        if (mascot.dataset.state === 'popup') {
           mascot.dataset.state = 'idle';
         }
       };
-      ctrl.stopWalk = stopWalk;
+      ctrl.stopMove = stopMove;
+      ctrl.stopWalk = stopMove;
 
-      const walkTo = (targetX, speedPxPerSec = 68, onDone) => {
+      // Natural 4-beat "Peek-a-Boo" relocation along the composer rim
+      const moveTo = (targetX, onDone) => {
         const curSt = getState();
         const reduced = Boolean(curSt.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
         if (reduced || document.hidden || ctrl.dragging) return;
         const b = getBounds();
         const clampedTarget = Math.max(b.minX, Math.min(b.maxX, targetX));
-        const dist = clampedTarget - ctrl.x;
-        if (Math.abs(dist) < 12) return;
+        if (Math.abs(clampedTarget - ctrl.x) < 24) return;
 
-        stopWalk();
-        ctrl.walking = true;
-        ctrl.dir = dist < 0 ? -1 : 1;
-        mascot.style.setProperty('--agy-mdir', String(ctrl.dir));
-        mascot.dataset.state = 'walking';
+        clearPhaseTimers();
+        ctrl.moving = true;
+        mascot.dataset.phase = 'ducking';
 
-        const startX = ctrl.x;
-        const durationMs = Math.max(700, Math.min(4800, (Math.abs(dist) / speedPxPerSec) * 1000));
-        const startTs = performance.now();
-
-        const step = (now) => {
-          window.__AGY_MASCOT_ROAM_RAF__ = 0;
-          if (!ctrl.walking || ctrl.dragging || document.hidden || !mascot.isConnected) {
-            stopWalk();
-            return;
-          }
-          const t = Math.min(1, (now - startTs) / durationMs);
-          // Smooth easeInOutSine
-          const eased = -(Math.cos(Math.PI * t) - 1) / 2;
-          applyPos(startX + dist * eased, false);
-          if (t < 1) {
-            window.__AGY_MASCOT_ROAM_RAF__ = requestAnimationFrame(step);
-          } else {
-            ctrl.walking = false;
-            applyPos(clampedTarget, true);
-            if (mascot.dataset.state === 'walking') {
-              mascot.dataset.state = 'idle';
+        const schedulePhase = (ms, fn) => {
+          const tid = setTimeout(() => {
+            if (!ctrl.moving || ctrl.dragging || document.hidden || !mascot.isConnected) {
+              stopMove();
+              return;
             }
-            if (typeof onDone === 'function') onDone();
-          }
+            fn();
+          }, ms);
+          window.__AGY_MASCOT_PHASE_TIMERS__.push(tid);
         };
-        window.__AGY_MASCOT_ROAM_RAF__ = requestAnimationFrame(step);
+
+        schedulePhase(260, () => {
+          mascot.dataset.phase = 'scurry';
+          applyPos(clampedTarget, true);
+        });
+
+        schedulePhase(480, () => {
+          mascot.dataset.phase = 'peeking';
+        });
+
+        schedulePhase(920, () => {
+          mascot.dataset.phase = 'perched';
+          mascot.dataset.state = 'popup';
+        });
+
+        schedulePhase(1320, () => {
+          ctrl.moving = false;
+          if (mascot.dataset.state === 'popup') {
+            mascot.dataset.state = 'idle';
+          }
+          if (typeof onDone === 'function') onDone();
+        });
       };
-      ctrl.walkTo = walkTo;
+      ctrl.moveTo = moveTo;
+      ctrl.walkTo = moveTo;
 
       const scheduleRoam = () => {
         if (window.__AGY_MASCOT_ROAM_TIMER__) clearTimeout(window.__AGY_MASCOT_ROAM_TIMER__);
-        const delayMs = 8500 + Math.round(Math.random() * 7500);
+        const delayMs = 13000 + Math.round(Math.random() * 9000);
         window.__AGY_MASCOT_ROAM_TIMER__ = setTimeout(() => {
           window.__AGY_MASCOT_ROAM_TIMER__ = 0;
           if (!mascot.isConnected) return;
           const curSt = getState();
           const reduced = Boolean(curSt.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
           const recentlyInteracted = (Date.now() - ctrl.lastUserInteraction) < 6000;
-          if (!reduced && !document.hidden && !ctrl.dragging && !ctrl.walking && mascot.dataset.state === 'idle') {
+          if (!reduced && !document.hidden && !ctrl.dragging && !ctrl.moving && mascot.dataset.state === 'idle') {
             if (!recentlyInteracted) {
               const b = getBounds();
               const span = b.maxX - b.minX;
-              if (span > 60) {
-                // Pick a cozy new spot at least 70px away along the bar
+              if (span > 90) {
                 let target = b.minX + Math.random() * span;
-                if (Math.abs(target - ctrl.x) < 70) {
-                  target = ctrl.x > (b.minX + span * 0.5) ? b.minX + span * 0.18 : b.maxX - span * 0.12;
+                if (Math.abs(target - ctrl.x) < 90) {
+                  target = ctrl.x > (b.minX + span * 0.5) ? b.minX + span * 0.16 : b.maxX - span * 0.10;
                 }
-                walkTo(target, 64);
+                moveTo(target);
               }
             }
           }
@@ -2569,7 +2615,7 @@
       };
       scheduleRoam();
 
-      // Pointer drag & pet interaction
+      // Pointer drag along rim & pet interaction
       let dragStartClientX = 0;
       let dragStartX = 0;
       let movedDist = 0;
@@ -2578,13 +2624,14 @@
       mascot.addEventListener('pointerdown', (e) => {
         if (e.button !== 0) return;
         e.stopPropagation();
-        stopWalk();
+        stopMove();
         ctrl.dragging = true;
         ctrl.lastUserInteraction = Date.now();
         dragStartClientX = e.clientX;
         lastClientX = e.clientX;
         dragStartX = ctrl.x;
         movedDist = 0;
+        mascot.dataset.phase = 'perched';
         mascot.dataset.dragging = '1';
         mascot.style.setProperty('--agy-tilt', '0deg');
         try { mascot.setPointerCapture(e.pointerId); } catch (_) {}
@@ -2596,10 +2643,7 @@
         const stepDx = e.clientX - lastClientX;
         lastClientX = e.clientX;
         movedDist = Math.max(movedDist, Math.abs(dx));
-        if (Math.abs(stepDx) > 1.5) {
-          ctrl.dir = stepDx < 0 ? -1 : 1;
-        }
-        const tilt = Math.max(-10, Math.min(10, stepDx * 0.85));
+        const tilt = Math.max(-5, Math.min(5, stepDx * 0.45));
         mascot.style.setProperty('--agy-tilt', `${tilt.toFixed(1)}deg`);
         applyPos(dragStartX + dx, false);
       }, { signal: ac.signal });
@@ -2624,15 +2668,6 @@
             if (mascot.dataset.state === 'happy') mascot.dataset.state = 'idle';
             window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
           }, 700);
-        } else {
-          // Dropped after sliding along bar
-          mascot.dataset.state = 'happy';
-          spawnSakuraBurst(composer, ctrl.x + mascotW * 0.5);
-          if (window.__AGY_MASCOT_SUCCESS_TIMER__) clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
-          window.__AGY_MASCOT_SUCCESS_TIMER__ = setTimeout(() => {
-            if (mascot.dataset.state === 'happy') mascot.dataset.state = 'idle';
-            window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
-          }, 600);
         }
       };
       mascot.addEventListener('pointerup', finishDrag, { signal: ac.signal });
@@ -2653,7 +2688,7 @@
       composer.addEventListener('input', () => {
         ctrl.lastUserInteraction = Date.now();
         if (ctrl.dragging || mascot.dataset.state === 'thinking') return;
-        stopWalk();
+        stopMove();
         mascot.dataset.state = 'listening';
         if (window.__AGY_MASCOT_LISTEN_TIMER__) clearTimeout(window.__AGY_MASCOT_LISTEN_TIMER__);
         window.__AGY_MASCOT_LISTEN_TIMER__ = setTimeout(() => {
@@ -2680,7 +2715,7 @@
     window.__AGY_MASCOT_PREV_THINKING__ = isThinking;
 
     if (isThinking) {
-      if (ctrl && ctrl.stopWalk) ctrl.stopWalk();
+      if (ctrl && ctrl.stopMove) ctrl.stopMove();
       if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
         clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
         window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
