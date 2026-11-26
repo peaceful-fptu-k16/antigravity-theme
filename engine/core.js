@@ -749,48 +749,86 @@
       #agy-living-mascot {
         position: absolute;
         top: ${bubbleTheme.stickerTop || -58}px;
-        right: ${bubbleTheme.stickerRight || 18}px;
+        left: 0;
         width: ${bubbleTheme.stickerW || 74}px;
         height: ${bubbleTheme.stickerH || 70}px;
+        z-index: 35;
+        cursor: grab;
+        user-select: none;
+        touch-action: none;
+        will-change: transform;
+        transform: translate3d(var(--agy-mx, 0px), 0px, 0px);
+      }
+      #agy-living-mascot[data-dragging="1"] {
+        cursor: grabbing;
+      }
+      #agy-living-mascot .agy-mascot-flip {
+        width: 100%;
+        height: 100%;
+        transform: scaleX(var(--agy-mdir, 1));
+        transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      #agy-living-mascot .agy-mascot-sprite {
+        width: 100%;
+        height: 100%;
         background-image: url("${safeCssUrl(bubbleTheme.sticker)}");
         background-size: contain;
         background-position: bottom center;
         background-repeat: no-repeat;
-        z-index: 35;
-        cursor: pointer;
-        user-select: none;
         filter: drop-shadow(0 5px 12px rgba(10, 6, 16, 0.55));
         transform-origin: bottom center;
-        transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms ease;
+        transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms ease;
         ${isReducedMotion ? '' : 'animation: agyMascotIdle 4.4s ease-in-out infinite;'}
       }
-      #agy-living-mascot:hover {
+      #agy-living-mascot:hover .agy-mascot-sprite {
         transform: translateY(-3px) scale(1.04);
         filter: drop-shadow(0 6px 14px ${effGlow});
       }
-      #agy-living-mascot[data-state="thinking"] {
+      #agy-living-mascot[data-dragging="1"] .agy-mascot-sprite {
+        animation: none !important;
+        transform: translateY(-8px) scale(1.06) rotate(var(--agy-tilt, 0deg));
+        filter: drop-shadow(0 10px 18px ${effGlow});
+      }
+      #agy-living-mascot[data-state="walking"] .agy-mascot-sprite {
+        ${isReducedMotion ? '' : 'animation: agyMascotWalk 420ms ease-in-out infinite;'}
+      }
+      #agy-living-mascot[data-state="listening"] .agy-mascot-sprite {
+        ${isReducedMotion ? '' : 'animation: agyMascotListen 1.8s ease-in-out infinite;'}
+        filter: drop-shadow(0 5px 14px ${effGlow});
+      }
+      #agy-living-mascot[data-state="thinking"] .agy-mascot-sprite {
         ${isReducedMotion ? '' : 'animation: agyMascotThink 1.5s ease-in-out infinite;'}
         filter: drop-shadow(0 4px 14px ${effGlow});
       }
-      #agy-living-mascot[data-state="thinking"]::after {
-        content: "•••";
-        position: absolute;
-        top: -8px;
-        left: -14px;
-        padding: 1px 6px;
-        border-radius: 9999px;
-        font-size: 9px;
-        letter-spacing: 1px;
-        font-weight: 700;
-        color: #F9EAF3;
-        background: rgba(32, 21, 37, 0.92);
-        border: 1px solid ${effPrimary};
-        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
-        ${isReducedMotion ? '' : 'animation: agyThinkDot 1.3s ease-in-out infinite;'}
-      }
-      #agy-living-mascot[data-state="success"] {
+      #agy-living-mascot[data-state="success"] .agy-mascot-sprite,
+      #agy-living-mascot[data-state="happy"] .agy-mascot-sprite {
         ${isReducedMotion ? '' : 'animation: agyMascotHop 580ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
         filter: drop-shadow(0 6px 16px ${effGlow});
+      }
+      #agy-living-mascot .agy-mascot-bubble {
+        position: absolute;
+        top: -12px;
+        left: 50%;
+        transform: translateX(-50%) translateY(4px) scale(0.85);
+        padding: 1px 7px;
+        border-radius: 9999px;
+        font-size: 10px;
+        line-height: 15px;
+        letter-spacing: 0.4px;
+        font-weight: 700;
+        white-space: nowrap;
+        color: #F9EAF3;
+        background: rgba(32, 21, 37, 0.94);
+        border: 1px solid ${effPrimary};
+        box-shadow: 0 3px 10px rgba(0, 0, 0, 0.42);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity 180ms ease, transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+      }
+      #agy-living-mascot .agy-mascot-bubble[data-show="1"],
+      #agy-living-mascot[data-state="thinking"] .agy-mascot-bubble {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0px) scale(1);
       }
       .agy-sakura-petal {
         position: absolute;
@@ -807,20 +845,24 @@
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-2.5px); }
       }
+      @keyframes agyMascotWalk {
+        0%, 100% { transform: translateY(0px) rotate(-2deg); }
+        50% { transform: translateY(-4.5px) rotate(2.5deg); }
+      }
+      @keyframes agyMascotListen {
+        0%, 100% { transform: translateY(0px) rotate(-1.5deg); }
+        50% { transform: translateY(-2px) rotate(1.5deg); }
+      }
       @keyframes agyMascotThink {
         0%, 100% { transform: translateY(0px) rotate(0deg); }
-        25% { transform: translateY(-3px) rotate(-2.2deg); }
-        75% { transform: translateY(-2px) rotate(2.2deg); }
+        25% { transform: translateY(-3px) rotate(-2.5deg); }
+        75% { transform: translateY(-2px) rotate(2.5deg); }
       }
       @keyframes agyMascotHop {
         0% { transform: translateY(0) scale(1); }
-        38% { transform: translateY(-9px) scale(1.07); }
-        70% { transform: translateY(1px) scale(0.98); }
+        35% { transform: translateY(-10px) scale(1.08); }
+        68% { transform: translateY(1px) scale(0.97); }
         100% { transform: translateY(0) scale(1); }
-      }
-      @keyframes agyThinkDot {
-        0%, 100% { opacity: 0.55; transform: translateY(0); }
-        50% { opacity: 1; transform: translateY(-2px); }
       }
       @keyframes agyPetalFloat {
         0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.6); }
@@ -1614,15 +1656,10 @@
     if (titleBtn) titleBtn.remove();
     const settingsBtn = document.getElementById('agy-custom-theme-settings-btn');
     if (settingsBtn) settingsBtn.remove();
-    const mascotEl = document.getElementById('agy-living-mascot');
-    if (mascotEl) mascotEl.remove();
+    cleanupLivingMascot();
     cleanupVideoWallpaper();
     window.__AGY_VIDEO_WP_CFG__ = null;
     document.querySelectorAll('.agy-sakura-petal').forEach(p => p.remove());
-    if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
-      clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
-      window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
-    }
     const modal = document.getElementById('agy-custom-theme-modal-backdrop');
     if (modal) modal.remove();
     document.querySelectorAll('[data-agy-scroll-bound]').forEach(el => {
@@ -2299,22 +2336,57 @@
     });
   }
 
-  function spawnSakuraBurst(composerEl) {
+  const STORAGE_MASCOT_RATIO = 'agy_mascot_x_ratio_v3';
+
+  function cleanupLivingMascot() {
+    if (window.__AGY_MASCOT_ROAM_RAF__) {
+      cancelAnimationFrame(window.__AGY_MASCOT_ROAM_RAF__);
+      window.__AGY_MASCOT_ROAM_RAF__ = 0;
+    }
+    if (window.__AGY_MASCOT_ROAM_TIMER__) {
+      clearTimeout(window.__AGY_MASCOT_ROAM_TIMER__);
+      window.__AGY_MASCOT_ROAM_TIMER__ = 0;
+    }
+    if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
+      clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+      window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+    }
+    if (window.__AGY_MASCOT_BUBBLE_TIMER__) {
+      clearTimeout(window.__AGY_MASCOT_BUBBLE_TIMER__);
+      window.__AGY_MASCOT_BUBBLE_TIMER__ = 0;
+    }
+    if (window.__AGY_MASCOT_LISTEN_TIMER__) {
+      clearTimeout(window.__AGY_MASCOT_LISTEN_TIMER__);
+      window.__AGY_MASCOT_LISTEN_TIMER__ = 0;
+    }
+    if (window.__AGY_MASCOT_AC__) {
+      try { window.__AGY_MASCOT_AC__.abort(); } catch (_) {}
+      window.__AGY_MASCOT_AC__ = null;
+    }
+    window.__AGY_MASCOT_CTRL__ = null;
+    const existing = document.getElementById('agy-living-mascot');
+    if (existing) existing.remove();
+  }
+
+  function spawnSakuraBurst(composerEl, originLeftPx) {
     const st = getState();
     if (st.reducedMotion) return;
     if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     if (!composerEl) return;
+    const baseLeft = Number.isFinite(originLeftPx)
+      ? originLeftPx
+      : Math.max(24, (composerEl.clientWidth || 600) - 56);
     const offsets = [
-      { right: 42, top: -32, dx: -36, dy: -48, rot: -110, delay: 0 },
-      { right: 26, top: -44, dx: -14, dy: -56, rot: 95, delay: 90 },
-      { right: 56, top: -22, dx: -48, dy: -34, rot: -145, delay: 160 },
-      { right: 16, top: -36, dx: 18, dy: -46, rot: 130, delay: 220 },
-      { right: 34, top: -26, dx: -24, dy: -62, rot: 75, delay: 280 }
+      { ox: -14, top: -32, dx: -32, dy: -48, rot: -110, delay: 0 },
+      { ox: 6, top: -44, dx: -8, dy: -56, rot: 95, delay: 80 },
+      { ox: -22, top: -24, dx: -44, dy: -34, rot: -145, delay: 140 },
+      { ox: 18, top: -36, dx: 26, dy: -46, rot: 130, delay: 200 },
+      { ox: 0, top: -28, dx: 14, dy: -60, rot: 75, delay: 260 }
     ];
     offsets.forEach((p) => {
       const el = document.createElement('span');
       el.className = 'agy-sakura-petal';
-      el.style.right = p.right + 'px';
+      el.style.left = Math.round(baseLeft + p.ox) + 'px';
       el.style.top = p.top + 'px';
       el.style.setProperty('--dx', p.dx + 'px');
       el.style.setProperty('--dy', p.dy + 'px');
@@ -2325,6 +2397,23 @@
     });
   }
 
+  function showMascotBubble(mascot, text, durationMs = 1500) {
+    if (!mascot) return;
+    const bubble = mascot.querySelector('.agy-mascot-bubble');
+    if (!bubble) return;
+    bubble.textContent = text;
+    bubble.dataset.show = '1';
+    if (window.__AGY_MASCOT_BUBBLE_TIMER__) clearTimeout(window.__AGY_MASCOT_BUBBLE_TIMER__);
+    if (durationMs > 0) {
+      window.__AGY_MASCOT_BUBBLE_TIMER__ = setTimeout(() => {
+        if (mascot.dataset.state !== 'thinking') {
+          delete bubble.dataset.show;
+        }
+        window.__AGY_MASCOT_BUBBLE_TIMER__ = 0;
+      }, durationMs);
+    }
+  }
+
   function syncLivingMascot(stOverride) {
     const st = stOverride || getState();
     const bubbleTheme = THEMES[st.bubbleName] || THEMES[st.themeName] || THEMES[DEFAULT_THEME_KEY] || {};
@@ -2332,28 +2421,256 @@
     const existing = document.getElementById('agy-living-mascot');
 
     if (!shouldMount) {
-      if (existing) existing.remove();
+      cleanupLivingMascot();
       return;
     }
 
     const composer = document.querySelector('.surface-composer');
     if (!composer) return;
 
+    const mascotW = Number(bubbleTheme.stickerW) || 74;
+    const padX = 16;
+    const getBounds = () => {
+      const cw = composer.clientWidth || 640;
+      const minX = padX;
+      const maxX = Math.max(minX, cw - mascotW - padX);
+      return { minX, maxX };
+    };
+
     let mascot = existing;
-    if (!mascot || mascot.parentNode !== composer) {
-      if (existing) existing.remove();
+    let ctrl = window.__AGY_MASCOT_CTRL__;
+    if (!mascot || mascot.parentNode !== composer || !ctrl) {
+      cleanupLivingMascot();
+      const ac = new AbortController();
+      window.__AGY_MASCOT_AC__ = ac;
+
       mascot = document.createElement('div');
       mascot.id = 'agy-living-mascot';
       mascot.setAttribute('role', 'button');
-      mascot.setAttribute('aria-label', 'Open Custom Theme Studio');
-      mascot.title = 'Sakura Kitsune • Click to open Custom Theme Studio';
+      mascot.setAttribute('aria-label', 'Sakura Kitsune Mascot');
+      mascot.title = 'Sakura Kitsune • Click to pet · Drag along bar · Double-click for Studio';
       mascot.dataset.state = 'idle';
-      mascot.addEventListener('click', (e) => {
-        e.stopPropagation();
-        spawnSakuraBurst(composer);
-        window.__ANTIGRAVITY_OPEN_THEME_MODAL__();
-      });
+      mascot.innerHTML = `
+        <div class="agy-mascot-bubble" aria-hidden="true">•••</div>
+        <div class="agy-mascot-flip"><div class="agy-mascot-sprite"></div></div>
+      `;
       composer.appendChild(mascot);
+
+      const { minX, maxX } = getBounds();
+      let savedRatio = parseFloat(localStorage.getItem(STORAGE_MASCOT_RATIO) || '');
+      if (!Number.isFinite(savedRatio) || savedRatio < 0 || savedRatio > 1) {
+        savedRatio = 0.94;
+      }
+      ctrl = {
+        x: Math.round(minX + (maxX - minX) * savedRatio),
+        dir: 1,
+        dragging: false,
+        walking: false,
+        lastUserInteraction: 0,
+        petCount: 0,
+        composer
+      };
+      window.__AGY_MASCOT_CTRL__ = ctrl;
+
+      const applyPos = (nx, save = false) => {
+        const b = getBounds();
+        ctrl.x = Math.max(b.minX, Math.min(b.maxX, nx));
+        mascot.style.setProperty('--agy-mx', `${Math.round(ctrl.x)}px`);
+        mascot.style.setProperty('--agy-mdir', String(ctrl.dir));
+        if (save && b.maxX > b.minX) {
+          const ratio = (ctrl.x - b.minX) / (b.maxX - b.minX);
+          try { localStorage.setItem(STORAGE_MASCOT_RATIO, ratio.toFixed(4)); } catch (_) {}
+        }
+      };
+      ctrl.applyPos = applyPos;
+      applyPos(ctrl.x, false);
+
+      const stopWalk = () => {
+        if (window.__AGY_MASCOT_ROAM_RAF__) {
+          cancelAnimationFrame(window.__AGY_MASCOT_ROAM_RAF__);
+          window.__AGY_MASCOT_ROAM_RAF__ = 0;
+        }
+        ctrl.walking = false;
+        if (mascot.dataset.state === 'walking') {
+          mascot.dataset.state = 'idle';
+        }
+      };
+      ctrl.stopWalk = stopWalk;
+
+      const walkTo = (targetX, speedPxPerSec = 68, onDone) => {
+        const curSt = getState();
+        const reduced = Boolean(curSt.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+        if (reduced || document.hidden || ctrl.dragging) return;
+        const b = getBounds();
+        const clampedTarget = Math.max(b.minX, Math.min(b.maxX, targetX));
+        const dist = clampedTarget - ctrl.x;
+        if (Math.abs(dist) < 12) return;
+
+        stopWalk();
+        ctrl.walking = true;
+        ctrl.dir = dist < 0 ? -1 : 1;
+        mascot.style.setProperty('--agy-mdir', String(ctrl.dir));
+        mascot.dataset.state = 'walking';
+
+        const startX = ctrl.x;
+        const durationMs = Math.max(700, Math.min(4800, (Math.abs(dist) / speedPxPerSec) * 1000));
+        const startTs = performance.now();
+
+        const step = (now) => {
+          window.__AGY_MASCOT_ROAM_RAF__ = 0;
+          if (!ctrl.walking || ctrl.dragging || document.hidden || !mascot.isConnected) {
+            stopWalk();
+            return;
+          }
+          const t = Math.min(1, (now - startTs) / durationMs);
+          // Smooth easeInOutSine
+          const eased = -(Math.cos(Math.PI * t) - 1) / 2;
+          applyPos(startX + dist * eased, false);
+          if (t < 1) {
+            window.__AGY_MASCOT_ROAM_RAF__ = requestAnimationFrame(step);
+          } else {
+            ctrl.walking = false;
+            applyPos(clampedTarget, true);
+            if (mascot.dataset.state === 'walking') {
+              mascot.dataset.state = 'idle';
+            }
+            if (typeof onDone === 'function') onDone();
+          }
+        };
+        window.__AGY_MASCOT_ROAM_RAF__ = requestAnimationFrame(step);
+      };
+      ctrl.walkTo = walkTo;
+
+      const scheduleRoam = () => {
+        if (window.__AGY_MASCOT_ROAM_TIMER__) clearTimeout(window.__AGY_MASCOT_ROAM_TIMER__);
+        const delayMs = 8500 + Math.round(Math.random() * 7500);
+        window.__AGY_MASCOT_ROAM_TIMER__ = setTimeout(() => {
+          window.__AGY_MASCOT_ROAM_TIMER__ = 0;
+          if (!mascot.isConnected) return;
+          const curSt = getState();
+          const reduced = Boolean(curSt.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+          const recentlyInteracted = (Date.now() - ctrl.lastUserInteraction) < 6000;
+          if (!reduced && !document.hidden && !ctrl.dragging && !ctrl.walking && mascot.dataset.state === 'idle') {
+            if (!recentlyInteracted) {
+              const b = getBounds();
+              const span = b.maxX - b.minX;
+              if (span > 60) {
+                // Pick a cozy new spot at least 70px away along the bar
+                let target = b.minX + Math.random() * span;
+                if (Math.abs(target - ctrl.x) < 70) {
+                  target = ctrl.x > (b.minX + span * 0.5) ? b.minX + span * 0.18 : b.maxX - span * 0.12;
+                }
+                walkTo(target, 64);
+              }
+            }
+          }
+          scheduleRoam();
+        }, delayMs);
+      };
+      scheduleRoam();
+
+      // Pointer drag & pet interaction
+      let dragStartClientX = 0;
+      let dragStartX = 0;
+      let movedDist = 0;
+      let lastClientX = 0;
+
+      mascot.addEventListener('pointerdown', (e) => {
+        if (e.button !== 0) return;
+        e.stopPropagation();
+        stopWalk();
+        ctrl.dragging = true;
+        ctrl.lastUserInteraction = Date.now();
+        dragStartClientX = e.clientX;
+        lastClientX = e.clientX;
+        dragStartX = ctrl.x;
+        movedDist = 0;
+        mascot.dataset.dragging = '1';
+        mascot.style.setProperty('--agy-tilt', '0deg');
+        try { mascot.setPointerCapture(e.pointerId); } catch (_) {}
+      }, { signal: ac.signal });
+
+      mascot.addEventListener('pointermove', (e) => {
+        if (!ctrl.dragging) return;
+        const dx = e.clientX - dragStartClientX;
+        const stepDx = e.clientX - lastClientX;
+        lastClientX = e.clientX;
+        movedDist = Math.max(movedDist, Math.abs(dx));
+        if (Math.abs(stepDx) > 1.5) {
+          ctrl.dir = stepDx < 0 ? -1 : 1;
+        }
+        const tilt = Math.max(-10, Math.min(10, stepDx * 0.85));
+        mascot.style.setProperty('--agy-tilt', `${tilt.toFixed(1)}deg`);
+        applyPos(dragStartX + dx, false);
+      }, { signal: ac.signal });
+
+      const finishDrag = (e) => {
+        if (!ctrl.dragging) return;
+        ctrl.dragging = false;
+        delete mascot.dataset.dragging;
+        mascot.style.setProperty('--agy-tilt', '0deg');
+        try { mascot.releasePointerCapture(e.pointerId); } catch (_) {}
+        applyPos(ctrl.x, true);
+        if (movedDist < 6) {
+          // Gentle pet interaction!
+          ctrl.petCount += 1;
+          const moods = ['♥', '✨', '🌸', '♥'];
+          const glyph = moods[ctrl.petCount % moods.length];
+          mascot.dataset.state = 'happy';
+          showMascotBubble(mascot, glyph, 1200);
+          spawnSakuraBurst(composer, ctrl.x + mascotW * 0.5);
+          if (window.__AGY_MASCOT_SUCCESS_TIMER__) clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+          window.__AGY_MASCOT_SUCCESS_TIMER__ = setTimeout(() => {
+            if (mascot.dataset.state === 'happy') mascot.dataset.state = 'idle';
+            window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+          }, 700);
+        } else {
+          // Dropped after sliding along bar
+          mascot.dataset.state = 'happy';
+          spawnSakuraBurst(composer, ctrl.x + mascotW * 0.5);
+          if (window.__AGY_MASCOT_SUCCESS_TIMER__) clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+          window.__AGY_MASCOT_SUCCESS_TIMER__ = setTimeout(() => {
+            if (mascot.dataset.state === 'happy') mascot.dataset.state = 'idle';
+            window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+          }, 600);
+        }
+      };
+      mascot.addEventListener('pointerup', finishDrag, { signal: ac.signal });
+      mascot.addEventListener('pointercancel', finishDrag, { signal: ac.signal });
+
+      mascot.addEventListener('dblclick', (e) => {
+        e.stopPropagation();
+        window.__ANTIGRAVITY_OPEN_THEME_MODAL__();
+      }, { signal: ac.signal });
+
+      mascot.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        window.__ANTIGRAVITY_OPEN_THEME_MODAL__();
+      }, { signal: ac.signal });
+
+      // Perk up attentively while user is typing in composer
+      composer.addEventListener('input', () => {
+        ctrl.lastUserInteraction = Date.now();
+        if (ctrl.dragging || mascot.dataset.state === 'thinking') return;
+        stopWalk();
+        mascot.dataset.state = 'listening';
+        if (window.__AGY_MASCOT_LISTEN_TIMER__) clearTimeout(window.__AGY_MASCOT_LISTEN_TIMER__);
+        window.__AGY_MASCOT_LISTEN_TIMER__ = setTimeout(() => {
+          if (mascot.dataset.state === 'listening') mascot.dataset.state = 'idle';
+          window.__AGY_MASCOT_LISTEN_TIMER__ = 0;
+        }, 1600);
+      }, { signal: ac.signal });
+
+      window.addEventListener('resize', () => {
+        const b = getBounds();
+        const r = parseFloat(localStorage.getItem(STORAGE_MASCOT_RATIO) || '0.94');
+        const safeR = Number.isFinite(r) ? Math.max(0, Math.min(1, r)) : 0.94;
+        applyPos(b.minX + (b.maxX - b.minX) * safeR, false);
+      }, { signal: ac.signal });
+    } else {
+      // Re-clamp position if composer width changed
+      ctrl.applyPos(ctrl.x, false);
     }
 
     const isThinking = Boolean(
@@ -2363,22 +2680,28 @@
     window.__AGY_MASCOT_PREV_THINKING__ = isThinking;
 
     if (isThinking) {
+      if (ctrl && ctrl.stopWalk) ctrl.stopWalk();
       if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
         clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
         window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
       }
       mascot.dataset.state = 'thinking';
+      const bubble = mascot.querySelector('.agy-mascot-bubble');
+      if (bubble) bubble.textContent = '•••';
     } else if (prevThinking) {
       mascot.dataset.state = 'success';
-      spawnSakuraBurst(composer);
+      showMascotBubble(mascot, '✨', 1500);
+      spawnSakuraBurst(composer, (ctrl ? ctrl.x : 0) + mascotW * 0.5);
       if (window.__AGY_MASCOT_SUCCESS_TIMER__) clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
       window.__AGY_MASCOT_SUCCESS_TIMER__ = setTimeout(() => {
         const cur = document.getElementById('agy-living-mascot');
         if (cur && cur.dataset.state === 'success') cur.dataset.state = 'idle';
         window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
       }, 1500);
-    } else if (mascot.dataset.state !== 'success') {
+    } else if (mascot.dataset.state === 'thinking') {
       mascot.dataset.state = 'idle';
+      const bubble = mascot.querySelector('.agy-mascot-bubble');
+      if (bubble) delete bubble.dataset.show;
     }
   }
 
@@ -2638,8 +2961,7 @@
     if (staleTitleBtn) staleTitleBtn.remove();
     const staleSettingsBtn = document.getElementById('agy-custom-theme-settings-btn');
     if (staleSettingsBtn) staleSettingsBtn.remove();
-    const staleMascot = document.getElementById('agy-living-mascot');
-    if (staleMascot) staleMascot.remove();
+    cleanupLivingMascot();
     cleanupVideoWallpaper();
 
     window.__AGY_HOLE_EL__ = null;
