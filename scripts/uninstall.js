@@ -17,6 +17,8 @@ const { execSync } = require('child_process');
 const ROOT_DIR = path.resolve(__dirname, '..');
 const PID_FILE = path.join(ROOT_DIR, 'daemon.pid');
 const VBS_FILE = path.join(ROOT_DIR, 'silent-start.vbs');
+const LAUNCHER_VBS_FILE = path.join(ROOT_DIR, 'launch-antigravity.vbs');
+const LAUNCHER_STATE_FILE = path.join(ROOT_DIR, 'launcher_state.json');
 
 function resolvePortFile() {
     if (process.env.AGY_PORT_FILE) return process.env.AGY_PORT_FILE;
@@ -63,8 +65,40 @@ function stopDaemon() {
     } catch (_) {}
 }
 
+function restoreWindowsShortcuts() {
+    if (!fs.existsSync(LAUNCHER_STATE_FILE)) return;
+    try {
+        const psScript = [
+            "$ErrorActionPreference = 'Stop'",
+            `$state = Get-Content -Path '${LAUNCHER_STATE_FILE.replace(/'/g, "''")}' -Raw -Encoding UTF8 | ConvertFrom-Json`,
+            '$ws = New-Object -ComObject WScript.Shell',
+            'foreach ($entry in @($state.shortcuts)) {',
+            '  if ($entry.shortcutPath -and (Test-Path $entry.shortcutPath) -and $entry.targetPath) {',
+            '    $sc = $ws.CreateShortcut($entry.shortcutPath)',
+            '    $sc.TargetPath = [string]$entry.targetPath',
+            '    $sc.Arguments = [string]$entry.arguments',
+            '    if ($entry.workingDirectory) { $sc.WorkingDirectory = [string]$entry.workingDirectory }',
+            '    if ($entry.iconLocation) { $sc.IconLocation = [string]$entry.iconLocation }',
+            '    if ($entry.description) { $sc.Description = [string]$entry.description }',
+            '    $sc.Save()',
+            '    Write-Host ("[uninstall] Restored shortcut: " + $entry.shortcutPath)',
+            '  }',
+            '}',
+        ].join('\n');
+        const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
+        execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'inherit' });
+    } catch (err) {
+        console.warn(`[uninstall] Could not restore shortcuts automatically: ${err.message}`);
+    }
+    try {
+        fs.unlinkSync(LAUNCHER_STATE_FILE);
+        console.log(`[uninstall] Removed launcher state: ${LAUNCHER_STATE_FILE}`);
+    } catch (_) {}
+}
+
 function removeAutoStart() {
     if (process.platform === 'win32') {
+        restoreWindowsShortcuts();
         const appData = process.env.APPDATA || path.join(os.homedir(), 'AppData', 'Roaming');
         const lnk = path.join(appData, 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Startup', 'AntigravityCustomTheme.lnk');
         if (fs.existsSync(lnk)) {
@@ -74,6 +108,10 @@ function removeAutoStart() {
         if (fs.existsSync(VBS_FILE)) {
             fs.unlinkSync(VBS_FILE);
             console.log(`[uninstall] Removed helper script: ${VBS_FILE}`);
+        }
+        if (fs.existsSync(LAUNCHER_VBS_FILE)) {
+            fs.unlinkSync(LAUNCHER_VBS_FILE);
+            console.log(`[uninstall] Removed on-demand launcher: ${LAUNCHER_VBS_FILE}`);
         }
         return;
     }

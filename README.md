@@ -10,11 +10,13 @@ Turn any wallpaper, aesthetic mood, or color palette into a live, 60fps custom t
 - **Unified L-Glass + Split-Browser Safe:** Automatically detects Antigravity's split embedded Chromium view (`data-has-browser-hole`) and cuts an `evenodd` `clip-path` window so embedded pages never get tinted or blurred.
 - **Live Settings Modal:** Switch presets, upload custom wallpapers or **User / AI Agent circular avatars** (auto-compressed WebP), adjust scrim darkness, and persist choices to `theme_config.json`.
 - **Light & Dark Glass Modes:** Supports both deep dark themes and daytime bright palettes (`isLight: true`) with adaptive ink, frosted pills, and titlebar controls.
-- **Two Lightweight Sample Presets Included:**
+- **Three Built-In Presets Included (default: `Sakura Midnight`):**
+  - `Sakura Midnight` — 4K Magical Sakura Tree seamless Dual-Video Crossfade Loop (`themes/assets/magical_sakura_4k.mp4`), Midnight Plum 92% cards, Living Sakura Kitsune mascot (`idle` / `thinking` / `success` + petal burst), Adaptive Workspace Modes (`Focus` / `Balanced` / `Immersive`), and Zen Mode (`Ctrl+Shift+Z`)
   - `WLOP Cosmic` — 2K starlight wallpaper + custom SVG flourishes (`themes/assets/wlop_cosmic_2k.webp`)
   - `Midnight Obsidian` — Ultra-light zero-image pure-CSS gradient preset
+- **4K Live Video & GIF Streaming:** Local HTTP Range (`206 Partial Content`) media server inside `daemon/theme_daemon.js` streams large 4K `.mp4`/`.webm` wallpapers on `127.0.0.1` without bloating `dist/theme_payload.js`, paired with GPU Dual-Video Crossfade looping for zero-stutter transitions.
 - **Data/Engine Separation:** Add your own themes solely inside `themes/themes.json` + `themes/assets/` and compile via `scripts/build_payload.py`.
-- **Cross-Platform Daemon (`daemon/theme_daemon.js`):** Windows, macOS, and Linux support using Node >= 22 built-in `WebSocket`.
+- **Cross-Platform Daemon (`daemon/theme_daemon.js`):** Windows, macOS, and Linux support using Node >= 22 built-in `WebSocket` (supports `--exit-on-close` On-Demand mode).
 
 ## Prerequisites
 
@@ -40,7 +42,7 @@ This resolves `themes/themes.json` + `themes/assets/*` and compiles them with `e
 powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1
 ```
 
-Creates a hidden launcher in your Windows Startup folder (`AntigravityCustomTheme.lnk`) without hardcoding paths and attaches silently. Pass `-NoStartup` if you only want to run it for the current session.
+By default, this installs the **On-Demand Launcher** (no Windows Startup entry, zero background process when Antigravity is closed): it wraps your `Antigravity.lnk` shortcuts (Desktop / Start Menu / Taskbar) via a generated hidden `launch-antigravity.vbs` that launches `Antigravity.exe --remote-debugging-port=0` together with `theme_daemon.js --exit-on-close`, so the daemon starts automatically whenever you open Antigravity and exits automatically once Antigravity closes. Pass `-Startup` if you prefer the legacy always-on Windows Startup daemon, or `-NoStartup` to run only for the current session.
 
 **macOS / Linux (Bash):**
 
@@ -50,7 +52,7 @@ bash scripts/install-unix.sh
 
 - On **macOS**, installs a `~/Library/LaunchAgents/io.antigravity.custom-theme.plist` LaunchAgent.
 - On **Linux**, installs a `systemd --user` service (or falls back to `nohup`).
-- Use `bash scripts/install-unix.sh --foreground` to run interactively in your terminal, or `stop` / `status`.
+- Use `bash scripts/install-unix.sh --foreground` to run interactively in your terminal, `node daemon/theme_daemon.js --exit-on-close` for on-demand single-session use, or `stop` / `status`.
 
 > **Platform Testing Note:** Windows (`install-win.ps1`, CDP hot-reload, uninstall) has been verified live against Antigravity on Windows 11. macOS (`launchd`) and Linux (`systemd --user`) scripts are implemented and shell-syntax verified, and welcome community runtime feedback across macOS/Linux setups (you can override `DevToolsActivePort` location anytime via `AGY_PORT_FILE=/path/to/DevToolsActivePort`).
 

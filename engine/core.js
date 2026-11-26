@@ -14,6 +14,32 @@
   const STORAGE_GLASS_BLUR = 'agy_glass_blur_v3';
   const STORAGE_AVATAR_SIZE = 'agy_avatar_size_v3';
   const STORAGE_AVATAR_RADIUS = 'agy_avatar_radius_v3';
+  const STORAGE_MODE = 'agy_mode_v3';
+  const STORAGE_CHAT_OPACITY = 'agy_chat_opacity_v3';
+  const STORAGE_ACCENT = 'agy_accent_v3';
+  const STORAGE_REDUCED_MOTION = 'agy_reduced_motion_v3';
+  const STORAGE_ZEN = 'agy_zen_v3';
+
+  const ACCENT_PRESETS = {
+    '': { label: 'Theme Default', primary: null, glow: null },
+    'sakura': { label: 'Sakura', primary: '#E88BB9', glow: 'rgba(232, 139, 185, 0.24)' },
+    'rose': { label: 'Rose', primary: '#FB7185', glow: 'rgba(251, 113, 133, 0.24)' },
+    'lavender': { label: 'Lavender', primary: '#C084FC', glow: 'rgba(192, 132, 252, 0.24)' }
+  };
+
+  const MODE_PRESETS = {
+    'focus': { label: 'Focus', desc: 'Deep focus · high contrast', defaultDim: 78, defaultCardAlpha: 0.96, minSidebarAlpha: 0.86 },
+    'balanced': { label: 'Balanced', desc: 'Crisp reading · sakura depth', defaultDim: 62, defaultCardAlpha: 0.92, minSidebarAlpha: 0.72 },
+    'immersive': { label: 'Immersive', desc: 'Vivid scenery · airy glass', defaultDim: 34, defaultCardAlpha: 0.82, minSidebarAlpha: 0.42 }
+  };
+
+  function withRgbaAlpha(colorStr, targetAlpha) {
+    if (!colorStr || typeof colorStr !== 'string') return colorStr;
+    const m = colorStr.match(/^rgba\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*,\s*([\d.]+)\s*\)$/i);
+    if (!m) return colorStr;
+    const clamped = Math.max(0.05, Math.min(0.99, targetAlpha));
+    return `rgba(${m[1]}, ${m[2]}, ${m[3]}, ${clamped.toFixed(2)})`;
+  }
 
   const CHECK_SVG = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>`;
 
@@ -62,24 +88,311 @@
     const rawBubble = localStorage.getItem(STORAGE_BUBBLE) || init.bubbleName || themeName;
     const bubbleName = THEMES[rawBubble] ? rawBubble : themeName;
     const inputStyle = localStorage.getItem(STORAGE_INPUT) || init.inputStyle || 'sync';
-    const dimming = parseFiniteInt(localStorage.getItem(STORAGE_DIMMING) ?? init.dimming, 69);
+    const activeThemeDef = THEMES[themeName] || {};
+    const defaultDim = Number.isFinite(activeThemeDef.defaultDimming) ? activeThemeDef.defaultDimming : 69;
+    const defaultBlur = parseFiniteInt(String(activeThemeDef.headerBlur || '').replace(/[^\d]/g, ''), 3);
+    const dimming = parseFiniteInt(localStorage.getItem(STORAGE_DIMMING) ?? init.dimming, defaultDim);
     const wpEnabled = localStorage.getItem(STORAGE_WP_ENABLED) !== null
       ? localStorage.getItem(STORAGE_WP_ENABLED) !== 'false'
       : (init.wpEnabled !== undefined ? init.wpEnabled : true);
     const customWp = localStorage.getItem(STORAGE_CUSTOM_WP) || init.customWp || '';
     const userAvatar = localStorage.getItem(STORAGE_USER_AVATAR) ?? init.userAvatar ?? '';
     const agentAvatar = localStorage.getItem(STORAGE_AGENT_AVATAR) ?? init.agentAvatar ?? '';
-    const glassBlur = parseFiniteInt(localStorage.getItem(STORAGE_GLASS_BLUR) ?? init.glassBlur, 3);
+    const glassBlur = parseFiniteInt(localStorage.getItem(STORAGE_GLASS_BLUR) ?? init.glassBlur, defaultBlur);
     const avatarSize = parseFiniteInt(localStorage.getItem(STORAGE_AVATAR_SIZE) ?? init.avatarSize, 32);
     const avatarRadius = parseFiniteInt(localStorage.getItem(STORAGE_AVATAR_RADIUS) ?? init.avatarRadius, 50);
-    return { themeName, bubbleName, inputStyle, dimming, wpEnabled, customWp, userAvatar, agentAvatar, glassBlur, avatarSize, avatarRadius };
+    const rawMode = localStorage.getItem(STORAGE_MODE) || init.workspaceMode || 'balanced';
+    const workspaceMode = MODE_PRESETS[rawMode] ? rawMode : 'balanced';
+    const chatOpacity = parseFiniteInt(localStorage.getItem(STORAGE_CHAT_OPACITY) ?? init.chatOpacity, 0);
+    const rawAccent = localStorage.getItem(STORAGE_ACCENT) ?? init.accentOverride ?? '';
+    const accentOverride = Object.prototype.hasOwnProperty.call(ACCENT_PRESETS, rawAccent) ? rawAccent : '';
+    const reducedMotion = localStorage.getItem(STORAGE_REDUCED_MOTION) !== null
+      ? localStorage.getItem(STORAGE_REDUCED_MOTION) === 'true'
+      : Boolean(init.reducedMotion);
+    const zenMode = localStorage.getItem(STORAGE_ZEN) !== null
+      ? localStorage.getItem(STORAGE_ZEN) === 'true'
+      : Boolean(init.zenMode);
+    return { themeName, bubbleName, inputStyle, dimming, wpEnabled, customWp, userAvatar, agentAvatar, glassBlur, avatarSize, avatarRadius, workspaceMode, chatOpacity, accentOverride, reducedMotion, zenMode };
   }
 
-  // Downscale custom wallpaper uploads to max 2560px WebP so localStorage (5MB limit) & theme_config.json stay fast
+  function isVideoMediaUrl(url) {
+    return typeof url === 'string' && (/^data:video\//i.test(url) || /\.(mp4|webm)(\?.*)?$/i.test(url));
+  }
+
+  function getVideoBlobUrl(url) {
+    if (!url) return url;
+    if (url.startsWith('__AGY_MEDIA__/')) {
+      const base = window.__AGY_MEDIA_BASE__ || '';
+      return base ? `${base}/${url.slice('__AGY_MEDIA__/'.length)}` : url;
+    }
+    if (!url.startsWith('data:video/')) return url;
+    window.__AGY_VIDEO_BLOB_CACHE__ = window.__AGY_VIDEO_BLOB_CACHE__ || {};
+    const key = `${url.slice(0, 64)}|${url.length}`;
+    if (window.__AGY_VIDEO_BLOB_CACHE__[key]) return window.__AGY_VIDEO_BLOB_CACHE__[key];
+    try {
+      const comma = url.indexOf(',');
+      const header = url.slice(5, comma);
+      const mime = header.split(';')[0] || 'video/mp4';
+      const bin = atob(url.slice(comma + 1));
+      const bytes = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      const blobUrl = URL.createObjectURL(new Blob([bytes], { type: mime }));
+      window.__AGY_VIDEO_BLOB_CACHE__[key] = blobUrl;
+      return blobUrl;
+    } catch (_) {
+      return url;
+    }
+  }
+
+  function bakeGlassFromSource(sourceEl, natW, natH, key, overlayRgb, overlayAlpha, tintBg, blurStr) {
+    try {
+      const w = 640;
+      const h = Math.max(180, Math.round((natH || 1440) * (w / (natW || 2560))));
+      const canvas = document.createElement('canvas');
+      canvas.width = w;
+      canvas.height = h;
+      const ctx = canvas.getContext('2d');
+      if (!ctx) return;
+      const pxMatch = String(blurStr !== undefined ? blurStr : '3px').match(/(\d+(?:\.\d+)?)/);
+      const scaledBlur = Math.max(0, Math.min(16, Math.round((pxMatch ? parseFloat(pxMatch[1]) : 3) * 0.75)));
+      ctx.filter = scaledBlur > 0 ? `blur(${scaledBlur}px)` : 'none';
+      ctx.drawImage(sourceEl, -12, -12, w + 24, h + 24);
+      ctx.filter = 'none';
+      ctx.fillStyle = `rgba(${overlayRgb}, ${overlayAlpha})`;
+      ctx.fillRect(0, 0, w, h);
+      if (tintBg) {
+        ctx.fillStyle = tintBg;
+        ctx.fillRect(0, 0, w, h);
+      }
+      const baked = canvas.toDataURL('image/webp', 0.85);
+      window.__AGY_BLUR_CACHE__ = window.__AGY_BLUR_CACHE__ || {};
+      window.__AGY_BLUR_CACHE__[key] = baked;
+      if (window.__AGY_LAST_GLASS__ && window.__AGY_LAST_GLASS__.key === key) {
+        window.__AGY_LAST_GLASS__.url = baked;
+        const curShell = document.querySelector('.agy-shell');
+        if (curShell) curShell.style.setProperty('--agy-l-glass-bg', 'url("' + baked + '")');
+      }
+    } catch (e) {}
+  }
+
+  function cleanupVideoWallpaper() {
+    if (window.__AGY_VIDEO_XFADE_RAF__) {
+      cancelAnimationFrame(window.__AGY_VIDEO_XFADE_RAF__);
+      window.__AGY_VIDEO_XFADE_RAF__ = 0;
+    }
+    if (window.__AGY_VIDEO_XFADE_TIMER__) {
+      clearTimeout(window.__AGY_VIDEO_XFADE_TIMER__);
+      window.__AGY_VIDEO_XFADE_TIMER__ = 0;
+    }
+    window.__AGY_VIDEO_LOOP_STATE__ = null;
+    ['agy-bg-video', 'agy-bg-video-b', 'agy-bg-scrim'].forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    });
+  }
+
+  function syncVideoWallpaper(cfg) {
+    window.__AGY_VIDEO_WP_CFG__ = cfg || null;
+    const shell = document.querySelector('.agy-shell');
+    if (!cfg || !cfg.enabled || !cfg.wpUrl || !isVideoMediaUrl(cfg.wpUrl)) {
+      cleanupVideoWallpaper();
+      return;
+    }
+    if (!shell) return;
+
+    const blobSrc = getVideoBlobUrl(cfg.wpUrl);
+
+    function ensureVideoEl(id, insertBeforeNode) {
+      let el = document.getElementById(id);
+      if (!el || el.parentNode !== shell) {
+        if (el) el.remove();
+        el = document.createElement('video');
+        el.id = id;
+        el.crossOrigin = 'anonymous';
+        el.autoplay = false;
+        el.loop = false;
+        el.muted = true;
+        el.playsInline = true;
+        el.preload = 'auto';
+        el.setAttribute('crossorigin', 'anonymous');
+        el.setAttribute('muted', '');
+        el.setAttribute('playsinline', '');
+        el.setAttribute('aria-hidden', 'true');
+        if (insertBeforeNode && insertBeforeNode.parentNode === shell) {
+          shell.insertBefore(el, insertBeforeNode);
+        } else {
+          shell.insertBefore(el, shell.firstChild);
+        }
+      }
+      el.style.objectPosition = cfg.bgPosition || 'center center';
+      return el;
+    }
+
+    const vidA = ensureVideoEl('agy-bg-video', shell.firstChild);
+    const vidB = ensureVideoEl('agy-bg-video-b', vidA.nextSibling);
+
+    let scrim = document.getElementById('agy-bg-scrim');
+    if (!scrim || scrim.parentNode !== shell) {
+      if (scrim) scrim.remove();
+      scrim = document.createElement('span');
+      scrim.id = 'agy-bg-scrim';
+      scrim.setAttribute('aria-hidden', 'true');
+      if (vidB.nextSibling) shell.insertBefore(scrim, vidB.nextSibling);
+      else shell.appendChild(scrim);
+    }
+    scrim.style.backgroundImage = cfg.scrimCss || 'none';
+
+    const shouldPause = Boolean(cfg.reducedMotion || document.hidden);
+    const safePlay = (el) => {
+      if (!el) return;
+      if (Boolean((window.__AGY_VIDEO_WP_CFG__ && window.__AGY_VIDEO_WP_CFG__.reducedMotion) || document.hidden)) return;
+      el.muted = true;
+      if (!el.paused) return;
+      try {
+        const pr = el.play();
+        if (pr && typeof pr.catch === 'function') pr.catch(() => {});
+      } catch (_) {}
+    };
+
+    const srcChanged = vidA.dataset.srcKey !== cfg.srcKey || vidB.dataset.srcKey !== cfg.srcKey;
+    if (srcChanged) {
+      if (window.__AGY_VIDEO_XFADE_TIMER__) {
+        clearTimeout(window.__AGY_VIDEO_XFADE_TIMER__);
+        window.__AGY_VIDEO_XFADE_TIMER__ = 0;
+      }
+      vidA.dataset.srcKey = cfg.srcKey;
+      vidB.dataset.srcKey = cfg.srcKey;
+      vidA.style.transition = 'none';
+      vidB.style.transition = 'none';
+      vidA.style.opacity = '1';
+      vidB.style.opacity = '0';
+      vidA.style.zIndex = '0';
+      vidB.style.zIndex = '0';
+      vidA.src = blobSrc;
+      vidB.src = blobSrc;
+      vidA.addEventListener('canplay', () => safePlay(vidA), { once: true });
+      vidA.load();
+      vidB.load();
+      window.__AGY_VIDEO_LOOP_STATE__ = {
+        active: 'A',
+        fading: false,
+        srcKey: cfg.srcKey
+      };
+    }
+
+    if (!window.__AGY_VIDEO_LOOP_STATE__) {
+      window.__AGY_VIDEO_LOOP_STATE__ = { active: 'A', fading: false, srcKey: cfg.srcKey };
+      vidA.style.opacity = '1';
+      vidB.style.opacity = '0';
+    }
+
+    const stLoop = window.__AGY_VIDEO_LOOP_STATE__;
+    const activeVid = stLoop.active === 'A' ? vidA : vidB;
+    const standbyVid = stLoop.active === 'A' ? vidB : vidA;
+
+    if (shouldPause) {
+      try { vidA.pause(); } catch (_) {}
+      try { vidB.pause(); } catch (_) {}
+      if (window.__AGY_VIDEO_XFADE_RAF__) {
+        cancelAnimationFrame(window.__AGY_VIDEO_XFADE_RAF__);
+        window.__AGY_VIDEO_XFADE_RAF__ = 0;
+      }
+    } else {
+      safePlay(activeVid);
+      if (!window.__AGY_VIDEO_XFADE_RAF__) {
+        const monitorLoop = () => {
+          window.__AGY_VIDEO_XFADE_RAF__ = 0;
+          const liveCfg = window.__AGY_VIDEO_WP_CFG__;
+          const curState = window.__AGY_VIDEO_LOOP_STATE__;
+          const a = document.getElementById('agy-bg-video');
+          const b = document.getElementById('agy-bg-video-b');
+          if (!liveCfg || !liveCfg.enabled || liveCfg.reducedMotion || document.hidden || !curState || !a || !b) {
+            return;
+          }
+          const cur = curState.active === 'A' ? a : b;
+          const nxt = curState.active === 'A' ? b : a;
+          const dur = cur.duration;
+
+          if (!curState.fading && Number.isFinite(dur) && dur > 1.2) {
+            // Smooth GPU crossfade over last 1.05s (clamped to 24% of short clips) so looping never jumps or stutters
+            const fadeSec = Math.min(1.05, Math.max(0.45, dur * 0.24));
+            const remaining = dur - cur.currentTime;
+            if (remaining <= fadeSec + 0.06 || cur.ended) {
+              curState.fading = true;
+              const fadeMs = Math.round(fadeSec * 1000);
+              try {
+                if (nxt.currentTime > 0.05) nxt.currentTime = 0;
+              } catch (_) {}
+              nxt.style.transition = 'none';
+              cur.style.transition = 'none';
+              nxt.style.opacity = '0';
+              cur.style.opacity = '1';
+              // Place incoming video slightly above outgoing (both remain beneath scrim & UI layers)
+              cur.style.setProperty('z-index', '0', 'important');
+              nxt.style.setProperty('z-index', '0', 'important');
+              if (nxt.parentNode === cur.parentNode && nxt.nextSibling !== cur.nextSibling) {
+                const sc = document.getElementById('agy-bg-scrim');
+                if (sc && sc.parentNode === cur.parentNode) {
+                  cur.parentNode.insertBefore(nxt, sc);
+                }
+              }
+              safePlay(nxt);
+              requestAnimationFrame(() => {
+                nxt.style.transition = `opacity ${fadeMs}ms linear`;
+                nxt.style.opacity = '1';
+              });
+              if (window.__AGY_VIDEO_XFADE_TIMER__) clearTimeout(window.__AGY_VIDEO_XFADE_TIMER__);
+              window.__AGY_VIDEO_XFADE_TIMER__ = setTimeout(() => {
+                window.__AGY_VIDEO_XFADE_TIMER__ = 0;
+                cur.style.transition = 'none';
+                cur.style.opacity = '0';
+                try {
+                  cur.pause();
+                  cur.currentTime = 0;
+                } catch (_) {}
+                curState.active = curState.active === 'A' ? 'B' : 'A';
+                curState.fading = false;
+              }, fadeMs + 60);
+            }
+          } else if (cur.ended && !curState.fading) {
+            try { cur.currentTime = 0; } catch (_) {}
+            safePlay(cur);
+          }
+          window.__AGY_VIDEO_XFADE_RAF__ = requestAnimationFrame(monitorLoop);
+        };
+        window.__AGY_VIDEO_XFADE_RAF__ = requestAnimationFrame(monitorLoop);
+      }
+    }
+
+    if (cfg.useUnifiedGlass) {
+      const glassKey = `${cfg.srcKey}|${cfg.overlayRgb}|${cfg.overlayAlpha.toFixed(3)}|${cfg.tintBg}|${cfg.blurStr}`;
+      window.__AGY_BLUR_CACHE__ = window.__AGY_BLUR_CACHE__ || {};
+      const cached = window.__AGY_BLUR_CACHE__[glassKey];
+      if (cached) {
+        window.__AGY_LAST_GLASS__ = { key: glassKey, url: cached };
+        shell.style.setProperty('--agy-l-glass-bg', 'url("' + cached + '")');
+      } else {
+        window.__AGY_LAST_GLASS__ = { key: glassKey, url: null };
+        const doBake = () => {
+          if (activeVid.videoWidth > 0 && activeVid.videoHeight > 0) {
+            bakeGlassFromSource(activeVid, activeVid.videoWidth, activeVid.videoHeight, glassKey, cfg.overlayRgb, cfg.overlayAlpha, cfg.tintBg, cfg.blurStr);
+          }
+        };
+        if (activeVid.readyState >= 2) doBake();
+        else activeVid.addEventListener('loadeddata', doBake, { once: true });
+      }
+    }
+  }
+
+  // Downscale custom wallpaper uploads to max 2560px WebP (preserving animated GIFs & MP4/WebM untouched)
   function compressWallpaperFile(file, callback) {
     const reader = new FileReader();
     reader.onload = () => {
       const rawUrl = String(reader.result || '');
+      if (file && (/gif|video/i.test(file.type || '') || /\.(gif|mp4|webm)$/i.test(file.name || ''))) {
+        callback(rawUrl);
+        return;
+      }
       const img = new Image();
       img.onload = () => {
         try {
@@ -221,6 +534,21 @@
       if (overrides.avatarRadius !== undefined) {
         localStorage.setItem(STORAGE_AVATAR_RADIUS, String(overrides.avatarRadius));
       }
+      if (overrides.workspaceMode !== undefined) {
+        localStorage.setItem(STORAGE_MODE, String(overrides.workspaceMode));
+      }
+      if (overrides.chatOpacity !== undefined) {
+        localStorage.setItem(STORAGE_CHAT_OPACITY, String(overrides.chatOpacity));
+      }
+      if (overrides.accentOverride !== undefined) {
+        localStorage.setItem(STORAGE_ACCENT, String(overrides.accentOverride));
+      }
+      if (overrides.reducedMotion !== undefined) {
+        localStorage.setItem(STORAGE_REDUCED_MOTION, String(Boolean(overrides.reducedMotion)));
+      }
+      if (overrides.zenMode !== undefined) {
+        localStorage.setItem(STORAGE_ZEN, String(Boolean(overrides.zenMode)));
+      }
     } catch (e) {}
 
     if (window.agySaveThemeConfig) {
@@ -232,6 +560,13 @@
     const mainTheme = THEMES[st.themeName] || THEMES[DEFAULT_THEME_KEY];
     const bubbleTheme = THEMES[st.bubbleName] || mainTheme;
     const wpUrl = st.customWp || mainTheme.wallpaper || '';
+
+    const accentCfg = ACCENT_PRESETS[st.accentOverride] || ACCENT_PRESETS[''];
+    const effPrimary = accentCfg.primary || mainTheme.primary;
+    const effGlow = accentCfg.glow || mainTheme.glow;
+    const modeCfg = MODE_PRESETS[st.workspaceMode] || MODE_PRESETS.balanced;
+    const effDimming = st.zenMode ? Math.max(st.dimming, 80) : st.dimming;
+    const isReducedMotion = Boolean(st.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
     const oldLegacy = document.getElementById('antigravity-ho-ly-chibi-theme');
     if (oldLegacy) oldLegacy.remove();
@@ -246,21 +581,31 @@
     }
 
     const overlayAlpha = mainTheme.clearBackdrop
-      ? Math.min(0.92, Math.max(0.0, ((st.dimming - 10) / 82) * 0.85))
-      : Math.min(0.92, Math.max(0.12, (st.dimming / 100) * 0.78));
+      ? Math.min(0.92, Math.max(0.0, ((effDimming - 10) / 82) * 0.85))
+      : Math.min(0.92, Math.max(0.12, (effDimming / 100) * 0.78));
     const overlayRgb = mainTheme.overlayRgb || '10, 7, 6';
     const bgPosition = mainTheme.bgPosition || 'center center';
     const secondaryGlowStop = mainTheme.secondaryGlow
       ? `, radial-gradient(circle at 22% 72%, ${mainTheme.secondaryGlow} 0%, transparent 55%)`
       : '';
 
+    const isVideoWp = isVideoMediaUrl(wpUrl);
     let bgLayers = '';
+    let videoScrimCss = '';
     if (wpUrl) {
-      bgLayers = mainTheme.clearBackdrop
-        ? `linear-gradient(180deg, rgba(${overlayRgb}, ${overlayAlpha}) 0%, rgba(${overlayRgb}, ${overlayAlpha}) 100%), url("${wpUrl}")`
-        : `radial-gradient(circle at 75% 40%, ${mainTheme.glow} 0%, transparent 65%)${secondaryGlowStop}, linear-gradient(180deg, rgba(${overlayRgb}, ${overlayAlpha * 0.85}) 0%, rgba(${overlayRgb}, ${overlayAlpha}) 100%), url("${wpUrl}")`;
+      if (mainTheme.clearBackdrop) {
+        const centerAlpha = Math.min(0.95, overlayAlpha + (mainTheme.isLight ? 0 : 0.12));
+        const edgeAlpha = Math.max(0.06, overlayAlpha - (mainTheme.isLight ? 0 : 0.10));
+        videoScrimCss = mainTheme.isLight
+          ? `linear-gradient(180deg, rgba(${overlayRgb}, ${overlayAlpha}) 0%, rgba(${overlayRgb}, ${overlayAlpha}) 100%)`
+          : `radial-gradient(ellipse 76% 72% at 52% 48%, rgba(${overlayRgb}, ${centerAlpha.toFixed(3)}) 0%, rgba(${overlayRgb}, ${edgeAlpha.toFixed(3)}) 100%)`;
+        bgLayers = isVideoWp ? videoScrimCss : `${videoScrimCss}, url("${wpUrl}")`;
+      } else {
+        videoScrimCss = `radial-gradient(circle at 75% 40%, ${effGlow} 0%, transparent 65%)${secondaryGlowStop}, linear-gradient(180deg, rgba(${overlayRgb}, ${overlayAlpha * 0.85}) 0%, rgba(${overlayRgb}, ${overlayAlpha}) 100%)`;
+        bgLayers = isVideoWp ? videoScrimCss : `${videoScrimCss}, url("${wpUrl}")`;
+      }
     } else {
-      bgLayers = mainTheme.pureBg || `radial-gradient(circle at 75% 30%, ${mainTheme.glow} 0%, transparent 60%), linear-gradient(160deg, rgba(${overlayRgb}, 0.96) 0%, #070910 100%)`;
+      bgLayers = mainTheme.pureBg || `radial-gradient(circle at 75% 30%, ${effGlow} 0%, transparent 60%), linear-gradient(160deg, rgba(${overlayRgb}, 0.96) 0%, #070910 100%)`;
     }
 
     const wpCss = st.wpEnabled ? `
@@ -270,6 +615,24 @@
         background-position: ${bgPosition} !important;
         background-repeat: no-repeat !important;
         image-rendering: auto !important;
+      }
+      #agy-bg-video,
+      #agy-bg-video-b,
+      #agy-bg-scrim {
+        display: block !important;
+        position: absolute !important;
+        inset: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        z-index: 0 !important;
+        pointer-events: none !important;
+        clip-path: var(--agy-hole-clip, none) !important;
+      }
+      #agy-bg-video,
+      #agy-bg-video-b {
+        object-fit: cover !important;
+        object-position: ${bgPosition} !important;
+        will-change: opacity;
       }
       /* Keep transparent scrollers on GPU composited-scrolling layers */
       .agy-shell .overflow-y-auto {
@@ -290,6 +653,7 @@
         background-image: none !important;
       }
       /* Browser split-pane hole cutout: keep wallpaper & L-glass visible outside [data-browser-hole] without covering live BrowserView */
+      ${isVideoWp ? '' : `
       body[data-has-browser-hole="true"] .agy-shell[data-agy-hole-active="1"]::after {
         content: "";
         position: absolute;
@@ -303,6 +667,7 @@
         clip-path: var(--agy-hole-clip, none);
         will-change: transform;
       }
+      `}
       body[data-has-browser-hole="true"] .agy-shell[data-agy-hole-active="1"] > :not([data-has-browser-hole="true"]):not([data-browser-hole]:not([data-browser-hole="false"])):not(.settings-modal-container),
       body[data-has-browser-hole="true"] .agy-shell[data-agy-hole-active="1"] .browser-hole-opaque:not([data-has-browser-hole="true"]),
       body[data-has-browser-hole="true"] .agy-shell[data-agy-hole-active="1"] [data-pane-id]:not([data-has-browser-hole="true"]),
@@ -329,7 +694,9 @@
     const defaultCornerSvg = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Cpath d='M2 20 L2 6 Q2 2 6 2 L20 2' stroke='%23fbbf24' stroke-width='1.5' fill='none' opacity='0.65'/%3E%3Ccircle cx='6' cy='6' r='2' fill='%23fbbf24' opacity='0.75'/%3E%3C/svg%3E";
     const cornerFiligreeUrl = bubbleTheme.cornerSvg || defaultCornerSvg;
 
-    const bubbleStickerCss = bubbleTheme.sticker ? (bubbleTheme.isOrnament ? `
+    const useLivingComposerMascot = Boolean(bubbleTheme.composerOnlyMascot && bubbleTheme.sticker && st.inputStyle !== 'minimal');
+
+    const bubbleStickerCss = (bubbleTheme.sticker && !bubbleTheme.composerOnlyMascot) ? (bubbleTheme.isOrnament ? `
       .group\\/user-input-step {
         padding-top: 18px !important;
       }
@@ -371,8 +738,96 @@
       .agy-user-bubble-frame::before { display: none !important; }
     `;
 
-    const showInputSticker = st.inputStyle !== 'minimal' && bubbleTheme.sticker;
-    const inputStickerCss = showInputSticker ? (bubbleTheme.isOrnament ? `
+    const showInputSticker = st.inputStyle !== 'minimal' && bubbleTheme.sticker && !useLivingComposerMascot;
+    const inputStickerCss = useLivingComposerMascot ? `
+      .surface-composer {
+        margin-top: 40px !important;
+        overflow: visible !important;
+      }
+      .surface-composer::before,
+      .surface-composer::after { display: none !important; }
+      #agy-living-mascot {
+        position: absolute;
+        top: ${bubbleTheme.stickerTop || -58}px;
+        right: ${bubbleTheme.stickerRight || 18}px;
+        width: ${bubbleTheme.stickerW || 74}px;
+        height: ${bubbleTheme.stickerH || 70}px;
+        background-image: url("${safeCssUrl(bubbleTheme.sticker)}");
+        background-size: contain;
+        background-position: bottom center;
+        background-repeat: no-repeat;
+        z-index: 35;
+        cursor: pointer;
+        user-select: none;
+        filter: drop-shadow(0 5px 12px rgba(10, 6, 16, 0.55));
+        transform-origin: bottom center;
+        transition: transform 200ms cubic-bezier(0.22, 1, 0.36, 1), filter 200ms ease;
+        ${isReducedMotion ? '' : 'animation: agyMascotIdle 4.4s ease-in-out infinite;'}
+      }
+      #agy-living-mascot:hover {
+        transform: translateY(-3px) scale(1.04);
+        filter: drop-shadow(0 6px 14px ${effGlow});
+      }
+      #agy-living-mascot[data-state="thinking"] {
+        ${isReducedMotion ? '' : 'animation: agyMascotThink 1.5s ease-in-out infinite;'}
+        filter: drop-shadow(0 4px 14px ${effGlow});
+      }
+      #agy-living-mascot[data-state="thinking"]::after {
+        content: "•••";
+        position: absolute;
+        top: -8px;
+        left: -14px;
+        padding: 1px 6px;
+        border-radius: 9999px;
+        font-size: 9px;
+        letter-spacing: 1px;
+        font-weight: 700;
+        color: #F9EAF3;
+        background: rgba(32, 21, 37, 0.92);
+        border: 1px solid ${effPrimary};
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        ${isReducedMotion ? '' : 'animation: agyThinkDot 1.3s ease-in-out infinite;'}
+      }
+      #agy-living-mascot[data-state="success"] {
+        ${isReducedMotion ? '' : 'animation: agyMascotHop 580ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
+        filter: drop-shadow(0 6px 16px ${effGlow});
+      }
+      .agy-sakura-petal {
+        position: absolute;
+        width: 10px;
+        height: 8px;
+        border-radius: 70% 30% 70% 30%;
+        background: radial-gradient(circle at 30% 30%, #ffffff 0%, #fbcfe8 55%, ${effPrimary} 100%);
+        pointer-events: none;
+        z-index: 36;
+        opacity: 0;
+        animation: agyPetalFloat 1.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+      @keyframes agyMascotIdle {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-2.5px); }
+      }
+      @keyframes agyMascotThink {
+        0%, 100% { transform: translateY(0px) rotate(0deg); }
+        25% { transform: translateY(-3px) rotate(-2.2deg); }
+        75% { transform: translateY(-2px) rotate(2.2deg); }
+      }
+      @keyframes agyMascotHop {
+        0% { transform: translateY(0) scale(1); }
+        38% { transform: translateY(-9px) scale(1.07); }
+        70% { transform: translateY(1px) scale(0.98); }
+        100% { transform: translateY(0) scale(1); }
+      }
+      @keyframes agyThinkDot {
+        0%, 100% { opacity: 0.55; transform: translateY(0); }
+        50% { opacity: 1; transform: translateY(-2px); }
+      }
+      @keyframes agyPetalFloat {
+        0% { opacity: 0; transform: translate(0, 0) rotate(0deg) scale(0.6); }
+        20% { opacity: 0.92; }
+        100% { opacity: 0; transform: translate(var(--dx, -24px), var(--dy, -46px)) rotate(var(--rot, 140deg)) scale(1.05); }
+      }
+    ` : (showInputSticker ? (bubbleTheme.isOrnament ? `
       .surface-composer {
         margin-top: 16px !important;
         overflow: visible !important;
@@ -429,7 +884,7 @@
     `) : `
       .surface-composer::before,
       .surface-composer::after { display: none !important; }
-    `;
+    `);
 
     const inputCardBg =
       st.inputStyle === 'glass'
@@ -443,8 +898,21 @@
         ? 'linear-gradient(135deg, #f59e0b 0%, rgba(217, 119, 6, 0.35) 50%, #fbbf24 100%)'
         : bubbleTheme.frameBg;
 
-    const sidebarBg = mainTheme.sidebarBg || 'rgba(14, 10, 8, 0.68)';
+    const rawSidebarBg = mainTheme.sidebarBg || 'rgba(14, 10, 8, 0.68)';
+    const effSidebarAlpha = st.workspaceMode === 'focus'
+      ? Math.max(0.86, parseFloat((rawSidebarBg.match(/,\s*([\d.]+)\s*\)/) || [])[1] || '0.72'))
+      : st.workspaceMode === 'immersive'
+      ? Math.min(0.45, parseFloat((rawSidebarBg.match(/,\s*([\d.]+)\s*\)/) || [])[1] || '0.45'))
+      : parseFloat((rawSidebarBg.match(/,\s*([\d.]+)\s*\)/) || [])[1] || '0.72');
+    const sidebarBg = withRgbaAlpha(rawSidebarBg, effSidebarAlpha);
+    const effHeaderBg = mainTheme.headerBg ? withRgbaAlpha(mainTheme.headerBg, effSidebarAlpha) : '';
+    const rawAiCardBg = mainTheme.aiCardBg || '';
+    const targetCardAlpha = st.chatOpacity >= 70 && st.chatOpacity <= 98
+      ? (st.chatOpacity / 100)
+      : (st.workspaceMode === 'focus' ? 0.96 : st.workspaceMode === 'immersive' ? 0.82 : parseFloat((rawAiCardBg.match(/,\s*([\d.]+)\s*\)/) || [])[1] || String(modeCfg.defaultCardAlpha)));
+    const effAiCardBg = rawAiCardBg ? withRgbaAlpha(rawAiCardBg, targetCardAlpha) : '';
     const sidebarHoverBg = mainTheme.sidebarHoverBg || 'rgba(255, 255, 255, 0.08)';
+    const sidebarActiveBg = mainTheme.sidebarActiveBg || sidebarHoverBg;
     const btnBg = mainTheme.btnBg || 'rgba(48, 30, 22, 0.62)';
     const modalBg = mainTheme.modalBg || 'rgba(14, 12, 12, 0.96)';
     const innerBubbleBorder = bubbleTheme.isScroll
@@ -526,18 +994,70 @@
       }
     ` : '';
 
-    const aiCardCss = mainTheme.aiCardBg ? `
+    const aiCardCss = effAiCardBg ? `
       /* Translucent reading card for AI responses (zero live backdrop-filter for max 120fps scroll) */
+      .agy-shell {
+        font-family: "Inter", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+      }
+      .agy-shell code,
+      .agy-shell pre {
+        font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+      }
       .agy-shell [data-testid="agent-response"] {
-        background: ${mainTheme.aiCardBg} !important;
-        ${isLight ? `color: ${uiInk} !important;` : ''}
+        background: ${effAiCardBg} !important;
+        ${isLight ? `color: ${uiInk} !important;` : (mainTheme.uiTextColor ? `color: ${uiInk};` : '')}
         backdrop-filter: none !important;
         border: 1px solid ${mainTheme.aiCardBorder || (isLight ? 'rgba(15, 23, 42, 0.12)' : 'rgba(255, 255, 255, 0.1)')} !important;
         border-radius: 14px !important;
-        padding: 12px 16px !important;
-        box-shadow: ${isLight ? '0 4px 14px rgba(15, 23, 42, 0.08)' : '0 4px 14px rgba(0, 0, 0, 0.28)'} !important;
+        padding: 14px 18px !important;
+        box-shadow: ${isLight ? '0 4px 14px rgba(15, 23, 42, 0.08)' : '0 6px 22px rgba(0, 0, 0, 0.34)'} !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
+      }
+      /* Crisp typography hierarchy & generous readability */
+      .agy-shell [data-testid="agent-response"] :is(p, li) {
+        line-height: 1.68;
+      }
+      .agy-shell [data-testid="agent-response"] h1 {
+        font-size: 1.3em;
+        font-weight: 650;
+        letter-spacing: -0.02em;
+        margin-top: 0.75em;
+        margin-bottom: 0.4em;
+      }
+      .agy-shell [data-testid="agent-response"] h2 {
+        font-size: 1.15em;
+        font-weight: 620;
+        letter-spacing: -0.015em;
+        margin-top: 0.7em;
+        margin-bottom: 0.32em;
+      }
+      .agy-shell [data-testid="agent-response"] h3 {
+        font-size: 1.04em;
+        font-weight: 600;
+        margin-top: 0.6em;
+        margin-bottom: 0.25em;
+      }
+      ${(!isLight && mainTheme.inlineCodeBg) ? `
+      .agy-shell [data-testid="agent-response"] :not(pre) > code {
+        background: ${mainTheme.inlineCodeBg} !important;
+        color: ${mainTheme.inlineCodeColor || '#F9C6E0'} !important;
+        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(232, 139, 185, 0.20)'} !important;
+        border-radius: 5px !important;
+        padding: 1px 6px !important;
+        font-size: 0.88em !important;
+      }
+      ` : ''}
+      ${(!isLight && mainTheme.codeBg) ? `
+      .agy-shell [data-testid="agent-response"] pre {
+        background: ${mainTheme.codeBg} !important;
+        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(232, 139, 185, 0.18)'} !important;
+        border-radius: 10px !important;
+      }
+      ` : ''}
+      .agy-shell [data-testid="agent-response"] a {
+        color: ${effPrimary};
+        text-underline-offset: 3px;
       }
       .agy-shell [data-testid="agent-response"] .md-table-bleed,
       .agy-shell [data-testid="agent-response"] .md-table-host {
@@ -634,8 +1154,50 @@
       }
       ${isLight ? `
       .agy-shell [data-main-content-body="true"],
-      .agy-shell [data-testid="agent-response"] :is(p, li, span, code, h1, h2, h3, h4, strong, td, th) {
+      .agy-shell [data-testid="agent-response"] :is(p, li, span, code, h1, h2, h3, h4, strong, td, th, blockquote) {
         color: ${uiInk};
+      }
+      .agy-shell [data-testid="agent-response"] a {
+        color: ${mainTheme.primary} !important;
+      }
+      .agy-shell [data-testid="agent-response"] :not(pre) > code {
+        background: rgba(38, 28, 31, 0.08) !important;
+        border: 1px solid rgba(38, 28, 31, 0.10) !important;
+        border-radius: 5px !important;
+        padding: 1px 5px !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre {
+        background: rgba(246, 241, 244, 0.92) !important;
+        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(15, 23, 42, 0.14)'} !important;
+        border-radius: 10px !important;
+      }
+      .agy-shell [data-testid="agent-response"] :is(th, td) {
+        border-color: rgba(38, 28, 31, 0.14) !important;
+      }
+      .agy-shell [data-testid="agent-response"] thead th {
+        background: rgba(38, 28, 31, 0.05) !important;
+      }
+      .agy-shell [data-main-content-body="true"] button:not(.agy-user-bubble *),
+      .agy-shell [data-main-content-body="true"] .text-muted-foreground,
+      .agy-shell [data-main-content-body="true"] .text-secondary-foreground {
+        color: ${uiMutedInk} !important;
+      }
+      .agy-shell .surface-composer-card,
+      .agy-shell .surface-composer-card :is(button, [role="button"], textarea, [contenteditable="true"], [role="textbox"], svg) {
+        color: ${uiInk} !important;
+      }
+      .agy-shell .surface-composer-card :is(button, [role="button"]):hover {
+        background: rgba(38, 28, 31, 0.07) !important;
+      }
+      .agy-shell .surface-composer-card ::placeholder,
+      .agy-shell .surface-composer-card .text-muted-foreground {
+        color: ${uiMutedInk} !important;
+      }
+      .agy-shell .surface-opaque.bg-sidebar,
+      .agy-shell .surface-opaque.border-menu-border,
+      .agy-shell .surface-opaque.bg-sidebar :is(button, a, span, [role="menuitem"]),
+      .agy-shell .surface-opaque.border-menu-border :is(button, a, span, [role="menuitem"]) {
+        color: ${uiInk} !important;
       }
       ` : ''}
       .agy-shell [data-main-content-body="true"] h1,
@@ -648,11 +1210,28 @@
     if (useUnifiedGlass && typeof syncShellMetrics === 'function') {
       syncShellMetrics();
     }
-    if (useUnifiedGlass) {
-      const effectiveBlur = Number.isFinite(st.glassBlur) ? `${st.glassBlur}px` : (mainTheme.headerBlur || '3px');
-      syncPrebakedGlass(wpUrl, overlayRgb, overlayAlpha, mainTheme.headerBg || '', effectiveBlur);
+    const effectiveBlur = Number.isFinite(st.glassBlur) ? `${st.glassBlur}px` : (mainTheme.headerBlur || '3px');
+    if (isVideoWp && st.wpEnabled) {
+      syncVideoWallpaper({
+        enabled: true,
+        wpUrl,
+        srcKey: `${window.__AGY_MEDIA_BASE__ || ''}|${wpUrl.slice(0, 64)}|${wpUrl.length}`,
+        bgPosition,
+        scrimCss: videoScrimCss,
+        overlayRgb,
+        overlayAlpha,
+        tintBg: effHeaderBg || mainTheme.headerBg || '',
+        blurStr: effectiveBlur,
+        useUnifiedGlass,
+        reducedMotion: isReducedMotion
+      });
     } else {
-      syncPrebakedGlass(null);
+      syncVideoWallpaper(null);
+      if (useUnifiedGlass) {
+        syncPrebakedGlass(wpUrl, overlayRgb, overlayAlpha, effHeaderBg || mainTheme.headerBg || '', effectiveBlur);
+      } else {
+        syncPrebakedGlass(null);
+      }
     }
 
     const sidePanelCss = st.wpEnabled ? `
@@ -799,7 +1378,22 @@
       .agy-shell .bg-sidebar [class*="group/headerbtn"]:hover,
       .agy-shell .bg-sidebar a:hover {
         background: ${sidebarHoverBg} !important;
+        transition: background-color 180ms ease !important;
       }
+      /* Sidebar visual separation & active conversation highlight */
+      .agy-shell [data-testid="sidebar-split"] > :first-child {
+        border-right: 1px solid ${mainTheme.headerBorder || 'rgba(255, 255, 255, 0.08)'} !important;
+      }
+      .agy-shell .bg-sidebar :is(a[aria-current="page"], a[data-active="true"], button[data-active="true"], a[class*="bg-sidebar-accent"], a[class*="bg-accent"]) {
+        background: ${sidebarActiveBg} !important;
+        box-shadow: inset 2.5px 0 0 ${effPrimary} !important;
+        color: ${uiInk} !important;
+      }
+      ${st.zenMode ? `
+      .agy-shell [data-testid="sidebar-split"] > :first-child {
+        display: none !important;
+      }
+      ` : ''}
       ${sidebarEnhanceCss}
       ${aiCardCss}
       ${sidePanelCss}
@@ -817,7 +1411,7 @@
       .agy-user-bubble-frame {
         background: ${bubbleTheme.frameBg} !important;
         border-radius: ${bubbleTheme.isScroll ? '6px' : '14px'} !important;
-        box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45), 0 0 12px ${bubbleTheme.glow} !important;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.42), 0 0 10px ${effGlow} !important;
         position: relative !important;
         overflow: visible !important;
         padding: 1.2px !important;
@@ -851,19 +1445,23 @@
         color: ${bubbleTheme.textColor} !important;
       }
 
-      /* Double-Border Input Composer */
+      /* Double-Border Input Composer — Hero interactive anchor with calm focus glow */
       .surface-composer {
         background: ${inputOuterBorder} !important;
         border-radius: 16px !important;
-        padding: 1.5px !important;
-        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.5), 0 0 14px ${bubbleTheme.glow} !important;
+        padding: 1.2px !important;
+        box-shadow: 0 8px 26px rgba(0, 0, 0, 0.52), 0 0 12px ${effGlow} !important;
         position: relative !important;
+        transition: box-shadow 200ms ease, transform 200ms ease !important;
+      }
+      .surface-composer:focus-within {
+        box-shadow: 0 0 0 1px ${effPrimary}, 0 10px 30px rgba(0, 0, 0, 0.58), 0 0 22px ${effGlow} !important;
       }
 
       .surface-composer-card {
         background: ${inputCardBg} !important;
         backdrop-filter: none !important;
-        border-radius: 14.5px !important;
+        border-radius: 14.8px !important;
         border: ${bubbleTheme.innerBorder || '1px solid rgba(255, 255, 255, 0.07)'} !important;
       }
 
@@ -944,13 +1542,17 @@
         border-color: ${mainTheme.borderColor} !important;
         background: ${mainTheme.glow} !important;
       }
-      #agy-custom-theme-sidebar-btn svg {
-        color: ${mainTheme.primary} !important;
+      #agy-custom-theme-sidebar-btn svg,
+      #agy-custom-theme-titlebar-btn svg {
+        color: ${effPrimary} !important;
       }
     `;
 
     syncTitleBarOverlay(st);
     scheduleTitleBarSync(st);
+    if (typeof syncLivingMascot === 'function') {
+      syncLivingMascot(st);
+    }
   }
 
   function syncTitleBarOverlay(stOverride) {
@@ -1008,8 +1610,19 @@
     if (styleEl) styleEl.remove();
     const navBtn = document.getElementById('agy-custom-theme-sidebar-btn');
     if (navBtn) navBtn.remove();
+    const titleBtn = document.getElementById('agy-custom-theme-titlebar-btn');
+    if (titleBtn) titleBtn.remove();
     const settingsBtn = document.getElementById('agy-custom-theme-settings-btn');
     if (settingsBtn) settingsBtn.remove();
+    const mascotEl = document.getElementById('agy-living-mascot');
+    if (mascotEl) mascotEl.remove();
+    cleanupVideoWallpaper();
+    window.__AGY_VIDEO_WP_CFG__ = null;
+    document.querySelectorAll('.agy-sakura-petal').forEach(p => p.remove());
+    if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
+      clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+      window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+    }
     const modal = document.getElementById('agy-custom-theme-modal-backdrop');
     if (modal) modal.remove();
     document.querySelectorAll('[data-agy-scroll-bound]').forEach(el => {
@@ -1120,6 +1733,48 @@
 
     container.innerHTML = `
       <div id="agy-theme-scroll-container" style="padding: 24px 32px 48px 32px; max-width: 860px; margin: 0 auto; overflow-y: auto; height: 100%; color: ${mText};">
+        <div style="border: 1px solid ${mainTheme.borderColor}; background: ${mCardBg}; border-radius: 12px; padding: 14px 20px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 12px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+            <div>
+              <div style="font-size: 14.5px; font-weight: 600; color: ${mText}; margin-bottom: 2px;">Workspace Mode & Atmosphere</div>
+              <div style="font-size: 12px; color: ${mMuted};">Switch instantly between coding focus and scenic sakura depth (Zen shortcut: Ctrl+Shift+Z).</div>
+            </div>
+            <div style="display: inline-flex; padding: 3px; border-radius: 9px; background: ${mInputBg}; border: 1px solid ${mBorder}; gap: 3px;">
+              ${Object.entries(MODE_PRESETS).map(([key, item]) => {
+                const active = st.workspaceMode === key;
+                return `<button class="agy-mode-btn" data-mode="${key}" type="button" style="padding: 4px 11px; border-radius: 7px; font-size: 12px; font-weight: ${active ? '600' : '500'}; border: none; cursor: pointer; background: ${active ? (ACCENT_PRESETS[st.accentOverride]?.primary || mainTheme.primary) : 'transparent'}; color: ${active ? '#100D17' : mLabel}; transition: all 160ms ease;">${escapeHtml(item.label)}</button>`;
+              }).join('')}
+            </div>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px; padding-top: 8px; border-top: 1px solid ${mDivider};">
+            <div style="display: flex; align-items: center; gap: 14px; flex-wrap: wrap;">
+              <label style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: ${mMuted};">
+                Chat Opacity
+                <input id="agy-chat-opacity-slider" type="range" min="70" max="98" value="${st.chatOpacity >= 70 ? st.chatOpacity : Math.round((MODE_PRESETS[st.workspaceMode]?.defaultCardAlpha || 0.92) * 100)}" style="width: 92px; cursor: pointer; accent-color: ${mainTheme.primary}; height: 5px;" />
+                <span id="agy-chat-opacity-val" style="min-width: 34px; text-align: right;">${st.chatOpacity >= 70 ? st.chatOpacity : Math.round((MODE_PRESETS[st.workspaceMode]?.defaultCardAlpha || 0.92) * 100)}%</span>
+              </label>
+              <div style="display: flex; align-items: center; gap: 6px; font-size: 12px; color: ${mMuted};">
+                <span>Accent</span>
+                ${Object.entries(ACCENT_PRESETS).map(([key, item]) => {
+                  const active = st.accentOverride === key;
+                  const swatch = item.primary || mainTheme.primary;
+                  return `<button class="agy-accent-btn" data-accent="${key}" type="button" title="${escapeHtml(item.label)}" style="display: inline-flex; align-items: center; gap: 5px; padding: 3px 8px; border-radius: 9999px; font-size: 11.5px; cursor: pointer; background: ${active ? mCardSelBg : 'transparent'}; border: 1px solid ${active ? swatch : mBorder}; color: ${active ? mText : mMuted};"><span style="width: 8px; height: 8px; border-radius: 50%; background: ${swatch}; display: inline-block;"></span>${escapeHtml(key ? item.label : 'Auto')}</button>`;
+                }).join('')}
+              </div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: ${mLabel}; cursor: pointer;">
+                <input id="agy-zen-toggle" type="checkbox" ${st.zenMode ? 'checked' : ''} style="accent-color: ${mainTheme.primary}; cursor: pointer;" />
+                Zen Mode
+              </label>
+              <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: ${mLabel}; cursor: pointer;">
+                <input id="agy-reduced-motion-toggle" type="checkbox" ${st.reducedMotion ? 'checked' : ''} style="accent-color: ${mainTheme.primary}; cursor: pointer;" />
+                Reduced Motion
+              </label>
+            </div>
+          </div>
+        </div>
+
         <div style="border: 1px solid ${mainTheme.borderColor}; background: ${mCardBg}; border-radius: 12px; padding: 16px 20px; margin-bottom: 14px; display: flex; flex-direction: column; gap: 12px;">
           <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
             <div>
@@ -1142,8 +1797,8 @@
                 <span id="agy-blur-val" style="min-width: 30px; text-align: right;">${st.glassBlur}px</span>
               </label>
               <label style="padding: 5px 10px; border-radius: 8px; background: ${mBtnBg}; border: 1px solid ${mainTheme.borderColor}; color: ${mText}; font-size: 12px; cursor: pointer; white-space: nowrap;">
-                Custom Image
-                <input id="agy-wp-upload" type="file" accept="image/*" style="display: none;" />
+                Custom Media
+                <input id="agy-wp-upload" type="file" accept="image/*,video/mp4,video/webm" style="display: none;" />
               </label>
               <button id="agy-export-btn" type="button" style="padding: 5px 10px; border-radius: 8px; background: ${mBtnBg}; border: 1px solid ${mBorder}; color: ${mText}; font-size: 12px; cursor: pointer; white-space: nowrap;">
                 Export JSON
@@ -1278,7 +1933,8 @@
               const th = THEMES[name];
               const safeName = escapeHtml(name);
               const isSelected = name === st.themeName;
-              const thumbBg = th.wallpaper
+              const isVidThumb = isVideoMediaUrl(th.wallpaper || '');
+              const thumbBg = (th.wallpaper && !isVidThumb)
                 ? `linear-gradient(180deg, rgba(0,0,0,0.15), rgba(14,12,12,0.85)), url('${safeCssUrl(th.wallpaper)}')`
                 : (th.pureBg || th.bg);
               const thumbOrnamentStyle = th.isOrnament
@@ -1286,9 +1942,10 @@
                 : 'right: 12px; bottom: 4px; width: 42px; height: 38px; background-position: bottom center;';
               return `
                 <div class="agy-preset-card" data-name="${safeName}" style="border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${mCardBg}; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: border-color 0.15s ease;">
-                  <div style="height: 68px; width: 100%; background-image: ${thumbBg}; background-size: cover; background-position: ${th.bgPosition || 'center'}; position: relative; display: flex; align-items: flex-end; padding: 8px 14px;">
-                    ${th.sticker ? `<div style="position: absolute; ${thumbOrnamentStyle} background-image: url('${safeCssUrl(th.sticker)}'); background-size: contain; background-repeat: no-repeat; pointer-events: none;"></div>` : ''}
-                    <span style="font-size: 13.5px; font-weight: 600; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.75);">${safeName}</span>
+                  <div style="height: 68px; width: 100%; background-image: ${thumbBg}; background-size: cover; background-position: ${th.bgPosition || 'center'}; position: relative; display: flex; align-items: flex-end; padding: 8px 14px; overflow: hidden;">
+                    ${isVidThumb ? `<video src="${safeCssUrl(getVideoBlobUrl(th.wallpaper))}" autoplay loop muted playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></video><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,13,23,0.12), rgba(16,13,23,0.72)); pointer-events: none;"></div>` : ''}
+                    ${th.sticker ? `<div style="position: absolute; ${thumbOrnamentStyle} background-image: url('${safeCssUrl(th.sticker)}'); background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 2;"></div>` : ''}
+                    <span style="position: relative; z-index: 2; font-size: 13.5px; font-weight: 600; color: #fff; text-shadow: 0 1px 4px rgba(0,0,0,0.75);">${safeName}</span>
                   </div>
                   <div style="padding: 10px 14px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-size: 12px; color: ${mMuted};">${escapeHtml(th.concept || '')}</span>
@@ -1352,6 +2009,52 @@
       valLabel.textContent = v + '%';
       applyTheme({ dimming: v });
     });
+
+    container.querySelectorAll('.agy-mode-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const modeKey = btn.dataset.mode;
+        const mCfg = MODE_PRESETS[modeKey] || MODE_PRESETS.balanced;
+        applyTheme({
+          workspaceMode: modeKey,
+          dimming: mCfg.defaultDim,
+          chatOpacity: Math.round(mCfg.defaultCardAlpha * 100)
+        });
+        renderThemePanels(container);
+      });
+    });
+
+    const chatOpacitySlider = container.querySelector('#agy-chat-opacity-slider');
+    const chatOpacityVal = container.querySelector('#agy-chat-opacity-val');
+    if (chatOpacitySlider) {
+      chatOpacitySlider.addEventListener('input', (e) => {
+        const v = parseInt(e.target.value, 10);
+        if (chatOpacityVal) chatOpacityVal.textContent = v + '%';
+        applyTheme({ chatOpacity: v });
+      });
+    }
+
+    container.querySelectorAll('.agy-accent-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const accentKey = btn.dataset.accent || '';
+        applyTheme({ accentOverride: accentKey });
+        renderThemePanels(container);
+      });
+    });
+
+    const zenToggle = container.querySelector('#agy-zen-toggle');
+    if (zenToggle) {
+      zenToggle.addEventListener('change', (e) => {
+        applyTheme({ zenMode: e.target.checked });
+        syncShellMetrics();
+      });
+    }
+
+    const reducedMotionToggle = container.querySelector('#agy-reduced-motion-toggle');
+    if (reducedMotionToggle) {
+      reducedMotionToggle.addEventListener('change', (e) => {
+        applyTheme({ reducedMotion: e.target.checked });
+      });
+    }
 
     const wpToggle = container.querySelector('#agy-wp-toggle');
     wpToggle.addEventListener('change', (e) => {
@@ -1496,7 +2199,7 @@
             throw new Error('Config must be a JSON object');
           }
           const allowed = {};
-          const keys = ['themeName', 'bubbleName', 'inputStyle', 'dimming', 'wpEnabled', 'customWp', 'userAvatar', 'agentAvatar', 'glassBlur', 'avatarSize', 'avatarRadius'];
+          const keys = ['themeName', 'bubbleName', 'inputStyle', 'dimming', 'wpEnabled', 'customWp', 'userAvatar', 'agentAvatar', 'glassBlur', 'avatarSize', 'avatarRadius', 'workspaceMode', 'chatOpacity', 'accentOverride', 'reducedMotion', 'zenMode'];
           keys.forEach((k) => {
             if (parsed[k] !== undefined) allowed[k] = parsed[k];
           });
@@ -1521,18 +2224,31 @@
       localStorage.removeItem(STORAGE_INPUT);
       localStorage.removeItem(STORAGE_DIMMING);
       localStorage.removeItem(STORAGE_WP_ENABLED);
+      localStorage.removeItem(STORAGE_MODE);
+      localStorage.removeItem(STORAGE_CHAT_OPACITY);
+      localStorage.removeItem(STORAGE_ACCENT);
+      localStorage.removeItem(STORAGE_REDUCED_MOTION);
+      localStorage.removeItem(STORAGE_ZEN);
+      const defTheme = THEMES[DEFAULT_THEME_KEY] || {};
+      const defDim = Number.isFinite(defTheme.defaultDimming) ? defTheme.defaultDimming : 69;
+      const defBlur = parseFiniteInt(String(defTheme.headerBlur || '').replace(/[^\d]/g, ''), 3);
       applyTheme({
         themeName: DEFAULT_THEME_KEY,
         bubbleName: DEFAULT_THEME_KEY,
         inputStyle: 'sync',
-        dimming: 69,
+        dimming: defDim,
         wpEnabled: true,
         customWp: '',
         userAvatar: '',
         agentAvatar: '',
-        glassBlur: 3,
+        glassBlur: defBlur,
         avatarSize: 32,
-        avatarRadius: 50
+        avatarRadius: 50,
+        workspaceMode: 'balanced',
+        chatOpacity: 0,
+        accentOverride: '',
+        reducedMotion: false,
+        zenMode: false
       });
       renderThemePanels(container);
     });
@@ -1540,7 +2256,12 @@
     container.querySelectorAll('.agy-preset-card').forEach(card => {
       card.addEventListener('click', () => {
         const name = card.dataset.name;
-        applyTheme({ themeName: name, bubbleName: name, customWp: '' });
+        const picked = THEMES[name] || {};
+        const nextOverrides = { themeName: name, bubbleName: name, customWp: '', chatOpacity: 0 };
+        if (Number.isFinite(picked.defaultDimming)) {
+          nextOverrides.dimming = picked.defaultDimming;
+        }
+        applyTheme(nextOverrides);
         renderThemePanels(container);
       });
     });
@@ -1578,14 +2299,122 @@
     });
   }
 
+  function spawnSakuraBurst(composerEl) {
+    const st = getState();
+    if (st.reducedMotion) return;
+    if (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!composerEl) return;
+    const offsets = [
+      { right: 42, top: -32, dx: -36, dy: -48, rot: -110, delay: 0 },
+      { right: 26, top: -44, dx: -14, dy: -56, rot: 95, delay: 90 },
+      { right: 56, top: -22, dx: -48, dy: -34, rot: -145, delay: 160 },
+      { right: 16, top: -36, dx: 18, dy: -46, rot: 130, delay: 220 },
+      { right: 34, top: -26, dx: -24, dy: -62, rot: 75, delay: 280 }
+    ];
+    offsets.forEach((p) => {
+      const el = document.createElement('span');
+      el.className = 'agy-sakura-petal';
+      el.style.right = p.right + 'px';
+      el.style.top = p.top + 'px';
+      el.style.setProperty('--dx', p.dx + 'px');
+      el.style.setProperty('--dy', p.dy + 'px');
+      el.style.setProperty('--rot', p.rot + 'deg');
+      el.style.animationDelay = p.delay + 'ms';
+      composerEl.appendChild(el);
+      setTimeout(() => { el.remove(); }, 1850);
+    });
+  }
+
+  function syncLivingMascot(stOverride) {
+    const st = stOverride || getState();
+    const bubbleTheme = THEMES[st.bubbleName] || THEMES[st.themeName] || THEMES[DEFAULT_THEME_KEY] || {};
+    const shouldMount = Boolean(bubbleTheme.composerOnlyMascot && bubbleTheme.sticker && st.inputStyle !== 'minimal');
+    const existing = document.getElementById('agy-living-mascot');
+
+    if (!shouldMount) {
+      if (existing) existing.remove();
+      return;
+    }
+
+    const composer = document.querySelector('.surface-composer');
+    if (!composer) return;
+
+    let mascot = existing;
+    if (!mascot || mascot.parentNode !== composer) {
+      if (existing) existing.remove();
+      mascot = document.createElement('div');
+      mascot.id = 'agy-living-mascot';
+      mascot.setAttribute('role', 'button');
+      mascot.setAttribute('aria-label', 'Open Custom Theme Studio');
+      mascot.title = 'Sakura Kitsune • Click to open Custom Theme Studio';
+      mascot.dataset.state = 'idle';
+      mascot.addEventListener('click', (e) => {
+        e.stopPropagation();
+        spawnSakuraBurst(composer);
+        window.__ANTIGRAVITY_OPEN_THEME_MODAL__();
+      });
+      composer.appendChild(mascot);
+    }
+
+    const isThinking = Boolean(
+      composer.querySelector('.surface-composer-card button[aria-label*="Cancel"], .surface-composer-card button[aria-label*="Stop"]')
+    );
+    const prevThinking = Boolean(window.__AGY_MASCOT_PREV_THINKING__);
+    window.__AGY_MASCOT_PREV_THINKING__ = isThinking;
+
+    if (isThinking) {
+      if (window.__AGY_MASCOT_SUCCESS_TIMER__) {
+        clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+        window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+      }
+      mascot.dataset.state = 'thinking';
+    } else if (prevThinking) {
+      mascot.dataset.state = 'success';
+      spawnSakuraBurst(composer);
+      if (window.__AGY_MASCOT_SUCCESS_TIMER__) clearTimeout(window.__AGY_MASCOT_SUCCESS_TIMER__);
+      window.__AGY_MASCOT_SUCCESS_TIMER__ = setTimeout(() => {
+        const cur = document.getElementById('agy-living-mascot');
+        if (cur && cur.dataset.state === 'success') cur.dataset.state = 'idle';
+        window.__AGY_MASCOT_SUCCESS_TIMER__ = 0;
+      }, 1500);
+    } else if (mascot.dataset.state !== 'success') {
+      mascot.dataset.state = 'idle';
+    }
+  }
+
+  function injectTitlebarThemeButton() {
+    if (document.getElementById('agy-custom-theme-titlebar-btn')) return;
+    const toolbar = document.querySelector('[data-testid="pane-titlebar-toolbar"]');
+    if (!toolbar) return;
+
+    const btn = document.createElement('button');
+    btn.id = 'agy-custom-theme-titlebar-btn';
+    btn.type = 'button';
+    btn.title = 'Custom Theme Studio (Zen Mode: Ctrl+Shift+Z)';
+    btn.setAttribute('aria-label', 'Open Custom Theme Studio');
+    btn.className = 'inline-flex items-center justify-center rounded-md p-1.5 transition-colors cursor-pointer select-none';
+    btn.style.cssText = 'background: transparent; border: none; opacity: 0.92;';
+    btn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/></svg>`;
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      window.__ANTIGRAVITY_OPEN_THEME_MODAL__();
+    });
+    toolbar.insertBefore(btn, toolbar.firstChild);
+  }
+
   function injectMainSidebarButton() {
     if (document.getElementById('agy-custom-theme-sidebar-btn')) return;
 
-    const sidebar = document.querySelector('.bg-sidebar');
-    if (!sidebar) return;
+    const sidebars = Array.from(document.querySelectorAll('.agy-shell .bg-sidebar, .agy-shell [data-testid="sidebar-split"]'));
+    if (!sidebars.length) return;
 
-    const spans = Array.from(sidebar.querySelectorAll('span'));
-    const customSpan = spans.find(s => s.textContent?.trim() === 'Customizations');
+    let customSpan = null;
+    for (const sb of sidebars) {
+      const spans = Array.from(sb.querySelectorAll('span'));
+      customSpan = spans.find(s => s.textContent?.trim() === 'Customizations');
+      if (customSpan) break;
+    }
     if (!customSpan) return;
 
     const row = customSpan.closest('a, button, div[role="button"], .group\\/headerbtn') || customSpan.parentElement;
@@ -1726,6 +2555,9 @@
   function hookShellMetrics() {
     const shell = document.querySelector('.agy-shell');
     if (!shell) return;
+    if (window.__AGY_VIDEO_WP_CFG__ && !document.getElementById('agy-bg-video')) {
+      syncVideoWallpaper(window.__AGY_VIDEO_WP_CFG__);
+    }
     if (!shell.dataset.agyTboMounted) {
       shell.dataset.agyTboMounted = '1';
       scheduleTitleBarSync();
@@ -1750,9 +2582,11 @@
 
   function tick() {
     injectMainSidebarButton();
+    injectTitlebarThemeButton();
     injectSettingsModalButton();
     hookSidebarScroll();
     hookShellMetrics();
+    syncLivingMascot();
   }
 
   function scheduleTick() {
@@ -1778,9 +2612,21 @@
     }
     window.__AGY_SCROLL_AC__ = new AbortController();
     window.addEventListener('load', () => scheduleTitleBarSync(), { signal: window.__AGY_SCROLL_AC__.signal });
-    window.addEventListener('focus', () => syncTitleBarOverlay(), { signal: window.__AGY_SCROLL_AC__.signal });
+    window.addEventListener('focus', () => {
+      syncTitleBarOverlay();
+      if (window.__AGY_VIDEO_WP_CFG__) syncVideoWallpaper(window.__AGY_VIDEO_WP_CFG__);
+    }, { signal: window.__AGY_SCROLL_AC__.signal });
+    window.addEventListener('keydown', (e) => {
+      if (e.ctrlKey && e.shiftKey && (e.key === 'Z' || e.key === 'z')) {
+        e.preventDefault();
+        const cur = getState();
+        applyTheme({ zenMode: !cur.zenMode });
+        syncShellMetrics();
+      }
+    }, { signal: window.__AGY_SCROLL_AC__.signal });
     document.addEventListener('visibilitychange', () => {
       if (!document.hidden) syncTitleBarOverlay();
+      if (window.__AGY_VIDEO_WP_CFG__) syncVideoWallpaper(window.__AGY_VIDEO_WP_CFG__);
     }, { signal: window.__AGY_SCROLL_AC__.signal });
     document.querySelectorAll('[data-agy-scroll-bound]').forEach(el => delete el.dataset.agyScrollBound);
     document.querySelectorAll('[data-agy-tbo-mounted]').forEach(el => delete el.dataset.agyTboMounted);
@@ -1788,8 +2634,13 @@
     if (staleBackdrop) staleBackdrop.remove();
     const staleSidebarBtn = document.getElementById('agy-custom-theme-sidebar-btn');
     if (staleSidebarBtn) staleSidebarBtn.remove();
+    const staleTitleBtn = document.getElementById('agy-custom-theme-titlebar-btn');
+    if (staleTitleBtn) staleTitleBtn.remove();
     const staleSettingsBtn = document.getElementById('agy-custom-theme-settings-btn');
     if (staleSettingsBtn) staleSettingsBtn.remove();
+    const staleMascot = document.getElementById('agy-living-mascot');
+    if (staleMascot) staleMascot.remove();
+    cleanupVideoWallpaper();
 
     window.__AGY_HOLE_EL__ = null;
     window.__AGY_SIDE_EL__ = null;

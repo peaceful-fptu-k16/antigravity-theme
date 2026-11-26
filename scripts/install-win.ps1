@@ -1,5 +1,7 @@
 param(
-    [switch]$NoStartup
+    [switch]$Startup,
+    [switch]$NoStartup,
+    [string]$NodePath = ''
 )
 
 $ErrorActionPreference = 'Stop'
@@ -11,16 +13,61 @@ $PayloadJs = Join-Path $RepoRoot 'dist\theme_payload.js'
 $BuildPy = Join-Path $RepoRoot 'scripts\build_payload.py'
 $PidFile = Join-Path $RepoRoot 'daemon.pid'
 $VbsPath = Join-Path $RepoRoot 'silent-start.vbs'
+$LauncherVbsPath = Join-Path $RepoRoot 'launch-antigravity.vbs'
+$LauncherStatePath = Join-Path $RepoRoot 'launcher_state.json'
 
-$NodeCmd = Get-Command node -ErrorAction SilentlyContinue
-if (-not $NodeCmd) {
-    Write-Error "Node.js not found in PATH. Install Node.js >= 22 first."
+function Test-NodeBinary {
+    param([string]$CandidatePath)
+    if (-not $CandidatePath -or -not (Test-Path $CandidatePath)) { return $null }
+    try {
+        $majorText = (& $CandidatePath -p "process.versions.node.split('.')[0]" 2>$null)
+        $major = 0
+        if ([int]::TryParse(($majorText -as [string]).Trim(), [ref]$major) -and $major -ge 22) {
+            return $CandidatePath
+        }
+    } catch {}
+    return $null
 }
-$NodeExe = $NodeCmd.Source
-$NodeMajor = [int]((& $NodeExe -p "process.versions.node.split('.')[0]").Trim())
-if ($NodeMajor -lt 22) {
-    Write-Error "Node.js >= 22 is required (found v$NodeMajor at $NodeExe)."
+
+function Find-NodeExe {
+    if ($NodePath) {
+        $verified = Test-NodeBinary $NodePath
+        if ($verified) { return $verified }
+        Write-Error "Provided -NodePath is missing or older than Node.js 22: $NodePath"
+    }
+
+    $cmd = Get-Command node -ErrorAction SilentlyContinue
+    if ($cmd) {
+        $verified = Test-NodeBinary $cmd.Source
+        if ($verified) { return $verified }
+        $foundMajor = (& $cmd.Source -p "process.versions.node.split('.')[0]" 2>$null)
+        Write-Warning "[install-win] Node in PATH is v$foundMajor (< 22); searching for Node.js >= 22..."
+    }
+
+    $fallbacks = @(
+        'C:\Program Files\nodejs\node.exe',
+        'C:\Program Files (x86)\nodejs\node.exe',
+        (Join-Path $env:LOCALAPPDATA 'Programs\nodejs\node.exe'),
+        (Join-Path $env:APPDATA 'nvm\current\node.exe'),
+        (Join-Path $env:USERPROFILE '.volta\bin\node.exe'),
+        (Join-Path $env:USERPROFILE 'scoop\shims\node.exe')
+    )
+    foreach ($cand in $fallbacks) {
+        $verified = Test-NodeBinary $cand
+        if ($verified) { return $verified }
+    }
+
+    $discovered = Get-ChildItem -Path $env:LOCALAPPDATA -Filter 'node.exe' -Recurse -Depth 2 -ErrorAction SilentlyContinue
+    foreach ($item in $discovered) {
+        $verified = Test-NodeBinary $item.FullName
+        if ($verified) { return $verified }
+    }
+
+    Write-Error "Node.js >= 22 not found. Install Node.js >= 22 (or pass -NodePath C:\path\to\node.exe)."
 }
+
+$NodeExe = Find-NodeExe
+Write-Host "[install-win] Using Node.js: $NodeExe"
 
 if (-not (Test-Path $PayloadJs)) {
     $PyCmd = Get-Command python -ErrorAction SilentlyContinue
@@ -51,19 +98,8 @@ if (Test-Path $PidFile) {
     Remove-Item $PidFile -Force -ErrorAction SilentlyContinue
 }
 
-# Generate silent-start.vbs dynamically without hardcoding user or Node paths.
-$EscapedNode = $NodeExe.Replace('"', '""')
-$EscapedDaemon = $DaemonJs.Replace('"', '""')
-$VbsContent = @"
-Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = "$($RepoRoot.Replace('"', '""'))"
-WshShell.Run """$EscapedNode"" ""$EscapedDaemon""", 0, False
-"@
-Set-Content -Path $VbsPath -Value $VbsContent -Encoding Unicode
-
 $WshShell = New-Object -ComObject WScript.Shell
 
-# Ensure Antigravity shortcuts include --remote-debugging-port=0 (required on Antigravity v2.33.0+)
 $ShortcutSearchDirs = @(
     [Environment]::GetFolderPath('DesktopDirectory'),
     [Environment]::GetFolderPath('CommonDesktopDirectory'),
@@ -73,38 +109,226 @@ $ShortcutSearchDirs = @(
     (Join-Path $env:APPDATA 'Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar')
 ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -Unique
 
-foreach ($SearchDir in $ShortcutSearchDirs) {
-    Get-ChildItem -Path $SearchDir -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue | ForEach-Object {
-        try {
-            $Sc = $WshShell.CreateShortcut($_.FullName)
-            if ($Sc.TargetPath -and ($Sc.TargetPath -imatch '\\Antigravity\.exe$')) {
-                if ($Sc.Arguments -notmatch '--remote-debugging-port') {
-                    $Sc.Arguments = ("$($Sc.Arguments) --remote-debugging-port=0").Trim()
-                    $Sc.Save()
-                    Write-Host "[install-win] Patched CDP flag on shortcut: $($_.FullName)"
+# Load any previous shortcut backup state so re-running install-win.ps1 stays idempotent.
+$SavedShortcuts = @{}
+$SavedAgyExe = ''
+if (Test-Path $LauncherStatePath) {
+    try {
+        $PrevState = Get-Content -Path $LauncherStatePath -Raw -Encoding UTF8 | ConvertFrom-Json
+        if ($PrevState.antigravityExe) { $SavedAgyExe = [string]$PrevState.antigravityExe }
+        if ($PrevState.shortcuts) {
+            foreach ($entry in $PrevState.shortcuts) {
+                if ($entry.shortcutPath) {
+                    $SavedShortcuts[$entry.shortcutPath] = $entry
                 }
             }
-        } catch {
-            # Ignore unreadable or protected shortcuts
         }
-    }
+    } catch {}
 }
 
-if (-not $NoStartup) {
-    $StartupDir = [Environment]::GetFolderPath('Startup')
-    $ShortcutPath = Join-Path $StartupDir 'AntigravityCustomTheme.lnk'
-    $Shortcut = $WshShell.CreateShortcut($ShortcutPath)
+function Find-AntigravityExe {
+    if ($SavedAgyExe -and (Test-Path $SavedAgyExe)) { return $SavedAgyExe }
+
+    $running = Get-Process -Name 'Antigravity' -ErrorAction SilentlyContinue | Select-Object -First 1
+    if ($running -and $running.Path -and (Test-Path $running.Path)) {
+        return $running.Path
+    }
+
+    $stdCandidates = @(
+        (Join-Path $env:LOCALAPPDATA 'Programs\antigravity\Antigravity.exe'),
+        (Join-Path $env:LOCALAPPDATA 'Programs\Antigravity\Antigravity.exe'),
+        (Join-Path $env:ProgramFiles 'Antigravity\Antigravity.exe')
+    )
+    foreach ($c in $stdCandidates) {
+        if (Test-Path $c) { return $c }
+    }
+
+    foreach ($SearchDir in $ShortcutSearchDirs) {
+        $lnks = Get-ChildItem -Path $SearchDir -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue
+        foreach ($lnk in $lnks) {
+            try {
+                $Sc = $WshShell.CreateShortcut($lnk.FullName)
+                if ($Sc.TargetPath -and ($Sc.TargetPath -imatch '\\Antigravity\.exe$') -and (Test-Path $Sc.TargetPath)) {
+                    return $Sc.TargetPath
+                }
+            } catch {}
+        }
+    }
+    return ''
+}
+
+function Get-ActivePortFile {
+    $candidates = @(
+        (Join-Path $env:APPDATA 'antigravity\DevToolsActivePort'),
+        (Join-Path $env:APPDATA 'Antigravity\DevToolsActivePort')
+    )
+    foreach ($p in $candidates) {
+        if (Test-Path $p) { return $p }
+    }
+    return $null
+}
+
+$EscapedNode = $NodeExe.Replace('"', '""')
+$EscapedDaemon = $DaemonJs.Replace('"', '""')
+$EscapedRepo = $RepoRoot.Replace('"', '""')
+$StartupDir = [Environment]::GetFolderPath('Startup')
+$StartupShortcutPath = Join-Path $StartupDir 'AntigravityCustomTheme.lnk'
+
+if ($Startup) {
+    # Legacy Always-On Startup Mode (opt-in via -Startup)
+    $VbsContent = @"
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.CurrentDirectory = "$EscapedRepo"
+WshShell.Run """$EscapedNode"" ""$EscapedDaemon""", 0, False
+"@
+    Set-Content -Path $VbsPath -Value $VbsContent -Encoding Unicode
+
+    foreach ($SearchDir in $ShortcutSearchDirs) {
+        Get-ChildItem -Path $SearchDir -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+                $Sc = $WshShell.CreateShortcut($_.FullName)
+                if ($Sc.TargetPath -and ($Sc.TargetPath -imatch '\\Antigravity\.exe$')) {
+                    if ($Sc.Arguments -notmatch '--remote-debugging-port') {
+                        $Sc.Arguments = ("$($Sc.Arguments) --remote-debugging-port=0").Trim()
+                        $Sc.Save()
+                        Write-Host "[install-win] Patched CDP flag on shortcut: $($_.FullName)"
+                    }
+                }
+            } catch {}
+        }
+    }
+
+    $Shortcut = $WshShell.CreateShortcut($StartupShortcutPath)
     $Shortcut.TargetPath = 'wscript.exe'
     $Shortcut.Arguments = """$VbsPath"""
     $Shortcut.WorkingDirectory = $RepoRoot
     $Shortcut.WindowStyle = 7
     $Shortcut.Description = 'Antigravity Custom Theme Daemon'
     $Shortcut.Save()
-    Write-Host "[install-win] Startup shortcut created: $ShortcutPath"
-}
+    Write-Host "[install-win] Startup shortcut created: $StartupShortcutPath"
 
-Write-Host "[install-win] Launching daemon via wscript.exe..."
-Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $RepoRoot
+    Write-Host "[install-win] Launching daemon via wscript.exe..."
+    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $RepoRoot
+} elseif ($NoStartup) {
+    # Current-session only (no OS startup, no shortcut wrapping)
+    $VbsContent = @"
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.CurrentDirectory = "$EscapedRepo"
+WshShell.Run """$EscapedNode"" ""$EscapedDaemon"" --exit-on-close", 0, False
+"@
+    Set-Content -Path $VbsPath -Value $VbsContent -Encoding Unicode
+    Write-Host "[install-win] Launching on-demand daemon for current session..."
+    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $RepoRoot
+} else {
+    # Default: Fully Automatic On-Demand Launcher (NO Windows Startup, auto-starts with Antigravity, auto-exits on close)
+    $AgyExe = Find-AntigravityExe
+    if (-not $AgyExe) {
+        Write-Error "Antigravity.exe could not be located. Start Antigravity once or pass -Startup."
+    }
+
+    # Remove any legacy Windows Startup shortcut so daemon never starts with Windows.
+    if (Test-Path $StartupShortcutPath) {
+        Remove-Item $StartupShortcutPath -Force -ErrorAction SilentlyContinue
+        Write-Host "[install-win] Removed legacy Windows Startup shortcut: $StartupShortcutPath"
+    }
+    if (Test-Path $VbsPath) {
+        Remove-Item $VbsPath -Force -ErrorAction SilentlyContinue
+    }
+
+    $EscapedAgy = $AgyExe.Replace('"', '""')
+    $LauncherVbs = @"
+Option Explicit
+Dim WshShell, i, extraArgs, agyCmd, daemonCmd
+Set WshShell = CreateObject("WScript.Shell")
+WshShell.CurrentDirectory = "$EscapedRepo"
+
+extraArgs = ""
+For i = 0 To WScript.Arguments.Count - 1
+    extraArgs = extraArgs & " """ & Replace(WScript.Arguments(i), """", """""") & """"
+Next
+
+agyCmd = """$EscapedAgy"" --remote-debugging-port=0" & extraArgs
+daemonCmd = """$EscapedNode"" ""$EscapedDaemon"" --exit-on-close"
+
+WshShell.Run agyCmd, 1, False
+WshShell.Run daemonCmd, 0, False
+"@
+    Set-Content -Path $LauncherVbsPath -Value $LauncherVbs -Encoding Unicode
+    Write-Host "[install-win] Generated on-demand launcher: $LauncherVbsPath"
+
+    $WscriptExe = Join-Path $env:SystemRoot 'System32\wscript.exe'
+    $PatchedCount = 0
+
+    foreach ($SearchDir in $ShortcutSearchDirs) {
+        Get-ChildItem -Path $SearchDir -Recurse -Filter '*.lnk' -ErrorAction SilentlyContinue | ForEach-Object {
+            try {
+                $ScPath = $_.FullName
+                $Sc = $WshShell.CreateShortcut($ScPath)
+                $IsDirectAgy = $Sc.TargetPath -and ($Sc.TargetPath -imatch '\\Antigravity\.exe$')
+                $IsAlreadyWrapped = ($Sc.TargetPath -imatch '\\wscript\.exe$') -and ($Sc.Arguments -like "*$LauncherVbsPath*")
+
+                if ($IsDirectAgy -or $IsAlreadyWrapped) {
+                    if ($IsDirectAgy -and -not $SavedShortcuts.ContainsKey($ScPath)) {
+                        $SavedShortcuts[$ScPath] = [PSCustomObject]@{
+                            shortcutPath     = $ScPath
+                            targetPath       = [string]$Sc.TargetPath
+                            arguments        = [string]$Sc.Arguments
+                            workingDirectory = [string]$Sc.WorkingDirectory
+                            iconLocation     = [string]$Sc.IconLocation
+                            description      = [string]$Sc.Description
+                        }
+                    }
+
+                    $OrigArgs = ''
+                    if ($SavedShortcuts.ContainsKey($ScPath) -and $SavedShortcuts[$ScPath].arguments) {
+                        $OrigArgs = ([string]$SavedShortcuts[$ScPath].arguments -replace '--remote-debugging-port=\S+', '').Trim()
+                    }
+                    $WrappedArgs = """$LauncherVbsPath"""
+                    if ($OrigArgs) { $WrappedArgs = "$WrappedArgs $OrigArgs" }
+
+                    $Sc.TargetPath = $WscriptExe
+                    $Sc.Arguments = $WrappedArgs
+                    $Sc.WorkingDirectory = (Split-Path -Parent $AgyExe)
+                    $Sc.IconLocation = "$AgyExe,0"
+                    $Sc.WindowStyle = 1
+                    $Sc.Save()
+                    $PatchedCount++
+                    Write-Host "[install-win] Bound on-demand launcher to shortcut: $ScPath"
+                }
+            } catch {
+                # Ignore unreadable or protected shortcuts
+            }
+        }
+    }
+
+    $StateObj = [PSCustomObject]@{
+        mode           = 'on-demand'
+        antigravityExe = $AgyExe
+        launcherVbs    = $LauncherVbsPath
+        shortcuts      = @($SavedShortcuts.Values)
+    }
+    $StateJson = $StateObj | ConvertTo-Json -Depth 5
+    Set-Content -Path $LauncherStatePath -Value $StateJson -Encoding UTF8
+
+    if ($PatchedCount -eq 0) {
+        Write-Warning "[install-win] No Antigravity.lnk shortcuts found to wrap. You can launch via $LauncherVbsPath directly."
+    }
+
+    $ActivePortFile = Get-ActivePortFile
+    if ($ActivePortFile) {
+        Write-Host "[install-win] Active Antigravity CDP session detected; attaching daemon (--exit-on-close)..."
+        $AttachVbs = "Set WshShell = CreateObject(""WScript.Shell""): WshShell.CurrentDirectory = ""$EscapedRepo"": WshShell.Run """"""$EscapedNode"""" """"$EscapedDaemon"""" --exit-on-close"", 0, False"
+        $TmpAttach = Join-Path $env:TEMP "agy_attach_$(Get-Random).vbs"
+        Set-Content -Path $TmpAttach -Value $AttachVbs -Encoding Unicode
+        Start-Process -FilePath 'wscript.exe' -ArgumentList """$TmpAttach""" -WorkingDirectory $RepoRoot
+        Start-Sleep -Milliseconds 600
+        Remove-Item $TmpAttach -Force -ErrorAction SilentlyContinue
+    } else {
+        Write-Host "[install-win] Setup complete (On-Demand mode, zero Windows Startup)."
+        Write-Host "[install-win] Quit Antigravity completely (System Tray -> Quit) and reopen it from Desktop or Start Menu to activate your theme automatically."
+        exit 0
+    }
+}
 
 for ($i = 0; $i -lt 15; $i++) {
     Start-Sleep -Milliseconds 250
@@ -114,9 +338,8 @@ for ($i = 0; $i -lt 15; $i++) {
         if ([int]::TryParse(($NewPidText -as [string]), [ref]$NewPid) -and $NewPid -gt 0) {
             if (Get-Process -Id $NewPid -ErrorAction SilentlyContinue) {
                 Write-Host "[install-win] Daemon running silently (PID $NewPid)."
-                $PortFile = Join-Path $env:APPDATA 'Antigravity\DevToolsActivePort'
-                if (-not (Test-Path $PortFile)) {
-                    Write-Host "[install-win] Note: DevToolsActivePort not found yet. Quit Antigravity completely (System Tray -> Quit) and reopen it from Start Menu (if using a Taskbar pin, unpin and re-pin from Start Menu)."
+                if (-not (Get-ActivePortFile)) {
+                    Write-Host "[install-win] Note: DevToolsActivePort not found yet. Quit Antigravity completely (System Tray -> Quit) and reopen it from Start Menu."
                 }
                 exit 0
             }

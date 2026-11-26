@@ -46,6 +46,44 @@ def encode_raster(img_path: Path, max_dim: int) -> str:
         return f"data:{mime};base64,{base64.b64encode(raw).decode('ascii')}"
 
     with Image.open(img_path) as img:
+        is_animated = bool(getattr(img, "is_animated", False)) and getattr(img, "n_frames", 1) > 1
+        if is_animated:
+            raw = img_path.read_bytes()
+            ext = img_path.suffix.lower()
+            if ext == ".gif" and len(raw) <= 6 * 1024 * 1024:
+                return f"data:image/gif;base64,{base64.b64encode(raw).decode('ascii')}"
+            if ext == ".webp" and len(raw) <= 6 * 1024 * 1024:
+                return f"data:image/webp;base64,{base64.b64encode(raw).decode('ascii')}"
+            # Re-encode large animated images into compact animated WebP
+            frames = []
+            durations = []
+            w, h = img.size
+            longest = max(w, h)
+            target_max = min(max_dim, 1600) if max_dim > 0 else 1600
+            scale = (target_max / float(longest)) if longest > target_max else 1.0
+            new_size = (max(1, int(round(w * scale))), max(1, int(round(h * scale))))
+            resample = getattr(getattr(Image, "Resampling", Image), "LANCZOS")
+            for frame_idx in range(getattr(img, "n_frames", 1)):
+                img.seek(frame_idx)
+                fr = img.convert("RGBA")
+                if scale < 1.0:
+                    fr = fr.resize(new_size, resample)
+                frames.append(fr)
+                durations.append(int(img.info.get("duration", 60) or 60))
+            buf = io.BytesIO()
+            frames[0].save(
+                buf,
+                format="WEBP",
+                save_all=True,
+                append_images=frames[1:],
+                duration=durations,
+                loop=int(img.info.get("loop", 0) or 0),
+                quality=80,
+                method=4,
+            )
+            encoded = base64.b64encode(buf.getvalue()).decode("ascii")
+            return f"data:image/webp;base64,{encoded}"
+
         img = ImageOps.exif_transpose(img)
         has_alpha = img.mode in ("RGBA", "LA", "PA") or (
             img.mode == "P" and "transparency" in img.info
@@ -90,8 +128,17 @@ def resolve_asset_value(value: object, themes_dir: Path, max_dim: int) -> object
     if not asset_path.is_file():
         raise FileNotFoundError(f"Theme asset not found: {trimmed} (resolved: {asset_path})")
 
-    if asset_path.suffix.lower() == ".svg":
+    suffix = asset_path.suffix.lower()
+    if suffix == ".svg":
         return encode_svg(asset_path)
+    if suffix in (".mp4", ".webm"):
+        size_bytes = asset_path.stat().st_size
+        if size_bytes > 3 * 1024 * 1024:
+            rel_posix = asset_path.relative_to(themes_dir.resolve()).as_posix()
+            return f"__AGY_MEDIA__/{rel_posix}"
+        raw = asset_path.read_bytes()
+        mime = "video/mp4" if suffix == ".mp4" else "video/webm"
+        return f"data:{mime};base64,{base64.b64encode(raw).decode('ascii')}"
     return encode_raster(asset_path, max_dim)
 
 

@@ -4,6 +4,8 @@ daemon.log
 daemon.pid
 theme_config.json
 silent-start.vbs
+launch-antigravity.vbs
+launcher_state.json
 
 # OS / Python / Node junk
 __pycache__/

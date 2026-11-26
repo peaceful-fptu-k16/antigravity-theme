@@ -35,8 +35,8 @@ Creates and applies custom glassmorphic themes (wallpapers, cohesive palettes, c
    - Run `python scripts/build_payload.py` (or `python3 scripts/build_payload.py`).
    - Run `node --check dist/theme_payload.js` to ensure zero syntax issues.
 5. **Run / hot-reload daemon**
-   - **Windows:** `powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1`
-   - **macOS / Linux:** `bash scripts/install-unix.sh` (or `--foreground` for interactive testing)
+   - **Windows:** `powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1` (default **On-Demand Launcher**: wraps `Antigravity.lnk` so the daemon launches only when Antigravity opens and exits automatically via `--exit-on-close`, with no Windows Startup entry; pass `-Startup` for always-on OS startup).
+   - **macOS / Linux:** `bash scripts/install-unix.sh` (or `--foreground` for interactive testing; `daemon/theme_daemon.js --exit-on-close` for single-session auto-exit)
    - If the daemon is already running, rebuilding `dist/theme_payload.js` triggers automatic hot-reload via `fs.watch`.
 6. **Verify live via CDP**
    - Run `node scripts/verify_cdp.js` while Antigravity is open.

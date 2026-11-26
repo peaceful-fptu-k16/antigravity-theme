@@ -21,9 +21,134 @@ const ROOT_DIR = path.resolve(__dirname, '..');
 const PID_FILE = path.join(ROOT_DIR, 'daemon.pid');
 const CONFIG_FILE = process.env.AGY_CONFIG_PATH || path.join(ROOT_DIR, 'theme_config.json');
 const DIST_DIR = path.join(ROOT_DIR, 'dist');
+const ASSETS_DIR = path.join(ROOT_DIR, 'themes', 'assets');
 const PAYLOAD_PATH = path.join(DIST_DIR, 'theme_payload.js');
 const LOG_FILE = path.join(ROOT_DIR, 'daemon.log');
 const DEFAULT_CONFIG = {};
+
+const MEDIA_MIME = {
+    '.mp4': 'video/mp4',
+    '.webm': 'video/webm',
+    '.gif': 'image/gif',
+    '.webp': 'image/webp',
+    '.png': 'image/png',
+    '.jpg': 'image/jpeg',
+    '.jpeg': 'image/jpeg',
+    '.svg': 'image/svg+xml',
+};
+
+let mediaServer = null;
+let mediaBaseUrl = '';
+
+function startMediaServer() {
+    return new Promise((resolve) => {
+        const srv = http.createServer((req, res) => {
+            if (!req.url || (req.method !== 'GET' && req.method !== 'HEAD')) {
+                res.writeHead(405);
+                res.end();
+                return;
+            }
+            const cleanUrl = req.url.split('?')[0];
+            if (!cleanUrl.startsWith('/assets/')) {
+                res.writeHead(404);
+                res.end();
+                return;
+            }
+            let rel;
+            try {
+                rel = decodeURIComponent(cleanUrl.slice('/assets/'.length));
+            } catch (_) {
+                res.writeHead(400);
+                res.end();
+                return;
+            }
+            const fullPath = path.resolve(ASSETS_DIR, rel);
+            if (!fullPath.startsWith(ASSETS_DIR + path.sep) || !fs.existsSync(fullPath)) {
+                res.writeHead(404);
+                res.end();
+                return;
+            }
+            let stat;
+            try {
+                stat = fs.statSync(fullPath);
+                if (!stat.isFile()) {
+                    res.writeHead(404);
+                    res.end();
+                    return;
+                }
+            } catch (_) {
+                res.writeHead(404);
+                res.end();
+                return;
+            }
+
+            const ext = path.extname(fullPath).toLowerCase();
+            const mime = MEDIA_MIME[ext] || 'application/octet-stream';
+            const total = stat.size;
+            const commonHeaders = {
+                'Content-Type': mime,
+                'Accept-Ranges': 'bytes',
+                'Access-Control-Allow-Origin': '*',
+                'Cache-Control': 'public, max-age=3600',
+            };
+
+            const rangeHeader = req.headers.range;
+            if (rangeHeader && /^bytes=/i.test(rangeHeader)) {
+                const match = rangeHeader.match(/bytes=(\d*)-(\d*)/i);
+                const start = match && match[1] ? parseInt(match[1], 10) : 0;
+                const end = match && match[2] ? Math.min(total - 1, parseInt(match[2], 10)) : total - 1;
+                if (!Number.isFinite(start) || !Number.isFinite(end) || start > end || start >= total) {
+                    res.writeHead(416, { ...commonHeaders, 'Content-Range': `bytes */${total}` });
+                    res.end();
+                    return;
+                }
+                res.writeHead(206, {
+                    ...commonHeaders,
+                    'Content-Range': `bytes ${start}-${end}/${total}`,
+                    'Content-Length': end - start + 1,
+                });
+                if (req.method === 'HEAD') {
+                    res.end();
+                    return;
+                }
+                const stream = fs.createReadStream(fullPath, { start, end });
+                stream.on('error', () => { try { res.destroy(); } catch (_) {} });
+                stream.pipe(res);
+                return;
+            }
+
+            res.writeHead(200, { ...commonHeaders, 'Content-Length': total });
+            if (req.method === 'HEAD') {
+                res.end();
+                return;
+            }
+            const stream = fs.createReadStream(fullPath);
+            stream.on('error', () => { try { res.destroy(); } catch (_) {} });
+            stream.pipe(res);
+        });
+
+        srv.on('error', (err) => {
+            log(`Media server failed to start: ${err.message}`);
+            resolve('');
+        });
+        srv.listen(0, '127.0.0.1', () => {
+            const addr = srv.address();
+            if (addr && typeof addr === 'object') {
+                mediaServer = srv;
+                mediaBaseUrl = `http://127.0.0.1:${addr.port}`;
+                log(`Local media server listening at ${mediaBaseUrl}`);
+            }
+            resolve(mediaBaseUrl);
+        });
+    });
+}
+
+const EXIT_ON_CLOSE = process.argv.includes('--exit-on-close') || process.env.AGY_EXIT_ON_CLOSE === '1';
+const STARTUP_GRACE_MS = Math.max(5000, parseInt(process.env.AGY_STARTUP_GRACE_MS || '60000', 10) || 60000);
+const MAX_MISSED_SCANS = Math.max(2, parseInt(process.env.AGY_EXIT_MISSED_SCANS || '5', 10) || 5);
+const STARTED_AT = Date.now();
+let everConnectedToCdp = false;
+let missedCdpScans = 0;
 
 function resolvePortFile() {
     if (process.env.AGY_PORT_FILE) {
@@ -136,8 +261,9 @@ function buildInjectedSource() {
     missingPayloadLogged = false;
 
     const cfgJson = JSON.stringify(readConfig());
+    const mediaBaseJson = JSON.stringify(mediaBaseUrl || '');
     const payloadCode = fs.readFileSync(PAYLOAD_PATH, 'utf8');
-    return `window.__AGY_INITIAL_CONFIG__ = ${cfgJson};\n${payloadCode}`;
+    return `window.__AGY_INITIAL_CONFIG__ = ${cfgJson};\nwindow.__AGY_MEDIA_BASE__ = ${mediaBaseJson};\n${payloadCode}`;
 }
 
 function getPortInfo() {
@@ -287,13 +413,30 @@ function createSession(target) {
     ws.addEventListener('error', cleanup);
 }
 
+function handleCdpUnavailable() {
+    if (!EXIT_ON_CLOSE) return;
+    if (everConnectedToCdp) {
+        missedCdpScans += 1;
+        if (missedCdpScans >= MAX_MISSED_SCANS) {
+            log(`Antigravity CDP unreachable for ${missedCdpScans} consecutive checks; exiting (--exit-on-close).`);
+            shutdown('antigravity-closed');
+        }
+    } else if (Date.now() - STARTED_AT >= STARTUP_GRACE_MS) {
+        log(`Antigravity CDP did not become available within ${Math.round(STARTUP_GRACE_MS / 1000)}s; exiting (--exit-on-close).`);
+        shutdown('startup-timeout');
+    }
+}
+
 let isScanning = false;
 async function scanPages() {
     if (isScanning) return;
     isScanning = true;
     try {
     const info = getPortInfo();
-    if (!info) return;
+    if (!info) {
+        handleCdpUnavailable();
+        return;
+    }
 
     if (lastPort !== null && lastPort !== info.port) {
         for (const s of sessions.values()) {
@@ -309,9 +452,16 @@ async function scanPages() {
     try {
         targets = await fetchJson(`http://127.0.0.1:${info.port}/json`);
     } catch (_) {
+        handleCdpUnavailable();
         return;
     }
-    if (!Array.isArray(targets)) return;
+    if (!Array.isArray(targets)) {
+        handleCdpUnavailable();
+        return;
+    }
+
+    everConnectedToCdp = true;
+    missedCdpScans = 0;
 
     const pages = targets.filter((t) => {
         if (!t || t.type !== 'page' || !t.webSocketDebuggerUrl) return false;
@@ -362,6 +512,12 @@ function watchPayload() {
 
 function shutdown(signal) {
     log(`Shutting down on ${signal}.`);
+    if (mediaServer) {
+        try {
+            mediaServer.close();
+        } catch (_) {}
+        mediaServer = null;
+    }
     for (const s of sessions.values()) {
         try {
             s.ws.close();
@@ -377,7 +533,9 @@ process.on('SIGINT', () => shutdown('SIGINT'));
 process.on('SIGTERM', () => shutdown('SIGTERM'));
 process.on('exit', removePidLock);
 
-log(`Theme daemon started (PID ${process.pid}, platform=${process.platform}, portFile=${resolvePortFile()}).`);
-watchPayload();
-scanPages();
-setInterval(scanPages, 1500);
+log(`Theme daemon started (PID ${process.pid}, platform=${process.platform}, exitOnClose=${EXIT_ON_CLOSE}, portFile=${resolvePortFile()}).`);
+startMediaServer().then(() => {
+    watchPayload();
+    scanPages();
+    setInterval(scanPages, 1500);
+});

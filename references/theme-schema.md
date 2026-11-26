@@ -48,6 +48,10 @@
 | `isLight` | boolean | Optional | Enables Light Mode Glass typography (`#0f172a` ink, frosted light pills, dark window controls) |
 | `uiTextColor`, `uiMutedColor` | css color | Optional | Override header/sidebar/body primary and muted ink (defaults adapt to `isLight`) |
 | `pillBg`, `pillHoverBg`, `pillTextColor`, `pillBorder` | css color | Optional | Custom styling for composer strip pills (`No Project`, `Local Checkout`, branch trigger) |
+| `defaultDimming` | number | Optional | Recommended default wallpaper dim % (e.g. `62` for Balanced Midnight presets) |
+| `composerOnlyMascot` | boolean | Optional | Places the interactive living mascot exclusively above the composer (idle/thinking/success animations + petal burst) instead of repeating on every chat bubble |
+| `sidebarActiveBg` | rgba string | Optional | Highlight background for the active sidebar conversation row (paired with a left accent indicator) |
+| `codeBg`, `inlineCodeBg`, `inlineCodeColor` | css color | Optional | Custom surface and text colors for code blocks (`pre`) and inline code pills inside AI responses |
 
 ## Asset Resolution (`scripts/build_payload.py`)
 
