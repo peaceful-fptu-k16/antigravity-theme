@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="rpdSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffaf3"/>
+      <stop offset="38%" stop-color="#faf4ed"/>
+      <stop offset="72%" stop-color="#f7e9e1"/>
+      <stop offset="100%" stop-color="#f2dfd8"/>
+    </linearGradient>
+    <radialGradient id="rpdSunGlow" cx="62%" cy="62%" r="52%">
+      <stop offset="0%" stop-color="#fff8eb" stop-opacity="0.96"/>
+      <stop offset="28%" stop-color="#f8d8b8" stop-opacity="0.52"/>
+      <stop offset="60%" stop-color="#e8b8b5" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#faf4ed" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rpdBeam" x1="50%" y1="100%" x2="50%" y2="0%">
+      <stop offset="0%" stop-color="#ea9d34" stop-opacity="0.24"/>
+      <stop offset="45%" stop-color="#d7827e" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#fffaf3" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="rpdCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#f3e1da" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="rpdHillFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e6dae4"/>
+      <stop offset="100%" stop-color="#efe6ea"/>
+    </linearGradient>
+    <linearGradient id="rpdHillMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d5e4e4"/>
+      <stop offset="100%" stop-color="#e5eeee"/>
+    </linearGradient>
+    <linearGradient id="rpdHillNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c7dbda"/>
+      <stop offset="100%" stop-color="#dce8e7"/>
+    </linearGradient>
+    <radialGradient id="rpdSunDisc" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="56%" stop-color="#fde3c2"/>
+      <stop offset="100%" stop-color="#eab1ab"/>
+    </radialGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#rpdSky)"/>
+  <rect width="1920" height="1080" fill="url(#rpdSunGlow)"/>
+  <g>
+    <polygon points="1180,680 680,0 920,0" fill="url(#rpdBeam)"/>
+    <polygon points="1180,680 1040,0 1320,0" fill="url(#rpdBeam)"/>
+    <polygon points="1180,680 1440,0 1760,0" fill="url(#rpdBeam)"/>
+    <polygon points="1180,680 1840,120 1920,380" fill="url(#rpdBeam)" opacity="0.72"/>
+  </g>
+  <g transform="translate(1180, 646)">
+    <circle cx="0" cy="0" r="168" fill="#ea9d34" opacity="0.14"/>
+    <circle cx="0" cy="0" r="108" fill="url(#rpdSunDisc)"/>
+  </g>
+  <g>
+    <path d="M 96 294 C 166 244 282 242 356 280 C 424 232 552 238 622 288 C 698 270 784 292 832 334 L 58 340 Z" fill="url(#rpdCloud)"/>
+    <path d="M 1184 236 C 1258 188 1378 186 1456 226 C 1532 178 1664 186 1744 238 C 1814 220 1882 234 1952 272 L 1146 278 Z" fill="url(#rpdCloud)" opacity="0.9"/>
+    <path d="M 392 468 C 472 422 594 422 678 456 C 756 410 888 416 972 464 L 1018 506 L 352 510 Z" fill="url(#rpdCloud)" opacity="0.78"/>
+  </g>
+  <path d="M 0 726 C 280 648 564 662 868 724 C 1186 788 1502 652 1920 704 L 1920 1080 L 0 1080 Z" fill="url(#rpdHillFar)"/>
+  <path d="M 0 806 C 312 738 648 796 984 756 C 1316 716 1624 804 1920 762 L 1920 1080 L 0 1080 Z" fill="url(#rpdHillMid)"/>
+  <path d="M 0 886 C 344 824 686 846 1054 904 C 1396 958 1682 848 1920 884 L 1920 1080 L 0 1080 Z" fill="url(#rpdHillNear)"/>
+  <g fill="#56949f" opacity="0.28">
+    <path d="M 144 926 L 144 794 L 122 844 L 134 844 L 112 894 L 128 894 L 108 930 L 180 930 L 160 894 L 176 894 L 154 844 L 166 844 Z"/>
+    <path d="M 232 940 L 232 842 L 214 880 L 224 880 L 206 918 L 258 918 L 240 880 L 250 880 Z"/>
+    <path d="M 1672 938 L 1672 838 L 1654 878 L 1664 878 L 1646 918 L 1698 918 L 1680 878 L 1690 878 Z"/>
+    <path d="M 1776 926 L 1776 786 L 1752 838 L 1766 838 L 1742 890 L 1758 890 L 1738 928 L 1814 928 L 1794 890 L 1810 890 L 1786 838 L 1800 838 Z"/>
+  </g>
+  <g opacity="0.54">
+    <path d="M 484 612 C 492 600 508 606 500 618 C 492 626 480 620 484 612 Z" fill="#d7827e"/>
+    <path d="M 824 558 C 832 546 848 552 840 564 C 832 572 820 566 824 558 Z" fill="#ea9d34"/>
+    <path d="M 1492 588 C 1500 576 1516 582 1508 594 C 1500 602 1488 596 1492 588 Z" fill="#907aa9"/>
+    <path d="M 964 218 L 966.5 211 L 973.5 208.5 L 966.5 206 L 964 199 L 961.5 206 L 954.5 208.5 L 961.5 211 Z" fill="#d7827e"/>
+    <path d="M 1412 318 L 1414.5 311 L 1421.5 308.5 L 1414.5 306 L 1412 299 L 1409.5 306 L 1402.5 308.5 L 1409.5 311 Z" fill="#ea9d34"/>
+  </g>
+</svg>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+<defs>
+<linearGradient id="gddw_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#090b0f"/><stop offset="48%" stop-color="#0d1117"/><stop offset="100%" stop-color="#111622"/>
+</linearGradient>
+<radialGradient id="gddw_bneb" cx="76%" cy="24%" r="48%">
+<stop offset="0%" stop-color="#58a6ff" stop-opacity="0.28"/><stop offset="42%" stop-color="#1f6feb" stop-opacity="0.11"/><stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="gddw_pneb" cx="22%" cy="76%" r="46%">
+<stop offset="0%" stop-color="#bc8cff" stop-opacity="0.24"/><stop offset="48%" stop-color="#8957e5" stop-opacity="0.09"/><stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="gddw_gneb" cx="54%" cy="58%" r="28%">
+<stop offset="0%" stop-color="#3fb950" stop-opacity="0.11"/><stop offset="100%" stop-color="#0d1117" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="gddw_main" x1="0%" y1="70%" x2="100%" y2="20%">
+<stop offset="0%" stop-color="#58a6ff" stop-opacity="0.12"/><stop offset="35%" stop-color="#58a6ff" stop-opacity="0.82"/><stop offset="72%" stop-color="#bc8cff" stop-opacity="0.88"/><stop offset="100%" stop-color="#bc8cff" stop-opacity="0.16"/>
+</linearGradient>
+<linearGradient id="gddw_feat" x1="12%" y1="88%" x2="88%" y2="14%">
+<stop offset="0%" stop-color="#bc8cff" stop-opacity="0.08"/><stop offset="45%" stop-color="#58a6ff" stop-opacity="0.58"/><stop offset="80%" stop-color="#3fb950" stop-opacity="0.72"/><stop offset="100%" stop-color="#58a6ff" stop-opacity="0.12"/>
+</linearGradient>
+<radialGradient id="gddw_nb" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#f0f6fc"/><stop offset="32%" stop-color="#58a6ff"/><stop offset="100%" stop-color="#58a6ff" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="gddw_np" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#f0f6fc"/><stop offset="34%" stop-color="#bc8cff"/><stop offset="100%" stop-color="#bc8cff" stop-opacity="0"/>
+</radialGradient>
+<linearGradient id="gddw_hor" x1="0%" y1="0%" x2="0%" y2="100%">
+<stop offset="0%" stop-color="#161b22" stop-opacity="0"/><stop offset="100%" stop-color="#090b0f" stop-opacity="0.88"/>
+</linearGradient>
+</defs>
+<rect width="1920" height="1080" fill="url(#gddw_bg)"/>
+<rect width="1920" height="1080" fill="url(#gddw_bneb)"/>
+<rect width="1920" height="1080" fill="url(#gddw_pneb)"/>
+<rect width="1920" height="1080" fill="url(#gddw_gneb)"/>
+<path d="M0 180H1920M0 360H1920M0 540H1920M0 720H1920M0 900H1920M240 0V1080M560 0V1080M960 0V1080M1360 0V1080M1680 0V1080" stroke="#24292f" stroke-width="1" opacity="0.42"/>
+<g stroke="#58a6ff" stroke-opacity="0.16" stroke-width="1.2">
+<circle cx="1460" cy="270" r="210"/>
+<circle cx="1460" cy="270" r="340" stroke-dasharray="6 10"/>
+<circle cx="1460" cy="270" r="490" stroke="#bc8cff" stroke-opacity="0.12"/>
+<circle cx="420" cy="820" r="240" stroke="#bc8cff" stroke-opacity="0.14"/>
+<circle cx="420" cy="820" r="380" stroke-dasharray="4 12" stroke="#58a6ff" stroke-opacity="0.1"/>
+</g>
+<g opacity="0.92" stroke-linecap="round">
+<path d="M-40 810C260 790 420 620 740 560 1030 505 1180 310 1460 270 1660 242 1810 190 1960 120" stroke="url(#gddw_main)" stroke-width="3.2"/>
+<path d="M-40 810C260 790 420 620 740 560 1030 505 1180 310 1460 270 1660 242 1810 190 1960 120" stroke="#58a6ff" stroke-width="10" stroke-opacity="0.09"/>
+<path d="M380 680C560 660 680 740 960 675 1220 615 1340 430 1590 385 1740 358 1840 320 1960 295" stroke="url(#gddw_feat)" stroke-width="2.2"/>
+<path d="M740 560C860 440 1020 355 1215 340 1340 330 1405 295 1460 270" stroke="#bc8cff" stroke-width="2" stroke-opacity="0.68" stroke-dasharray="10 6"/>
+<path d="M110 960C360 910 520 820 740 760 980 695 1180 760 1460 685 1680 626 1810 530 1960 480" stroke="#58a6ff" stroke-width="1.35" stroke-opacity="0.34"/>
+<path d="M960 675C1100 560 1240 520 1430 515 1590 510 1740 440 1890 365" stroke="#3fb950" stroke-width="1.6" stroke-opacity="0.46"/>
+</g>
+<path d="M740 560L960 675M1215 340L1460 270L1590 385L1430 515M380 680L420 820" stroke="#58a6ff" stroke-opacity="0.22" stroke-width="1"/>
+<g>
+<circle cx="1460" cy="270" r="54" fill="url(#gddw_nb)" opacity="0.55"/>
+<circle cx="1460" cy="270" r="14" fill="#0d1117" stroke="#58a6ff" stroke-width="3"/>
+<circle cx="1460" cy="270" r="5" fill="#f0f6fc"/>
+<circle cx="740" cy="560" r="46" fill="url(#gddw_np)" opacity="0.52"/>
+<circle cx="740" cy="560" r="12" fill="#0d1117" stroke="#bc8cff" stroke-width="2.6"/>
+<circle cx="740" cy="560" r="4.5" fill="#f0f6fc"/>
+<circle cx="1215" cy="340" r="32" fill="url(#gddw_np)" opacity="0.42"/>
+<circle cx="1215" cy="340" r="8.5" fill="#0d1117" stroke="#bc8cff" stroke-width="2.2"/>
+<circle cx="960" cy="675" r="34" fill="url(#gddw_nb)" opacity="0.4"/>
+<circle cx="960" cy="675" r="9" fill="#0d1117" stroke="#3fb950" stroke-width="2.4"/>
+<circle cx="1590" cy="385" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="2"/>
+<circle cx="380" cy="680" r="8" fill="#0d1117" stroke="#58a6ff" stroke-width="2.2"/>
+<circle cx="420" cy="820" r="7" fill="#0d1117" stroke="#bc8cff" stroke-width="2"/>
+<circle cx="1430" cy="515" r="7" fill="#0d1117" stroke="#3fb950" stroke-width="2"/>
+</g>
+<g fill="#f0f6fc">
+<circle cx="185" cy="145" r="1.8" opacity="0.72"/>
+<circle cx="628" cy="172" r="2.1" fill="#58a6ff" opacity="0.75"/>
+<circle cx="885" cy="118" r="1.5" opacity="0.56"/>
+<circle cx="1095" cy="192" r="2.2" fill="#bc8cff" opacity="0.78"/>
+<circle cx="1690" cy="152" r="2" fill="#58a6ff" opacity="0.7"/>
+<circle cx="1720" cy="640" r="1.8" fill="#bc8cff" opacity="0.6"/>
+<circle cx="290" cy="480" r="1.6" fill="#58a6ff" opacity="0.58"/>
+<circle cx="535" cy="915" r="1.9" fill="#bc8cff" opacity="0.62"/>
+<path d="M1640 190L1643 180 1653 177 1643 174 1640 164 1637 174 1627 177 1637 180Z" fill="#58a6ff" opacity="0.82"/>
+<path d="M520 310L522.4 302.6 530 300 522.4 297.4 520 290 517.6 297.4 510 300 517.6 302.6Z" fill="#bc8cff" opacity="0.74"/>
+</g>
+<rect y="820" width="1920" height="260" fill="url(#gddw_hor)"/>
+</svg>

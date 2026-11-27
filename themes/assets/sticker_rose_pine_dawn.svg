@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="rpdStArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#56949f" stop-opacity="0.22"/>
+      <stop offset="38%" stop-color="#907aa9" stop-opacity="0.92"/>
+      <stop offset="72%" stop-color="#d7827e" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#ea9d34" stop-opacity="0.38"/>
+    </linearGradient>
+    <radialGradient id="rpdStSun" cx="50%" cy="60%" r="55%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="55%" stop-color="#ea9d34"/>
+      <stop offset="100%" stop-color="#d7827e"/>
+    </radialGradient>
+  </defs>
+  <path d="M 6 27 Q 64 7 122 24" stroke="url(#rpdStArc)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 31 Q 66 15 114 27" stroke="#56949f" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.62"/>
+  <g transform="translate(88, 22)">
+    <path d="M -9 0 A 9 9 0 0 1 9 0 Z" fill="url(#rpdStSun)"/>
+    <path d="M 0 -13 L 0 -10.5 M -7.5 -10.5 L -5.8 -8.8 M 7.5 -10.5 L 5.8 -8.8 M -11.8 -5 L -9.6 -4.2 M 11.8 -5 L 9.6 -4.2" stroke="#ea9d34" stroke-width="1.15" stroke-linecap="round"/>
+    <path d="M -13 1 Q 0 -1.5 13 1" stroke="#56949f" stroke-width="1.25" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(45, 18) rotate(-14)">
+    <path d="M -11 2 Q 0 -2 11 1" stroke="#56949f" stroke-width="1.2" stroke-linecap="round"/>
+    <path d="M -5 0 C -6 -4 -2 -6 0 -3 C -1 -1 -3 0 -5 0 Z" fill="#d7827e"/>
+    <path d="M 1 -1 C 1 -5 5 -6 6 -3 C 5 -1 3 -1 1 -1 Z" fill="#907aa9"/>
+    <circle cx="8" cy="-1.5" r="1.4" fill="#ea9d34"/>
+  </g>
+  <path d="M 19 21 L 20.3 17.8 L 23.5 16.5 L 20.3 15.2 L 19 12 L 17.7 15.2 L 14.5 16.5 L 17.7 17.8 Z" fill="#d7827e"/>
+  <path d="M 111 14 L 112 11.4 L 114.6 10.4 L 112 9.4 L 111 6.8 L 110 9.4 L 107.4 10.4 L 110 11.4 Z" fill="#ea9d34"/>
+</svg>

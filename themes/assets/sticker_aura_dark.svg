@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="ads_arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#a277ff" stop-opacity="0.16"/>
+      <stop offset="36%" stop-color="#a277ff" stop-opacity="0.95"/>
+      <stop offset="72%" stop-color="#61ffca" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#82e2ff" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="ads_crys" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61ffca"/>
+      <stop offset="55%" stop-color="#82e2ff"/>
+      <stop offset="100%" stop-color="#a277ff"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 C 34 11, 56 12, 82 19 C 98 23, 111 21, 122 25" stroke="url(#ads_arc)" stroke-width="1.55" stroke-linecap="round"/>
+  <path d="M 16 32 C 42 17, 64 18, 90 25 C 102 28, 108 28, 115 30" stroke="#a277ff" stroke-width="0.9" stroke-dasharray="3.5 3" opacity="0.65"/>
+  <g transform="translate(88, 18)">
+    <polygon points="0,-10 6,-1 0,10 -6,-1" fill="rgba(97,255,202,0.22)" stroke="url(#ads_crys)" stroke-width="1.35"/>
+    <line x1="0" y1="-10" x2="0" y2="10" stroke="#edecee" stroke-width="0.85" opacity="0.8"/>
+    <polygon points="8,-5 12,1 8,7 5,1" fill="rgba(162,119,255,0.28)" stroke="#a277ff" stroke-width="1"/>
+  </g>
+  <g transform="translate(42, 16)">
+    <polygon points="0,-6 4,0 0,6 -4,0" fill="rgba(162,119,255,0.24)" stroke="#a277ff" stroke-width="1.15"/>
+    <circle cx="0" cy="0" r="1.2" fill="#61ffca"/>
+  </g>
+  <path d="M 19 20 L 20.2 17 L 23.2 15.8 L 20.2 14.6 L 19 11.6 L 17.8 14.6 L 14.8 15.8 L 17.8 17 Z" fill="#61ffca"/>
+  <path d="M 111 14 L 112 11.5 L 114.5 10.5 L 112 9.5 L 111 7 L 110 9.5 L 107.5 10.5 L 110 11.5 Z" fill="#82e2ff"/>
+  <circle cx="62" cy="14" r="1.2" fill="#a277ff"/>
+</svg>

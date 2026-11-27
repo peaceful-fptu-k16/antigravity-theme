@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="rpdAvABg" cx="50%" cy="34%" r="74%">
+      <stop offset="0%" stop-color="#fffaf3"/>
+      <stop offset="62%" stop-color="#faf0e6"/>
+      <stop offset="100%" stop-color="#eedcd5"/>
+    </radialGradient>
+    <linearGradient id="rpdAvARing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7827e"/>
+      <stop offset="50%" stop-color="#907aa9"/>
+      <stop offset="100%" stop-color="#286983"/>
+    </linearGradient>
+    <linearGradient id="rpdAvACore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea9d34"/>
+      <stop offset="52%" stop-color="#d7827e"/>
+      <stop offset="100%" stop-color="#907aa9"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#rpdAvABg)" stroke="url(#rpdAvARing)" stroke-width="2.4"/>
+  <circle cx="32" cy="32" r="20" stroke="#d7827e" stroke-width="1.15" stroke-dasharray="3 3" opacity="0.65"/>
+  <circle cx="32" cy="32" r="13.5" stroke="#56949f" stroke-width="1.2" opacity="0.72"/>
+  <path d="M 32 13 L 35.4 26.8 L 49 32 L 35.4 37.2 L 32 51 L 28.6 37.2 L 15 32 L 28.6 26.8 Z" fill="url(#rpdAvACore)"/>
+  <path d="M 20.5 20.5 L 29.6 28.2 L 43.5 20.5 L 35.8 29.6 L 43.5 43.5 L 34.4 35.8 L 20.5 43.5 L 28.2 34.4 Z" fill="#286983" opacity="0.58"/>
+  <circle cx="32" cy="32" r="3.4" fill="#fffaf3"/>
+  <circle cx="32" cy="32" r="1.8" fill="#ea9d34"/>
+</svg>

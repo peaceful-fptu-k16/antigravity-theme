@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="gdmw_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c2128"/>
+      <stop offset="52%" stop-color="#22272e"/>
+      <stop offset="100%" stop-color="#282e37"/>
+    </linearGradient>
+    <radialGradient id="gdmw_horizon_blue" cx="68%" cy="62%" r="54%">
+      <stop offset="0%" stop-color="#539bf5" stop-opacity="0.2"/>
+      <stop offset="52%" stop-color="#539bf5" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#22272e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gdmw_horizon_lav" cx="28%" cy="56%" r="48%">
+      <stop offset="0%" stop-color="#b083f0" stop-opacity="0.18"/>
+      <stop offset="56%" stop-color="#b083f0" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#22272e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gdmw_spline1" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#539bf5" stop-opacity="0.08"/>
+      <stop offset="32%" stop-color="#539bf5" stop-opacity="0.62"/>
+      <stop offset="72%" stop-color="#b083f0" stop-opacity="0.66"/>
+      <stop offset="100%" stop-color="#b083f0" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="gdmw_spline2" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#b083f0" stop-opacity="0.06"/>
+      <stop offset="40%" stop-color="#b083f0" stop-opacity="0.46"/>
+      <stop offset="78%" stop-color="#57ab5a" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#539bf5" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="gdmw_ridge1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2d333b" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#1c2128" stop-opacity="0.94"/>
+    </linearGradient>
+    <linearGradient id="gdmw_ridge2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#22272e" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#161a1e" stop-opacity="0.98"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#gdmw_bg)"/>
+  <rect width="1920" height="1080" fill="url(#gdmw_horizon_blue)"/>
+  <rect width="1920" height="1080" fill="url(#gdmw_horizon_lav)"/>
+  <g stroke="#373e47" stroke-width="1" opacity="0.4">
+    <line x1="0" y1="220" x2="1920" y2="220"/>
+    <line x1="0" y1="440" x2="1920" y2="440"/>
+    <line x1="0" y1="660" x2="1920" y2="660"/>
+    <line x1="320" y1="0" x2="320" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1600" y1="0" x2="1600" y2="1080"/>
+  </g>
+  <g stroke="#539bf5" stroke-opacity="0.13" stroke-width="1.2">
+    <path d="M -60 410 C 320 340, 620 470, 980 410 C 1340 350, 1620 260, 1980 310"/>
+    <path d="M -60 470 C 360 400, 650 530, 1020 465 C 1380 400, 1660 320, 1980 365" stroke="#b083f0" stroke-opacity="0.14"/>
+  </g>
+  <g>
+    <path d="M -40 620 C 260 600, 440 470, 760 470 C 1060 470, 1220 355, 1520 355 C 1720 355, 1840 310, 1960 285" stroke="url(#gdmw_spline1)" stroke-width="3" stroke-linecap="round"/>
+    <path d="M -40 620 C 260 600, 440 470, 760 470 C 1060 470, 1220 355, 1520 355 C 1720 355, 1840 310, 1960 285" stroke="#539bf5" stroke-width="11" stroke-opacity="0.07" stroke-linecap="round"/>
+    <path d="M 180 565 C 440 565, 580 625, 920 580 C 1220 540, 1380 445, 1680 445 C 1810 445, 1890 420, 1960 405" stroke="url(#gdmw_spline2)" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M 520 515 C 660 430, 810 385, 1020 395 C 1180 402, 1340 365, 1520 355" stroke="#b083f0" stroke-width="1.65" stroke-opacity="0.52" stroke-dasharray="8 7" stroke-linecap="round"/>
+    <path d="M 920 580 C 1090 500, 1240 490, 1420 510 C 1580 528, 1740 480, 1940 450" stroke="#57ab5a" stroke-width="1.45" stroke-opacity="0.42" stroke-linecap="round"/>
+  </g>
+  <g>
+    <circle cx="760" cy="470" r="24" fill="#539bf5" opacity="0.1"/>
+    <circle cx="760" cy="470" r="9.5" fill="#22272e" stroke="#539bf5" stroke-width="2.4"/>
+    <circle cx="760" cy="470" r="3.4" fill="#adbac7"/>
+    <circle cx="1520" cy="355" r="28" fill="#b083f0" opacity="0.11"/>
+    <circle cx="1520" cy="355" r="10.5" fill="#22272e" stroke="#b083f0" stroke-width="2.5"/>
+    <circle cx="1520" cy="355" r="3.8" fill="#adbac7"/>
+    <circle cx="920" cy="580" r="20" fill="#57ab5a" opacity="0.1"/>
+    <circle cx="920" cy="580" r="8" fill="#22272e" stroke="#57ab5a" stroke-width="2.2"/>
+    <circle cx="520" cy="515" r="7" fill="#22272e" stroke="#539bf5" stroke-width="2"/>
+    <circle cx="1020" cy="395" r="6.5" fill="#22272e" stroke="#b083f0" stroke-width="2"/>
+    <circle cx="1680" cy="445" r="7" fill="#22272e" stroke="#539bf5" stroke-width="2"/>
+  </g>
+  <path d="M 0 745 C 320 690, 620 770, 980 720 C 1340 670, 1640 730, 1920 685 L 1920 1080 L 0 1080 Z" fill="url(#gdmw_ridge1)"/>
+  <path d="M 0 855 C 380 815, 740 895, 1140 835 C 1480 785, 1740 835, 1920 810 L 1920 1080 L 0 1080 Z" fill="url(#gdmw_ridge2)"/>
+  <path d="M 0 745 C 320 690, 620 770, 980 720 C 1340 670, 1640 730, 1920 685" stroke="#539bf5" stroke-width="1.2" stroke-opacity="0.22"/>
+  <path d="M 0 855 C 380 815, 740 895, 1140 835 C 1480 785, 1740 835, 1920 810" stroke="#b083f0" stroke-width="1" stroke-opacity="0.18"/>
+  <g fill="#adbac7">
+    <circle cx="240" cy="185" r="1.5" opacity="0.45"/>
+    <circle cx="490" cy="145" r="1.8" fill="#539bf5" opacity="0.55"/>
+    <circle cx="810" cy="210" r="1.4" opacity="0.4"/>
+    <circle cx="1180" cy="165" r="2" fill="#b083f0" opacity="0.55"/>
+    <circle cx="1440" cy="195" r="1.4" opacity="0.45"/>
+    <circle cx="1740" cy="155" r="1.7" fill="#539bf5" opacity="0.5"/>
+  </g>
+</svg>

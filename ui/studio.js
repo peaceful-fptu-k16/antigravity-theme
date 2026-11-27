@@ -12,7 +12,13 @@ let busy = false;
 let sliderTimer = null;
 let toastTimer = null;
 let searchQuery = '';
-let activeFilter = 'all'; // all | dark | light | media | custom
+let activeFilter = 'all'; // all | dark | light | art | avatars | custom
+let assetsHydrationInFlight = false;
+let assetsHydratedOnce = false;
+
+// In-memory preview asset cache keyed by preset display name:
+// { wallpaper?: string, sticker?: string, cornerSvg?: string, userAvatar?: string, agentAvatar?: string }
+const previewCache = new Map();
 
 function esc(value) {
   return String(value ?? '')
@@ -38,6 +44,83 @@ function applyHostContext(ctx) {
   if (ctx.styles?.variables) applyHostStyleVariables(ctx.styles.variables);
 }
 
+function ingestState(nextState, { invalidateAssetCache = false } = {}) {
+  if (!nextState) return;
+  if (invalidateAssetCache) {
+    previewCache.clear();
+    assetsHydratedOnce = false;
+  }
+
+  for (const p of nextState.presets || []) {
+    const existing = previewCache.get(p.name) || {};
+    if (p.wallpaperPreview) existing.wallpaper = p.wallpaperPreview;
+    if (p.stickerPreview) existing.sticker = p.stickerPreview;
+    if (p.cornerPreview) existing.cornerSvg = p.cornerPreview;
+    if (p.userAvatarPreview) existing.userAvatar = p.userAvatarPreview;
+    if (p.agentAvatarPreview) existing.agentAvatar = p.agentAvatarPreview;
+    if (Object.keys(existing).length > 0) {
+      previewCache.set(p.name, existing);
+    }
+  }
+
+  currentState = nextState;
+}
+
+async function hydratePresetAssets(force = false) {
+  if (!currentState || assetsHydrationInFlight) return;
+  const presets = currentState.presets || [];
+  if (presets.length === 0) return;
+
+  const missingWpNames = presets
+    .filter((p) => p.mediaType === 'svg-art' && !previewCache.get(p.name)?.wallpaper)
+    .map((p) => p.name);
+  const needsDecorationHydration =
+    force ||
+    !assetsHydratedOnce ||
+    presets.some((p) => {
+      const c = previewCache.get(p.name);
+      return (p.hasOrnament && !c?.sticker && !c?.cornerSvg) || (p.hasAvatars && !c?.userAvatar && !c?.agentAvatar);
+    });
+
+  if (!needsDecorationHydration && missingWpNames.length === 0) return;
+
+  assetsHydrationInFlight = true;
+  try {
+    if (needsDecorationHydration) {
+      const res = await app.callServerTool({
+        name: 'app_preset_assets',
+        arguments: { kinds: ['sticker', 'cornerSvg', 'userAvatar', 'agentAvatar'] },
+      });
+      const assetMap = res?.structuredContent?.assets;
+      if (assetMap && typeof assetMap === 'object') {
+        for (const [name, entry] of Object.entries(assetMap)) {
+          previewCache.set(name, { ...(previewCache.get(name) || {}), ...entry });
+        }
+        assetsHydratedOnce = true;
+      }
+    }
+
+    if (missingWpNames.length > 0) {
+      const res = await app.callServerTool({
+        name: 'app_preset_assets',
+        arguments: { names: missingWpNames, kinds: ['wallpaper'] },
+      });
+      const wpMap = res?.structuredContent?.assets;
+      if (wpMap && typeof wpMap === 'object') {
+        for (const [name, entry] of Object.entries(wpMap)) {
+          previewCache.set(name, { ...(previewCache.get(name) || {}), ...entry });
+        }
+      }
+    }
+
+    updatePresetGridOnly();
+  } catch {
+    // Non-fatal: cards already display wallpaper previews & palette swatches
+  } finally {
+    assetsHydrationInFlight = false;
+  }
+}
+
 async function callTool(name, args = {}) {
   busy = true;
   render();
@@ -49,12 +132,16 @@ async function callTool(name, args = {}) {
       return result;
     }
     const sc = result?.structuredContent;
+    const mutatePresets = name === 'theme_create_preset' || name === 'theme_delete_preset';
     if (sc?.state) {
-      currentState = sc.state;
+      ingestState(sc.state, { invalidateAssetCache: mutatePresets });
     } else if (sc?.presets && sc?.config) {
-      currentState = sc;
+      ingestState(sc, { invalidateAssetCache: false });
     } else if (name === 'theme_verify_cdp' && sc) {
       if (currentState) currentState = { ...currentState, verify: sc };
+    }
+    if (mutatePresets) {
+      hydratePresetAssets(true);
     }
     return result;
   } catch (err) {
@@ -67,7 +154,9 @@ async function callTool(name, args = {}) {
 }
 
 async function refreshState(includeVerify = false) {
-  await callTool('app_studio_state', { includeVerify });
+  const includePreviews = !currentState;
+  await callTool('app_studio_state', { includeVerify, includePreviews });
+  hydratePresetAssets(false);
 }
 
 function schedulePatch(patch, toastLabel) {
@@ -89,15 +178,32 @@ function filterPresets(presets) {
   return (presets || []).filter((p) => {
     if (activeFilter === 'dark' && p.isLight) return false;
     if (activeFilter === 'light' && !p.isLight) return false;
-    if (activeFilter === 'media' && p.mediaType === 'css-gradient') return false;
+    if (activeFilter === 'art' && !p.hasWallpaperArt && p.mediaType === 'css-gradient') return false;
+    if (activeFilter === 'avatars' && !p.hasAvatars) return false;
     if (activeFilter === 'custom' && p.source === 'builtin') return false;
     if (!q) return true;
-    return (
-      p.name.toLowerCase().includes(q) ||
-      (p.concept || '').toLowerCase().includes(q) ||
-      (p.mediaType || '').toLowerCase().includes(q)
-    );
+    const searchable = [
+      p.name,
+      p.concept || '',
+      p.mediaType || '',
+      p.isLight ? 'light' : 'dark',
+      p.hasWallpaperArt ? 'wallpaper art' : 'glass gradient',
+      p.hasOrnament ? 'ornament sticker' : '',
+      p.hasAvatars ? 'avatars' : '',
+      p.source || '',
+    ]
+      .join(' ')
+      .toLowerCase();
+    return searchable.includes(q);
   });
+}
+
+function mediaBadgeLabel(p) {
+  if (p.mediaType === 'video') return '4K Live';
+  if (p.mediaType === 'animated-gif') return 'Animated';
+  if (p.mediaType === 'svg-art') return 'Wallpaper Art';
+  if (p.mediaType === 'image') return '2K Art';
+  return 'Pure Glass';
 }
 
 function renderPresetGridHtml(presets, cfg) {
@@ -108,23 +214,66 @@ function renderPresetGridHtml(presets, cfg) {
   return filtered
     .map((p) => {
       const isActive = cfg.themeName === p.name;
-      const swatchBg = `linear-gradient(135deg, rgb(${esc(p.overlayRgb)}) 0%, ${esc(p.primary)}66 60%, ${esc(p.secondary)}77 100%)`;
+      const cached = previewCache.get(p.name) || {};
+      const wpUri = cached.wallpaper || p.wallpaperPreview || '';
+      const stickerUri = cached.sticker || p.stickerPreview || '';
+      const cornerUri = cached.cornerSvg || p.cornerPreview || '';
+      const userAvUri = cached.userAvatar || p.userAvatarPreview || '';
+      const agentAvUri = cached.agentAvatar || p.agentAvatarPreview || '';
+
+      const fallbackBg =
+        p.pureBg ||
+        `linear-gradient(135deg, rgb(${esc(p.overlayRgb)}) 0%, ${esc(p.primary)}55 58%, ${esc(p.secondary)}66 100%)`;
+
+      const badges = [
+        `<span class="fbadge ${p.hasWallpaperArt ? 'art' : 'glass'}">${esc(mediaBadgeLabel(p))}</span>`,
+        p.hasOrnament
+          ? `<span class="fbadge ornament">${p.isOrnament ? 'Ornament' : 'Mascot'}</span>`
+          : '',
+        p.hasAvatars ? `<span class="fbadge avatars">Avatars</span>` : '',
+        `<span class="fbadge ${p.isLight ? 'light' : 'dark'}">${p.isLight ? 'Light' : 'Dark'}</span>`,
+      ]
+        .filter(Boolean)
+        .join('');
+
       return `
-        <div class="preset-card ${isActive ? 'active' : ''}">
-          <div class="swatch" style="background:${swatchBg}">
-            <div class="swatch-dots">
-              <span class="swatch-dot" style="background:rgb(${esc(p.overlayRgb)})" title="Base"></span>
-              <span class="swatch-dot" style="background:${esc(p.primary)}" title="Primary ${esc(p.primary)}"></span>
-              <span class="swatch-dot" style="background:${esc(p.secondary)}" title="Secondary ${esc(p.secondary)}"></span>
+        <div class="preset-card ${isActive ? 'active' : ''} ${p.isLight ? 'is-light' : 'is-dark'}">
+          <div class="card-preview" style="background:${esc(fallbackBg)}">
+            ${wpUri ? `<img class="preview-wp" src="${esc(wpUri)}" alt="" loading="lazy" decoding="async" />` : ''}
+            <div class="preview-scrim ${p.isLight ? 'light' : 'dark'}"></div>
+            ${cornerUri ? `<img class="preview-corner" src="${esc(cornerUri)}" alt="" loading="lazy" decoding="async" />` : ''}
+            ${
+              stickerUri
+                ? `<img class="preview-sticker ${p.isOrnament ? 'ornament' : 'mascot'}" src="${esc(stickerUri)}" alt="" loading="lazy" decoding="async" />`
+                : ''
+            }
+            <div class="preview-top-right">
+              ${isActive ? `<span class="tag active-tag">Active</span>` : ''}
             </div>
-            <span class="tag">${p.mediaType === 'css-gradient' ? 'Glass' : esc(p.mediaType)} · ${p.isLight ? 'Light' : 'Dark'}</span>
+            <div class="preview-footer">
+              <div class="swatch-dots">
+                <span class="swatch-dot" style="background:rgb(${esc(p.overlayRgb)})" title="Base rgb(${esc(p.overlayRgb)})"></span>
+                <span class="swatch-dot" style="background:${esc(p.primary)}" title="Primary ${esc(p.primary)}"></span>
+                <span class="swatch-dot" style="background:${esc(p.secondary)}" title="Secondary ${esc(p.secondary)}"></span>
+                <span class="swatch-dot" style="background:${esc(p.textColor || '#f8fafc')}" title="Text ${esc(p.textColor || '')}"></span>
+              </div>
+              ${
+                userAvUri || agentAvUri
+                  ? `<div class="avatar-pair">
+                      ${userAvUri ? `<img class="avatar-badge" style="border-color:${esc(p.primary)}" src="${esc(userAvUri)}" alt="" title="User Avatar" loading="lazy" decoding="async" />` : ''}
+                      ${agentAvUri ? `<img class="avatar-badge" style="border-color:${esc(p.secondary)}" src="${esc(agentAvUri)}" alt="" title="Agent Avatar" loading="lazy" decoding="async" />` : ''}
+                    </div>`
+                  : ''
+              }
+            </div>
           </div>
           <div class="preset-body">
             <div class="preset-title">
-              <span>${esc(p.name)}</span>
-              ${p.source !== 'builtin' ? `<span class="muted">${esc(p.source)}</span>` : ''}
+              <span class="preset-name" title="${esc(p.name)}">${esc(p.name)}</span>
+              ${p.source !== 'builtin' ? `<span class="source-pill">${esc(p.source)}</span>` : ''}
             </div>
             <div class="preset-concept">${esc(p.concept)}</div>
+            <div class="feature-badges">${badges}</div>
             <div class="preset-actions">
               <button class="btn ${isActive ? 'primary' : ''}" data-action="apply-preset" data-preset="${esc(p.name)}" ${busy ? 'disabled' : ''}>
                 ${isActive ? 'Active' : 'Apply'}
@@ -179,15 +328,21 @@ function render() {
   const st = currentState;
   const cfg = st.config || {};
   const presets = st.presets || [];
+  const activePreset = presets.find((p) => p.name === cfg.themeName);
   const filtered = filterPresets(presets);
   const darkCount = presets.filter((p) => !p.isLight).length;
   const lightCount = presets.filter((p) => p.isLight).length;
-  const mediaCount = presets.filter((p) => p.mediaType !== 'css-gradient').length;
+  const artCount = presets.filter((p) => p.hasWallpaperArt || p.mediaType !== 'css-gradient').length;
+  const avatarCount = presets.filter((p) => p.hasAvatars).length;
   const customCount = presets.filter((p) => p.source !== 'builtin').length;
 
   const cdpOk = Boolean(st.cdp?.available);
   const daemonOk = Boolean(st.daemon?.running);
   const canMessage = Boolean(hostCapabilities?.message);
+
+  const brandBg = activePreset
+    ? `linear-gradient(135deg, ${esc(activePreset.primary)} 0%, ${esc(activePreset.secondary)} 100%)`
+    : 'linear-gradient(135deg, #f472b6 0%, #c084fc 55%, #38bdf8 100%)';
 
   const setupBanner = !cdpOk && st.setupHint
     ? `
@@ -225,7 +380,7 @@ function render() {
     <div class="studio">
       <div class="header">
         <div class="brand">
-          <div class="brand-mark">✦</div>
+          <div class="brand-mark" style="background:${brandBg}">✦</div>
           <div>
             <h1>Theme Studio</h1>
             <p>Active: <strong>${esc(cfg.themeName)}</strong> · ${presets.length} Presets · Zero Live Blur</p>
@@ -260,13 +415,14 @@ function render() {
           <span id="preset-count-label" class="muted">Showing ${filtered.length} of ${presets.length} presets</span>
         </div>
         <div class="filter-bar">
-          <input id="preset-search" class="search-input" type="search" placeholder="Search Catppuccin, Tokyo Night, Dracula, Nord, Gruvbox, Light…" value="${esc(searchQuery)}" />
+          <input id="preset-search" class="search-input" type="search" placeholder="Search Catppuccin, Tokyo Night, Dracula, Nord, SynthWave, Light…" value="${esc(searchQuery)}" />
           <div class="filter-tabs">
             ${[
               ['all', `All (${presets.length})`],
               ['dark', `Dark (${darkCount})`],
               ['light', `Light (${lightCount})`],
-              ['media', `4K / Art (${mediaCount})`],
+              ['art', `Wallpaper Art (${artCount})`],
+              ['avatars', `Avatars (${avatarCount})`],
               ['custom', `Custom (${customCount})`],
             ]
               .map(
@@ -511,11 +667,12 @@ app.ontoolinput = () => {
 app.ontoolresult = (result) => {
   const sc = result?.structuredContent;
   if (sc?.presets && sc?.config) {
-    currentState = sc;
+    ingestState(sc);
   } else if (sc?.state) {
-    currentState = sc.state;
+    ingestState(sc.state);
   }
   render();
+  hydratePresetAssets(false);
 };
 
 app.onhostcontextchanged = (ctx) => {
@@ -529,6 +686,8 @@ async function init() {
   applyHostContext(app.getHostContext());
   if (!currentState) {
     await refreshState(false);
+  } else {
+    hydratePresetAssets(false);
   }
 }
 

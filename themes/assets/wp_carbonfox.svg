@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="cf_bg" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#0b0b0b"/>
+      <stop offset="48%" stop-color="#161616"/>
+      <stop offset="100%" stop-color="#1e1e1e"/>
+    </linearGradient>
+    <radialGradient id="cf_glowB" cx="30%" cy="32%" r="40%">
+      <stop offset="0%" stop-color="#78a9ff" stop-opacity="0.22"/>
+      <stop offset="58%" stop-color="#33b1ff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#161616" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cf_glowO" cx="72%" cy="66%" r="40%">
+      <stop offset="0%" stop-color="#be95ff" stop-opacity="0.2"/>
+      <stop offset="58%" stop-color="#ee5396" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#161616" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cf_fin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#282828" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#121212" stop-opacity="0.94"/>
+    </linearGradient>
+    <linearGradient id="cf_guideB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78a9ff" stop-opacity="0.15"/>
+      <stop offset="45%" stop-color="#78a9ff" stop-opacity="0.95"/>
+      <stop offset="75%" stop-color="#33b1ff" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#08bdba" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="cf_guideO" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#be95ff" stop-opacity="0.15"/>
+      <stop offset="48%" stop-color="#be95ff" stop-opacity="0.92"/>
+      <stop offset="78%" stop-color="#ee5396" stop-opacity="0.75"/>
+      <stop offset="100%" stop-color="#be95ff" stop-opacity="0.15"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#cf_bg)"/>
+  <rect width="1920" height="1080" fill="url(#cf_glowB)"/>
+  <rect width="1920" height="1080" fill="url(#cf_glowO)"/>
+  <g stroke="#393939" stroke-width="0.9" opacity="0.52">
+    <line x1="0" y1="180" x2="1920" y2="180"/>
+    <line x1="0" y1="360" x2="1920" y2="360"/>
+    <line x1="0" y1="540" x2="1920" y2="540"/>
+    <line x1="0" y1="720" x2="1920" y2="720"/>
+    <line x1="0" y1="900" x2="1920" y2="900"/>
+    <line x1="240" y1="0" x2="240" y2="1080"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/>
+    <line x1="720" y1="0" x2="720" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1200" y1="0" x2="1200" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/>
+    <line x1="1680" y1="0" x2="1680" y2="1080"/>
+    <line x1="0" y1="540" x2="540" y2="0"/>
+    <line x1="0" y1="1080" x2="1080" y2="0"/>
+    <line x1="480" y1="1080" x2="1560" y2="0"/>
+    <line x1="960" y1="1080" x2="1920" y2="120"/>
+    <line x1="1440" y1="1080" x2="1920" y2="600"/>
+  </g>
+  <g>
+    <polygon points="160,1080 160,360 360,240 360,1080" fill="url(#cf_fin)" stroke="#383838" stroke-width="1.2"/>
+    <polygon points="410,1080 410,490 590,380 590,1080" fill="url(#cf_fin)" stroke="#383838" stroke-width="1.2"/>
+    <polygon points="1330,1080 1330,380 1510,490 1510,1080" fill="url(#cf_fin)" stroke="#383838" stroke-width="1.2"/>
+    <polygon points="1560,1080 1560,240 1760,360 1760,1080" fill="url(#cf_fin)" stroke="#383838" stroke-width="1.2"/>
+  </g>
+  <g stroke-linejoin="miter" stroke-linecap="square">
+    <polyline points="0,360 480,360 660,540 1260,540 1440,360 1920,360" stroke="#78a9ff" stroke-width="10" opacity="0.14"/>
+    <polyline points="0,360 480,360 660,540 1260,540 1440,360 1920,360" stroke="url(#cf_guideB)" stroke-width="2.4"/>
+    <polyline points="0,720 480,720 660,540 1260,540 1440,720 1920,720" stroke="#be95ff" stroke-width="10" opacity="0.14"/>
+    <polyline points="0,720 480,720 660,540 1260,540 1440,720 1920,720" stroke="url(#cf_guideO)" stroke-width="2.2"/>
+    <polyline points="240,0 240,360 480,360 480,1080" stroke="#33b1ff" stroke-width="1.4" opacity="0.65"/>
+    <polyline points="1680,0 1680,360 1440,360 1440,1080" stroke="#be95ff" stroke-width="1.4" opacity="0.65"/>
+  </g>
+  <g transform="translate(960, 540)">
+    <polygon points="0,-165 165,0 0,165 -165,0" fill="rgba(22,22,22,0.88)" stroke="#78a9ff" stroke-width="1.8"/>
+    <polygon points="0,-122 122,0 0,122 -122,0" stroke="#be95ff" stroke-width="1.2" opacity="0.82"/>
+    <polygon points="-64,-56 -24,-12 0,-26 24,-12 64,-56 54,18 0,68 -54,18" fill="rgba(120,169,255,0.12)" stroke="#78a9ff" stroke-width="1.8" stroke-linejoin="miter"/>
+    <polyline points="-54,18 0,-26 54,18" stroke="#be95ff" stroke-width="1.3" opacity="0.85"/>
+    <circle cx="-22" cy="8" r="4" fill="#33b1ff"/>
+    <circle cx="22" cy="8" r="4" fill="#33b1ff"/>
+    <polygon points="0,42 8,54 0,66 -8,54" fill="#08bdba"/>
+  </g>
+  <g>
+    <circle cx="480" cy="360" r="5" fill="#78a9ff"/>
+    <circle cx="1440" cy="360" r="5" fill="#be95ff"/>
+    <circle cx="480" cy="720" r="4.5" fill="#be95ff"/>
+    <circle cx="1440" cy="720" r="4.5" fill="#78a9ff"/>
+    <circle cx="660" cy="540" r="4.5" fill="#33b1ff"/>
+    <circle cx="1260" cy="540" r="4.5" fill="#08bdba"/>
+    <circle cx="240" cy="180" r="3.5" fill="#25be6a"/>
+    <circle cx="1680" cy="180" r="3.5" fill="#ee5396"/>
+  </g>
+</svg>

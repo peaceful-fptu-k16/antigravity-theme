@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="slu-bg" cx="38%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#fdf6e3"/>
+      <stop offset="68%" stop-color="#eee8d5"/>
+      <stop offset="100%" stop-color="#e1d9c1"/>
+    </radialGradient>
+    <linearGradient id="slu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#268bd2"/>
+      <stop offset="55%" stop-color="#2aa198"/>
+      <stop offset="100%" stop-color="#b58900"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#slu-bg)" stroke="url(#slu-rim)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="24" stroke="#b58900" stroke-width="0.9" stroke-dasharray="3 5" opacity="0.6"/>
+  <ellipse cx="32" cy="28" rx="18" ry="8" transform="rotate(-18 32 28)" stroke="#2aa198" stroke-width="1.15" opacity="0.62"/>
+  <circle cx="32" cy="24" r="7.8" fill="#586e75"/>
+  <path d="M 15 51 C 18 40 24 36 32 36 C 40 36 46 40 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#586e75" stroke="#268bd2" stroke-width="1.2"/>
+  <path d="M 48 14 L 49.4 17.6 L 53 19 L 49.4 20.4 L 48 24 L 46.6 20.4 L 43 19 L 46.6 17.6 Z" fill="#268bd2"/>
+</svg>

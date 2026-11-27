@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="andu_bg" cx="35%" cy="30%" r="75%">
+      <stop offset="0%" stop-color="#2e3342"/>
+      <stop offset="100%" stop-color="#14161c"/>
+    </radialGradient>
+    <linearGradient id="andu_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ebc7"/>
+      <stop offset="60%" stop-color="#ff0055"/>
+      <stop offset="100%" stop-color="#f9ed69"/>
+    </linearGradient>
+    <linearGradient id="andu_visor" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#00ebc7"/>
+      <stop offset="55%" stop-color="#2b2f3a"/>
+      <stop offset="100%" stop-color="#ff0055"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#andu_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="url(#andu_rim)" stroke-width="2.2"/>
+  <path d="M 16 53 C 18 42, 24 39, 32 39 C 40 39, 46 42, 48 53" fill="#2b2f3a" stroke="#00ebc7" stroke-width="1.5"/>
+  <circle cx="32" cy="26" r="11.5" fill="#23262e" stroke="#d5ced9" stroke-width="1.5"/>
+  <ellipse cx="32" cy="26" rx="8.5" ry="6.2" fill="url(#andu_visor)"/>
+  <path d="M 26 24.5 Q 32 21.5 38 25.5" stroke="#f9ed69" stroke-width="1.2" stroke-linecap="round"/>
+  <circle cx="48" cy="15" r="1.5" fill="#00ebc7"/>
+  <circle cx="15" cy="19" r="1.2" fill="#ff0055"/>
+</svg>

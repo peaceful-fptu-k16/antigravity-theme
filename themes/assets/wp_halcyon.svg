@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="halw_sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#121317"/>
+      <stop offset="48%" stop-color="#1b1d23"/>
+      <stop offset="72%" stop-color="#242730"/>
+      <stop offset="100%" stop-color="#15171d"/>
+    </linearGradient>
+    <radialGradient id="halw_moon_glow" cx="68%" cy="44%" r="42%">
+      <stop offset="0%" stop-color="#ffd76d" stop-opacity="0.32"/>
+      <stop offset="32%" stop-color="#ffd76d" stop-opacity="0.12"/>
+      <stop offset="68%" stop-color="#5ccfe6" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#1b1d23" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halw_cyan_mist" cx="24%" cy="52%" r="48%">
+      <stop offset="0%" stop-color="#5ccfe6" stop-opacity="0.18"/>
+      <stop offset="54%" stop-color="#d4bfff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#1b1d23" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="halw_moon" cx="42%" cy="38%" r="62%">
+      <stop offset="0%" stop-color="#fff4cc"/>
+      <stop offset="55%" stop-color="#ffd76d"/>
+      <stop offset="100%" stop-color="#f0b749"/>
+    </radialGradient>
+    <linearGradient id="halw_sea" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#20242e"/>
+      <stop offset="50%" stop-color="#181b22"/>
+      <stop offset="100%" stop-color="#101216"/>
+    </linearGradient>
+    <linearGradient id="halw_horizon" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5ccfe6" stop-opacity="0.08"/>
+      <stop offset="40%" stop-color="#5ccfe6" stop-opacity="0.46"/>
+      <stop offset="68%" stop-color="#ffd76d" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#5ccfe6" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="halw_mist_band" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5ccfe6" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#5ccfe6" stop-opacity="0.14"/>
+      <stop offset="70%" stop-color="#d4bfff" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#5ccfe6" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#halw_sky)"/>
+  <rect width="1920" height="1080" fill="url(#halw_moon_glow)"/>
+  <rect width="1920" height="1080" fill="url(#halw_cyan_mist)"/>
+  <g fill="#e3e3e3">
+    <circle cx="230" cy="155" r="1.7" opacity="0.62"/>
+    <circle cx="445" cy="220" r="1.4" opacity="0.48"/>
+    <circle cx="670" cy="130" r="2" fill="#5ccfe6" opacity="0.72"/>
+    <circle cx="920" cy="188" r="1.5" opacity="0.54"/>
+    <circle cx="1110" cy="122" r="1.8" fill="#d4bfff" opacity="0.65"/>
+    <circle cx="1590" cy="160" r="2.1" fill="#ffd76d" opacity="0.75"/>
+    <circle cx="1745" cy="240" r="1.5" fill="#5ccfe6" opacity="0.58"/>
+    <circle cx="340" cy="340" r="1.3" opacity="0.44"/>
+  </g>
+  <g transform="translate(1310, 445)">
+    <circle cx="0" cy="0" r="168" stroke="#ffd76d" stroke-opacity="0.14" stroke-width="1.2"/>
+    <circle cx="0" cy="0" r="245" stroke="#5ccfe6" stroke-opacity="0.1" stroke-width="1" stroke-dasharray="6 10"/>
+    <circle cx="0" cy="0" r="82" fill="url(#halw_moon)"/>
+    <circle cx="-18" cy="-14" r="18" fill="#f0b749" opacity="0.18"/>
+    <circle cx="24" cy="18" r="12" fill="#f0b749" opacity="0.15"/>
+  </g>
+  <path d="M 0 650 C 220 622, 410 618, 620 644 L 620 662 L 0 662 Z" fill="#171920" opacity="0.88"/>
+  <path d="M 1520 652 C 1680 626, 1810 630, 1920 644 L 1920 662 L 1520 662 Z" fill="#171920" opacity="0.85"/>
+  <ellipse cx="640" cy="615" rx="520" ry="34" fill="url(#halw_mist_band)"/>
+  <ellipse cx="1480" cy="595" rx="440" ry="28" fill="url(#halw_mist_band)"/>
+  <rect y="655" width="1920" height="425" fill="url(#halw_sea)"/>
+  <line x1="0" y1="655" x2="1920" y2="655" stroke="url(#halw_horizon)" stroke-width="2.2"/>
+  <g stroke-linecap="round">
+    <line x1="1185" y1="686" x2="1435" y2="686" stroke="#ffd76d" stroke-width="3.6" stroke-opacity="0.68"/>
+    <line x1="1210" y1="712" x2="1410" y2="712" stroke="#ffd76d" stroke-width="3" stroke-opacity="0.56"/>
+    <line x1="1232" y1="742" x2="1388" y2="742" stroke="#ffd76d" stroke-width="2.4" stroke-opacity="0.46"/>
+    <line x1="1250" y1="776" x2="1370" y2="776" stroke="#ffd76d" stroke-width="2" stroke-opacity="0.38"/>
+    <line x1="1266" y1="816" x2="1354" y2="816" stroke="#ffd76d" stroke-width="1.8" stroke-opacity="0.32"/>
+    <line x1="1280" y1="862" x2="1340" y2="862" stroke="#ffd76d" stroke-width="1.5" stroke-opacity="0.24"/>
+    <line x1="1294" y1="914" x2="1326" y2="914" stroke="#ffd76d" stroke-width="1.2" stroke-opacity="0.2"/>
+    <line x1="210" y1="726" x2="520" y2="726" stroke="#5ccfe6" stroke-width="1.5" stroke-opacity="0.24"/>
+    <line x1="680" y1="795" x2="960" y2="795" stroke="#5ccfe6" stroke-width="1.4" stroke-opacity="0.2"/>
+    <line x1="1520" y1="762" x2="1780" y2="762" stroke="#5ccfe6" stroke-width="1.4" stroke-opacity="0.22"/>
+    <line x1="360" y1="882" x2="710" y2="882" stroke="#d4bfff" stroke-width="1.2" stroke-opacity="0.18"/>
+  </g>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cnKw" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7e9cd8"/>
+      <stop offset="60%" stop-color="#6a9589"/>
+      <stop offset="100%" stop-color="#ffa066"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 28 L 3 9 Q 3 3 9 3 L 28 3" stroke="url(#cnKw)" stroke-width="1.55" stroke-linecap="round" opacity="0.92"/>
+  <path d="M 6.8 19 L 6.8 10.5 Q 6.8 6.8 10.5 6.8 L 19 6.8" stroke="#7e9cd8" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  <path d="M 8 18.2 C 9.4 11.4, 15.6 8.2, 20.6 10.6 C 17.8 10.8, 15.2 12.6, 14.4 15.5 C 12.6 13.8, 10.4 14.8, 8 18.2 Z" fill="#dcd7ba" opacity="0.92"/>
+  <path d="M 9.6 15.5 C 11.4 11.6, 15.2 9.8, 18.4 10.6" stroke="#7e9cd8" stroke-width="1.1" stroke-linecap="round"/>
+  <circle cx="17.8" cy="15.2" r="1.6" fill="#ffa066"/>
+  <circle cx="21.5" cy="12.4" r="0.95" fill="#dcd7ba" opacity="0.85"/>
+  <circle cx="31.5" cy="3" r="1.4" fill="#ffa066" opacity="0.9"/>
+  <circle cx="3" cy="31.5" r="1.4" fill="#7e9cd8" opacity="0.9"/>
+</svg>

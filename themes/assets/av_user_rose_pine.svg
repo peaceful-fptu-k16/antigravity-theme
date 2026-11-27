@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="rpAvUBg" cx="38%" cy="24%" r="75%">
+      <stop offset="0%" stop-color="#26233a"/>
+      <stop offset="62%" stop-color="#1f1d2e"/>
+      <stop offset="100%" stop-color="#191724"/>
+    </radialGradient>
+    <linearGradient id="rpAvURing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ebbcba"/>
+      <stop offset="52%" stop-color="#c4a7e7"/>
+      <stop offset="100%" stop-color="#9ccfd8"/>
+    </linearGradient>
+    <linearGradient id="rpAvUFig" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0def4"/>
+      <stop offset="100%" stop-color="#ebbcba"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#rpAvUBg)" stroke="url(#rpAvURing)" stroke-width="2.4"/>
+  <circle cx="32" cy="24" r="14" fill="#ebbcba" opacity="0.18"/>
+  <path d="M 14 45 Q 20 35 28 38 M 50 45 Q 44 35 36 38" stroke="#9ccfd8" stroke-width="1.4" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="32" cy="24.5" r="8.2" fill="url(#rpAvUFig)"/>
+  <path d="M 16 51.5 C 17.6 40.6 24 36 32 36 C 40 36 46.4 40.6 48 51.5" fill="url(#rpAvUFig)" opacity="0.94"/>
+  <circle cx="43" cy="21" r="2.6" fill="#eb6f92" opacity="0.88"/>
+  <circle cx="43" cy="21" r="1.0" fill="#f6c177"/>
+  <circle cx="18" cy="19" r="1.5" fill="#f6c177" opacity="0.88"/>
+</svg>

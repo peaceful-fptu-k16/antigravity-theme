@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="auC2Bg" cx="35%" cy="25%" r="75%"><stop offset="0%" stop-color="#275578"/><stop offset="58%" stop-color="#193549"/><stop offset="100%" stop-color="#0f2332"/></radialGradient>
+<linearGradient id="auC2Rim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#ffc600"/><stop offset="55%" stop-color="#9effff"/><stop offset="100%" stop-color="#ff9d00"/></linearGradient>
+<linearGradient id="auC2Fig" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#ffffff"/><stop offset="100%" stop-color="#9effff"/></linearGradient>
+<clipPath id="auC2Clip"><circle cx="32" cy="32" r="28"/></clipPath>
+</defs>
+<circle cx="32" cy="32" r="29" fill="url(#auC2Bg)" stroke="url(#auC2Rim)" stroke-width="2.3"/>
+<g clip-path="url(#auC2Clip)">
+<path d="M 10 24 A 22 22 0 0 1 54 24" stroke="#ffc600" stroke-width="1.1" stroke-dasharray="4 4" opacity="0.5"/>
+<circle cx="32" cy="24.8" r="8.4" fill="url(#auC2Fig)"/>
+<path d="M 15 56 C 16 42, 23 36.8, 32 36.8 C 41 36.8, 48 42, 49 56 Z" fill="url(#auC2Fig)" opacity="0.95"/>
+<path d="M 24.5 44.5 L 32 39.8 L 39.5 44.5" stroke="#193549" stroke-width="1.6" stroke-linecap="round" opacity="0.65"/>
+</g>
+<circle cx="32" cy="32" r="26" stroke="#ffc600" stroke-width="0.75" opacity="0.32"/>
+<rect x="46.5" y="14.5" width="4.4" height="4.4" transform="rotate(45 48.7 16.7)" fill="#ffc600"/>
+</svg>

@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="aymw_sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#141820"/>
+      <stop offset="48%" stop-color="#1f2430"/>
+      <stop offset="76%" stop-color="#282e3d"/>
+      <stop offset="100%" stop-color="#181d27"/>
+    </linearGradient>
+    <radialGradient id="aymw_sun_bloom" cx="62%" cy="56%" r="44%">
+      <stop offset="0%" stop-color="#ffcc66" stop-opacity="0.34"/>
+      <stop offset="32%" stop-color="#ffa759" stop-opacity="0.16"/>
+      <stop offset="68%" stop-color="#73d0ff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#1f2430" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aymw_mist_blue" cx="24%" cy="38%" r="45%">
+      <stop offset="0%" stop-color="#73d0ff" stop-opacity="0.19"/>
+      <stop offset="56%" stop-color="#73d0ff" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#1f2430" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="aymw_orb" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fff0c2"/>
+      <stop offset="45%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ffa759" stop-opacity="0.55"/>
+    </linearGradient>
+    <linearGradient id="aymw_sea1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#283142" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#191e29" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="aymw_sea2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#212838" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#141820" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="aymw_shimmer" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#73d0ff" stop-opacity="0"/>
+      <stop offset="32%" stop-color="#73d0ff" stop-opacity="0.52"/>
+      <stop offset="62%" stop-color="#ffcc66" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#ffa759" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#aymw_sky)"/>
+  <rect width="1920" height="1080" fill="url(#aymw_sun_bloom)"/>
+  <rect width="1920" height="1080" fill="url(#aymw_mist_blue)"/>
+  <g opacity="0.92">
+    <circle cx="1190" cy="545" r="145" fill="url(#aymw_orb)"/>
+    <rect x="1010" y="542" width="360" height="10" rx="5" fill="#1f2430" opacity="0.55"/>
+    <rect x="1030" y="566" width="320" height="12" rx="6" fill="#1f2430" opacity="0.62"/>
+    <rect x="1055" y="592" width="270" height="14" rx="7" fill="#1f2430" opacity="0.72"/>
+    <circle cx="1190" cy="545" r="210" stroke="#ffcc66" stroke-opacity="0.16" stroke-width="1.2"/>
+    <circle cx="1190" cy="545" r="300" stroke="#73d0ff" stroke-opacity="0.11" stroke-width="1" stroke-dasharray="8 10"/>
+  </g>
+  <g fill="#73d0ff" opacity="0.09">
+    <ellipse cx="420" cy="495" rx="390" ry="38"/>
+    <ellipse cx="1510" cy="450" rx="340" ry="32" fill="#ffcc66" opacity="0.7"/>
+    <ellipse cx="890" cy="595" rx="560" ry="26"/>
+  </g>
+  <path d="M 0 650 C 290 618, 560 662, 920 638 C 1280 614, 1580 658, 1920 628 L 1920 1080 L 0 1080 Z" fill="url(#aymw_sea1)"/>
+  <path d="M 0 650 C 290 618, 560 662, 920 638 C 1280 614, 1580 658, 1920 628" stroke="url(#aymw_shimmer)" stroke-width="2.2"/>
+  <path d="M 0 765 C 340 725, 690 792, 1080 748 C 1420 710, 1690 768, 1920 742 L 1920 1080 L 0 1080 Z" fill="url(#aymw_sea2)"/>
+  <path d="M 0 765 C 340 725, 690 792, 1080 748 C 1420 710, 1690 768, 1920 742" stroke="#73d0ff" stroke-width="1.5" stroke-opacity="0.34"/>
+  <path d="M 0 885 C 380 848, 760 912, 1180 870 C 1510 838, 1740 884, 1920 865 L 1920 1080 L 0 1080 Z" fill="#141820" opacity="0.92"/>
+  <path d="M 0 885 C 380 848, 760 912, 1180 870 C 1510 838, 1740 884, 1920 865" stroke="#ffcc66" stroke-width="1.2" stroke-opacity="0.28"/>
+  <g stroke-linecap="round">
+    <line x1="1065" y1="686" x2="1315" y2="686" stroke="#ffcc66" stroke-width="3.2" stroke-opacity="0.58"/>
+    <line x1="1095" y1="718" x2="1285" y2="718" stroke="#ffcc66" stroke-width="2.4" stroke-opacity="0.46"/>
+    <line x1="1120" y1="782" x2="1260" y2="782" stroke="#ffa759" stroke-width="2" stroke-opacity="0.38"/>
+    <line x1="1142" y1="818" x2="1238" y2="818" stroke="#ffcc66" stroke-width="1.8" stroke-opacity="0.32"/>
+    <line x1="1160" y1="896" x2="1220" y2="896" stroke="#73d0ff" stroke-width="1.5" stroke-opacity="0.35"/>
+    <line x1="340" y1="710" x2="540" y2="710" stroke="#73d0ff" stroke-width="1.6" stroke-opacity="0.28"/>
+    <line x1="1460" y1="808" x2="1650" y2="808" stroke="#73d0ff" stroke-width="1.4" stroke-opacity="0.25"/>
+  </g>
+  <g fill="#cccac2">
+    <circle cx="290" cy="180" r="1.7" opacity="0.58"/>
+    <circle cx="540" cy="245" r="2" fill="#73d0ff" opacity="0.68"/>
+    <circle cx="810" cy="145" r="1.5" opacity="0.5"/>
+    <circle cx="1510" cy="195" r="1.9" fill="#ffcc66" opacity="0.7"/>
+    <circle cx="1710" cy="270" r="1.6" fill="#73d0ff" opacity="0.6"/>
+  </g>
+</svg>

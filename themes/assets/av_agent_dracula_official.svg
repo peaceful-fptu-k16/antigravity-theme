@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="da-bg" cx="50%" cy="42%" r="68%">
+      <stop offset="0%" stop-color="#383452"/>
+      <stop offset="60%" stop-color="#222331"/>
+      <stop offset="100%" stop-color="#14151e"/>
+    </radialGradient>
+    <linearGradient id="da-wing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bd93f9"/>
+      <stop offset="55%" stop-color="#ff79c6"/>
+      <stop offset="100%" stop-color="#8be9fd"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#da-bg)" stroke="url(#da-wing)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="24" stroke="#8be9fd" stroke-width="1" stroke-dasharray="6 4" opacity="0.5"/>
+  <!-- Stylized arcane bat-wings framing AI star core -->
+  <path d="M 10 31 C 16 21 24 22 28 29 L 32 23 L 36 29 C 40 22 48 21 54 31 C 47 32 42 36 39 42 C 36 37 34 38 32 43 C 30 38 28 37 25 42 C 22 36 17 32 10 31 Z" fill="url(#da-wing)" opacity="0.9"/>
+  <!-- Luminous 4-point AI spark nucleus -->
+  <path d="M 32 16 L 34.8 29.2 L 48 32 L 34.8 34.8 L 32 48 L 29.2 34.8 L 16 32 L 29.2 29.2 Z" fill="#f8f8f2"/>
+  <circle cx="32" cy="32" r="3.4" fill="#8be9fd"/>
+  <circle cx="20" cy="18" r="1.6" fill="#f1fa8c"/>
+  <circle cx="45" cy="46" r="1.4" fill="#ff79c6"/>
+</svg>

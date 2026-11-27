@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="lws_beam1" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#40b4c4" stop-opacity="0.15"/>
+      <stop offset="35%" stop-color="#b4dce7" stop-opacity="0.95"/>
+      <stop offset="70%" stop-color="#eb64b9" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffe261" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="lws_diamond" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b4dce7"/>
+      <stop offset="50%" stop-color="#eb64b9"/>
+      <stop offset="100%" stop-color="#40b4c4"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 8 122 25" stroke="url(#lws_beam1)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 18 32 Q 66 15 112 29" stroke="#74dfc4" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.65"/>
+  <path d="M 74 28 L 106 8" stroke="#eb64b9" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 76 10 L 104 28" stroke="#40b4c4" stroke-width="1.2" stroke-linecap="round"/>
+  <polygon points="90,10 97,19 90,28 83,19" stroke="url(#lws_diamond)" stroke-width="1.4" fill="rgba(235,100,185,0.16)"/>
+  <circle cx="90" cy="19" r="2.1" fill="#ffffff"/>
+  <path d="M 27 25 L 36 13 L 43 21 L 50 15 L 57 25" stroke="#b4dce7" stroke-width="1.25" stroke-linejoin="round"/>
+  <line x1="25" y1="25" x2="60" y2="25" stroke="#eb64b9" stroke-width="1" opacity="0.8"/>
+  <path d="M 17 21 L 18.2 18 L 21.2 16.8 L 18.2 15.6 L 17 12.6 L 15.8 15.6 L 12.8 16.8 L 15.8 18 Z" fill="#ffe261"/>
+  <circle cx="112" cy="14" r="1.4" fill="#74dfc4"/>
+  <circle cx="66" cy="14" r="1.1" fill="#eb64b9"/>
+</svg>

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cmCrFrame" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5c2e7"/>
+      <stop offset="55%" stop-color="#cba6f7"/>
+      <stop offset="100%" stop-color="#89b4fa"/>
+    </linearGradient>
+    <radialGradient id="cmCrMoon" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#f5e0dc"/>
+      <stop offset="55%" stop-color="#f5c2e7"/>
+      <stop offset="100%" stop-color="#cba6f7"/>
+    </radialGradient>
+  </defs>
+  <path d="M 3 30 L 3 10 Q 3 3 10 3 L 30 3" stroke="url(#cmCrFrame)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 6.8 21 L 6.8 11.2 Q 6.8 6.8 11.2 6.8 L 21 6.8" stroke="#89b4fa" stroke-width="1.05" stroke-linecap="round" opacity="0.82"/>
+  <g transform="translate(13.5, 13.5)">
+    <path d="M 1.5 -5.2 A 5.4 5.4 0 1 0 5.4 3.2 A 4.1 4.1 0 1 1 1.5 -5.2 Z" fill="url(#cmCrMoon)"/>
+    <path d="M -2.5 -1.4 L -3.5 -4.6 L -0.4 -2.8 L 1.6 -2.8 L 3.4 -4.5 L 2.8 -1.2" stroke="#f5e0dc" stroke-width="0.95" stroke-linecap="round" stroke-linejoin="round" opacity="0.9"/>
+    <path d="M 4.4 -3.2 L 5 -4.8 L 5.6 -3.2 L 7.2 -2.6 L 5.6 -2 L 5 -0.4 L 4.4 -2 L 2.8 -2.6 Z" fill="#f9e2af"/>
+  </g>
+  <circle cx="33" cy="3" r="1.4" fill="#f9e2af" opacity="0.9"/>
+  <circle cx="3" cy="33" r="1.2" fill="#89dceb" opacity="0.85"/>
+</svg>

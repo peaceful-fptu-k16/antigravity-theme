@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="stNssArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#88c0d0" stop-opacity="0.22"/>
+      <stop offset="35%" stop-color="#5e81ac" stop-opacity="0.92"/>
+      <stop offset="72%" stop-color="#81a1c1" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#5e81ac" stop-opacity="0.24"/>
+    </linearGradient>
+    <linearGradient id="stNssIce" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5e81ac"/>
+      <stop offset="55%" stop-color="#81a1c1"/>
+      <stop offset="100%" stop-color="#88c0d0"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 8 122 24" stroke="url(#stNssArc)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 18 31 Q 64 15 112 27" stroke="#5e81ac" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.48"/>
+  <g transform="translate(64, 17)" stroke="url(#stNssIce)" stroke-linecap="round">
+    <line x1="0" y1="-10.5" x2="0" y2="10.5" stroke-width="1.45"/>
+    <line x1="-9.1" y1="-5.25" x2="9.1" y2="5.25" stroke-width="1.45"/>
+    <line x1="-9.1" y1="5.25" x2="9.1" y2="-5.25" stroke-width="1.45"/>
+    <polygon points="0,-5.4 4.7,-2.7 4.7,2.7 0,5.4 -4.7,2.7 -4.7,-2.7" fill="#88c0d0" fill-opacity="0.28" stroke="#5e81ac" stroke-width="1.05"/>
+    <path d="M -2.6 -8.4 L 0 -6.4 L 2.6 -8.4 M -2.6 8.4 L 0 6.4 L 2.6 8.4" stroke-width="1"/>
+    <circle cx="0" cy="0" r="1.8" fill="#2e3440" stroke="none"/>
+  </g>
+  <g transform="translate(32, 18)">
+    <polygon points="0,-5.5 3.6,0 0,5.5 -3.6,0" fill="#88c0d0" fill-opacity="0.45" stroke="#5e81ac" stroke-width="1"/>
+    <circle cx="0" cy="0" r="1.1" fill="#5e81ac"/>
+  </g>
+  <g transform="translate(96, 17)">
+    <polygon points="0,-5.5 3.6,0 0,5.5 -3.6,0" fill="#81a1c1" fill-opacity="0.4" stroke="#5e81ac" stroke-width="1"/>
+    <circle cx="0" cy="0" r="1.1" fill="#2e3440"/>
+  </g>
+  <path d="M 17 20 L 18.2 17.2 L 21 16 L 18.2 14.8 L 17 12 L 15.8 14.8 L 13 16 L 15.8 17.2 Z" fill="#5e81ac" opacity="0.82"/>
+  <path d="M 111 16 L 112 13.8 L 114.2 12.8 L 112 11.8 L 111 9.6 L 110 11.8 L 107.8 12.8 L 110 13.8 Z" fill="#81a1c1" opacity="0.86"/>
+  <circle cx="48" cy="14" r="1.2" fill="#5e81ac" opacity="0.72"/>
+  <circle cx="80" cy="14" r="1.2" fill="#88c0d0" opacity="0.85"/>
+</svg>

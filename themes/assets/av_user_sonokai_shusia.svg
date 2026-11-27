@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="snu-bg" cx="40%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#424554"/>
+      <stop offset="60%" stop-color="#2c2e34"/>
+      <stop offset="100%" stop-color="#1b1c21"/>
+    </radialGradient>
+    <linearGradient id="snu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78dce8"/>
+      <stop offset="52%" stop-color="#ab9df2"/>
+      <stop offset="100%" stop-color="#ff6188"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#snu-bg)" stroke="url(#snu-rim)" stroke-width="2.2"/>
+  <polygon points="32,8 54,20 54,44 32,56 10,44 10,20" stroke="#78dce8" stroke-width="0.9" opacity="0.4"/>
+  <circle cx="32" cy="24" r="7.8" fill="#e2e4e5"/>
+  <path d="M 15 51 L 20 39 L 32 36 L 44 39 L 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#363944" stroke="#78dce8" stroke-width="1.4" stroke-linejoin="round"/>
+  <polygon points="32,37 35.5,42 32,47 28.5,42" fill="#ff6188"/>
+  <polygon points="48,15 50.5,18 48,21 45.5,18" fill="#78dce8"/>
+</svg>

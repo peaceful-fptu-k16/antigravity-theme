@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cnTns" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7dcfff"/>
+      <stop offset="50%" stop-color="#7aa2f7"/>
+      <stop offset="100%" stop-color="#bb9af7"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 29 L 3 9 Q 3 3 9 3 L 29 3" stroke="url(#cnTns)" stroke-width="1.6" stroke-linecap="round" opacity="0.92"/>
+  <path d="M 7 20 L 7 10.5 Q 7 7 10.5 7 L 20 7" stroke="#bb9af7" stroke-width="1.05" stroke-linecap="round" opacity="0.78"/>
+  <path d="M 12.2 6.5 L 9.5 11.6 L 12.6 11.6 L 10.4 16.5 L 15.8 10.2 L 12.6 10.2 Z" fill="url(#cnTns)"/>
+  <line x1="17.5" y1="12.5" x2="15" y2="17.5" stroke="#7dcfff" stroke-width="1.05" stroke-linecap="round" opacity="0.82"/>
+  <line x1="21" y1="10" x2="19.2" y2="13.8" stroke="#7aa2f7" stroke-width="0.95" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="32.5" cy="3" r="1.45" fill="#7dcfff" opacity="0.9"/>
+  <circle cx="3" cy="32.5" r="1.45" fill="#bb9af7" opacity="0.9"/>
+  <circle cx="10.5" cy="10.5" r="1" fill="#c0caf5" opacity="0.85"/>
+</svg>

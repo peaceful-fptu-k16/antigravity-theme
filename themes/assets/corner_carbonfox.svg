@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cfc_g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78a9ff"/>
+      <stop offset="55%" stop-color="#33b1ff"/>
+      <stop offset="100%" stop-color="#be95ff"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 33 L 3 3 L 33 3" stroke="url(#cfc_g)" stroke-width="1.75" stroke-linecap="square"/>
+  <path d="M 7.5 23 L 7.5 7.5 L 23 7.5" stroke="#be95ff" stroke-width="1.1" opacity="0.86"/>
+  <polygon points="14,9 19,14 14,19 9,14" fill="#161616" stroke="#78a9ff" stroke-width="1.25"/>
+  <rect x="12.5" y="12.5" width="3" height="3" fill="#08bdba"/>
+  <line x1="3" y1="14" x2="9" y2="14" stroke="#33b1ff" stroke-width="0.9" opacity="0.75"/>
+  <line x1="14" y1="3" x2="14" y2="9" stroke="#33b1ff" stroke-width="0.9" opacity="0.75"/>
+  <circle cx="33" cy="3" r="1.7" fill="#78a9ff"/>
+  <circle cx="3" cy="33" r="1.7" fill="#be95ff"/>
+</svg>

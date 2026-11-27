@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="dfSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#171624"/>
+      <stop offset="34%" stop-color="#232136"/>
+      <stop offset="62%" stop-color="#3c3554"/>
+      <stop offset="84%" stop-color="#7a5468"/>
+      <stop offset="100%" stop-color="#ea9a97"/>
+    </linearGradient>
+    <radialGradient id="dfDuskSun" cx="48%" cy="74%" r="48%">
+      <stop offset="0%" stop-color="#f6c177" stop-opacity="0.54"/>
+      <stop offset="32%" stop-color="#ea9a97" stop-opacity="0.36"/>
+      <stop offset="66%" stop-color="#eb6f92" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#232136" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="dfTealZenith" cx="82%" cy="18%" r="36%">
+      <stop offset="0%" stop-color="#569fba" stop-opacity="0.22"/>
+      <stop offset="55%" stop-color="#c4a7e7" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#171624" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="dfMesaFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#4d3d5c"/>
+      <stop offset="100%" stop-color="#2b2742"/>
+    </linearGradient>
+    <linearGradient id="dfMesaMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#352f4d"/>
+      <stop offset="100%" stop-color="#1e1c30"/>
+    </linearGradient>
+    <linearGradient id="dfCliffNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#242138"/>
+      <stop offset="100%" stop-color="#131220"/>
+    </linearGradient>
+    <linearGradient id="dfRiver" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#f6c177" stop-opacity="0.72"/>
+      <stop offset="36%" stop-color="#ea9a97" stop-opacity="0.62"/>
+      <stop offset="72%" stop-color="#569fba" stop-opacity="0.54"/>
+      <stop offset="100%" stop-color="#2b4c63" stop-opacity="0.76"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#dfSky)"/>
+  <rect width="1920" height="1080" fill="url(#dfDuskSun)"/>
+  <rect width="1920" height="1080" fill="url(#dfTealZenith)"/>
+  <g opacity="0.88">
+    <circle cx="148" cy="108" r="1.8" fill="#e0def4"/>
+    <circle cx="294" cy="176" r="1.5" fill="#9ccfd8"/>
+    <circle cx="448" cy="88" r="2.1" fill="#f6c177"/>
+    <circle cx="632" cy="154" r="1.5" fill="#c4a7e7"/>
+    <circle cx="816" cy="96" r="1.9" fill="#e0def4"/>
+    <circle cx="994" cy="148" r="1.6" fill="#ea9a97"/>
+    <circle cx="1182" cy="92" r="2.0" fill="#f6c177"/>
+    <circle cx="1368" cy="168" r="1.7" fill="#569fba"/>
+    <circle cx="1552" cy="104" r="2.1" fill="#e0def4"/>
+    <circle cx="1742" cy="182" r="1.6" fill="#ea9a97"/>
+    <circle cx="1844" cy="94" r="1.4" fill="#9ccfd8"/>
+    <path d="M 1456 224 L 1459 214 L 1469 211 L 1459 208 L 1456 198 L 1453 208 L 1443 211 L 1453 214 Z" fill="#f6c177"/>
+    <path d="M 526 214 L 528.4 207.5 L 534.8 205 L 528.4 202.5 L 526 196 L 523.6 202.5 L 517.2 205 L 523.6 207.5 Z" fill="#9ccfd8"/>
+    <path d="M 1648 164 A 24 24 0 1 0 1666 202 A 19 19 0 1 1 1648 164 Z" fill="#ea9a97" opacity="0.88"/>
+  </g>
+  <g opacity="0.34">
+    <path d="M 180 442 C 340 412 520 422 720 448 C 520 456 320 458 180 442 Z" fill="#ea9a97"/>
+    <path d="M 1020 408 C 1220 378 1440 388 1660 416 C 1440 426 1200 424 1020 408 Z" fill="#f6c177"/>
+  </g>
+  <path d="M 0 604 L 184 552 L 348 552 L 424 614 L 584 614 L 686 672 L 1120 672 L 1228 594 L 1424 594 L 1512 532 L 1742 532 L 1920 584 L 1920 1080 L 0 1080 Z" fill="url(#dfMesaFar)"/>
+  <path d="M 0 674 L 164 632 L 320 644 L 444 714 L 642 748 L 814 824 L 1062 824 L 1196 728 L 1384 678 L 1564 624 L 1768 624 L 1920 662 L 1920 1080 L 0 1080 Z" fill="url(#dfMesaMid)"/>
+  <path d="M 862 794 C 908 824 988 852 942 908 C 896 962 764 988 836 1080 L 1094 1080 C 1028 1004 1112 954 1054 896 C 1012 854 964 822 948 794 Z" fill="url(#dfRiver)"/>
+  <path d="M 884 844 L 976 844 M 864 904 L 994 904 M 846 972 L 1016 972" stroke="#f6c177" stroke-width="2" stroke-linecap="round" opacity="0.46"/>
+  <path d="M 0 742 L 228 762 L 424 842 L 628 938 L 764 1080 L 0 1080 Z" fill="url(#dfCliffNear)"/>
+  <path d="M 1920 718 L 1662 694 L 1472 694 L 1348 758 L 1244 862 L 1108 1080 L 1920 1080 Z" fill="url(#dfCliffNear)"/>
+  <path d="M 1472 694 L 1662 694 L 1920 718" stroke="#ea9a97" stroke-width="2.2" opacity="0.54"/>
+  <g transform="translate(1524, 694)" fill="#131220">
+    <path d="M -22 2 C -20 -18 -14 -40 -6 -52 C -2 -58 6 -58 10 -48 L 16 -22 C 20 -8 24 -2 24 2 Z"/>
+    <path d="M -12 -52 L -18 -72 L -4 -58 L 6 -58 L 15 -73 L 13 -51 C 13 -44 6 -39 -2 -39 C -10 -39 -14 -45 -12 -52 Z"/>
+    <path d="M -12 -46 L -24 -42 L -11 -39 Z"/>
+    <path d="M 16 -6 C 36 -8 52 -24 56 -40 C 59 -50 48 -52 42 -42 C 35 -30 28 -18 14 -16 Z"/>
+    <path d="M 48 -44 C 53 -48 56 -44 54 -37 C 52 -32 47 -32 45 -37 Z" fill="#ea9a97" opacity="0.78"/>
+    <circle cx="-6" cy="-49" r="1.6" fill="#f6c177"/>
+  </g>
+</svg>

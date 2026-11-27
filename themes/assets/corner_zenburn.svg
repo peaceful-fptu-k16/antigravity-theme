@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="znc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0dfaf"/>
+      <stop offset="55%" stop-color="#7f9f7f"/>
+      <stop offset="100%" stop-color="#8cd0d3"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 11 Q 3 3 11 3 L 30 3" stroke="url(#znc-rim)" stroke-width="1.55" stroke-linecap="round"/>
+  <path d="M 7.5 21 L 7.5 12.5 Q 7.5 7.5 12.5 7.5 L 21 7.5" stroke="#8cd0d3" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  <!-- Zen Enso ring & bamboo leaf -->
+  <path d="M 10.5 10.5 A 4.8 4.8 0 1 1 9.4 15.2" stroke="#f0dfaf" stroke-width="1.35" stroke-linecap="round"/>
+  <path d="M 13.5 14 Q 18.5 12.5 20.5 16.5 Q 16 17.5 13.5 14 Z" fill="#7f9f7f" opacity="0.9"/>
+  <circle cx="34" cy="3" r="1.4" fill="#dfaf8f" opacity="0.82"/>
+  <circle cx="3" cy="34" r="1.4" fill="#8cd0d3" opacity="0.82"/>
+</svg>

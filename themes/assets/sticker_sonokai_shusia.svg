@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="sns-arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ab9df2" stop-opacity="0.22"/>
+      <stop offset="38%" stop-color="#78dce8" stop-opacity="0.96"/>
+      <stop offset="72%" stop-color="#ff6188" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffd866" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="sns-gem" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78dce8"/>
+      <stop offset="52%" stop-color="#ab9df2"/>
+      <stop offset="100%" stop-color="#ff6188"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 L 36 18 L 68 14 L 122 25" stroke="url(#sns-arc)" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 18 31 L 46 22 L 74 19 L 112 28" stroke="#78dce8" stroke-width="0.85" stroke-dasharray="3 3" opacity="0.58"/>
+  <!-- Faceted crystal cluster -->
+  <g transform="translate(80, 17)">
+    <polygon points="0,-11 -6,0 0,10 6,0" fill="#363944" stroke="url(#sns-gem)" stroke-width="1.35"/>
+    <polygon points="0,-11 -6,0 0,-1" fill="#78dce8" opacity="0.65"/>
+    <polygon points="0,-11 6,0 0,-1" fill="#ff6188" opacity="0.58"/>
+    <polygon points="-10,-4 -14,3 -9,8 -6,2" fill="#ab9df2" opacity="0.72"/>
+    <polygon points="10,-3 14,3 9,8 6,2" fill="#78dce8" opacity="0.72"/>
+  </g>
+  <!-- Angular diamond glints -->
+  <polygon points="34,14 37,18 34,22 31,18" fill="#ff6188" opacity="0.9"/>
+  <polygon points="52,10 54.5,13 52,16 49.5,13" fill="#78dce8" opacity="0.9"/>
+  <path d="M 110 15 L 111.2 12 L 114.2 10.8 L 111.2 9.6 L 110 6.6 L 108.8 9.6 L 105.8 10.8 L 108.8 12 Z" fill="#e2e4e5" opacity="0.9"/>
+</svg>

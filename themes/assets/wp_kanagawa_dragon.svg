@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="kdSky" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#100f0f"/>
+      <stop offset="48%" stop-color="#181616"/>
+      <stop offset="84%" stop-color="#221f1f"/>
+      <stop offset="100%" stop-color="#121111"/>
+    </linearGradient>
+    <radialGradient id="kdGoldGlow" cx="68%" cy="30%" r="42%">
+      <stop offset="0%" stop-color="#c4b28a" stop-opacity="0.22"/>
+      <stop offset="48%" stop-color="#c4b28a" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#181616" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="kdSlateGlow" cx="26%" cy="54%" r="44%">
+      <stop offset="0%" stop-color="#658594" stop-opacity="0.2"/>
+      <stop offset="56%" stop-color="#658594" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#181616" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kdRibbonGold" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c4b28a" stop-opacity="0"/>
+      <stop offset="28%" stop-color="#c4b28a" stop-opacity="0.44"/>
+      <stop offset="68%" stop-color="#8992a5" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#658594" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="kdRibbonSlate" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#658594" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#658594" stop-opacity="0.34"/>
+      <stop offset="72%" stop-color="#c4b28a" stop-opacity="0.26"/>
+      <stop offset="100%" stop-color="#c4b28a" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="kdPeakMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2c2827"/>
+      <stop offset="100%" stop-color="#161414"/>
+    </linearGradient>
+    <linearGradient id="kdPeakFront" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1c1b"/>
+      <stop offset="100%" stop-color="#0e0d0d"/>
+    </linearGradient>
+    <linearGradient id="kdMist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#658594" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#658594" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#141212" stop-opacity="0.88"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#kdSky)"/>
+  <rect width="1920" height="1080" fill="url(#kdGoldGlow)"/>
+  <rect width="1920" height="1080" fill="url(#kdSlateGlow)"/>
+  <g transform="translate(1312, 268)">
+    <circle cx="0" cy="0" r="96" fill="#c4b28a" opacity="0.09"/>
+    <circle cx="0" cy="0" r="54" fill="#c4746e" opacity="0.16"/>
+    <circle cx="0" cy="0" r="28" fill="#c4746e" opacity="0.38"/>
+    <circle cx="0" cy="0" r="42" stroke="#c4b28a" stroke-width="1.2" stroke-dasharray="6 4" opacity="0.45"/>
+  </g>
+  <path d="M -40 730 L 180 510 L 340 592 L 560 412 L 770 558 L 990 368 L 1220 544 L 1460 398 L 1690 546 L 1960 440 L 1960 1080 L -40 1080 Z" fill="#262322" opacity="0.82"/>
+  <path d="M 990 368 L 1110 456 M 560 412 L 668 486 M 1460 398 L 1575 472" stroke="#c4b28a" stroke-width="2" opacity="0.34"/>
+  <g>
+    <path d="M -60 560 C 180 490, 360 618, 620 538 C 860 465, 1080 355, 1345 410 C 1545 452, 1730 375, 1980 420 L 1980 486 C 1720 450, 1520 524, 1310 478 C 1075 426, 865 538, 610 606 C 345 676, 170 562, -60 622 Z" fill="url(#kdRibbonSlate)"/>
+    <path d="M 110 534 C 310 486, 470 582, 695 516 C 915 452, 1115 362, 1365 416 C 1530 452, 1690 402, 1850 426" stroke="#c4b28a" stroke-width="2.2" opacity="0.54"/>
+    <path d="M 590 546 C 635 524, 675 540, 668 564 C 662 582, 634 584, 630 568" stroke="#c4b28a" stroke-width="2" stroke-linecap="round" opacity="0.62"/>
+    <path d="M 1190 388 C 1236 364, 1280 382, 1270 408 C 1262 426, 1235 426, 1232 410" stroke="#c4b28a" stroke-width="2.2" stroke-linecap="round" opacity="0.66"/>
+  </g>
+  <path d="M -40 820 L 210 612 L 420 718 L 690 522 L 940 688 L 1240 508 L 1520 676 L 1765 552 L 1960 660 L 1960 1080 L -40 1080 Z" fill="url(#kdPeakMid)"/>
+  <path d="M 690 522 L 820 608 M 1240 508 L 1388 598 M 210 612 L 325 670" stroke="#c4b28a" stroke-width="2.4" opacity="0.38"/>
+  <path d="M 690 522 L 560 620 M 1240 508 L 1110 598" stroke="#658594" stroke-width="1.8" opacity="0.35"/>
+  <g>
+    <path d="M -80 765 C 210 690, 440 805, 760 718 C 1060 638, 1285 752, 1605 668 C 1755 628, 1860 650, 1980 685 L 1980 760 C 1830 726, 1720 712, 1565 750 C 1260 826, 1035 718, 745 795 C 430 878, 195 768, -80 835 Z" fill="url(#kdRibbonGold)"/>
+    <path d="M 160 738 C 405 796, 610 742, 855 696 C 1105 650, 1305 740, 1595 672" stroke="#c4b28a" stroke-width="2.4" opacity="0.58"/>
+    <path d="M 880 692 C 928 668, 972 686, 962 714 C 954 732, 926 732, 922 714" stroke="#658594" stroke-width="2.2" stroke-linecap="round" opacity="0.65"/>
+    <path d="M 1495 686 C 1544 662, 1586 680, 1576 706 C 1568 724, 1540 724, 1536 708" stroke="#c4b28a" stroke-width="2.2" stroke-linecap="round" opacity="0.68"/>
+  </g>
+  <path d="M -40 945 L 175 795 L 395 888 L 620 755 L 875 885 L 1155 762 L 1435 882 L 1695 772 L 1960 888 L 1960 1080 L -40 1080 Z" fill="url(#kdPeakFront)"/>
+  <path d="M 620 755 L 748 820 M 1155 762 L 1298 824 M 1695 772 L 1825 832" stroke="#c4b28a" stroke-width="2" opacity="0.32"/>
+  <rect x="0" y="760" width="1920" height="320" fill="url(#kdMist)"/>
+  <g fill="#c4b28a" opacity="0.58">
+    <circle cx="420" cy="488" r="2.2"/>
+    <circle cx="838" cy="418" r="2.6"/>
+    <circle cx="1142" cy="348" r="2.2"/>
+    <circle cx="1560" cy="492" r="2.4"/>
+    <circle cx="678" cy="645" r="2"/>
+    <circle cx="1372" cy="616" r="2.2"/>
+  </g>
+</svg>

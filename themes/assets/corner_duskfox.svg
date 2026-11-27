@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="dfCrF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea9a97"/>
+      <stop offset="55%" stop-color="#f6c177"/>
+      <stop offset="100%" stop-color="#569fba"/>
+    </linearGradient>
+    <linearGradient id="dfCrFox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6c177"/>
+      <stop offset="55%" stop-color="#ea9a97"/>
+      <stop offset="100%" stop-color="#eb6f92"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 10 Q 3 3 10 3 L 30 3" stroke="url(#dfCrF)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 7 21 L 7 11.5 Q 7 7 11.5 7 L 21 7" stroke="#569fba" stroke-width="1.05" stroke-linecap="round" opacity="0.84"/>
+  <g transform="translate(14, 14.5)">
+    <path d="M -5.2 -0.5 L -6.4 -6.6 L -1.5 -3.4 L 1.5 -3.4 L 6.4 -6.6 L 5.2 -0.5 L 0 5.4 Z" fill="url(#dfCrFox)"/>
+    <circle cx="-2" cy="-0.8" r="0.9" fill="#9ccfd8"/>
+    <circle cx="2" cy="-0.8" r="0.9" fill="#9ccfd8"/>
+    <circle cx="0" cy="4.4" r="0.85" fill="#232136"/>
+  </g>
+  <circle cx="33" cy="3" r="1.4" fill="#9ccfd8"/>
+  <circle cx="3" cy="33" r="1.2" fill="#f6c177"/>
+</svg>

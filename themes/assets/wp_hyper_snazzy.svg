@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="hs_bg" x1="12%" y1="0%" x2="88%" y2="100%">
+      <stop offset="0%" stop-color="#151720"/>
+      <stop offset="48%" stop-color="#20222d"/>
+      <stop offset="100%" stop-color="#282a36"/>
+    </linearGradient>
+    <radialGradient id="hs_glowC" cx="28%" cy="38%" r="42%">
+      <stop offset="0%" stop-color="#57c7ff" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#9aedfe" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#20222d" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="hs_glowP" cx="74%" cy="56%" r="42%">
+      <stop offset="0%" stop-color="#ff6ac1" stop-opacity="0.26"/>
+      <stop offset="60%" stop-color="#5af78e" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#20222d" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hs_waveC" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#57c7ff" stop-opacity="0.1"/>
+      <stop offset="35%" stop-color="#57c7ff" stop-opacity="0.92"/>
+      <stop offset="70%" stop-color="#9aedfe" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#5af78e" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="hs_waveP" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#ff6ac1" stop-opacity="0.1"/>
+      <stop offset="40%" stop-color="#ff6ac1" stop-opacity="0.92"/>
+      <stop offset="75%" stop-color="#f3f99d" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#ff5c57" stop-opacity="0.18"/>
+    </linearGradient>
+    <linearGradient id="hs_prismFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#57c7ff" stop-opacity="0.18"/>
+      <stop offset="50%" stop-color="#ff6ac1" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#5af78e" stop-opacity="0.16"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#hs_bg)"/>
+  <rect width="1920" height="1080" fill="url(#hs_glowC)"/>
+  <rect width="1920" height="1080" fill="url(#hs_glowP)"/>
+  <g stroke="#9aedfe" stroke-width="0.9" opacity="0.12">
+    <line x1="0" y1="180" x2="1920" y2="180"/>
+    <line x1="0" y1="360" x2="1920" y2="360"/>
+    <line x1="0" y1="540" x2="1920" y2="540"/>
+    <line x1="0" y1="720" x2="1920" y2="720"/>
+    <line x1="0" y1="900" x2="1920" y2="900"/>
+    <line x1="240" y1="0" x2="240" y2="1080"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/>
+    <line x1="720" y1="0" x2="720" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1200" y1="0" x2="1200" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/>
+    <line x1="1680" y1="0" x2="1680" y2="1080"/>
+  </g>
+  <g opacity="0.72" stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="120,145 162,180 120,215" stroke="#57c7ff" stroke-width="5"/>
+    <line x1="182" y1="215" x2="248" y2="215" stroke="#5af78e" stroke-width="5"/>
+    <circle cx="1590" cy="145" r="7" fill="#ff5c57"/>
+    <circle cx="1624" cy="145" r="7" fill="#f3f99d"/>
+    <circle cx="1658" cy="145" r="7" fill="#5af78e"/>
+  </g>
+  <g>
+    <path d="M -60 720 C 260 540, 560 880, 960 660 C 1340 450, 1620 770, 1980 560" stroke="url(#hs_waveC)" stroke-width="34" opacity="0.14"/>
+    <path d="M -60 720 C 260 540, 560 880, 960 660 C 1340 450, 1620 770, 1980 560" stroke="url(#hs_waveC)" stroke-width="3.6"/>
+    <path d="M -60 790 C 310 610, 620 940, 1020 730 C 1380 540, 1650 830, 1980 650" stroke="url(#hs_waveP)" stroke-width="30" opacity="0.14"/>
+    <path d="M -60 790 C 310 610, 620 940, 1020 730 C 1380 540, 1650 830, 1980 650" stroke="url(#hs_waveP)" stroke-width="3.2"/>
+    <path d="M -60 870 C 350 710, 710 990, 1110 810 C 1450 655, 1710 910, 1980 760" stroke="#5af78e" stroke-width="2" opacity="0.62"/>
+    <path d="M -60 645 C 240 480, 520 790, 910 585 C 1290 385, 1600 685, 1980 485" stroke="#f3f99d" stroke-width="1.6" stroke-dasharray="10 10" opacity="0.52"/>
+  </g>
+  <g>
+    <polygon points="960,220 1190,610 730,610" fill="url(#hs_prismFill)" stroke="#57c7ff" stroke-width="2.4"/>
+    <polygon points="960,285 1135,575 785,575" stroke="#ff6ac1" stroke-width="1.6" opacity="0.82"/>
+    <polygon points="1480,310 1615,535 1345,535" fill="rgba(255,106,193,0.08)" stroke="#ff6ac1" stroke-width="1.6" opacity="0.78"/>
+    <polygon points="415,360 535,565 295,565" fill="rgba(87,199,255,0.08)" stroke="#5af78e" stroke-width="1.5" opacity="0.75"/>
+  </g>
+  <g stroke-linejoin="round" stroke-linecap="round">
+    <polyline points="415,465 555,425 605,470 760,415 845,455 960,395" stroke="#57c7ff" stroke-width="12" opacity="0.14"/>
+    <polyline points="415,465 555,425 605,470 760,415 845,455 960,395" stroke="#9aedfe" stroke-width="2.6"/>
+    <polyline points="960,395 1090,450 1160,395 1305,445 1385,390 1480,435" stroke="#ff6ac1" stroke-width="12" opacity="0.14"/>
+    <polyline points="960,395 1090,450 1160,395 1305,445 1385,390 1480,435" stroke="#ff6ac1" stroke-width="2.6"/>
+    <circle cx="960" cy="395" r="9" fill="#f3f99d"/>
+    <circle cx="960" cy="395" r="24" fill="#57c7ff" opacity="0.22"/>
+  </g>
+  <g opacity="0.82">
+    <circle cx="480" cy="180" r="3" fill="#57c7ff"/>
+    <circle cx="720" cy="180" r="3" fill="#ff6ac1"/>
+    <circle cx="1200" cy="180" r="3" fill="#5af78e"/>
+    <circle cx="1440" cy="180" r="3" fill="#f3f99d"/>
+    <circle cx="480" cy="900" r="3" fill="#ff6ac1"/>
+    <circle cx="1440" cy="900" r="3" fill="#57c7ff"/>
+  </g>
+</svg>

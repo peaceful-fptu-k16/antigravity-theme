@@ -1,0 +1,91 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="cd_sky" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#0b0c0e"/>
+      <stop offset="48%" stop-color="#16181a"/>
+      <stop offset="78%" stop-color="#1d222b"/>
+      <stop offset="100%" stop-color="#0e1013"/>
+    </linearGradient>
+    <radialGradient id="cd_glowB" cx="28%" cy="34%" r="40%">
+      <stop offset="0%" stop-color="#5ea1ff" stop-opacity="0.28"/>
+      <stop offset="60%" stop-color="#5ef1ff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#16181a" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="cd_glowM" cx="74%" cy="56%" r="38%">
+      <stop offset="0%" stop-color="#ff5ef1" stop-opacity="0.26"/>
+      <stop offset="60%" stop-color="#5ea1ff" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#16181a" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cd_towerA" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#222833"/>
+      <stop offset="100%" stop-color="#101215"/>
+    </linearGradient>
+    <linearGradient id="cd_towerB" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#1b1f27"/>
+      <stop offset="100%" stop-color="#0d0e11"/>
+    </linearGradient>
+    <linearGradient id="cd_holoRing" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5ef1ff" stop-opacity="0.1"/>
+      <stop offset="35%" stop-color="#5ea1ff" stop-opacity="0.9"/>
+      <stop offset="70%" stop-color="#ff5ef1" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#5ef1ff" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="cd_rain" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#5ef1ff" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#5ef1ff" stop-opacity="0.78"/>
+      <stop offset="100%" stop-color="#5aff15" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#cd_sky)"/>
+  <rect width="1920" height="1080" fill="url(#cd_glowB)"/>
+  <rect width="1920" height="1080" fill="url(#cd_glowM)"/>
+  <g stroke-width="1.4" opacity="0.65">
+    <path d="M0 190H210L280 260H540M1920 220H1710L1630 300H1430L1380 350" stroke="#5ea1ff"/>
+    <path d="M0 230H175L245 300H420L465 345" stroke="#5ef1ff" opacity="0.72"/>
+    <path d="M1920 170H1660L1590 240H1310" stroke="#ff5ef1"/>
+    <circle cx="540" cy="260" r="4.5" fill="#5ef1ff"/>
+    <circle cx="465" cy="345" r="3.5" fill="#5aff15"/>
+    <circle cx="1310" cy="240" r="4.5" fill="#ff5ef1"/>
+    <circle cx="1380" cy="350" r="3.5" fill="#5ea1ff"/>
+  </g>
+  <g opacity="0.72">
+    <path d="M215 60V390M395 110V480M650 40V340M1190 70V410M1495 120V500M1730 50V380" stroke="url(#cd_rain)" stroke-width="1.9"/>
+    <line x1="840" y1="90" x2="840" y2="280" stroke="#ff5ef1" stroke-width="1.4" opacity="0.45"/>
+    <line x1="1085" y1="80" x2="1085" y2="290" stroke="#5aff15" stroke-width="1.4" opacity="0.45"/>
+  </g>
+  <ellipse cx="960" cy="405" rx="340" ry="72" transform="rotate(-8 960 405)" stroke="url(#cd_holoRing)" stroke-width="2.4"/>
+  <ellipse cx="960" cy="405" rx="285" ry="54" transform="rotate(-8 960 405)" stroke="#5ef1ff" stroke-width="1" stroke-dasharray="10 8" opacity="0.55"/>
+  <g>
+    <polygon points="885,960 885,360 935,280 960,150 985,280 1035,360 1035,960" fill="url(#cd_towerA)" stroke="#5ea1ff" stroke-width="1.6"/>
+    <rect x="957" y="150" width="6" height="720" fill="#5ef1ff" opacity="0.22"/>
+    <polygon points="80,980 80,500 165,450 235,500 235,980" fill="url(#cd_towerB)" stroke="#5ea1ff" stroke-width="1.2"/>
+    <polygon points="270,980 270,410 340,360 415,410 415,980" fill="url(#cd_towerA)" stroke="#ff5ef1" stroke-width="1.3"/>
+    <polygon points="455,980 455,540 595,540 595,980" fill="url(#cd_towerB)" stroke="#5ea1ff" stroke-width="1.1"/>
+    <polygon points="635,980 635,445 730,395 810,445 810,980" fill="url(#cd_towerA)" stroke="#5ef1ff" stroke-width="1.3"/>
+    <polygon points="1110,980 1110,435 1190,385 1285,435 1285,980" fill="url(#cd_towerA)" stroke="#ff5ef1" stroke-width="1.3"/>
+    <polygon points="1325,980 1325,530 1465,530 1465,980" fill="url(#cd_towerB)" stroke="#5ea1ff" stroke-width="1.1"/>
+    <polygon points="1505,980 1505,395 1580,340 1655,395 1655,980" fill="url(#cd_towerA)" stroke="#5ef1ff" stroke-width="1.3"/>
+    <polygon points="1695,980 1695,485 1775,435 1845,485 1845,980" fill="url(#cd_towerB)" stroke="#ff5ef1" stroke-width="1.2"/>
+  </g>
+  <g opacity="0.88">
+    <rect x="305" y="455" width="76" height="10" rx="2" fill="#ff5ef1"/>
+    <rect x="305" y="485" width="54" height="6" rx="2" fill="#5ef1ff"/>
+    <rect x="668" y="490" width="96" height="9" rx="2" fill="#5ef1ff"/>
+    <rect x="912" y="420" width="96" height="8" rx="2" fill="#5ef1ff"/>
+    <rect x="912" y="452" width="96" height="6" rx="2" fill="#ff5ef1"/>
+    <rect x="912" y="484" width="96" height="6" rx="2" fill="#5ea1ff"/>
+    <rect x="912" y="516" width="96" height="6" rx="2" fill="#5aff15" opacity="0.82"/>
+    <rect x="1142" y="478" width="102" height="9" rx="2" fill="#ff5ef1"/>
+    <rect x="1142" y="508" width="74" height="6" rx="2" fill="#f1ff5e" opacity="0.85"/>
+    <rect x="1536" y="445" width="84" height="9" rx="2" fill="#5ea1ff"/>
+    <rect x="1536" y="476" width="60" height="6" rx="2" fill="#ff5ef1"/>
+  </g>
+  <rect x="0" y="900" width="1920" height="180" fill="#0d0e11" opacity="0.92"/>
+  <g stroke-width="1.8" opacity="0.86">
+    <path d="M0 940H420L470 990H870L920 940H1000L1050 990H1450L1500 940H1920" stroke="#5ea1ff"/>
+    <path d="M0 985H340L395 1035H1525L1580 985H1920" stroke="#ff5ef1" opacity="0.78"/>
+    <circle cx="470" cy="990" r="4" fill="#5ef1ff"/>
+    <circle cx="960" cy="940" r="5" fill="#5aff15"/>
+    <circle cx="1450" cy="990" r="4" fill="#ff5ef1"/>
+  </g>
+</svg>

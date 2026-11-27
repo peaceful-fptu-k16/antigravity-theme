@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="rpmAvUBg" cx="38%" cy="22%" r="76%">
+      <stop offset="0%" stop-color="#393552"/>
+      <stop offset="60%" stop-color="#2a273f"/>
+      <stop offset="100%" stop-color="#1b1929"/>
+    </radialGradient>
+    <linearGradient id="rpmAvURing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ea9a97"/>
+      <stop offset="52%" stop-color="#c4a7e7"/>
+      <stop offset="100%" stop-color="#9ccfd8"/>
+    </linearGradient>
+    <linearGradient id="rpmAvUFig" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e0def4"/>
+      <stop offset="100%" stop-color="#ea9a97"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#rpmAvUBg)" stroke="url(#rpmAvURing)" stroke-width="2.4"/>
+  <circle cx="45" cy="18" r="5.5" fill="#ea9a97" opacity="0.88"/>
+  <circle cx="31" cy="24.5" r="8.2" fill="url(#rpmAvUFig)"/>
+  <path d="M 15.5 49.5 C 17.2 39.8 23.4 35.8 31 35.8 C 38.8 35.8 45 39.8 46.8 49.5" fill="url(#rpmAvUFig)" opacity="0.94"/>
+  <ellipse cx="32" cy="51.5" rx="18" ry="3.6" stroke="#c4a7e7" stroke-width="1.2" opacity="0.72"/>
+  <line x1="22" y1="54.8" x2="42" y2="54.8" stroke="#9ccfd8" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="17" cy="20" r="1.5" fill="#f6c177"/>
+</svg>

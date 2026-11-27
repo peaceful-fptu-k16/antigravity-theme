@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="auPmBg" cx="35%" cy="25%" r="75%">
+      <stop offset="0%" stop-color="#2c3244"/>
+      <stop offset="58%" stop-color="#1a1e28"/>
+      <stop offset="100%" stop-color="#11141a"/>
+    </radialGradient>
+    <linearGradient id="auPmRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5de4c7"/>
+      <stop offset="55%" stop-color="#89ddff"/>
+      <stop offset="100%" stop-color="#add7ff"/>
+    </linearGradient>
+    <linearGradient id="auPmFig" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e4f0fb"/>
+      <stop offset="100%" stop-color="#5de4c7"/>
+    </linearGradient>
+    <clipPath id="auPmClip"><circle cx="32" cy="32" r="28"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="29" fill="url(#auPmBg)" stroke="url(#auPmRim)" stroke-width="2.2"/>
+  <g clip-path="url(#auPmClip)">
+    <ellipse cx="32" cy="32" rx="26" ry="10" transform="rotate(-22 32 32)" stroke="#5de4c7" stroke-width="1" opacity="0.34"/>
+    <circle cx="32" cy="24.6" r="8.4" fill="url(#auPmFig)"/>
+    <path d="M 15 56 C 16 42, 23 36.6, 32 36.6 C 41 36.6, 48 42, 49 56 Z" fill="url(#auPmFig)" opacity="0.94"/>
+    <path d="M 24.5 44.5 L 32 39.8 L 39.5 44.5" stroke="#1a1e28" stroke-width="1.4" stroke-linecap="round" opacity="0.58"/>
+  </g>
+  <circle cx="32" cy="32" r="26" stroke="#5de4c7" stroke-width="0.7" opacity="0.24"/>
+  <circle cx="48" cy="17" r="2" fill="#fffac2"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="sw84c_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fede5d"/>
+      <stop offset="60%" stop-color="#ff7edb"/>
+      <stop offset="100%" stop-color="#fe4450"/>
+    </linearGradient>
+    <clipPath id="sw84c_clip">
+      <circle cx="12.5" cy="12.5" r="5.2"/>
+    </clipPath>
+  </defs>
+  <path d="M 3 32 L 3 11 L 11 3 L 32 3" stroke="#36f9f6" stroke-width="1.65" stroke-linecap="square" opacity="0.94"/>
+  <path d="M 6.8 23 L 6.8 13 L 13 6.8 L 23 6.8" stroke="#ff7edb" stroke-width="1.15" stroke-linecap="square" opacity="0.86"/>
+  <g clip-path="url(#sw84c_clip)">
+    <rect x="7" y="7" width="11" height="6.2" fill="url(#sw84c_sun)"/>
+    <rect x="7" y="14.2" width="11" height="1.3" fill="url(#sw84c_sun)"/>
+    <rect x="7" y="16.3" width="11" height="1.2" fill="url(#sw84c_sun)"/>
+  </g>
+  <line x1="8" y1="18.2" x2="18.5" y2="18.2" stroke="#36f9f6" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="31.5" cy="3" r="1.7" fill="#fede5d"/>
+  <circle cx="3" cy="31.5" r="1.7" fill="#ff7edb"/>
+</svg>

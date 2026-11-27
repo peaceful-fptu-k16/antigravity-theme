@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="rpdCrF" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d7827e"/>
+      <stop offset="55%" stop-color="#907aa9"/>
+      <stop offset="100%" stop-color="#56949f"/>
+    </linearGradient>
+    <radialGradient id="rpdCrSun" cx="50%" cy="50%" r="55%">
+      <stop offset="0%" stop-color="#fef3c7"/>
+      <stop offset="55%" stop-color="#ea9d34"/>
+      <stop offset="100%" stop-color="#d7827e"/>
+    </radialGradient>
+  </defs>
+  <path d="M 3 30 L 3 10 Q 3 3 10 3 L 30 3" stroke="url(#rpdCrF)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 7 21 L 7 11.5 Q 7 7 11.5 7 L 21 7" stroke="#56949f" stroke-width="1.05" stroke-linecap="round" opacity="0.82"/>
+  <g transform="translate(13.5, 14)">
+    <path d="M -5.5 2 A 5.5 5.5 0 0 1 5.5 2 Z" fill="url(#rpdCrSun)"/>
+    <path d="M 0 -6.4 L 0 -4.6 M -4.8 -4.6 L -3.5 -3.4 M 4.8 -4.6 L 3.5 -3.4" stroke="#ea9d34" stroke-width="1.1" stroke-linecap="round"/>
+    <path d="M -6.8 3.6 Q 0 2 6.8 3.6" stroke="#56949f" stroke-width="1.1" stroke-linecap="round"/>
+  </g>
+  <circle cx="33" cy="3" r="1.4" fill="#ea9d34"/>
+  <circle cx="3" cy="33" r="1.2" fill="#d7827e"/>
+</svg>

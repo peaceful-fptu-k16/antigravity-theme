@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="paB" cx=".5" cy=".38" r=".74"><stop offset="0" stop-color="#3c425e"/><stop offset=".6" stop-color="#292d3e"/><stop offset="1" stop-color="#1b1e2b"/></radialGradient>
+<linearGradient id="paR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#89ddff"/><stop offset=".5" stop-color="#82aaff"/><stop offset="1" stop-color="#c792ea"/></linearGradient>
+<linearGradient id="paF1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#89ddff" stop-opacity=".88"/><stop offset="1" stop-color="#82aaff" stop-opacity=".52"/></linearGradient>
+<linearGradient id="paF2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#c792ea" stop-opacity=".88"/><stop offset="1" stop-color="#82aaff" stop-opacity=".48"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="30" fill="url(#paB)" stroke="url(#paR)" stroke-width="2.4"/>
+<polygon points="32,12 49,22 49,42 32,52 15,42 15,22" fill="#1b1e2b" stroke="url(#paR)" stroke-width="1.6" stroke-linejoin="round"/>
+<polygon points="32,12 49,22 32,32 15,22" fill="url(#paF1)"/>
+<polygon points="15,22 32,32 32,52 15,42" fill="url(#paF2)" opacity=".72"/>
+<polygon points="49,22 32,32 32,52 49,42" fill="#82aaff" opacity=".34"/>
+<circle cx="32" cy="32" r="3.4" fill="#c3e88d"/>
+<circle cx="32" cy="12" r="2" fill="#89ddff"/><circle cx="49" cy="22" r="1.8" fill="#ffcb6b"/><circle cx="15" cy="42" r="1.8" fill="#c792ea"/>
+</svg>

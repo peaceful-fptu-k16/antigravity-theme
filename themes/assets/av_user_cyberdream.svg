@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="cdu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#222730"/>
+      <stop offset="100%" stop-color="#0f1011"/>
+    </linearGradient>
+    <linearGradient id="cdu_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5ea1ff"/>
+      <stop offset="55%" stop-color="#5ef1ff"/>
+      <stop offset="100%" stop-color="#ff5ef1"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#cdu_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="url(#cdu_rim)" stroke-width="2.2"/>
+  <path d="M 10 22 L 16 22 L 20 18 M 54 22 L 48 22 L 44 18" stroke="#5ea1ff" stroke-width="1.1" opacity="0.55"/>
+  <path d="M 15 53 L 19 42 L 26 39 L 38 39 L 45 42 L 49 53" fill="#1e2124" stroke="#5ea1ff" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M 21 31 L 21 22 L 27 15 L 37 15 L 43 22 L 43 31 L 37 37 L 27 37 Z" fill="#16181a" stroke="#ff5ef1" stroke-width="1.5" stroke-linejoin="round"/>
+  <rect x="24" y="24" width="16" height="4.8" rx="1.5" fill="#5ef1ff"/>
+  <circle cx="28" cy="26.4" r="1.2" fill="#0f1011"/>
+  <circle cx="36" cy="26.4" r="1.2" fill="#0f1011"/>
+  <circle cx="32" cy="45" r="2" fill="#5aff15"/>
+</svg>

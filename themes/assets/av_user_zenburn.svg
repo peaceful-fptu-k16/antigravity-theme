@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="znu-bg" cx="40%" cy="32%" r="72%">
+      <stop offset="0%" stop-color="#565656"/>
+      <stop offset="60%" stop-color="#3f3f3f"/>
+      <stop offset="100%" stop-color="#2b2b2b"/>
+    </radialGradient>
+    <linearGradient id="znu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f0dfaf"/>
+      <stop offset="55%" stop-color="#7f9f7f"/>
+      <stop offset="100%" stop-color="#8cd0d3"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#znu-bg)" stroke="url(#znu-rim)" stroke-width="2.1"/>
+  <!-- Open Zen Enso circle behind portrait -->
+  <path d="M 16 26 A 17 17 0 1 1 20 44" stroke="#f0dfaf" stroke-width="1.8" stroke-linecap="round" opacity="0.48"/>
+  <circle cx="32" cy="24.5" r="7.6" fill="#dcdccc"/>
+  <path d="M 15 51 C 18 40 24 36 32 36 C 40 36 46 40 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#4b4b4b" stroke="#7f9f7f" stroke-width="1.35"/>
+  <path d="M 27 36 L 32 42 L 37 36" stroke="#f0dfaf" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 45 15 Q 50 13 51 18 Q 46 19 45 15 Z" fill="#7f9f7f"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="sw84a_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2b1742"/>
+      <stop offset="100%" stop-color="#140d21"/>
+    </linearGradient>
+    <linearGradient id="sw84a_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fede5d"/>
+      <stop offset="55%" stop-color="#ff7edb"/>
+      <stop offset="100%" stop-color="#fe4450"/>
+    </linearGradient>
+    <clipPath id="sw84a_clip"><circle cx="32" cy="32" r="12.5"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#sw84a_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="#ff7edb" stroke-width="2"/>
+  <circle cx="32" cy="32" r="24" stroke="#36f9f6" stroke-width="1" stroke-dasharray="4 3" opacity="0.72"/>
+  <polygon points="32,10 54,32 32,54 10,32" stroke="#36f9f6" stroke-width="1.6" fill="rgba(54,249,246,0.08)"/>
+  <g clip-path="url(#sw84a_clip)" fill="url(#sw84a_sun)">
+    <rect x="19" y="19" width="26" height="14"/>
+    <rect x="19" y="34.8" width="26" height="2.6"/>
+    <rect x="19" y="38.8" width="26" height="2.2"/>
+    <rect x="19" y="42.4" width="26" height="2.2"/>
+  </g>
+  <path d="M14 32H20M44 32H50M32 14V19M32 45V50" stroke="#72f1b8" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="32" cy="10" r="2" fill="#fede5d"/>
+  <circle cx="32" cy="54" r="2" fill="#ff7edb"/>
+</svg>

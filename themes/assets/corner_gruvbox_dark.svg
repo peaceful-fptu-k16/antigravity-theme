@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="gdc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fabd2f"/>
+      <stop offset="55%" stop-color="#fe8019"/>
+      <stop offset="100%" stop-color="#cc241d"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 11 Q 3 3 11 3 L 30 3" stroke="url(#gdc-rim)" stroke-width="1.8" stroke-linecap="round"/>
+  <path d="M 7 23 L 7 12.5 Q 7 7 12.5 7 L 23 7" stroke="#fabd2f" stroke-width="1.15" stroke-linecap="round" opacity="0.78"/>
+  <path d="M 10.5 17 L 10.5 13 Q 10.5 10.5 13 10.5 L 17 10.5" stroke="#8ec07c" stroke-width="1" stroke-linecap="round" opacity="0.75"/>
+  <!-- Mini retro sunburst core -->
+  <circle cx="14.5" cy="14.5" r="3.2" fill="#fe8019"/>
+  <circle cx="14.5" cy="14.5" r="1.4" fill="#fabd2f"/>
+  <circle cx="34" cy="3" r="1.5" fill="#b8bb26" opacity="0.9"/>
+  <circle cx="3" cy="34" r="1.5" fill="#ebdbb2" opacity="0.8"/>
+</svg>

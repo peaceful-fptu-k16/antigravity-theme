@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cnMo" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#89ddff"/>
+      <stop offset="55%" stop-color="#c792ea"/>
+      <stop offset="100%" stop-color="#c3e88d"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 9 Q 3 3 9 3 L 30 3" stroke="url(#cnMo)" stroke-width="1.65" stroke-linecap="round" opacity="0.94"/>
+  <path d="M 6.8 21 C 6.8 14, 9.2 10.5, 11.8 9.2 C 14.5 7.8, 17 6.8, 21 6.8" stroke="#89ddff" stroke-width="1.15" stroke-linecap="round" opacity="0.78"/>
+  <g transform="translate(12.5, 12.8)">
+    <path d="M 0 -4.8 C 2.9 -1.6, 3.4 1.6, 0 4.6 C -3.4 1.6, -2.9 -1.6, 0 -4.8 Z" fill="#263238" stroke="#89ddff" stroke-width="1.15"/>
+    <circle cx="0" cy="0.6" r="1.45" fill="#89ddff" opacity="0.82"/>
+  </g>
+  <circle cx="33" cy="3" r="1.4" fill="#c792ea" opacity="0.92"/>
+  <circle cx="3" cy="33" r="1.4" fill="#89ddff" opacity="0.92"/>
+  <circle cx="19.5" cy="12" r="1" fill="#c3e88d" opacity="0.85"/>
+</svg>

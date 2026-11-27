@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="soll-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fdf6e3"/>
+      <stop offset="52%" stop-color="#f9f2df"/>
+      <stop offset="100%" stop-color="#f1ead6"/>
+    </linearGradient>
+    <radialGradient id="soll-cobalt-wash" cx="68%" cy="46%" r="45%">
+      <stop offset="0%" stop-color="#268bd2" stop-opacity="0.14"/>
+      <stop offset="45%" stop-color="#2aa198" stop-opacity="0.09"/>
+      <stop offset="82%" stop-color="#fdf6e3" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="soll-gold-wash" cx="24%" cy="22%" r="38%">
+      <stop offset="0%" stop-color="#b58900" stop-opacity="0.14"/>
+      <stop offset="60%" stop-color="#fdf6e3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="soll-ink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#268bd2" stop-opacity="0.72"/>
+      <stop offset="55%" stop-color="#2aa198" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#b58900" stop-opacity="0.65"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#soll-bg)"/>
+  <rect width="1920" height="1080" fill="url(#soll-cobalt-wash)"/>
+  <rect width="1920" height="1080" fill="url(#soll-gold-wash)"/>
+  <!-- Delicate architectural observatory parchment drafting grid -->
+  <g stroke="#93a1a1" stroke-width="0.9" opacity="0.28">
+    <line x1="0" y1="510" x2="1920" y2="510"/>
+    <line x1="1300" y1="0" x2="1300" y2="1080"/>
+    <line x1="340" y1="0" x2="340" y2="1080" stroke-dasharray="6 10"/>
+    <path d="M 0 240 Q 960 410 1920 240"/>
+    <path d="M 0 800 Q 960 630 1920 800"/>
+  </g>
+  <!-- Engraved sunlit meridian dial upper-left -->
+  <g transform="translate(340, 255)">
+    <circle r="138" stroke="#268bd2" stroke-width="1.2" opacity="0.32"/>
+    <circle r="108" stroke="#2aa198" stroke-width="1" stroke-dasharray="4 7" opacity="0.38"/>
+    <circle r="68" fill="#eee8d5" opacity="0.55" stroke="#b58900" stroke-width="1.1"/>
+    <circle r="24" fill="#b58900" opacity="0.22"/>
+    <path d="M 0 -46 L 5 -5 L 46 0 L 5 5 L 0 46 L -5 5 L -46 0 L -5 -5 Z" fill="#b58900" opacity="0.32"/>
+    <line x1="138" y1="35" x2="580" y2="165" stroke="#b58900" stroke-width="1" stroke-dasharray="4 8" opacity="0.32"/>
+  </g>
+  <!-- Engraved Ivory Observatory Celestial Rings right-of-center -->
+  <g transform="translate(1300, 510)">
+    <circle r="410" fill="#eee8d5" opacity="0.36"/>
+    <circle r="415" stroke="url(#soll-ink)" stroke-width="1.8" opacity="0.58"/>
+    <circle r="392" stroke="#268bd2" stroke-width="1.1" opacity="0.4"/>
+    <circle r="380" stroke="#b58900" stroke-width="1.5" stroke-dasharray="2 16" opacity="0.55"/>
+    <circle r="312" stroke="#2aa198" stroke-width="1.5" opacity="0.52"/>
+    <circle r="236" stroke="#268bd2" stroke-width="1.2" stroke-dasharray="7 7" opacity="0.48"/>
+    <circle r="160" stroke="#b58900" stroke-width="1.4" opacity="0.55"/>
+    <circle r="86" fill="#fdf6e3" opacity="0.6" stroke="#268bd2" stroke-width="1.3"/>
+    <!-- Eccentric ecliptic arc -->
+    <circle cx="-42" cy="-48" r="218" stroke="#b58900" stroke-width="1.7" opacity="0.48"/>
+    <!-- Precision celestial ellipses -->
+    <ellipse rx="362" ry="132" transform="rotate(-26)" stroke="#268bd2" stroke-width="1.4" opacity="0.46"/>
+    <ellipse rx="362" ry="132" transform="rotate(32)" stroke="#2aa198" stroke-width="1.35" opacity="0.46"/>
+    <ellipse rx="270" ry="92" transform="rotate(74)" stroke="#b58900" stroke-width="1.15" stroke-dasharray="5 6" opacity="0.44"/>
+    <!-- Cardinal engraved rose -->
+    <line x1="-435" y1="0" x2="435" y2="0" stroke="#268bd2" stroke-width="1" opacity="0.36"/>
+    <line x1="0" y1="-435" x2="0" y2="435" stroke="#268bd2" stroke-width="1" opacity="0.36"/>
+    <path d="M 0 -126 L 13 -13 L 126 0 L 13 13 L 0 126 L -13 13 L -126 0 L -13 -13 Z" fill="#fdf6e3" stroke="#268bd2" stroke-width="1.4" opacity="0.72"/>
+    <path d="M 0 -76 L 8 -8 L 76 0 L 8 8 L 0 76 L -8 8 L -76 0 L -8 -8 Z" fill="#2aa198" opacity="0.28"/>
+    <circle r="18" fill="#fdf6e3" stroke="#b58900" stroke-width="1.8"/>
+    <circle r="6.5" fill="#268bd2" opacity="0.82"/>
+    <!-- Orbital markers -->
+    <circle cx="312" cy="0" r="6" fill="#268bd2" opacity="0.78"/>
+    <circle cx="-176" cy="-205" r="6.5" fill="#b58900" opacity="0.8"/>
+    <circle cx="204" cy="176" r="5.5" fill="#2aa198" opacity="0.8"/>
+    <circle cx="-265" cy="112" r="5" fill="#859900" opacity="0.75"/>
+  </g>
+  <!-- Soft botanical/architectural hill wash at lower edge -->
+  <path d="M 0 925 Q 420 865 920 920 T 1920 895 L 1920 1080 L 0 1080 Z" fill="#eee8d5" opacity="0.72"/>
+  <path d="M 0 965 Q 520 925 1040 970 T 1920 945" stroke="#2aa198" stroke-width="1.2" opacity="0.28"/>
+  <!-- Delicate star chart nodes lower-left -->
+  <g stroke="#268bd2" stroke-width="1" opacity="0.35">
+    <path d="M 150 820 L 280 755 L 435 800 L 575 725 L 705 780"/>
+  </g>
+  <g fill="#586e75" opacity="0.55">
+    <circle cx="150" cy="820" r="3"/><circle cx="280" cy="755" r="3.8" fill="#268bd2"/>
+    <circle cx="435" cy="800" r="3"/><circle cx="575" cy="725" r="4" fill="#b58900"/>
+    <circle cx="705" cy="780" r="3" fill="#2aa198"/>
+  </g>
+</svg>

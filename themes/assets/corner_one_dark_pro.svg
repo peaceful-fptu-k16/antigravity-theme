@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="odc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61afef"/>
+      <stop offset="55%" stop-color="#c678dd"/>
+      <stop offset="100%" stop-color="#56b6c2"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 10 Q 3 3 10 3 L 30 3" stroke="url(#odc-rim)" stroke-width="1.65" stroke-linecap="round"/>
+  <path d="M 7.5 22 L 7.5 12 Q 7.5 7.5 12 7.5 L 22 7.5" stroke="#c678dd" stroke-width="1.05" stroke-linecap="round" opacity="0.72"/>
+  <!-- Miniature crossed Atom orbital emblem -->
+  <g transform="translate(13.5, 13.5)">
+    <ellipse rx="6.2" ry="2.4" transform="rotate(-35)" stroke="#61afef" stroke-width="1.15"/>
+    <ellipse rx="6.2" ry="2.4" transform="rotate(35)" stroke="#c678dd" stroke-width="1.15"/>
+    <circle r="1.7" fill="#56b6c2"/>
+  </g>
+  <circle cx="34" cy="3" r="1.5" fill="#e5c07b" opacity="0.9"/>
+  <circle cx="3" cy="34" r="1.5" fill="#61afef" opacity="0.9"/>
+</svg>

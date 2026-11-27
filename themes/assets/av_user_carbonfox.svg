@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="cfu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#282828"/>
+      <stop offset="100%" stop-color="#0f0f0f"/>
+    </linearGradient>
+    <linearGradient id="cfu_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78a9ff"/>
+      <stop offset="55%" stop-color="#33b1ff"/>
+      <stop offset="100%" stop-color="#be95ff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#cfu_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="url(#cfu_rim)" stroke-width="2.2"/>
+  <line x1="18" y1="10" x2="18" y2="54" stroke="#393939" stroke-width="0.9"/>
+  <line x1="46" y1="10" x2="46" y2="54" stroke="#393939" stroke-width="0.9"/>
+  <path d="M 16 53 L 20 42 L 26 39 L 38 39 L 44 42 L 48 53" fill="#252525" stroke="#78a9ff" stroke-width="1.5"/>
+  <polygon points="32,14 42,20 42,32 32,38 22,32 22,20" fill="#161616" stroke="#be95ff" stroke-width="1.5"/>
+  <rect x="25" y="24" width="14" height="4.2" fill="#78a9ff"/>
+  <rect x="29.5" y="44" width="5" height="5" fill="#08bdba"/>
+  <circle cx="48" cy="18" r="1.4" fill="#33b1ff"/>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="hdu_bg" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#2b2131"/>
+      <stop offset="58%" stop-color="#1c1e26"/>
+      <stop offset="100%" stop-color="#111218"/>
+    </linearGradient>
+    <linearGradient id="hdu_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e95678"/>
+      <stop offset="55%" stop-color="#fab795"/>
+      <stop offset="100%" stop-color="#fac29a"/>
+    </linearGradient>
+    <linearGradient id="hdu_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ffe2c4"/>
+      <stop offset="55%" stop-color="#fab795"/>
+      <stop offset="100%" stop-color="#e95678"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#hdu_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="url(#hdu_rim)" stroke-width="2.2"/>
+  <circle cx="32" cy="29" r="15" fill="url(#hdu_sun)" opacity="0.25"/>
+  <path d="M 10 42 L 22 33 L 32 38 L 43 32 L 54 42 L 54 53 L 10 53 Z" fill="#181922"/>
+  <circle cx="32" cy="25" r="8.5" fill="#232530" stroke="#fab795" stroke-width="1.5"/>
+  <path d="M 16 53 C 18 42, 24 39, 32 39 C 40 39, 46 42, 48 53" fill="#232530" stroke="#e95678" stroke-width="1.5"/>
+  <circle cx="46" cy="17" r="1.4" fill="#fac29a"/>
+  <circle cx="17" cy="19" r="1.2" fill="#21bfc2"/>
+</svg>

@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="gvl-sky" x1="0%" y1="0%" x2="20%" y2="100%">
+      <stop offset="0%" stop-color="#fbf1c7"/>
+      <stop offset="52%" stop-color="#f7ebc2"/>
+      <stop offset="100%" stop-color="#f2e4b7"/>
+    </linearGradient>
+    <radialGradient id="gvl-sun-wash" cx="74%" cy="28%" r="48%">
+      <stop offset="0%" stop-color="#d79921" stop-opacity="0.28"/>
+      <stop offset="38%" stop-color="#d65d0e" stop-opacity="0.14"/>
+      <stop offset="75%" stop-color="#fbf1c7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="gvl-sage-wash" cx="18%" cy="76%" r="45%">
+      <stop offset="0%" stop-color="#427b58" stop-opacity="0.14"/>
+      <stop offset="65%" stop-color="#fbf1c7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gvl-hill1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e7d4a5"/>
+      <stop offset="100%" stop-color="#dec491"/>
+    </linearGradient>
+    <linearGradient id="gvl-hill2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dbb27c"/>
+      <stop offset="100%" stop-color="#ce9d68"/>
+    </linearGradient>
+    <linearGradient id="gvl-hill3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c68652"/>
+      <stop offset="100%" stop-color="#b46b3b"/>
+    </linearGradient>
+    <linearGradient id="gvl-sun-disc" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4c762"/>
+      <stop offset="60%" stop-color="#df8c3a"/>
+      <stop offset="100%" stop-color="#c85c24"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#gvl-sky)"/>
+  <rect width="1920" height="1080" fill="url(#gvl-sun-wash)"/>
+  <rect width="1920" height="1080" fill="url(#gvl-sage-wash)"/>
+  <!-- Warm sunlit geometric retro arcs across parchment sky -->
+  <g fill="none" stroke-linecap="round">
+    <path d="M 960 660 A 460 460 0 0 1 1880 660" stroke="#d79921" stroke-width="26" opacity="0.12"/>
+    <path d="M 1030 660 A 390 390 0 0 1 1810 660" stroke="#af3a03" stroke-width="20" opacity="0.11"/>
+    <path d="M 1100 660 A 320 320 0 0 1 1740 660" stroke="#427b58" stroke-width="14" opacity="0.11"/>
+    <path d="M 140 240 Q 480 140 840 220 T 1560 175" stroke="#b57614" stroke-width="1.5" stroke-dasharray="8 12" opacity="0.28"/>
+  </g>
+  <!-- Vintage print-style golden sun -->
+  <g transform="translate(1420, 310)">
+    <circle r="158" stroke="#b57614" stroke-width="1.3" stroke-dasharray="6 10" opacity="0.34"/>
+    <circle r="122" fill="url(#gvl-sun-disc)" opacity="0.72"/>
+    <circle r="86" fill="#fbf1c7" opacity="0.24"/>
+    <line x1="-122" y1="32" x2="122" y2="32" stroke="#fbf1c7" stroke-width="5" opacity="0.65"/>
+    <line x1="-114" y1="54" x2="114" y2="54" stroke="#fbf1c7" stroke-width="6.5" opacity="0.65"/>
+    <line x1="-98" y1="78" x2="98" y2="78" stroke="#fbf1c7" stroke-width="8" opacity="0.65"/>
+  </g>
+  <!-- Soft vintage parchment clouds -->
+  <g fill="#fdf7de" opacity="0.75">
+    <path d="M 140 285 Q 190 245 255 262 Q 305 225 380 258 Q 430 250 460 285 Z"/>
+    <path d="M 690 210 Q 740 178 800 194 Q 848 164 915 190 Q 958 184 985 210 Z" opacity="0.8"/>
+    <path d="M 1570 198 Q 1615 170 1675 184 Q 1720 158 1780 182 Q 1815 176 1840 198 Z" opacity="0.7"/>
+  </g>
+  <!-- Distant pale ochre canyon mesas -->
+  <path d="M 0 705 Q 190 615 410 660 L 560 615 L 745 615 L 860 685 Q 1120 630 1370 670 L 1540 595 L 1750 595 L 1920 675 L 1920 1080 L 0 1080 Z" fill="url(#gvl-hill1)" opacity="0.88"/>
+  <!-- Midground warm ochre & terracotta layered canyon hills -->
+  <path d="M 0 785 Q 240 695 520 755 T 1080 745 T 1640 725 L 1920 765 L 1920 1080 L 0 1080 Z" fill="url(#gvl-hill2)" opacity="0.74"/>
+  <!-- Delicate woodblock contour lines on hills -->
+  <path d="M 40 825 Q 260 740 520 795 T 1090 785 T 1640 765" stroke="#af3a03" stroke-width="1.3" opacity="0.22"/>
+  <path d="M 0 878 Q 310 790 680 860 T 1420 835 T 1920 870 L 1920 1080 L 0 1080 Z" fill="url(#gvl-hill3)" opacity="0.56"/>
+  <!-- Foreground warm earth framing & sage desert flora -->
+  <path d="M 0 955 Q 340 895 760 965 T 1560 940 T 1920 960 L 1920 1080 L 0 1080 Z" fill="#9c5a30" opacity="0.34"/>
+  <g fill="#427b58" opacity="0.48">
+    <!-- Left agave rosette -->
+    <path d="M 110 1040 Q 82 955 46 920 Q 95 955 122 1030 Z"/>
+    <path d="M 122 1040 Q 118 935 124 888 Q 138 940 136 1038 Z"/>
+    <path d="M 134 1040 Q 164 958 206 930 Q 158 972 146 1040 Z"/>
+    <!-- Right juniper tuft -->
+    <path d="M 1765 1042 Q 1738 962 1705 935 Q 1752 968 1778 1038 Z"/>
+    <path d="M 1780 1042 Q 1784 948 1794 908 Q 1802 958 1794 1042 Z"/>
+    <path d="M 1792 1042 Q 1825 968 1862 945 Q 1815 985 1804 1042 Z"/>
+  </g>
+</svg>

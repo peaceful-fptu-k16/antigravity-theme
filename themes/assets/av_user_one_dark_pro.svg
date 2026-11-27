@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="odu-bg" cx="40%" cy="32%" r="72%">
+      <stop offset="0%" stop-color="#3d4352"/>
+      <stop offset="60%" stop-color="#282c34"/>
+      <stop offset="100%" stop-color="#1a1d22"/>
+    </radialGradient>
+    <linearGradient id="odu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61afef"/>
+      <stop offset="55%" stop-color="#c678dd"/>
+      <stop offset="100%" stop-color="#56b6c2"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#odu-bg)" stroke="url(#odu-rim)" stroke-width="2.2"/>
+  <ellipse cx="32" cy="30" rx="22" ry="8.5" transform="rotate(-24 32 30)" stroke="#61afef" stroke-width="1.15" opacity="0.52"/>
+  <circle cx="32" cy="24" r="7.8" fill="#abb2bf"/>
+  <path d="M 15 51 C 18 40 24 36 32 36 C 40 36 46 40 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#313640" stroke="#61afef" stroke-width="1.4"/>
+  <circle cx="32" cy="42" r="2.6" fill="#c678dd"/>
+  <circle cx="49" cy="18" r="2" fill="#56b6c2"/>
+  <circle cx="16" cy="41" r="1.6" fill="#e5c07b"/>
+</svg>

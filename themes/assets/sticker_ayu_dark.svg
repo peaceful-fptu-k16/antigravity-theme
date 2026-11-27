@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="ayds_dune" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#53bdfa" stop-opacity="0.16"/>
+      <stop offset="40%" stop-color="#ff8f40" stop-opacity="0.92"/>
+      <stop offset="76%" stop-color="#ffcc66" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ff8f40" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="ayds_moon" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe5a3"/>
+      <stop offset="55%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ff8f40"/>
+    </linearGradient>
+  </defs>
+  <path d="M 5 28 C 28 20, 52 13, 82 20 C 98 24, 112 26, 123 23" stroke="url(#ayds_dune)" stroke-width="1.55" stroke-linecap="round"/>
+  <path d="M 16 32 C 44 24, 72 20, 110 28" stroke="#53bdfa" stroke-width="0.95" stroke-dasharray="3.5 3" opacity="0.62"/>
+  <g transform="translate(88, 14)">
+    <circle cx="0" cy="0" r="8.5" fill="#ff8f40" opacity="0.16"/>
+    <path d="M 2.8 -6.8 A 7.2 7.2 0 1 0 6.8 2.8 A 5.7 5.7 0 1 1 2.8 -6.8 Z" fill="url(#ayds_moon)"/>
+  </g>
+  <path d="M 24 22 A 32 32 0 0 1 70 11" stroke="#53bdfa" stroke-width="1" stroke-linecap="round" opacity="0.68"/>
+  <path d="M 42 15 L 43.2 12 L 46.2 10.8 L 43.2 9.6 L 42 6.6 L 40.8 9.6 L 37.8 10.8 L 40.8 12 Z" fill="#53bdfa" opacity="0.92"/>
+  <path d="M 111 15 L 112 12.6 L 114.4 11.6 L 112 10.6 L 111 8.2 L 110 10.6 L 107.6 11.6 L 110 12.6 Z" fill="#ffcc66" opacity="0.88"/>
+  <path d="M 20 22 L 20.9 19.8 L 23 19 L 20.9 18.2 L 20 16 L 19.1 18.2 L 17 19 L 19.1 19.8 Z" fill="#ff8f40" opacity="0.85"/>
+  <circle cx="60" cy="11.5" r="1.25" fill="#bfbdb6" opacity="0.8"/>
+  <circle cx="101" cy="20" r="1.15" fill="#53bdfa" opacity="0.76"/>
+</svg>

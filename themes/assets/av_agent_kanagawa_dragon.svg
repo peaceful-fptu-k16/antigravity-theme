@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="aaKdBg" cx="50%" cy="40%" r="68%">
+      <stop offset="0%" stop-color="#2b2726"/>
+      <stop offset="62%" stop-color="#181616"/>
+      <stop offset="100%" stop-color="#0e0d0d"/>
+    </radialGradient>
+    <linearGradient id="aaKdGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfd2b4"/>
+      <stop offset="52%" stop-color="#c4b28a"/>
+      <stop offset="100%" stop-color="#658594"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#aaKdBg)" stroke="url(#aaKdGold)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="23.5" stroke="#658594" stroke-width="1" stroke-dasharray="5 3" opacity="0.55"/>
+  <path d="M 15 34 C 15 19, 28 13, 41 18 C 49 21, 51 31, 45 38 C 40 44, 31 44, 28 38" stroke="url(#aaKdGold)" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 49 30 C 49 45, 36 51, 23 46 C 15 43, 13 33, 19 26" stroke="#658594" stroke-width="1.7" stroke-linecap="round" opacity="0.88"/>
+  <polygon points="32,21 41,32 32,43 23,32" fill="#181616" stroke="#c4b28a" stroke-width="1.5"/>
+  <circle cx="32" cy="32" r="4.2" fill="#c4746e"/>
+  <circle cx="32" cy="32" r="1.8" fill="#dfd2b4"/>
+  <circle cx="46" cy="18" r="1.8" fill="#c4b28a"/>
+  <circle cx="18" cy="46" r="1.8" fill="#658594"/>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="oxcc_edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#33b1ff"/>
+      <stop offset="55%" stop-color="#ff7eb6"/>
+      <stop offset="100%" stop-color="#3ddbd9"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3.5 29 L 3.5 9.5 L 9.5 3.5 L 29 3.5" stroke="url(#oxcc_edge)" stroke-width="1.55" stroke-linecap="square" stroke-linejoin="miter"/>
+  <path d="M 7.5 20 L 7.5 11 L 11 7.5 L 20 7.5" stroke="#525252" stroke-width="1" opacity="0.8"/>
+  <polygon points="10.5,17 14,10.5 19.5,10.5 16,17" fill="#262626" stroke="#33b1ff" stroke-width="1"/>
+  <line x1="9" y1="19" x2="21" y2="9" stroke="#33b1ff" stroke-width="1.35" stroke-linecap="round"/>
+  <line x1="12" y1="20.5" x2="22" y2="12" stroke="#ff7eb6" stroke-width="1.15" stroke-linecap="round"/>
+  <rect x="27.5" y="2.2" width="2.6" height="2.6" fill="#33b1ff"/>
+  <rect x="2.2" y="27.5" width="2.6" height="2.6" fill="#ff7eb6"/>
+</svg>

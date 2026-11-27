@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="ad_bg" x1="15%" y1="0%" x2="85%" y2="100%">
+      <stop offset="0%" stop-color="#0b0a10"/>
+      <stop offset="48%" stop-color="#15141b"/>
+      <stop offset="100%" stop-color="#1d182b"/>
+    </linearGradient>
+    <radialGradient id="ad_auraV" cx="35%" cy="42%" r="46%">
+      <stop offset="0%" stop-color="#a277ff" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#a277ff" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#15141b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ad_auraM" cx="72%" cy="62%" r="42%">
+      <stop offset="0%" stop-color="#61ffca" stop-opacity="0.26"/>
+      <stop offset="56%" stop-color="#82e2ff" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#15141b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ad_wave1" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#a277ff" stop-opacity="0.05"/>
+      <stop offset="32%" stop-color="#a277ff" stop-opacity="0.88"/>
+      <stop offset="68%" stop-color="#61ffca" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#82e2ff" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="ad_wave2" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#61ffca" stop-opacity="0.04"/>
+      <stop offset="45%" stop-color="#82e2ff" stop-opacity="0.72"/>
+      <stop offset="80%" stop-color="#a277ff" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#a277ff" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="ad_shardM" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61ffca" stop-opacity="0.85"/>
+      <stop offset="55%" stop-color="#2b8c7c" stop-opacity="0.55"/>
+      <stop offset="100%" stop-color="#15141b" stop-opacity="0.92"/>
+    </linearGradient>
+    <linearGradient id="ad_shardV" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c3a6ff" stop-opacity="0.8"/>
+      <stop offset="55%" stop-color="#a277ff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#15141b" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#ad_bg)"/>
+  <rect width="1920" height="1080" fill="url(#ad_auraV)"/>
+  <rect width="1920" height="1080" fill="url(#ad_auraM)"/>
+  <g opacity="0.24">
+    <circle cx="960" cy="540" r="390" stroke="#a277ff" stroke-width="1.2"/>
+    <circle cx="960" cy="540" r="540" stroke="#61ffca" stroke-width="1" stroke-dasharray="12 14"/>
+    <circle cx="960" cy="540" r="690" stroke="#82e2ff" stroke-width="0.9" opacity="0.65"/>
+  </g>
+  <g>
+    <path d="M -80 760 C 260 540, 560 320, 960 520 C 1340 710, 1620 430, 2000 260" stroke="url(#ad_wave1)" stroke-width="46" opacity="0.14"/>
+    <path d="M -80 760 C 260 540, 560 320, 960 520 C 1340 710, 1620 430, 2000 260" stroke="url(#ad_wave1)" stroke-width="4" opacity="0.92"/>
+    <path d="M -80 830 C 310 610, 620 410, 1020 590 C 1390 760, 1680 510, 2000 350" stroke="url(#ad_wave2)" stroke-width="32" opacity="0.13"/>
+    <path d="M -80 830 C 310 610, 620 410, 1020 590 C 1390 760, 1680 510, 2000 350" stroke="url(#ad_wave2)" stroke-width="2.6" opacity="0.82"/>
+    <path d="M -80 650 C 220 430, 540 260, 910 430 C 1270 600, 1580 350, 2000 180" stroke="#a277ff" stroke-width="1.6" stroke-dasharray="8 10" opacity="0.55"/>
+    <path d="M -80 910 C 380 730, 740 530, 1120 690 C 1480 840, 1740 650, 2000 500" stroke="#61ffca" stroke-width="1.5" opacity="0.5"/>
+  </g>
+  <g>
+    <polygon points="1460,210 1545,395 1475,555 1385,410" fill="url(#ad_shardM)" stroke="#61ffca" stroke-width="1.8"/>
+    <polyline points="1460,210 1470,405 1475,555" stroke="#edecee" stroke-width="1.2" opacity="0.78"/>
+    <line x1="1385" y1="410" x2="1545" y2="395" stroke="#82e2ff" stroke-width="1.1" opacity="0.65"/>
+    <polygon points="1635,445 1695,575 1645,685 1580,585" fill="url(#ad_shardV)" stroke="#a277ff" stroke-width="1.6"/>
+    <polyline points="1635,445 1642,580 1645,685" stroke="#edecee" stroke-width="1" opacity="0.65"/>
+    <polygon points="340,290 415,455 352,590 272,465" fill="url(#ad_shardV)" stroke="#a277ff" stroke-width="1.8"/>
+    <polyline points="340,290 348,462 352,590" stroke="#edecee" stroke-width="1.1" opacity="0.72"/>
+    <polygon points="485,610 540,720 492,810 438,725" fill="url(#ad_shardM)" stroke="#61ffca" stroke-width="1.5"/>
+    <polyline points="485,610 490,722 492,810" stroke="#edecee" stroke-width="1" opacity="0.7"/>
+    <polygon points="1030,680 1078,778 1036,862 986,784" fill="url(#ad_shardM)" stroke="#82e2ff" stroke-width="1.4" opacity="0.85"/>
+  </g>
+  <g opacity="0.88">
+    <circle cx="240" cy="180" r="2.2" fill="#a277ff"/>
+    <circle cx="520" cy="240" r="1.8" fill="#61ffca"/>
+    <circle cx="780" cy="175" r="2" fill="#82e2ff"/>
+    <circle cx="1150" cy="220" r="2.1" fill="#a277ff"/>
+    <circle cx="1325" cy="145" r="1.6" fill="#61ffca"/>
+    <circle cx="1720" cy="225" r="2.2" fill="#edecee"/>
+    <circle cx="1795" cy="790" r="1.9" fill="#61ffca"/>
+    <circle cx="1290" cy="885" r="2" fill="#a277ff"/>
+    <circle cx="675" cy="910" r="1.8" fill="#82e2ff"/>
+    <circle cx="210" cy="835" r="2" fill="#f69d50" opacity="0.75"/>
+    <path d="M 1345 315 L 1348 304 L 1351 315 L 1362 318 L 1351 321 L 1348 332 L 1345 321 L 1334 318 Z" fill="#61ffca"/>
+    <path d="M 465 360 L 468 350 L 471 360 L 481 363 L 471 366 L 468 376 L 465 366 L 455 363 Z" fill="#a277ff"/>
+    <path d="M 945 270 L 947.5 262 L 950 270 L 958 272.5 L 950 275 L 947.5 283 L 945 275 L 937 272.5 Z" fill="#82e2ff"/>
+  </g>
+</svg>

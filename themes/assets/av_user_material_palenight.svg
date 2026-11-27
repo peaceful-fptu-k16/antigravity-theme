@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="mpAvUBg" cx="38%" cy="24%" r="76%">
+      <stop offset="0%" stop-color="#3a405c"/>
+      <stop offset="60%" stop-color="#292d3e"/>
+      <stop offset="100%" stop-color="#1b1e2b"/>
+    </radialGradient>
+    <linearGradient id="mpAvURing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c792ea"/>
+      <stop offset="52%" stop-color="#82aaff"/>
+      <stop offset="100%" stop-color="#89ddff"/>
+    </linearGradient>
+    <linearGradient id="mpAvUFig" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#bfc7d5"/>
+      <stop offset="100%" stop-color="#c792ea"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#mpAvUBg)" stroke="url(#mpAvURing)" stroke-width="2.4"/>
+  <line x1="8" y1="42" x2="46" y2="8" stroke="#89ddff" stroke-width="1" opacity="0.34"/>
+  <line x1="20" y1="56" x2="56" y2="22" stroke="#c792ea" stroke-width="1" opacity="0.34"/>
+  <polygon points="32,16 40,24 32,32 24,24" fill="url(#mpAvUFig)"/>
+  <path d="M 16 51 L 24 36.5 L 40 36.5 L 48 51 Z" fill="url(#mpAvUFig)" opacity="0.92"/>
+  <polyline points="24,36.5 32,42 40,36.5" stroke="#89ddff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="48" cy="18" r="1.8" fill="#c3e88d"/>
+  <circle cx="16" cy="22" r="1.5" fill="#ffcb6b"/>
+</svg>

@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="aolu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fafafa"/>
+      <stop offset="100%" stop-color="#eeeef5"/>
+    </linearGradient>
+    <linearGradient id="aolu_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#526fff"/>
+      <stop offset="100%" stop-color="#a626a4"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#aolu_bg)"/>
+  <ellipse cx="32" cy="30" rx="22" ry="9.5" transform="rotate(-18 32 30)" stroke="#526fff" stroke-width="1.15" stroke-opacity="0.45"/>
+  <circle cx="14.5" cy="35.5" r="2" fill="#fafafa" stroke="#526fff" stroke-width="1.25"/>
+  <circle cx="49.5" cy="24.5" r="2" fill="#fafafa" stroke="#a626a4" stroke-width="1.25"/>
+  <circle cx="32" cy="24" r="8" fill="#383a42" stroke="#526fff" stroke-width="1.45"/>
+  <path d="M 16.5 51.5 C 18.8 41.2, 24.8 36.6, 32 36.6 C 39.2 36.6, 45.2 41.2, 47.5 51.5" fill="#383a42" stroke="url(#aolu_ring)" stroke-width="1.65" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#aolu_ring)" stroke-width="2"/>
+</svg>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="auNpnBg" cx="35%" cy="25%" r="75%"><stop offset="0%" stop-color="#434c5e"/><stop offset="55%" stop-color="#2e3440"/><stop offset="100%" stop-color="#1e222a"/></radialGradient>
+<linearGradient id="auNpnRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#88c0d0"/><stop offset="55%" stop-color="#a3be8c"/><stop offset="100%" stop-color="#81a1c1"/></linearGradient>
+<linearGradient id="auNpnFig" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#eceff4"/><stop offset="100%" stop-color="#88c0d0"/></linearGradient>
+<clipPath id="auNpnClip"><circle cx="32" cy="32" r="28"/></clipPath>
+</defs>
+<circle cx="32" cy="32" r="29" fill="url(#auNpnBg)" stroke="url(#auNpnRim)" stroke-width="2.2"/>
+<g clip-path="url(#auNpnClip)">
+<path d="M 4 24 C 18 12, 38 22, 60 11" stroke="#a3be8c" stroke-width="2.2" stroke-linecap="round" opacity="0.45"/>
+<circle cx="32" cy="24.5" r="8.5" fill="url(#auNpnFig)"/>
+<path d="M 15 56 C 16 42, 23 36.5, 32 36.5 C 41 36.5, 48 42, 49 56 Z" fill="url(#auNpnFig)" opacity="0.92"/>
+<path d="M 24 44 L 32 39.5 L 40 44" stroke="#2e3440" stroke-width="1.4" stroke-linecap="round" opacity="0.5"/>
+</g>
+<circle cx="32" cy="32" r="26" stroke="#eceff4" stroke-width="0.7" opacity="0.2"/>
+<path d="M 47 13 L 48 15.8 L 50.8 16.8 L 48 17.8 L 47 20.6 L 46 17.8 L 43.2 16.8 L 46 15.8 Z" fill="#a3be8c"/>
+</svg>

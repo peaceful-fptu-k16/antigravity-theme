@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="ml2AvABg" cx="50%" cy="38%" r="74%">
+      <stop offset="0%" stop-color="#35395a"/>
+      <stop offset="60%" stop-color="#1e2030"/>
+      <stop offset="100%" stop-color="#141520"/>
+    </radialGradient>
+    <linearGradient id="ml2AvARing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fca7ea"/>
+      <stop offset="50%" stop-color="#82aaff"/>
+      <stop offset="100%" stop-color="#7dcfff"/>
+    </linearGradient>
+    <linearGradient id="ml2AvACore" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eef4ff"/>
+      <stop offset="50%" stop-color="#fca7ea"/>
+      <stop offset="100%" stop-color="#82aaff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#ml2AvABg)" stroke="url(#ml2AvARing)" stroke-width="2.4"/>
+  <ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(-28 32 32)" stroke="#fca7ea" stroke-width="1.45" opacity="0.88"/>
+  <ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(28 32 32)" stroke="#7dcfff" stroke-width="1.45" opacity="0.88"/>
+  <path d="M 32 14 L 36.2 27.8 L 50 32 L 36.2 36.2 L 32 50 L 27.8 36.2 L 14 32 L 27.8 27.8 Z" fill="url(#ml2AvACore)"/>
+  <circle cx="32" cy="32" r="3.4" fill="#1e2030"/>
+  <circle cx="32" cy="32" r="1.9" fill="#ffc777"/>
+  <circle cx="49" cy="19" r="2.0" fill="#ff757f"/>
+  <circle cx="15" cy="45" r="2.0" fill="#7dcfff"/>
+</svg>

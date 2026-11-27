@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="auIbBg" cx="35%" cy="25%" r="75%">
+      <stop offset="0%" stop-color="#2c3148"/>
+      <stop offset="58%" stop-color="#1e2132"/>
+      <stop offset="100%" stop-color="#12141e"/>
+    </radialGradient>
+    <linearGradient id="auIbRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c6c8d1"/>
+      <stop offset="50%" stop-color="#89b8c2"/>
+      <stop offset="100%" stop-color="#84a0c6"/>
+    </linearGradient>
+    <linearGradient id="auIbFig" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dfe2ec"/>
+      <stop offset="100%" stop-color="#84a0c6"/>
+    </linearGradient>
+    <clipPath id="auIbClip"><circle cx="32" cy="32" r="28"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="29" fill="url(#auIbBg)" stroke="url(#auIbRim)" stroke-width="2.2"/>
+  <g clip-path="url(#auIbClip)">
+    <line x1="4" y1="36" x2="60" y2="36" stroke="#89b8c2" stroke-width="1" opacity="0.35"/>
+    <circle cx="32" cy="24.5" r="8.4" fill="url(#auIbFig)"/>
+    <path d="M 15 56 C 16 42, 23 36.5, 32 36.5 C 41 36.5, 48 42, 49 56 Z" fill="url(#auIbFig)" opacity="0.92"/>
+    <path d="M 24.5 44.5 L 32 39.8 L 39.5 44.5" stroke="#1e2132" stroke-width="1.4" stroke-linecap="round" opacity="0.55"/>
+  </g>
+  <circle cx="32" cy="32" r="26" stroke="#89b8c2" stroke-width="0.7" opacity="0.22"/>
+  <polygon points="48,14 50.8,17.2 48,20.4 45.2,17.2" fill="#89b8c2"/>
+</svg>

@@ -1,0 +1,93 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="lw_sky" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#14101a"/>
+      <stop offset="38%" stop-color="#27212e"/>
+      <stop offset="62%" stop-color="#3a2540"/>
+      <stop offset="68%" stop-color="#293949"/>
+      <stop offset="100%" stop-color="#16121b"/>
+    </linearGradient>
+    <radialGradient id="lw_glowP" cx="38%" cy="46%" r="36%">
+      <stop offset="0%" stop-color="#eb64b9" stop-opacity="0.34"/>
+      <stop offset="60%" stop-color="#eb64b9" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#27212e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="lw_glowA" cx="66%" cy="54%" r="38%">
+      <stop offset="0%" stop-color="#40b4c4" stop-opacity="0.32"/>
+      <stop offset="58%" stop-color="#b4dce7" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#27212e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="lw_chrome" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#40b4c4" stop-opacity="0.08"/>
+      <stop offset="22%" stop-color="#b4dce7" stop-opacity="0.92"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0.98"/>
+      <stop offset="78%" stop-color="#eb64b9" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#40b4c4" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="lw_beamPink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#eb64b9" stop-opacity="0.06"/>
+      <stop offset="45%" stop-color="#eb64b9" stop-opacity="0.95"/>
+      <stop offset="55%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#eb64b9" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="lw_beamAqua" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#74dfc4" stop-opacity="0.06"/>
+      <stop offset="45%" stop-color="#40b4c4" stop-opacity="0.92"/>
+      <stop offset="55%" stop-color="#b4dce7" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#40b4c4" stop-opacity="0.1"/>
+    </linearGradient>
+    <linearGradient id="lw_canyon" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#352a42"/>
+      <stop offset="100%" stop-color="#17131d"/>
+    </linearGradient>
+    <linearGradient id="lw_water" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#221c2c"/>
+      <stop offset="100%" stop-color="#120f17"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#lw_sky)"/>
+  <rect width="1920" height="1080" fill="url(#lw_glowP)"/>
+  <rect width="1920" height="1080" fill="url(#lw_glowA)"/>
+  <g opacity="0.82">
+    <circle cx="196" cy="134" r="1.7" fill="#ffffff"/>
+    <circle cx="388" cy="186" r="1.4" fill="#b4dce7"/>
+    <circle cx="574" cy="96" r="1.9" fill="#ffe261"/>
+    <circle cx="764" cy="162" r="1.3" fill="#eb64b9"/>
+    <circle cx="964" cy="112" r="2" fill="#74dfc4"/>
+    <circle cx="1172" cy="176" r="1.5" fill="#ffffff"/>
+    <circle cx="1394" cy="94" r="1.8" fill="#eb64b9"/>
+    <circle cx="1592" cy="158" r="1.6" fill="#b4dce7"/>
+    <circle cx="1768" cy="118" r="1.9" fill="#ffe261"/>
+    <circle cx="294" cy="312" r="1.2" fill="#74dfc4"/>
+    <circle cx="1638" cy="294" r="1.4" fill="#eb64b9"/>
+  </g>
+  <g opacity="0.9">
+    <path d="M-120 120L1440 880M160 -40L1780 760" stroke="#eb64b9" stroke-width="15" opacity="0.13"/>
+    <path d="M-120 120L1440 880M160 -40L1780 760" stroke="url(#lw_beamPink)" stroke-width="2.8"/>
+    <path d="M2040 90L480 870M1720 -30L140 750" stroke="#40b4c4" stroke-width="15" opacity="0.13"/>
+    <path d="M2040 90L480 870M1720 -30L140 750" stroke="url(#lw_beamAqua)" stroke-width="2.8"/>
+  </g>
+  <g opacity="0.92">
+    <polygon points="960,260 1055,390 960,520 865,390" stroke="#b4dce7" stroke-width="1.6" fill="rgba(64,180,196,0.06)"/>
+    <polygon points="960,295 1028,390 960,485 892,390" stroke="#eb64b9" stroke-width="1.2" fill="rgba(235,100,185,0.07)"/>
+    <circle cx="960" cy="390" r="8" fill="#ffffff" opacity="0.88"/>
+    <circle cx="960" cy="390" r="28" fill="#eb64b9" opacity="0.18"/>
+  </g>
+  <g>
+    <polygon points="-40,715 170,410 345,565 540,365 735,620 865,715" fill="url(#lw_canyon)"/>
+    <polygon points="1055,715 1195,590 1375,345 1575,540 1745,388 1960,715" fill="url(#lw_canyon)"/>
+    <polygon points="-40,715 115,525 275,645 435,515 620,715" fill="#211a29"/>
+    <polygon points="1295,715 1475,505 1645,625 1820,510 1960,715" fill="#211a29"/>
+    <polyline points="170,410 345,565 540,365 735,620 865,715" stroke="#eb64b9" stroke-width="2.2" opacity="0.85"/>
+    <polyline points="1055,715 1195,590 1375,345 1575,540 1745,388 1960,715" stroke="#74dfc4" stroke-width="2.2" opacity="0.85"/>
+    <path d="M540 365L485 715M1375 345L1435 715M170 410L230 715M1745 388L1690 715" stroke="#b4dce7" stroke-width="1.1" opacity="0.32"/>
+  </g>
+  <rect x="0" y="715" width="1920" height="365" fill="url(#lw_water)"/>
+  <g opacity="0.55" stroke-width="1.7">
+    <path d="M680 748H1240M500 824H1420M180 1006H1740" stroke="#b4dce7"/>
+    <path d="M590 782H1330M410 874H1510" stroke="#eb64b9"/>
+    <path d="M300 934H1620" stroke="#74dfc4"/>
+  </g>
+  <line x1="0" y1="715" x2="1920" y2="715" stroke="url(#lw_chrome)" stroke-width="4"/>
+  <line x1="0" y1="715" x2="1920" y2="715" stroke="#b4dce7" stroke-width="14" opacity="0.16"/>
+</svg>

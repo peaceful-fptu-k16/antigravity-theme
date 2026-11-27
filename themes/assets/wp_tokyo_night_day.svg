@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="tndSky" x1="0%" y1="0%" x2="12%" y2="100%">
+      <stop offset="0%" stop-color="#c9dcf7"/>
+      <stop offset="40%" stop-color="#dfe8f7"/>
+      <stop offset="75%" stop-color="#eceef5"/>
+      <stop offset="100%" stop-color="#e1e2e7"/>
+    </linearGradient>
+    <radialGradient id="tndSun" cx="78%" cy="18%" r="42%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+      <stop offset="40%" stop-color="#eff4ff" stop-opacity="0.5"/>
+      <stop offset="75%" stop-color="#2e7de9" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#e1e2e7" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tndViolet" cx="22%" cy="32%" r="44%">
+      <stop offset="0%" stop-color="#9854f1" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#e1e2e7" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="tndCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="72%" stop-color="#edf2fc" stop-opacity="0.86"/>
+      <stop offset="100%" stop-color="#d2dcf2" stop-opacity="0.5"/>
+    </linearGradient>
+    <linearGradient id="tndFuji" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
+      <stop offset="35%" stop-color="#cfd9f0" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#b9c6e4" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="tndMist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#edf0f7" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#e8ebf4" stop-opacity="0.7"/>
+      <stop offset="100%" stop-color="#e1e2e7" stop-opacity="0.98"/>
+    </linearGradient>
+    <linearGradient id="tndBeam" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#tndSky)"/>
+  <rect width="1920" height="1080" fill="url(#tndSun)"/>
+  <rect width="1920" height="1080" fill="url(#tndViolet)"/>
+  <g opacity="0.58">
+    <polygon points="1500,0 1620,0 1240,680 1050,680" fill="url(#tndBeam)"/>
+    <polygon points="1710,0 1840,0 1560,720 1390,720" fill="url(#tndBeam)"/>
+    <polygon points="1340,0 1420,0 920,660 800,660" fill="url(#tndBeam)" opacity="0.65"/>
+  </g>
+  <circle cx="1510" cy="186" r="64" fill="#ffffff" opacity="0.88"/>
+  <circle cx="1510" cy="186" r="102" fill="#ffffff" opacity="0.28"/>
+  <path d="M-40 278 Q95 210 230 248 Q340 168 505 215 Q630 182 745 245 Q860 220 960 278 Z" fill="url(#tndCloud)"/>
+  <path d="M980 232 Q1105 162 1255 198 Q1385 132 1545 186 Q1680 156 1810 210 Q1890 194 1960 238 V268 H960 Z" fill="url(#tndCloud)" opacity="0.92"/>
+  <path d="M280 398 Q415 338 565 372 Q705 316 865 368 Q975 344 1090 398 Z M1180 375 Q1325 322 1475 352 Q1615 304 1765 356 Q1860 342 1940 375 Z" fill="#ffffff" opacity="0.6"/>
+  <path d="M140 775 Q315 645 426 520 H474 Q590 645 780 775 Z" fill="url(#tndFuji)" opacity="0.8"/>
+  <path d="M426 520 H474 L516 575 L492 565 L468 584 L448 566 L424 582 L404 568 Z" fill="#ffffff" opacity="0.95"/>
+  <path d="M30 862 V612 H112 V862 M134 862 V542 H230 V862 M260 862 V590 H348 V862 M400 862 V625 H492 V862 M595 862 V545 H709 V862 M742 862 V485 H850 V862 M888 862 V528 H1010 V862 M1042 862 V446 H1154 V862 M1192 862 V510 H1318 V862 M1352 862 V476 H1470 V862 M1508 862 V538 H1622 V862 M1658 862 V505 H1786 V862 M1814 862 V582 H1920 V862 Z" fill="#cbd5ea" opacity="0.82"/>
+  <path d="M0 890 V672 H108 V890 M172 890 V608 H276 V890 M312 890 V648 H408 V890 M524 890 V578 H640 V890 M676 890 V468 H698 V432 H727 V366 H731 V432 H760 V468 H782 V890 M822 890 V566 H940 V890 M976 890 V512 H1088 V890 M1132 890 L1146 472 Q1184 434 1222 472 L1236 890 M1276 890 V552 H1392 V890 M1426 890 V492 H1474 V422 H1479 V492 H1550 V890 M1584 890 V588 H1702 V890 M1736 890 V544 H1920 V890 Z" fill="#b4c4e2" opacity="0.88"/>
+  <path d="M692 500 h18 m38 0 h18 M1032 544 h22 M1158 526 h52 M1152 566 h64 M1448 530 h24" stroke="#2e7de9" stroke-width="5.5" opacity="0.52"/>
+  <path d="M720 500 h18 M692 534 h74 M996 544 h22 M1154 508 h60 M1150 546 h68 M1148 584 h72 M1484 530 h24" stroke="#ffffff" stroke-width="5" opacity="0.82"/>
+  <path d="M692 570 h38 M1448 564 h78" stroke="#9854f1" stroke-width="5" opacity="0.44"/>
+  <path d="M920 264 Q930 254 940 262 Q950 254 960 264 M982 290 Q990 282 998 288 Q1006 282 1014 290 M868 296 Q875 289 882 294 Q889 289 896 296" stroke="#3760bf" stroke-width="1.8" stroke-linecap="round" opacity="0.45"/>
+  <rect y="695" width="1920" height="385" fill="url(#tndMist)"/>
+  <path d="M0 925 Q480 882 960 918 Q1440 954 1920 905 V1080 H0 Z" fill="#d8dfef" opacity="0.52"/>
+  <path d="M0 978 Q520 946 1040 976 Q1520 1002 1920 966 V1080 H0 Z" fill="#e1e2e7" opacity="0.72"/>
+</svg>

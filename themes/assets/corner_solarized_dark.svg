@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="sdc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#b58900"/>
+      <stop offset="50%" stop-color="#2aa198"/>
+      <stop offset="100%" stop-color="#268bd2"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 10 Q 3 3 10 3 L 30 3" stroke="url(#sdc-rim)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 7 22 A 15 15 0 0 1 22 7" stroke="#268bd2" stroke-width="1.05" stroke-dasharray="2.5 2.5" opacity="0.8"/>
+  <path d="M 11 18 A 7 7 0 0 1 18 11" stroke="#b58900" stroke-width="1.1" opacity="0.85"/>
+  <!-- Astrolabe compass star -->
+  <path d="M 11 6.5 L 12.3 9.7 L 15.5 11 L 12.3 12.3 L 11 15.5 L 9.7 12.3 L 6.5 11 L 9.7 9.7 Z" fill="#b58900"/>
+  <circle cx="11" cy="11" r="1.2" fill="#eee8d5"/>
+  <circle cx="34" cy="3" r="1.4" fill="#2aa198"/>
+  <circle cx="3" cy="34" r="1.4" fill="#268bd2"/>
+</svg>

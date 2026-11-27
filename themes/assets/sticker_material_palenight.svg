@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="mpStArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#c792ea" stop-opacity="0.16"/>
+      <stop offset="36%" stop-color="#c792ea" stop-opacity="0.92"/>
+      <stop offset="72%" stop-color="#82aaff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#89ddff" stop-opacity="0.3"/>
+    </linearGradient>
+    <linearGradient id="mpStPrism" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#89ddff"/>
+      <stop offset="52%" stop-color="#82aaff"/>
+      <stop offset="100%" stop-color="#c792ea"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 L 36 16 L 68 21 L 96 12 L 122 23" stroke="url(#mpStArc)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 16 31 Q 64 15 114 27" stroke="#89ddff" stroke-width="0.85" stroke-dasharray="3 3" opacity="0.58"/>
+  <g transform="translate(88, 17)">
+    <polygon points="0,-10 10,0 0,10 -10,0" fill="#292d3e" stroke="url(#mpStPrism)" stroke-width="1.35"/>
+    <polygon points="0,-10 10,0 0,0" fill="#89ddff" opacity="0.45"/>
+    <polygon points="0,10 -10,0 0,0" fill="#c792ea" opacity="0.45"/>
+    <circle cx="0" cy="0" r="2.0" fill="#c3e88d"/>
+  </g>
+  <g>
+    <polygon points="44,12 49,17 44,22 39,17" fill="#c792ea" opacity="0.82"/>
+    <circle cx="36" cy="16" r="1.8" fill="#89ddff"/>
+    <circle cx="68" cy="21" r="1.7" fill="#ffcb6b"/>
+  </g>
+  <path d="M 19 21 L 20.3 17.8 L 23.5 16.5 L 20.3 15.2 L 19 12 L 17.7 15.2 L 14.5 16.5 L 17.7 17.8 Z" fill="#89ddff"/>
+  <path d="M 111 14 L 112 11.4 L 114.6 10.4 L 112 9.4 L 111 6.8 L 110 9.4 L 107.4 10.4 L 110 11.4 Z" fill="#c3e88d"/>
+</svg>

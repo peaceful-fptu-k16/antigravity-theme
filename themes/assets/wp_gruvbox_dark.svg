@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="gvd-sky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1d2021"/>
+      <stop offset="48%" stop-color="#282828"/>
+      <stop offset="82%" stop-color="#352b24"/>
+      <stop offset="100%" stop-color="#28221e"/>
+    </linearGradient>
+    <radialGradient id="gvd-sun-glow" cx="68%" cy="46%" r="44%">
+      <stop offset="0%" stop-color="#fabd2f" stop-opacity="0.34"/>
+      <stop offset="32%" stop-color="#fe8019" stop-opacity="0.22"/>
+      <stop offset="65%" stop-color="#cc241d" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#282828" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="gvd-sun-grad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fabd2f"/>
+      <stop offset="45%" stop-color="#fe8019"/>
+      <stop offset="80%" stop-color="#d65d0e"/>
+      <stop offset="100%" stop-color="#cc241d"/>
+    </linearGradient>
+    <linearGradient id="gvd-mesa-far" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#504945"/>
+      <stop offset="100%" stop-color="#322e2b"/>
+    </linearGradient>
+    <linearGradient id="gvd-mesa-mid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3c3836"/>
+      <stop offset="100%" stop-color="#242120"/>
+    </linearGradient>
+    <clipPath id="gvd-sun-clip">
+      <circle cx="1310" cy="495" r="210"/>
+    </clipPath>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#gvd-sky)"/>
+  <rect width="1920" height="1080" fill="url(#gvd-sun-glow)"/>
+  <!-- Subtle concentric vinyl record groove rings in sky -->
+  <g stroke="#ebdbb2" stroke-width="1" opacity="0.06">
+    <circle cx="1310" cy="495" r="265"/><circle cx="1310" cy="495" r="320"/>
+    <circle cx="1310" cy="495" r="380"/><circle cx="1310" cy="495" r="455"/>
+    <circle cx="1310" cy="495" r="545"/>
+  </g>
+  <!-- 70s Retro-Groove stacked supergraphic sunset ribbon stripes -->
+  <g opacity="0.22">
+    <path d="M -40 165 L 540 165 Q 690 165 790 265 L 1060 535" stroke="#fabd2f" stroke-width="22" stroke-linecap="round"/>
+    <path d="M -40 202 L 515 202 Q 665 202 765 302 L 1035 572" stroke="#fe8019" stroke-width="22" stroke-linecap="round"/>
+    <path d="M -40 239 L 490 239 Q 640 239 740 339 L 1010 609" stroke="#cc241d" stroke-width="22" stroke-linecap="round"/>
+    <path d="M -40 276 L 465 276 Q 615 276 715 376 L 985 646" stroke="#8ec07c" stroke-width="16" stroke-linecap="round" opacity="0.8"/>
+  </g>
+  <!-- Desert night stars near zenith -->
+  <g fill="#ebdbb2" opacity="0.6">
+    <circle cx="184" cy="96" r="1.8"/><circle cx="348" cy="72" r="1.4"/><circle cx="640" cy="108" r="1.6"/>
+    <circle cx="920" cy="84" r="2.0"/><circle cx="1140" cy="126" r="1.3"/><circle cx="1590" cy="112" r="1.8"/>
+    <circle cx="1748" cy="168" r="1.5"/><circle cx="1820" cy="92" r="1.4"/><circle cx="812" cy="164" r="1.2"/>
+  </g>
+  <!-- Geometric sliced vinyl sun -->
+  <g clip-path="url(#gvd-sun-clip)">
+    <circle cx="1310" cy="495" r="210" fill="url(#gvd-sun-grad)"/>
+    <!-- Vinyl grooves & sunset slices -->
+    <circle cx="1310" cy="495" r="165" stroke="#282828" stroke-width="1.5" opacity="0.22"/>
+    <circle cx="1310" cy="495" r="120" stroke="#282828" stroke-width="1.5" opacity="0.22"/>
+    <circle cx="1310" cy="495" r="42" fill="#282828" opacity="0.24"/>
+    <circle cx="1310" cy="495" r="14" fill="#ebdbb2" opacity="0.45"/>
+    <rect x="1080" y="520" width="460" height="9" fill="#282828"/>
+    <rect x="1080" y="548" width="460" height="12" fill="#282828"/>
+    <rect x="1080" y="580" width="460" height="15" fill="#282828"/>
+    <rect x="1080" y="616" width="460" height="19" fill="#282828"/>
+    <rect x="1080" y="655" width="460" height="24" fill="#282828"/>
+  </g>
+  <!-- Far desert mesas & buttes -->
+  <path d="M 0 725 L 150 725 L 210 645 L 440 645 L 515 735 L 740 735 L 805 660 L 960 660 L 1030 740 L 1465 740 L 1525 650 L 1745 650 L 1810 718 L 1920 718 L 1920 1080 L 0 1080 Z" fill="url(#gvd-mesa-far)"/>
+  <path d="M 210 645 L 440 645 M 805 660 L 960 660 M 1525 650 L 1745 650" stroke="#fabd2f" stroke-width="2" opacity="0.35"/>
+  <!-- Warm sunset haze band -->
+  <rect x="0" y="725" width="1920" height="95" fill="#fe8019" opacity="0.08"/>
+  <!-- Midground canyon cliffs -->
+  <path d="M 0 820 L 95 760 L 290 760 L 385 845 L 680 845 L 760 790 L 910 790 L 985 865 L 1380 865 L 1475 775 L 1690 775 L 1780 835 L 1920 835 L 1920 1080 L 0 1080 Z" fill="url(#gvd-mesa-mid)"/>
+  <path d="M 95 760 L 290 760 M 760 790 L 910 790 M 1475 775 L 1690 775" stroke="#fe8019" stroke-width="1.8" opacity="0.32"/>
+  <!-- Foreground canyon silhouette with stylized desert saguaros -->
+  <path d="M 0 920 L 260 920 L 360 970 L 790 985 L 1220 980 L 1580 935 L 1760 910 L 1920 910 L 1920 1080 L 0 1080 Z" fill="#1d2021"/>
+  <!-- Left saguaro silhouette -->
+  <g fill="#1d2021" transform="translate(150, 815)">
+    <rect x="-8" y="0" width="16" height="115" rx="8"/>
+    <path d="M -8 46 L -28 46 Q -36 46 -36 38 L -36 16 Q -36 9 -29 9 Q -22 9 -22 16 L -22 32 L -8 32 Z"/>
+    <path d="M 8 60 L 26 60 Q 34 60 34 52 L 34 26 Q 34 19 27 19 Q 20 19 20 26 L 20 46 L 8 46 Z"/>
+  </g>
+  <!-- Right saguaro silhouette -->
+  <g fill="#1d2021" transform="translate(1780, 825) scale(0.85)">
+    <rect x="-8" y="0" width="16" height="105" rx="8"/>
+    <path d="M -8 50 L -26 50 Q -34 50 -34 42 L -34 18 Q -34 11 -27 11 Q -20 11 -20 18 L -20 36 L -8 36 Z"/>
+    <path d="M 8 38 L 25 38 Q 32 38 32 31 L 32 10 Q 32 4 26 4 Q 20 4 20 10 L 20 25 L 8 25 Z"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="dfAvABg" cx="50%" cy="38%" r="74%">
+      <stop offset="0%" stop-color="#3c3556"/>
+      <stop offset="60%" stop-color="#232136"/>
+      <stop offset="100%" stop-color="#171624"/>
+    </radialGradient>
+    <linearGradient id="dfAvARing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6c177"/>
+      <stop offset="50%" stop-color="#ea9a97"/>
+      <stop offset="100%" stop-color="#569fba"/>
+    </linearGradient>
+    <linearGradient id="dfAvAFox" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f6c177"/>
+      <stop offset="52%" stop-color="#ea9a97"/>
+      <stop offset="100%" stop-color="#eb6f92"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#dfAvABg)" stroke="url(#dfAvARing)" stroke-width="2.4"/>
+  <path d="M 16 30 L 14 14 L 26 23 L 38 23 L 50 14 L 48 30 L 32 49 Z" fill="#2d2a45" stroke="url(#dfAvAFox)" stroke-width="1.8" stroke-linejoin="round"/>
+  <polygon points="16,30 32,33 32,49" fill="#ea9a97" opacity="0.42"/>
+  <polygon points="48,30 32,33 32,49" fill="#569fba" opacity="0.34"/>
+  <polygon points="22,29 27,31 24,33" fill="#9ccfd8"/>
+  <polygon points="42,29 37,31 40,33" fill="#9ccfd8"/>
+  <path d="M 32 13 L 33.4 16.6 L 37 18 L 33.4 19.4 L 32 23 L 30.6 19.4 L 27 18 L 30.6 16.6 Z" fill="#f6c177"/>
+  <circle cx="32" cy="45" r="2.2" fill="#f6c177"/>
+</svg>

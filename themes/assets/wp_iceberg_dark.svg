@@ -1,0 +1,101 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none">
+  <defs>
+    <linearGradient id="ibSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d0e14"/>
+      <stop offset="52%" stop-color="#161821"/>
+      <stop offset="100%" stop-color="#1e2234"/>
+    </linearGradient>
+    <linearGradient id="ibSea" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#192030"/>
+      <stop offset="35%" stop-color="#121724"/>
+      <stop offset="100%" stop-color="#0b0d14"/>
+    </linearGradient>
+    <radialGradient id="ibHalo" cx="64%" cy="46%" r="44%">
+      <stop offset="0%" stop-color="#89b8c2" stop-opacity="0.22"/>
+      <stop offset="48%" stop-color="#84a0c6" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#161821" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ibIceLit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dfe3ee"/>
+      <stop offset="55%" stop-color="#89b8c2"/>
+      <stop offset="100%" stop-color="#5d7b9c"/>
+    </linearGradient>
+    <linearGradient id="ibIceMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#84a0c6"/>
+      <stop offset="100%" stop-color="#35425d"/>
+    </linearGradient>
+    <linearGradient id="ibIceDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3b4865"/>
+      <stop offset="100%" stop-color="#1b2030"/>
+    </linearGradient>
+    <linearGradient id="ibSub1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#89b8c2" stop-opacity="0.58"/>
+      <stop offset="55%" stop-color="#84a0c6" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#161821" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="ibSub2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4e6b8a" stop-opacity="0.48"/>
+      <stop offset="100%" stop-color="#161821" stop-opacity="0.08"/>
+    </linearGradient>
+    <linearGradient id="ibRay" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#89b8c2" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#89b8c2" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="ibMist" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="585" fill="url(#ibSky)"/>
+  <rect width="1920" height="1080" fill="url(#ibHalo)"/>
+  <g fill="#c6c8d1">
+    <circle cx="165" cy="112" r="1.6" opacity="0.8"/>
+    <circle cx="348" cy="84" r="1.2" opacity="0.65"/>
+    <circle cx="542" cy="148" r="1.8" opacity="0.85"/>
+    <circle cx="780" cy="72" r="1.4" opacity="0.72"/>
+    <circle cx="1020" cy="126" r="1.5" opacity="0.75"/>
+    <circle cx="1310" cy="92" r="1.9" opacity="0.88"/>
+    <circle cx="1540" cy="138" r="1.3" opacity="0.7"/>
+    <circle cx="1765" cy="86" r="1.8" opacity="0.82"/>
+    <circle cx="255" cy="252" r="1.2" opacity="0.55" fill="#89b8c2"/>
+    <circle cx="1665" cy="240" r="1.4" opacity="0.65" fill="#a093c7"/>
+  </g>
+  <polygon points="130,585 245,475 340,492 435,585" fill="#2b3348" opacity="0.8"/>
+  <polygon points="245,475 288,585 130,585" fill="#84a0c6" opacity="0.34"/>
+  <rect x="0" y="585" width="1920" height="495" fill="url(#ibSea)"/>
+  <g opacity="0.55">
+    <polygon points="940,585 1030,585 950,960 820,920" fill="url(#ibRay)"/>
+    <polygon points="1180,585 1320,585 1440,990 1245,980" fill="url(#ibRay)"/>
+    <polygon points="1450,585 1545,585 1700,920 1580,930" fill="url(#ibRay)"/>
+  </g>
+  <g>
+    <polygon points="870,585 995,430 1125,315 1235,232 1350,348 1455,296 1575,455 1665,585" fill="url(#ibIceDark)"/>
+    <polygon points="1235,232 1125,315 1085,460 1215,585 1292,435" fill="url(#ibIceLit)"/>
+    <polygon points="1235,232 1292,435 1412,585 1350,348" fill="url(#ibIceMid)"/>
+    <polygon points="1125,315 995,430 960,585 1085,460" fill="url(#ibIceMid)" opacity="0.9"/>
+    <polygon points="1455,296 1350,348 1412,585 1532,585 1495,420" fill="url(#ibIceLit)" opacity="0.72"/>
+    <polyline points="870,585 995,430 1125,315 1235,232 1350,348 1455,296 1575,455 1665,585" stroke="#c6c8d1" stroke-width="1.5" stroke-opacity="0.55"/>
+  </g>
+  <g>
+    <polygon points="870,585 955,745 1085,895 1255,1025 1455,910 1585,775 1665,585" fill="url(#ibSub2)"/>
+    <polygon points="970,585 1120,765 1255,1025 1215,585" fill="url(#ibSub1)"/>
+    <polygon points="1215,585 1255,1025 1415,825 1412,585" fill="url(#ibSub1)" opacity="0.72"/>
+    <polygon points="1412,585 1415,825 1565,735 1625,585" fill="#84a0c6" opacity="0.22"/>
+    <polyline points="870,585 955,745 1085,895 1255,1025 1455,910 1585,775 1665,585" stroke="#89b8c2" stroke-width="1.4" stroke-opacity="0.48"/>
+    <polyline points="1215,585 1120,765 1255,1025 1415,825 1412,585" stroke="#c6c8d1" stroke-width="1" stroke-opacity="0.32"/>
+  </g>
+  <g filter="url(#ibMist)" opacity="0.32">
+    <ellipse cx="960" cy="585" rx="880" ry="26" fill="#84a0c6"/>
+    <ellipse cx="1260" cy="590" rx="460" ry="18" fill="#89b8c2"/>
+  </g>
+  <g stroke="#89b8c2" stroke-linecap="round">
+    <line x1="0" y1="585" x2="1920" y2="585" stroke-width="2" opacity="0.55"/>
+    <line x1="180" y1="618" x2="540" y2="618" stroke-width="1.3" opacity="0.3"/>
+    <line x1="760" y1="636" x2="1680" y2="636" stroke-width="1.4" opacity="0.32"/>
+    <line x1="340" y1="695" x2="820" y2="695" stroke-width="1.1" opacity="0.2"/>
+  </g>
+  <g fill="#84a0c6" opacity="0.34">
+    <polygon points="210,602 295,594 330,605 235,612"/>
+    <polygon points="560,598 635,592 668,602 585,606"/>
+    <polygon points="1720,604 1825,595 1860,606 1750,612"/>
+  </g>
+</svg>

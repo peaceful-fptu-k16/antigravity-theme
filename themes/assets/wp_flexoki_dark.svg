@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="fdPaper" x1="0%" y1="0%" x2="10%" y2="100%">
+      <stop offset="0%" stop-color="#0b0a0a"/>
+      <stop offset="48%" stop-color="#100f0f"/>
+      <stop offset="84%" stop-color="#181716"/>
+      <stop offset="100%" stop-color="#0d0c0c"/>
+    </linearGradient>
+    <radialGradient id="fdBlueWash" cx="72%" cy="32%" r="44%">
+      <stop offset="0%" stop-color="#4385be" stop-opacity="0.22"/>
+      <stop offset="52%" stop-color="#4385be" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#100f0f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="fdTealWash" cx="24%" cy="68%" r="42%">
+      <stop offset="0%" stop-color="#3aa99f" stop-opacity="0.16"/>
+      <stop offset="58%" stop-color="#3aa99f" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#100f0f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="fdArcBlue" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4385be" stop-opacity="0.05"/>
+      <stop offset="42%" stop-color="#4385be" stop-opacity="0.46"/>
+      <stop offset="76%" stop-color="#3aa99f" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#3aa99f" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fdArcOchre" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d0a215" stop-opacity="0"/>
+      <stop offset="40%" stop-color="#d0a215" stop-opacity="0.42"/>
+      <stop offset="82%" stop-color="#cecdc3" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#d0a215" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="fdMtnFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#272523"/>
+      <stop offset="100%" stop-color="#141312"/>
+    </linearGradient>
+    <linearGradient id="fdMtnMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1e1d1b"/>
+      <stop offset="100%" stop-color="#100f0f"/>
+    </linearGradient>
+    <linearGradient id="fdMtnNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#171615"/>
+      <stop offset="100%" stop-color="#0b0a0a"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#fdPaper)"/>
+  <rect width="1920" height="1080" fill="url(#fdBlueWash)"/>
+  <rect width="1920" height="1080" fill="url(#fdTealWash)"/>
+  <g stroke="#2a2928" stroke-width="1" opacity="0.52">
+    <line x1="96" y1="64" x2="1824" y2="64"/>
+    <line x1="96" y1="1016" x2="1824" y2="1016"/>
+    <line x1="96" y1="64" x2="96" y2="1016"/>
+    <line x1="1824" y1="64" x2="1824" y2="1016"/>
+    <line x1="640" y1="64" x2="640" y2="1016" stroke-dasharray="4 10" opacity="0.5"/>
+    <line x1="1280" y1="64" x2="1280" y2="1016" stroke-dasharray="4 10" opacity="0.5"/>
+  </g>
+  <g transform="translate(1360, 310)">
+    <path d="M -145 -68 C -102 -175, 48 -206, 134 -120 C 218 -35, 198 112, 92 164 C -10 214, -144 166, -168 54" stroke="url(#fdArcBlue)" stroke-width="26" stroke-linecap="round"/>
+    <path d="M -112 -98 C -52 -166, 62 -176, 128 -106 C 186 -45, 174 62, 108 116" stroke="#d0a215" stroke-width="3.2" stroke-linecap="round" opacity="0.44"/>
+    <rect x="92" y="-118" width="24" height="24" rx="2" fill="#d14d41" opacity="0.58"/>
+    <rect x="96" y="-114" width="16" height="16" stroke="#100f0f" stroke-width="1.6" opacity="0.72"/>
+  </g>
+  <path d="M -40 420 Q 340 280 780 395 Q 1180 500 1620 355 Q 1790 302 1960 340" stroke="url(#fdArcOchre)" stroke-width="9" stroke-linecap="round" opacity="0.58"/>
+  <path d="M -40 658 Q 250 515 540 592 Q 860 676 1180 486 Q 1460 342 1745 508 L 1960 598 L 1960 1080 L -40 1080 Z" fill="url(#fdMtnFar)"/>
+  <path d="M 1180 486 Q 1340 402 1515 446" stroke="#4385be" stroke-width="2.4" opacity="0.44"/>
+  <path d="M 210 562 Q 395 524 585 604" stroke="#d0a215" stroke-width="1.8" opacity="0.34"/>
+  <path d="M -40 764 Q 290 618 650 712 Q 980 798 1340 622 Q 1630 492 1960 662 L 1960 1080 L -40 1080 Z" fill="url(#fdMtnMid)"/>
+  <path d="M 120 712 Q 520 652 920 726 Q 1320 800 1780 688" stroke="#3aa99f" stroke-width="2" opacity="0.36"/>
+  <path d="M -40 895 Q 380 788 860 868 Q 1360 946 1960 798 L 1960 1080 L -40 1080 Z" fill="url(#fdMtnNear)"/>
+  <g stroke="#878580" stroke-width="1.4" opacity="0.46">
+    <path d="M 126 112 L 154 112 M 140 98 L 140 126"/>
+    <circle cx="140" cy="112" r="7"/>
+    <path d="M 1766 968 L 1794 968 M 1780 954 L 1780 982"/>
+    <circle cx="1780" cy="968" r="7"/>
+    <line x1="126" y1="968" x2="210" y2="968" stroke="#d0a215" opacity="0.65"/>
+    <circle cx="224" cy="968" r="3" fill="#4385be"/>
+    <circle cx="238" cy="968" r="3" fill="#3aa99f"/>
+    <circle cx="252" cy="968" r="3" fill="#d0a215"/>
+  </g>
+</svg>

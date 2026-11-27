@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="stWicArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#219fd5" stop-opacity="0.16"/>
+      <stop offset="38%" stop-color="#219fd5" stop-opacity="0.95"/>
+      <stop offset="72%" stop-color="#82aaff" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#d6deeb" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="stWicCrown" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d6deeb"/>
+      <stop offset="55%" stop-color="#219fd5"/>
+      <stop offset="100%" stop-color="#0a2540"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 7 122 24" stroke="url(#stWicArc)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 16 31 Q 64 13 114 27" stroke="#82aaff" stroke-width="0.85" stroke-dasharray="3 3" opacity="0.55"/>
+  <g transform="translate(64, 20)">
+    <polygon points="-14,5 -11,-4 -7,1 -4,-7 0,-13 4,-7 7,1 11,-4 14,5" fill="url(#stWicCrown)" fill-opacity="0.42" stroke="#219fd5" stroke-width="1.25" stroke-linejoin="round"/>
+    <polygon points="0,-13 2.5,-4 0,-2 -2.5,-4" fill="#d6deeb" opacity="0.88"/>
+    <line x1="-15" y1="5.5" x2="15" y2="5.5" stroke="#82aaff" stroke-width="1.2" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(31, 17)" stroke="#219fd5" stroke-width="1.15" stroke-linecap="round">
+    <line x1="0" y1="-6.5" x2="0" y2="6.5"/>
+    <line x1="-5.6" y1="-3.2" x2="5.6" y2="3.2"/>
+    <line x1="-5.6" y1="3.2" x2="5.6" y2="-3.2"/>
+    <circle cx="0" cy="0" r="1.5" fill="#d6deeb" stroke="none"/>
+  </g>
+  <g transform="translate(97, 17)" stroke="#82aaff" stroke-width="1.15" stroke-linecap="round">
+    <line x1="0" y1="-6" x2="0" y2="6"/>
+    <line x1="-5.2" y1="-3" x2="5.2" y2="3"/>
+    <line x1="-5.2" y1="3" x2="5.2" y2="-3"/>
+    <circle cx="0" cy="0" r="1.4" fill="#219fd5" stroke="none"/>
+  </g>
+  <path d="M 16 21 L 17 18.5 L 19.5 17.5 L 17 16.5 L 16 14 L 15 16.5 L 12.5 17.5 L 15 18.5 Z" fill="#d6deeb" opacity="0.9"/>
+  <path d="M 113 15 L 114 12.8 L 116.2 11.8 L 114 10.8 L 113 8.6 L 112 10.8 L 109.8 11.8 L 112 12.8 Z" fill="#219fd5" opacity="0.9"/>
+  <circle cx="46" cy="12" r="1.1" fill="#82aaff" opacity="0.85"/>
+  <circle cx="82" cy="12" r="1.1" fill="#d6deeb" opacity="0.85"/>
+</svg>

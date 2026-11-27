@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cnWic" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#d6deeb"/>
+      <stop offset="45%" stop-color="#219fd5"/>
+      <stop offset="100%" stop-color="#82aaff"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 9 Q 3 3 9 3 L 30 3" stroke="url(#cnWic)" stroke-width="1.65" stroke-linecap="round" opacity="0.94"/>
+  <path d="M 6.8 20.5 L 6.8 11 Q 6.8 6.8 11 6.8 L 20.5 6.8" stroke="#82aaff" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  <g transform="translate(12.2, 12.2)" stroke="#219fd5" stroke-width="1.15" stroke-linecap="round">
+    <line x1="0" y1="-5.4" x2="0" y2="5.4"/>
+    <line x1="-4.7" y1="-2.7" x2="4.7" y2="2.7"/>
+    <line x1="-4.7" y1="2.7" x2="4.7" y2="-2.7"/>
+    <path d="M -1.6 -4.2 L 0 -2.8 L 1.6 -4.2 M -1.6 4.2 L 0 2.8 L 1.6 4.2" stroke="#82aaff" stroke-width="0.95"/>
+    <circle cx="0" cy="0" r="1.45" fill="#d6deeb" stroke="none"/>
+  </g>
+  <polygon points="33,1.6 34.4,3 33,4.4 31.6,3" fill="#219fd5"/>
+  <polygon points="3,31.6 4.4,33 3,34.4 1.6,33" fill="#82aaff"/>
+</svg>

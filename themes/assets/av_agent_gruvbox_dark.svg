@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="gda-bg" cx="50%" cy="44%" r="68%">
+      <stop offset="0%" stop-color="#3c3836"/>
+      <stop offset="65%" stop-color="#282828"/>
+      <stop offset="100%" stop-color="#1d2021"/>
+    </radialGradient>
+    <linearGradient id="gda-sun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fabd2f"/>
+      <stop offset="55%" stop-color="#fe8019"/>
+      <stop offset="100%" stop-color="#8ec07c"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#gda-bg)" stroke="url(#gda-sun)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="22" stroke="#fabd2f" stroke-width="1.2" opacity="0.45"/>
+  <circle cx="32" cy="32" r="16" stroke="#fe8019" stroke-width="1.2" stroke-dasharray="5 3" opacity="0.65"/>
+  <!-- Retro geometric compass star & vinyl core -->
+  <path d="M 32 12 L 36 28 L 52 32 L 36 36 L 32 52 L 28 36 L 12 32 L 28 28 Z" fill="url(#gda-sun)"/>
+  <circle cx="32" cy="32" r="5.5" fill="#282828" stroke="#ebdbb2" stroke-width="1.6"/>
+  <circle cx="32" cy="32" r="2.2" fill="#fabd2f"/>
+  <circle cx="19" cy="19" r="1.8" fill="#8ec07c"/>
+  <circle cx="45" cy="45" r="1.8" fill="#fb4934"/>
+</svg>

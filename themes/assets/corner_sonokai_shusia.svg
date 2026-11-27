@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="snc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78dce8"/>
+      <stop offset="52%" stop-color="#ab9df2"/>
+      <stop offset="100%" stop-color="#ff6188"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 31 L 3 10 L 10 3 L 31 3" stroke="url(#snc-rim)" stroke-width="1.65" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 7.5 23 L 7.5 12.5 L 12.5 7.5 L 23 7.5" stroke="#ff6188" stroke-width="1.05" opacity="0.76"/>
+  <!-- Faceted crystal diamond shard -->
+  <polygon points="14,9 18.5,14 14,19 9.5,14" fill="#363944" stroke="#78dce8" stroke-width="1.2"/>
+  <polygon points="14,9 18.5,14 14,14" fill="#ff6188" opacity="0.72"/>
+  <polygon points="14,9 9.5,14 14,14" fill="#78dce8" opacity="0.75"/>
+  <polygon points="34,1.5 35.8,3.3 34,5.1 32.2,3.3" fill="#ffd866"/>
+  <polygon points="3.3,32.2 5.1,34 3.3,35.8 1.5,34" fill="#78dce8"/>
+</svg>

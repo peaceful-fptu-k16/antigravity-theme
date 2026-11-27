@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="aolc_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#526fff"/>
+      <stop offset="100%" stop-color="#a626a4"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3.5 29 L 3.5 8.5 Q 3.5 3.5 8.5 3.5 L 29 3.5" stroke="url(#aolc_grad)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 7 20 L 7 10 Q 7 7 10 7 L 20 7" stroke="#526fff" stroke-width="0.9" stroke-linecap="round" opacity="0.46"/>
+  <g transform="translate(14.5, 14.5)">
+    <ellipse cx="0" cy="0" rx="6.8" ry="2.8" transform="rotate(-30)" stroke="#526fff" stroke-width="1.15"/>
+    <ellipse cx="0" cy="0" rx="6.8" ry="2.8" transform="rotate(30)" stroke="#a626a4" stroke-width="1.15"/>
+    <circle cx="0" cy="0" r="1.5" fill="#526fff"/>
+    <circle cx="5.2" cy="-3" r="1.1" fill="#a626a4"/>
+    <circle cx="-5.2" cy="3" r="1.1" fill="#0184bc"/>
+  </g>
+  <circle cx="29" cy="3.5" r="1.15" fill="#a626a4" opacity="0.78"/>
+  <circle cx="3.5" cy="29" r="1.15" fill="#526fff" opacity="0.78"/>
+</svg>

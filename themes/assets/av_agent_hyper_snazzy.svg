@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="hsa_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#313443"/>
+      <stop offset="100%" stop-color="#171921"/>
+    </linearGradient>
+    <linearGradient id="hsa_tri" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#57c7ff"/>
+      <stop offset="50%" stop-color="#ff6ac1"/>
+      <stop offset="100%" stop-color="#f3f99d"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#hsa_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="#57c7ff" stroke-width="2"/>
+  <polyline points="10,36 18,32 22,36" stroke="#57c7ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polyline points="42,36 46,32 54,36" stroke="#ff6ac1" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <polygon points="32,12 50,46 14,46" fill="rgba(87,199,255,0.14)" stroke="url(#hsa_tri)" stroke-width="1.8" stroke-linejoin="round"/>
+  <polyline points="35,20 27,33 34,33 29,44" stroke="#f3f99d" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="32" cy="12" r="2" fill="#5af78e"/>
+</svg>

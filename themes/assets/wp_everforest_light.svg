@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="elSky" x1="0%" y1="0%" x2="8%" y2="100%">
+      <stop offset="0%" stop-color="#fffdf4"/>
+      <stop offset="46%" stop-color="#fdf6e3"/>
+      <stop offset="80%" stop-color="#f4f0d9"/>
+      <stop offset="100%" stop-color="#ece7ce"/>
+    </linearGradient>
+    <radialGradient id="elSun" cx="78%" cy="20%" r="44%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+      <stop offset="36%" stop-color="#fbf1cc" stop-opacity="0.56"/>
+      <stop offset="72%" stop-color="#dfa000" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#fdf6e3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="elMist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fdf6e3" stop-opacity="0"/>
+      <stop offset="50%" stop-color="#fdf6e3" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#f4f0d9" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="elHill1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e3ead0"/>
+      <stop offset="100%" stop-color="#d5e0c2"/>
+    </linearGradient>
+    <linearGradient id="elHill2" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d2dfc0"/>
+      <stop offset="100%" stop-color="#c2d4b0"/>
+    </linearGradient>
+    <linearGradient id="elHill3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c1d3ae"/>
+      <stop offset="100%" stop-color="#b2c79f"/>
+    </linearGradient>
+    <linearGradient id="elLeaf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8da101" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#35a77c" stop-opacity="0.22"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#elSky)"/>
+  <rect width="1920" height="1080" fill="url(#elSun)"/>
+  <circle cx="1505" cy="212" r="68" fill="#fffdf6" opacity="0.9"/>
+  <circle cx="1505" cy="212" r="112" fill="#dfa000" opacity="0.09"/>
+  <g opacity="0.45">
+    <path d="M 140 240 Q 340 198 560 228 Q 760 255 960 218 L 910 264 Q 680 286 440 266 Q 260 280 165 262 Z" fill="#ffffff"/>
+    <path d="M 980 310 Q 1200 272 1440 302 Q 1650 328 1860 290 L 1820 338 Q 1560 362 1290 342 Q 1120 356 1015 338 Z" fill="#ffffff"/>
+  </g>
+  <path d="M -40 618 Q 280 510 620 568 Q 980 626 1340 508 Q 1640 426 1960 538 L 1960 1080 L -40 1080 Z" fill="url(#elHill1)"/>
+  <rect x="0" y="510" width="1920" height="150" fill="url(#elMist)"/>
+  <path d="M -40 725 Q 320 605 700 688 Q 1080 772 1460 638 Q 1720 554 1960 658 L 1960 1080 L -40 1080 Z" fill="url(#elHill2)"/>
+  <path d="M 160 692 Q 520 650 880 712 M 1140 696 Q 1460 636 1780 676" stroke="#8da101" stroke-width="1.8" opacity="0.22"/>
+  <g fill="#9fb58c" opacity="0.72">
+    <polygon points="310,602 336,684 284,684"/>
+    <polygon points="366,620 388,694 344,694"/>
+    <polygon points="1548,572 1578,668 1518,668"/>
+    <polygon points="1610,596 1636,680 1584,680"/>
+    <polygon points="1668,615 1692,692 1644,692"/>
+  </g>
+  <rect x="0" y="640" width="1920" height="145" fill="url(#elMist)"/>
+  <path d="M -40 855 Q 360 755 780 832 Q 1180 906 1560 792 Q 1780 732 1960 798 L 1960 1080 L -40 1080 Z" fill="url(#elHill3)"/>
+  <path d="M -40 960 Q 480 896 980 950 Q 1480 1002 1960 924 L 1960 1080 L -40 1080 Z" fill="#e9e8cf" opacity="0.68"/>
+  <g>
+    <path d="M -20 120 Q 150 185 280 340" stroke="#8da101" stroke-width="2.4" opacity="0.34"/>
+    <path d="M 75 166 C 122 135, 178 140, 206 172 C 166 196, 114 195, 75 166 Z" fill="url(#elLeaf)"/>
+    <path d="M 148 228 C 120 278, 134 330, 170 352 C 194 308, 186 258, 148 228 Z" fill="url(#elLeaf)"/>
+    <path d="M 205 268 C 254 248, 306 264, 326 302 C 282 316, 236 304, 205 268 Z" fill="url(#elLeaf)"/>
+    <path d="M 1940 890 Q 1740 820 1590 675" stroke="#35a77c" stroke-width="2.4" opacity="0.32"/>
+    <path d="M 1810 836 C 1756 866, 1698 854, 1670 818 C 1712 796, 1768 802, 1810 836 Z" fill="url(#elLeaf)"/>
+    <path d="M 1716 774 C 1740 722, 1722 672, 1684 652 C 1662 698, 1676 746, 1716 774 Z" fill="url(#elLeaf)"/>
+    <path d="M 1648 728 C 1598 742, 1546 720, 1528 682 C 1574 672, 1620 688, 1648 728 Z" fill="url(#elLeaf)"/>
+  </g>
+  <g fill="#dfa000" opacity="0.34">
+    <circle cx="520" cy="420" r="3.2"/>
+    <circle cx="880" cy="365" r="2.8"/>
+    <circle cx="1180" cy="442" r="3.4"/>
+    <circle cx="1360" cy="355" r="2.6"/>
+    <circle cx="670" cy="540" r="2.5"/>
+  </g>
+</svg>

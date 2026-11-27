@@ -5,8 +5,10 @@ import readline from 'node:readline';
 import {
   buildPayload,
   deleteUserThemePreset,
+  encodeSvg,
   isPayloadStale,
   loadMergedThemes,
+  resolveLocalAssetPath,
   saveUserThemePreset,
 } from '../lib/builder.mjs';
 import {
@@ -50,30 +52,173 @@ function debugLog(msg) {
   }
 }
 
+const MAX_INLINE_PREVIEW_BYTES = 460 * 1024; // Keeps open_studio CallToolResult safely well under 1 MiB
+const MAX_SMALL_RASTER_PREVIEW_BYTES = 36 * 1024;
+const previewUriCache = new Map();
+
+function getAssetSearchDirs() {
+  return [paths.userThemesDir, paths.builtinThemesDir];
+}
+
+function readPreviewUri(assetValue, { allowSmallRaster = false } = {}) {
+  if (typeof assetValue !== 'string') return '';
+  const trimmed = assetValue.trim();
+  if (!trimmed) return '';
+  if (trimmed.startsWith('data:image/svg+xml')) {
+    return trimmed.length <= 28 * 1024 ? trimmed : '';
+  }
+  if (
+    trimmed.startsWith('data:') ||
+    trimmed.startsWith('http://') ||
+    trimmed.startsWith('https://') ||
+    trimmed.startsWith('__AGY_MEDIA__/')
+  ) {
+    return '';
+  }
+
+  const located = resolveLocalAssetPath(trimmed, getAssetSearchDirs());
+  if (!located) return '';
+  const { fullPath } = located;
+  const ext = path.extname(fullPath).toLowerCase();
+
+  try {
+    const stat = fs.statSync(fullPath);
+    const cacheKey = `${fullPath}:${stat.mtimeMs}:${stat.size}`;
+    if (previewUriCache.has(cacheKey)) {
+      return previewUriCache.get(cacheKey);
+    }
+
+    let uri = '';
+    if (ext === '.svg') {
+      uri = encodeSvg(fullPath);
+    } else if (
+      allowSmallRaster &&
+      (ext === '.webp' || ext === '.png' || ext === '.jpg' || ext === '.jpeg' || ext === '.gif') &&
+      stat.size <= MAX_SMALL_RASTER_PREVIEW_BYTES
+    ) {
+      const mime =
+        ext === '.webp'
+          ? 'image/webp'
+          : ext === '.png'
+            ? 'image/png'
+            : ext === '.gif'
+              ? 'image/gif'
+              : 'image/jpeg';
+      uri = `data:${mime};base64,${fs.readFileSync(fullPath).toString('base64')}`;
+    }
+
+    if (previewUriCache.size > 800) previewUriCache.clear();
+    previewUriCache.set(cacheKey, uri);
+    return uri;
+  } catch {
+    return '';
+  }
+}
+
 function detectMediaType(theme) {
   const wp = String(theme.wallpaper || '').trim();
   if (!wp) return 'css-gradient';
   if (/\.(mp4|webm)(\?.*)?$/i.test(wp) || wp.startsWith('data:video/')) return 'video';
   if (/\.gif(\?.*)?$/i.test(wp) || wp.startsWith('data:image/gif')) return 'animated-gif';
+  if (/\.svg(\?.*)?$/i.test(wp) || wp.startsWith('data:image/svg+xml')) return 'svg-art';
   return 'image';
 }
 
-function summarizePresets() {
+function summarizePresets({ includePreviews = false } = {}) {
   const { merged, sources } = loadMergedThemes(paths);
-  return Object.entries(merged).map(([name, cfg]) => ({
-    name,
-    source: sources[name] || 'builtin',
-    concept: cfg.concept || '',
-    primary: cfg.primary || '#a78bfa',
-    secondary: cfg.secondary || '#38bdf8',
-    overlayRgb: cfg.overlayRgb || '16, 13, 23',
-    isLight: Boolean(cfg.isLight),
-    mediaType: detectMediaType(cfg),
-    wallpaper: cfg.wallpaper || '',
-    defaultDimming: Number.isFinite(cfg.defaultDimming) ? cfg.defaultDimming : 69,
-    hasMascot: Boolean(cfg.composerOnlyMascot || cfg.sticker),
-    unifiedGlass: Boolean(cfg.unifiedGlass),
-  }));
+  let usedPreviewBytes = 0;
+
+  return Object.entries(merged).map(([name, cfg]) => {
+    const mediaType = detectMediaType(cfg);
+    const hasWallpaperArt = Boolean(String(cfg.wallpaper || '').trim());
+    const hasOrnament = Boolean(String(cfg.sticker || '').trim() || String(cfg.cornerSvg || '').trim());
+    const hasAvatars = Boolean(String(cfg.userAvatar || '').trim() || String(cfg.agentAvatar || '').trim());
+
+    const item = {
+      name,
+      source: sources[name] || 'builtin',
+      concept: cfg.concept || '',
+      primary: cfg.primary || '#a78bfa',
+      secondary: cfg.secondary || '#38bdf8',
+      overlayRgb: cfg.overlayRgb || '16, 13, 23',
+      textColor: cfg.textColor || (cfg.isLight ? '#1e293b' : '#f8fafc'),
+      surfaceBg: cfg.surfaceBg || '',
+      pureBg: cfg.pureBg || '',
+      isLight: Boolean(cfg.isLight),
+      mediaType,
+      wallpaper: cfg.wallpaper || '',
+      defaultDimming: Number.isFinite(cfg.defaultDimming) ? cfg.defaultDimming : 69,
+      isOrnament: Boolean(cfg.isOrnament),
+      hasWallpaperArt,
+      hasOrnament,
+      hasAvatars,
+      hasMascot: Boolean(cfg.composerOnlyMascot || cfg.sticker),
+      unifiedGlass: Boolean(cfg.unifiedGlass),
+    };
+
+    if (includePreviews) {
+      if (mediaType === 'svg-art') {
+        const wpUri = readPreviewUri(cfg.wallpaper);
+        if (wpUri && usedPreviewBytes + wpUri.length <= MAX_INLINE_PREVIEW_BYTES) {
+          item.wallpaperPreview = wpUri;
+          usedPreviewBytes += wpUri.length;
+        }
+      } else {
+        // For flagship video/raster themes, include tiny SVG ornament/corner previews directly on first paint
+        const stUri = readPreviewUri(cfg.sticker);
+        if (stUri && usedPreviewBytes + stUri.length <= MAX_INLINE_PREVIEW_BYTES) {
+          item.stickerPreview = stUri;
+          usedPreviewBytes += stUri.length;
+        }
+        const cnUri = readPreviewUri(cfg.cornerSvg);
+        if (cnUri && usedPreviewBytes + cnUri.length <= MAX_INLINE_PREVIEW_BYTES) {
+          item.cornerPreview = cnUri;
+          usedPreviewBytes += cnUri.length;
+        }
+      }
+    }
+
+    return item;
+  });
+}
+
+function collectPresetAssets({ names = null, kinds = null } = {}) {
+  const { merged } = loadMergedThemes(paths);
+  const nameFilter = Array.isArray(names) && names.length > 0 ? new Set(names) : null;
+  const activeKinds =
+    Array.isArray(kinds) && kinds.length > 0
+      ? new Set(kinds)
+      : new Set(['sticker', 'cornerSvg', 'userAvatar', 'agentAvatar']);
+
+  const assets = {};
+  for (const [name, cfg] of Object.entries(merged)) {
+    if (nameFilter && !nameFilter.has(name)) continue;
+    const entry = {};
+    if (activeKinds.has('wallpaper')) {
+      const uri = readPreviewUri(cfg.wallpaper);
+      if (uri) entry.wallpaper = uri;
+    }
+    if (activeKinds.has('sticker')) {
+      const uri = readPreviewUri(cfg.sticker, { allowSmallRaster: true });
+      if (uri) entry.sticker = uri;
+    }
+    if (activeKinds.has('cornerSvg')) {
+      const uri = readPreviewUri(cfg.cornerSvg);
+      if (uri) entry.cornerSvg = uri;
+    }
+    if (activeKinds.has('userAvatar')) {
+      const uri = readPreviewUri(cfg.userAvatar, { allowSmallRaster: true });
+      if (uri) entry.userAvatar = uri;
+    }
+    if (activeKinds.has('agentAvatar')) {
+      const uri = readPreviewUri(cfg.agentAvatar, { allowSmallRaster: true });
+      if (uri) entry.agentAvatar = uri;
+    }
+    if (Object.keys(entry).length > 0) {
+      assets[name] = entry;
+    }
+  }
+  return assets;
 }
 
 function getSetupHint() {
@@ -93,9 +238,9 @@ function getSetupHint() {
   };
 }
 
-async function collectStudioState({ includeVerify = false } = {}) {
+async function collectStudioState({ includeVerify = false, includePreviews = false } = {}) {
   const config = readJsonSafe(paths.configFile, {});
-  const presets = summarizePresets();
+  const presets = summarizePresets({ includePreviews });
   const cdp = await discoverAntigravityPages();
   const payloadExists = fs.existsSync(paths.payloadFile);
   const payloadSizeKB = payloadExists
@@ -196,6 +341,35 @@ const TOOLS = [
       type: 'object',
       properties: {
         includeVerify: { type: 'boolean' },
+        includePreviews: { type: 'boolean' },
+      },
+      additionalProperties: false,
+    },
+    _meta: {
+      ui: { visibility: ['app'] },
+    },
+  },
+  {
+    name: 'app_preset_assets',
+    title: 'Load Preset Visual Assets',
+    description:
+      'Internal app-only tool returning compact SVG data-URI previews (ornaments, corners, user/agent avatars, or wallpapers) for Theme Studio cards.',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        names: {
+          type: 'array',
+          items: { type: 'string' },
+          description: 'Optional subset of preset names.',
+        },
+        kinds: {
+          type: 'array',
+          items: {
+            type: 'string',
+            enum: ['wallpaper', 'sticker', 'cornerSvg', 'userAvatar', 'agentAvatar'],
+          },
+          description: 'Optional asset kinds to include.',
+        },
       },
       additionalProperties: false,
     },
@@ -392,10 +566,14 @@ async function handleToolCall(name, args = {}) {
   switch (name) {
     case 'open_studio':
     case 'app_studio_state': {
-      const state = await collectStudioState({ includeVerify: Boolean(args.includeVerify) });
+      const includePreviews = name === 'open_studio' ? true : args.includePreviews !== false;
+      const state = await collectStudioState({
+        includeVerify: Boolean(args.includeVerify),
+        includePreviews,
+      });
       const text = [
         `Theme Studio ready — active preset: "${state.config.themeName}" (${state.config.workspaceMode} mode, dimming ${state.config.dimming}%).`,
-        `Presets: ${state.presets.map((p) => `${p.name} [${p.source}]`).join(', ')}.`,
+        `Presets (${state.presets.length}): ${state.presets.map((p) => `${p.name} [${p.source}]`).join(', ')}.`,
         state.cdp.available
           ? `CDP connected on port ${state.cdp.port} (${state.cdp.pageCount} page(s), daemon attached: ${state.daemon.attachedPageCount}).`
           : `CDP inactive (${state.cdp.reason}). ${state.setupHint?.summary || ''}`,
@@ -403,6 +581,15 @@ async function handleToolCall(name, args = {}) {
       return {
         content: [{ type: 'text', text }],
         structuredContent: state,
+      };
+    }
+
+    case 'app_preset_assets': {
+      const assets = collectPresetAssets({ names: args.names, kinds: args.kinds });
+      const count = Object.keys(assets).length;
+      return {
+        content: [{ type: 'text', text: `Loaded visual preview assets for ${count} preset(s).` }],
+        structuredContent: { count, assets },
       };
     }
 

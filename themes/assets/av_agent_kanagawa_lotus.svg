@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="aaKlBg" cx="50%" cy="38%" r="68%">
+      <stop offset="0%" stop-color="#fbf8e4"/>
+      <stop offset="60%" stop-color="#f2ecbc"/>
+      <stop offset="100%" stop-color="#e3d8a0"/>
+    </radialGradient>
+    <linearGradient id="aaKlG" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4d699b"/>
+      <stop offset="50%" stop-color="#5a4785"/>
+      <stop offset="100%" stop-color="#6f894e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#aaKlBg)" stroke="url(#aaKlG)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="23" stroke="#4d699b" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.48"/>
+  <g transform="translate(32, 32)">
+    <path d="M0 -17 C4.5 -10,4.5 -4,0 0 C-4.5 -4,-4.5 -10,0 -17 Z M0 17 C4.5 10,4.5 4,0 0 C-4.5 4,-4.5 10,0 17 Z" fill="#4d699b" opacity="0.88"/>
+    <path d="M0 -17 C4.5 -10,4.5 -4,0 0 C-4.5 -4,-4.5 -10,0 -17 Z M0 17 C4.5 10,4.5 4,0 0 C-4.5 4,-4.5 10,0 17 Z" fill="#5a4785" opacity="0.85" transform="rotate(60)"/>
+    <path d="M0 -17 C4.5 -10,4.5 -4,0 0 C-4.5 -4,-4.5 -10,0 -17 Z M0 17 C4.5 10,4.5 4,0 0 C-4.5 4,-4.5 10,0 17 Z" fill="#6f894e" opacity="0.85" transform="rotate(120)"/>
+    <circle r="5" fill="#fbf7e2" stroke="#c84053" stroke-width="1.4"/>
+    <circle r="2" fill="#545464"/>
+  </g>
+</svg>

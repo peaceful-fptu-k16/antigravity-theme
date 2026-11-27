@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="mon-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1a1d"/>
+      <stop offset="48%" stop-color="#2d2a2e"/>
+      <stop offset="100%" stop-color="#211f22"/>
+    </linearGradient>
+    <radialGradient id="mon-gold-halo" cx="72%" cy="32%" r="42%">
+      <stop offset="0%" stop-color="#ffd866" stop-opacity="0.22"/>
+      <stop offset="48%" stop-color="#fc9867" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#2d2a2e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mon-pink-halo" cx="24%" cy="76%" r="44%">
+      <stop offset="0%" stop-color="#ff6188" stop-opacity="0.18"/>
+      <stop offset="52%" stop-color="#ab9df2" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#2d2a2e" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mon-beam-gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd866" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#ffd866" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#ffd866" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mon-beam-pink" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff6188" stop-opacity="0.32"/>
+      <stop offset="55%" stop-color="#ff6188" stop-opacity="0.11"/>
+      <stop offset="100%" stop-color="#ff6188" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mon-beam-cyan" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#78dce8" stop-opacity="0.3"/>
+      <stop offset="55%" stop-color="#78dce8" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#78dce8" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mon-prism-a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#48444a"/>
+      <stop offset="100%" stop-color="#262328"/>
+    </linearGradient>
+    <linearGradient id="mon-prism-b" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3c383e"/>
+      <stop offset="100%" stop-color="#1e1c1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#mon-bg)"/>
+  <rect width="1920" height="1080" fill="url(#mon-gold-halo)"/>
+  <rect width="1920" height="1080" fill="url(#mon-pink-halo)"/>
+  <!-- Subtle Bauhaus architectural drafting lines -->
+  <g stroke="#f8f8f2" stroke-width="0.9" opacity="0.06">
+    <line x1="240" y1="0" x2="240" y2="1080"/><line x1="640" y1="0" x2="640" y2="1080"/>
+    <line x1="1040" y1="0" x2="1040" y2="1080"/><line x1="1440" y1="0" x2="1440" y2="1080"/>
+    <line x1="0" y1="270" x2="1920" y2="270"/><line x1="0" y1="540" x2="1920" y2="540"/>
+    <line x1="0" y1="810" x2="1920" y2="810"/>
+  </g>
+  <!-- Diagonal incoming white-gold studio beam (upper-left to prism) -->
+  <polygon points="-60,120 110,60 1280,455 1230,520" fill="url(#mon-beam-gold)" opacity="0.72"/>
+  <line x1="0" y1="98" x2="1255" y2="486" stroke="#fcfcfa" stroke-width="1.6" opacity="0.24"/>
+  <!-- Refracted Bauhaus spectral light shafts fanning right & downward -->
+  <polygon points="1265,455 1920,160 1920,335 1280,505" fill="url(#mon-beam-gold)"/>
+  <polygon points="1275,492 1920,375 1920,565 1280,545" fill="url(#mon-beam-pink)"/>
+  <polygon points="1270,535 1920,610 1920,820 1245,585" fill="url(#mon-beam-cyan)"/>
+  <polygon points="1245,575 1920,860 1920,1045 1190,625" fill="#a9dc76" opacity="0.1"/>
+  <!-- Secondary refracted reflection beams left-downward -->
+  <polygon points="1185,540 520,1080 280,1080 1125,525" fill="url(#mon-beam-pink)" opacity="0.58"/>
+  <polygon points="1220,575 840,1080 620,1080 1165,560" fill="url(#mon-beam-cyan)" opacity="0.52"/>
+  <!-- Bauhaus modernist studio shapes & layered monoliths -->
+  <circle cx="1315" cy="495" r="245" stroke="#ffd866" stroke-width="1.4" opacity="0.28"/>
+  <circle cx="1315" cy="495" r="198" fill="#353137" opacity="0.44" stroke="#ff6188" stroke-width="1.2" stroke-dasharray="12 10"/>
+  <path d="M 1040 810 A 220 220 0 0 1 1260 590 L 1260 810 Z" fill="#383539" opacity="0.52"/>
+  <!-- Hero Bauhaus 3D Glass Prism -->
+  <g transform="translate(1265, 515)">
+    <polygon points="0,-215 -195,145 0,105" fill="url(#mon-prism-a)" stroke="#ffd866" stroke-width="1.6" stroke-opacity="0.62"/>
+    <polygon points="0,-215 195,145 0,105" fill="url(#mon-prism-b)" stroke="#78dce8" stroke-width="1.5" stroke-opacity="0.58"/>
+    <polygon points="-195,145 195,145 0,105" fill="#232025" stroke="#ff6188" stroke-width="1.4" stroke-opacity="0.55"/>
+    <!-- Internal refractive light facets -->
+    <polygon points="0,-165 -95,75 0,48" fill="#ffd866" opacity="0.12"/>
+    <polygon points="0,-165 95,75 0,48" fill="#78dce8" opacity="0.11"/>
+    <line x1="0" y1="-215" x2="0" y2="105" stroke="#fcfcfa" stroke-width="1.5" opacity="0.42"/>
+    <circle cx="0" cy="-215" r="5" fill="#ffd866"/>
+    <circle cx="-195" cy="145" r="4.5" fill="#ff6188"/>
+    <circle cx="195" cy="145" r="4.5" fill="#78dce8"/>
+  </g>
+  <!-- Balanced Bauhaus accent shapes left -->
+  <g transform="translate(310, 740)">
+    <circle r="110" stroke="#78dce8" stroke-width="1.3" opacity="0.34"/>
+    <path d="M -110 0 A 110 110 0 0 1 0 -110 L 0 0 Z" fill="#ffd866" opacity="0.14"/>
+    <rect x="26" y="24" width="64" height="64" fill="#ff6188" opacity="0.14" stroke="#ff6188" stroke-width="1.2" stroke-opacity="0.45"/>
+    <circle cx="-46" cy="46" r="16" fill="#a9dc76" opacity="0.22"/>
+  </g>
+  <!-- Crisp spectral edge stripes bottom -->
+  <g opacity="0.45">
+    <line x1="120" y1="990" x2="360" y2="990" stroke="#ffd866" stroke-width="3"/>
+    <line x1="380" y1="990" x2="520" y2="990" stroke="#ff6188" stroke-width="3"/>
+    <line x1="540" y1="990" x2="650" y2="990" stroke="#78dce8" stroke-width="3"/>
+    <line x1="670" y1="990" x2="730" y2="990" stroke="#a9dc76" stroke-width="3"/>
+  </g>
+</svg>

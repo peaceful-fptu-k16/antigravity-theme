@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="cds_trace" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5ea1ff" stop-opacity="0.2"/>
+      <stop offset="35%" stop-color="#5ef1ff" stop-opacity="0.95"/>
+      <stop offset="72%" stop-color="#ff5ef1" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#5aff15" stop-opacity="0.4"/>
+    </linearGradient>
+    <linearGradient id="cds_chip" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5ea1ff"/>
+      <stop offset="100%" stop-color="#ff5ef1"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 26 L 26 26 L 34 18 L 62 18 L 70 12 L 104 12 L 114 22 L 122 22" stroke="url(#cds_trace)" stroke-width="1.45" stroke-linejoin="round" stroke-linecap="round"/>
+  <path d="M 18 31 L 40 31 L 47 24 L 84 24 L 91 30 L 112 30" stroke="#5ea1ff" stroke-width="0.95" stroke-dasharray="4 3" opacity="0.7"/>
+  <g transform="translate(86, 17)">
+    <polygon points="0,-9 8,-4.5 8,4.5 0,9 -8,4.5 -8,-4.5" fill="#16181a" stroke="url(#cds_chip)" stroke-width="1.4"/>
+    <polygon points="0,-4.5 4,-2.2 4,2.2 0,4.5 -4,2.2 -4,-2.2" fill="#5ef1ff" opacity="0.88"/>
+    <circle cx="0" cy="0" r="1.4" fill="#16181a"/>
+  </g>
+  <g opacity="0.92">
+    <path d="M 38 24 L 38 14 L 42 11 L 46 14 L 46 24 M 49 24 L 49 9 L 52 6 L 55 9 L 55 24" stroke="#5ef1ff" stroke-width="1.2" stroke-linejoin="round"/>
+    <line x1="52" y1="6" x2="52" y2="2" stroke="#ff5ef1" stroke-width="1.1"/>
+  </g>
+  <circle cx="26" cy="26" r="1.8" fill="#5ef1ff"/>
+  <circle cx="62" cy="18" r="1.6" fill="#5aff15"/>
+  <circle cx="114" cy="22" r="1.8" fill="#ff5ef1"/>
+  <line x1="15" y1="11" x2="15" y2="21" stroke="#5aff15" stroke-width="1.1" opacity="0.8"/>
+  <line x1="20" y1="8" x2="20" y2="17" stroke="#5ef1ff" stroke-width="1.1" opacity="0.75"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="ayls_ribbon" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#399ee6" stop-opacity="0.18"/>
+      <stop offset="40%" stop-color="#399ee6" stop-opacity="0.88"/>
+      <stop offset="74%" stop-color="#f29718" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#fa8d3e" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="ayls_sun" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f29718"/>
+      <stop offset="100%" stop-color="#fa8d3e"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 C 30 20, 52 13, 80 20 C 98 24.5, 112 24, 122 20" stroke="url(#ayls_ribbon)" stroke-width="1.55" stroke-linecap="round"/>
+  <path d="M 18 31 C 44 25, 68 20, 110 28" stroke="#399ee6" stroke-width="0.95" stroke-dasharray="3 3" opacity="0.52"/>
+  <g transform="translate(88, 17)">
+    <path d="M -7.5 2.5 A 7.5 7.5 0 0 1 7.5 2.5" stroke="url(#ayls_sun)" stroke-width="1.7" stroke-linecap="round"/>
+    <circle cx="0" cy="1.5" r="3.2" fill="#f29718" opacity="0.85"/>
+    <line x1="0" y1="-8.5" x2="0" y2="-11" stroke="#f29718" stroke-width="1.2" stroke-linecap="round"/>
+    <line x1="-6.8" y1="-5.2" x2="-8.6" y2="-7" stroke="#fa8d3e" stroke-width="1.15" stroke-linecap="round"/>
+    <line x1="6.8" y1="-5.2" x2="8.6" y2="-7" stroke="#fa8d3e" stroke-width="1.15" stroke-linecap="round"/>
+  </g>
+  <path d="M 28 20 C 35 14, 44 14, 51 20" stroke="#399ee6" stroke-width="1.35" stroke-linecap="round"/>
+  <path d="M 35 16 C 40 12, 47 12, 52 16" stroke="#f29718" stroke-width="1.05" stroke-linecap="round" opacity="0.78"/>
+  <path d="M 112 13 L 112.9 10.8 L 115 10 L 112.9 9.2 L 112 7 L 111.1 9.2 L 109 10 L 111.1 10.8 Z" fill="#399ee6" opacity="0.86"/>
+  <circle cx="19" cy="20" r="1.6" fill="#fcfcfc" stroke="#f29718" stroke-width="1.2"/>
+  <circle cx="63" cy="13.5" r="1.4" fill="#399ee6" opacity="0.8"/>
+</svg>

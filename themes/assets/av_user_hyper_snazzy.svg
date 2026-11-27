@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="hsu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#343746"/>
+      <stop offset="100%" stop-color="#181a22"/>
+    </linearGradient>
+    <linearGradient id="hsu_rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#57c7ff"/>
+      <stop offset="52%" stop-color="#ff6ac1"/>
+      <stop offset="100%" stop-color="#5af78e"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#hsu_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="url(#hsu_rim)" stroke-width="2.2"/>
+  <polyline points="13,22 18,26 13,30" stroke="#57c7ff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+  <line x1="46" y1="30" x2="52" y2="30" stroke="#5af78e" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 16 53 C 18 42, 24 39, 32 39 C 40 39, 46 42, 48 53" fill="#282a36" stroke="#ff6ac1" stroke-width="1.5"/>
+  <circle cx="32" cy="26" r="10" fill="#282a36" stroke="#57c7ff" stroke-width="1.5"/>
+  <rect x="24" y="23.5" width="16" height="4.8" rx="2.4" fill="#57c7ff" opacity="0.9"/>
+  <circle cx="28" cy="25.9" r="1.2" fill="#1a1c24"/>
+  <circle cx="36" cy="25.9" r="1.2" fill="#1a1c24"/>
+  <circle cx="48" cy="17" r="1.5" fill="#f3f99d"/>
+</svg>

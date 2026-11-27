@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="kwSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#14141a"/>
+      <stop offset="46%" stop-color="#1f1f28"/>
+      <stop offset="82%" stop-color="#2a2a37"/>
+      <stop offset="100%" stop-color="#1d2232"/>
+    </linearGradient>
+    <radialGradient id="kwSunGlow" cx="68%" cy="46%" r="36%">
+      <stop offset="0%" stop-color="#ffa066" stop-opacity="0.28"/>
+      <stop offset="42%" stop-color="#e6c384" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#1f1f28" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="kwWaveGlow" cx="26%" cy="62%" r="44%">
+      <stop offset="0%" stop-color="#7e9cd8" stop-opacity="0.2"/>
+      <stop offset="100%" stop-color="#1f1f28" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="kwSeaDeep" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2c3a56"/>
+      <stop offset="55%" stop-color="#1d2538"/>
+      <stop offset="100%" stop-color="#141621"/>
+    </linearGradient>
+    <linearGradient id="kwWaveBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#516c9e"/>
+      <stop offset="50%" stop-color="#334568"/>
+      <stop offset="100%" stop-color="#1b2234"/>
+    </linearGradient>
+    <linearGradient id="kwWaveFront" x1="0%" y1="0%" x2="100%" y2="80%">
+      <stop offset="0%" stop-color="#7e9cd8"/>
+      <stop offset="48%" stop-color="#3c5077"/>
+      <stop offset="100%" stop-color="#191d2b"/>
+    </linearGradient>
+    <linearGradient id="kwCloud" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2a2a37" stop-opacity="0"/>
+      <stop offset="25%" stop-color="#363646" stop-opacity="0.76"/>
+      <stop offset="75%" stop-color="#2e3142" stop-opacity="0.68"/>
+      <stop offset="100%" stop-color="#1f1f28" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#kwSky)"/>
+  <rect width="1920" height="1080" fill="url(#kwSunGlow)"/>
+  <rect width="1920" height="1080" fill="url(#kwWaveGlow)"/>
+  <circle cx="1310" cy="488" r="88" fill="#ffa066" opacity="0.18"/>
+  <circle cx="1310" cy="488" r="56" fill="#e6c384" opacity="0.28"/>
+  <g opacity="0.88">
+    <path d="M 60 175 Q 240 138 440 165 Q 640 192 840 155 Q 980 135 1120 162 L 1060 205 Q 840 228 600 205 Q 340 225 120 205 Z" fill="url(#kwCloud)"/>
+    <path d="M 960 265 Q 1180 225 1420 258 Q 1620 282 1860 242 L 1820 296 Q 1560 324 1320 295 Q 1120 315 990 295 Z" fill="url(#kwCloud)"/>
+    <path d="M 180 202 Q 480 185 820 202" stroke="#e6c384" stroke-width="1.6" opacity="0.28"/>
+    <path d="M 1080 292 Q 1420 272 1740 292" stroke="#7e9cd8" stroke-width="1.6" opacity="0.26"/>
+  </g>
+  <g>
+    <path d="M 935 760 Q 1120 660 1236 530 L 1296 530 Q 1418 660 1615 760 Z" fill="#25283a"/>
+    <path d="M 1236 530 L 1296 530 L 1344 590 L 1318 578 L 1292 604 L 1266 579 L 1240 602 L 1212 580 L 1190 594 Z" fill="#dcd7ba" opacity="0.9"/>
+    <path d="M 1296 530 Q 1370 618 1485 702" stroke="#ffa066" stroke-width="2" opacity="0.34"/>
+  </g>
+  <path d="M -40 760 Q 260 665 560 725 Q 880 785 1200 715 Q 1540 648 1960 735 L 1960 1080 L -40 1080 Z" fill="url(#kwSeaDeep)"/>
+  <path d="M 680 860 C 820 715, 1020 650, 1215 695 C 1380 732, 1560 795, 1960 680 L 1960 1080 L 620 1080 Z" fill="#233048" opacity="0.92"/>
+  <g>
+    <path d="M -40 940 C 120 660, 290 420, 560 365 C 740 328, 885 408, 932 528 C 865 468, 765 465, 695 520 C 615 585, 650 698, 825 752 C 1020 812, 1340 835, 1960 768 L 1960 1080 L -40 1080 Z" fill="url(#kwWaveBody)"/>
+    <path d="M 42 865 C 195 628, 365 452, 585 412 C 708 390, 808 424, 868 476" stroke="#7e9cd8" stroke-width="3.2" opacity="0.55"/>
+    <path d="M 140 912 C 280 698, 428 532, 622 482 C 718 456, 792 478, 835 510" stroke="#6a9589" stroke-width="2.4" opacity="0.46"/>
+    <path d="M 248 962 C 375 775, 505 635, 655 582" stroke="#7e9cd8" stroke-width="2" opacity="0.4"/>
+    <path d="M 480 375 C 575 335, 725 326, 835 385 C 902 420, 950 486, 955 552 C 920 515, 892 505, 874 522 C 892 476, 865 445, 830 454 C 845 420, 808 395, 764 415 C 782 378, 734 366, 688 394 C 698 362, 646 355, 595 382 C 555 368, 514 378, 480 375 Z" fill="#dcd7ba" opacity="0.92"/>
+  </g>
+  <g>
+    <path d="M -40 1010 C 165 860, 355 775, 565 815 C 775 855, 965 960, 1235 890 C 1460 832, 1690 770, 1960 845 L 1960 1080 L -40 1080 Z" fill="url(#kwWaveFront)"/>
+    <path d="M 1220 892 C 1345 802, 1485 758, 1618 792 C 1545 812, 1495 858, 1495 908" stroke="#dcd7ba" stroke-width="4.5" stroke-linecap="round" opacity="0.72"/>
+    <path d="M 240 855 C 390 795, 550 808, 695 868" stroke="#dcd7ba" stroke-width="4" stroke-linecap="round" opacity="0.65"/>
+    <path d="M 780 960 C 980 985, 1180 955, 1390 902" stroke="#6a9589" stroke-width="2.6" opacity="0.48"/>
+  </g>
+  <g fill="#dcd7ba" opacity="0.82">
+    <circle cx="966" cy="462" r="5"/>
+    <circle cx="994" cy="494" r="3.6"/>
+    <circle cx="942" cy="422" r="4.2"/>
+    <circle cx="1024" cy="536" r="3"/>
+    <circle cx="888" cy="368" r="4.6"/>
+    <circle cx="834" cy="340" r="3.4"/>
+    <circle cx="752" cy="322" r="3.8"/>
+    <circle cx="1012" cy="456" r="2.6"/>
+    <circle cx="1588" cy="762" r="3.8"/>
+    <circle cx="1632" cy="748" r="2.8"/>
+    <circle cx="520" cy="788" r="3.4"/>
+  </g>
+</svg>

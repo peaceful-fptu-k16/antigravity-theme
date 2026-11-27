@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="aols_arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#526fff" stop-opacity="0.16"/>
+      <stop offset="38%" stop-color="#526fff" stop-opacity="0.88"/>
+      <stop offset="74%" stop-color="#a626a4" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#0184bc" stop-opacity="0.24"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 8 122 24" stroke="url(#aols_arc)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 31 Q 66 15 112 27" stroke="#a626a4" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.5"/>
+  <g transform="translate(88, 18)">
+    <ellipse cx="0" cy="0" rx="12" ry="4.8" transform="rotate(-24)" stroke="#526fff" stroke-width="1.25"/>
+    <ellipse cx="0" cy="0" rx="12" ry="4.8" transform="rotate(34)" stroke="#a626a4" stroke-width="1.25"/>
+    <ellipse cx="0" cy="0" rx="11" ry="4.2" transform="rotate(92)" stroke="#0184bc" stroke-width="1" opacity="0.72"/>
+    <circle cx="0" cy="0" r="2.2" fill="#526fff"/>
+    <circle cx="-9.5" cy="4.2" r="1.5" fill="#fafafa" stroke="#526fff" stroke-width="1.1"/>
+    <circle cx="9.2" cy="-4.2" r="1.5" fill="#fafafa" stroke="#a626a4" stroke-width="1.1"/>
+  </g>
+  <g transform="translate(38, 17)">
+    <ellipse cx="0" cy="0" rx="7.5" ry="3" transform="rotate(-18)" stroke="#a626a4" stroke-width="1.1" opacity="0.85"/>
+    <circle cx="0" cy="0" r="1.6" fill="#526fff"/>
+    <circle cx="6.2" cy="-1.8" r="1.2" fill="#0184bc"/>
+  </g>
+  <path d="M 18 20.5 L 19 18.2 L 21.3 17.2 L 19 16.2 L 18 13.9 L 17 16.2 L 14.7 17.2 L 17 18.2 Z" fill="#526fff" opacity="0.84"/>
+  <path d="M 114 14 L 114.9 11.8 L 117 11 L 114.9 10.2 L 114 8 L 113.1 10.2 L 111 11 L 113.1 11.8 Z" fill="#a626a4" opacity="0.84"/>
+  <circle cx="60" cy="12.5" r="1.35" fill="#526fff" opacity="0.72"/>
+</svg>

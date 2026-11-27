@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<linearGradient id="gdda_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#131926"/><stop offset="100%" stop-color="#090b0f"/>
+</linearGradient>
+<linearGradient id="gdda_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+<stop offset="0%" stop-color="#bc8cff"/><stop offset="50%" stop-color="#58a6ff"/><stop offset="100%" stop-color="#3fb950"/>
+</linearGradient>
+<radialGradient id="gdda_core" cx="50%" cy="50%" r="50%">
+<stop offset="0%" stop-color="#f0f6fc"/><stop offset="48%" stop-color="#58a6ff"/><stop offset="100%" stop-color="#bc8cff" stop-opacity="0.25"/>
+</radialGradient>
+</defs>
+<circle cx="32" cy="32" r="30" fill="url(#gdda_bg)"/>
+<ellipse cx="32" cy="32" rx="22" ry="10.5" transform="rotate(-28 32 32)" stroke="#bc8cff" stroke-width="1.35" stroke-opacity="0.72"/>
+<ellipse cx="32" cy="32" rx="22" ry="10.5" transform="rotate(28 32 32)" stroke="#58a6ff" stroke-width="1.35" stroke-opacity="0.72"/>
+<path d="M32 16L36.2 27.8 48 32 36.2 36.2 32 48 27.8 36.2 16 32 27.8 27.8Z" fill="url(#gdda_core)" stroke="#f0f6fc" stroke-opacity="0.75"/>
+<circle cx="32" cy="32" r="3.4" fill="#0d1117" stroke="#f0f6fc" stroke-width="1.4"/>
+<circle cx="15.5" cy="23" r="2.2" fill="#0d1117" stroke="#58a6ff" stroke-width="1.3"/>
+<circle cx="48.5" cy="23" r="2.2" fill="#0d1117" stroke="#bc8cff" stroke-width="1.3"/>
+<circle cx="32" cy="32" r="29.2" stroke="url(#gdda_ring)" stroke-width="2"/>
+</svg>

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="cfrStArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#8caaee" stop-opacity="0.14"/>
+      <stop offset="38%" stop-color="#ca9ee6" stop-opacity="0.92"/>
+      <stop offset="72%" stop-color="#81c8be" stop-opacity="0.94"/>
+      <stop offset="100%" stop-color="#e5c890" stop-opacity="0.28"/>
+    </linearGradient>
+    <linearGradient id="cfrStPeak" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f4b8e4"/>
+      <stop offset="55%" stop-color="#ca9ee6"/>
+      <stop offset="100%" stop-color="#51576d"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 7 122 24" stroke="url(#cfrStArc)" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 18 31 C 50 19 80 15 114 27" stroke="#81c8be" stroke-width="0.9" stroke-dasharray="3 3" opacity="0.62"/>
+  <g transform="translate(88, 22)">
+    <path d="M -14 2 L -5 -10 L 2 -1 L 7 -7 L 15 2 Z" fill="url(#cfrStPeak)" opacity="0.92"/>
+    <path d="M -5 -10 L -2 -4 L -6 -3 Z" fill="#f2d5cf" opacity="0.72"/>
+    <path d="M -16 3 Q 0 -1 16 3" stroke="#81c8be" stroke-width="1.15" stroke-linecap="round" opacity="0.85"/>
+    <circle cx="-1" cy="-13" r="1.9" fill="#e5c890"/>
+  </g>
+  <g>
+    <circle cx="30" cy="20" r="4.2" fill="#e5c890" opacity="0.24"/>
+    <circle cx="30" cy="20" r="1.7" fill="#e5c890"/>
+    <circle cx="48" cy="14" r="3.8" fill="#81c8be" opacity="0.26"/>
+    <circle cx="48" cy="14" r="1.6" fill="#81c8be"/>
+    <circle cx="64" cy="18" r="3.4" fill="#f4b8e4" opacity="0.25"/>
+    <circle cx="64" cy="18" r="1.4" fill="#f4b8e4"/>
+  </g>
+  <path d="M 112 14 L 113 11.4 L 115.6 10.4 L 113 9.4 L 112 6.8 L 111 9.4 L 108.4 10.4 L 111 11.4 Z" fill="#e5c890"/>
+  <path d="M 17 20 L 18 17.6 L 20.4 16.6 L 18 15.6 L 17 13.2 L 16 15.6 L 13.6 16.6 L 16 17.6 Z" fill="#ca9ee6" opacity="0.9"/>
+</svg>

@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="zen-bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#353535"/>
+      <stop offset="48%" stop-color="#3f3f3f"/>
+      <stop offset="100%" stop-color="#333331"/>
+    </linearGradient>
+    <radialGradient id="zen-moon-halo" cx="76%" cy="22%" r="38%">
+      <stop offset="0%" stop-color="#f0dfaf" stop-opacity="0.2"/>
+      <stop offset="48%" stop-color="#8cd0d3" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#3f3f3f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="zen-sage-mist" cx="18%" cy="26%" r="40%">
+      <stop offset="0%" stop-color="#7f9f7f" stop-opacity="0.14"/>
+      <stop offset="65%" stop-color="#3f3f3f" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="zen-stone-a" x1="20%" y1="0%" x2="80%" y2="100%">
+      <stop offset="0%" stop-color="#585750"/>
+      <stop offset="55%" stop-color="#3b3b38"/>
+      <stop offset="100%" stop-color="#2a2a28"/>
+    </linearGradient>
+    <linearGradient id="zen-stone-b" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#504f49"/>
+      <stop offset="100%" stop-color="#292927"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#zen-bg)"/>
+  <rect width="1920" height="1080" fill="url(#zen-moon-halo)"/>
+  <rect width="1920" height="1080" fill="url(#zen-sage-mist)"/>
+  <!-- Quiet misty horizon & pale warm-sand moon -->
+  <circle cx="1460" cy="225" r="88" fill="#f0dfaf" opacity="0.18"/>
+  <circle cx="1460" cy="225" r="56" fill="#f0dfaf" opacity="0.22"/>
+  <path d="M 0 360 Q 480 315 960 355 T 1920 335 L 1920 440 L 0 440 Z" fill="#4b4b48" opacity="0.34"/>
+  <!-- Serene raked karesansui sand wave ripples across warm stone garden -->
+  <g stroke="#f0dfaf" stroke-width="2" fill="none" opacity="0.15">
+    <path d="M 0 470 Q 320 442 640 472 T 1280 462 T 1920 476"/>
+    <path d="M 0 518 Q 320 490 640 520 T 1280 510 T 1920 524"/>
+    <path d="M 0 568 Q 320 540 640 570 T 1280 560 T 1920 574"/>
+    <path d="M 0 622 Q 320 594 640 624 T 1280 614 T 1920 628"/>
+    <path d="M 0 680 Q 320 652 640 682 T 1280 672 T 1920 686"/>
+    <path d="M 0 742 Q 320 714 640 744 T 1280 734 T 1920 748"/>
+    <path d="M 0 808 Q 320 780 640 810 T 1280 800 T 1920 814"/>
+    <path d="M 0 878 Q 320 850 640 880 T 1280 870 T 1920 884"/>
+    <path d="M 0 952 Q 320 924 640 954 T 1280 944 T 1920 958"/>
+  </g>
+  <g stroke="#8cd0d3" stroke-width="1.3" fill="none" opacity="0.11">
+    <path d="M 0 494 Q 320 466 640 496 T 1280 486 T 1920 500"/>
+    <path d="M 0 595 Q 320 567 640 597 T 1280 587 T 1920 601"/>
+    <path d="M 0 710 Q 320 682 640 712 T 1280 702 T 1920 716"/>
+    <path d="M 0 842 Q 320 814 640 844 T 1280 834 T 1920 848"/>
+  </g>
+  <!-- Concentric raked gravel ripples around main garden stones -->
+  <g transform="translate(1320, 725)">
+    <ellipse rx="360" ry="128" stroke="#f0dfaf" stroke-width="2" opacity="0.22"/>
+    <ellipse rx="310" ry="108" stroke="#8cd0d3" stroke-width="1.6" opacity="0.18"/>
+    <ellipse rx="260" ry="90" stroke="#f0dfaf" stroke-width="2" opacity="0.24"/>
+    <ellipse rx="212" ry="72" stroke="#7f9f7f" stroke-width="1.6" opacity="0.22"/>
+    <ellipse rx="166" ry="54" stroke="#f0dfaf" stroke-width="2" opacity="0.26"/>
+    <!-- Sculptural triad of Zen garden stones + muted sage moss -->
+    <ellipse cx="0" cy="18" rx="135" ry="38" fill="#2a2a28" opacity="0.45"/>
+    <path d="M -98 16 C -106 -38 -62 -106 -12 -118 C 36 -128 84 -78 102 -12 C 114 28 72 40 -4 38 C -64 36 -92 34 -98 16 Z" fill="url(#zen-stone-a)"/>
+    <path d="M -86 -8 C -72 -62 -28 -108 6 -114" stroke="#f0dfaf" stroke-width="1.6" opacity="0.32"/>
+    <path d="M 65 24 C 60 -16 92 -52 130 -44 C 164 -36 178 4 162 28 C 142 42 78 40 65 24 Z" fill="url(#zen-stone-b)"/>
+    <!-- Muted sage moss cushion -->
+    <path d="M -96 18 Q -64 -2 -18 14 Q 26 2 78 22 Q 40 42 -28 38 Q -78 36 -96 18 Z" fill="#7f9f7f" opacity="0.38"/>
+  </g>
+  <!-- Secondary calm ripple & stone left-bottom -->
+  <g transform="translate(360, 845)">
+    <ellipse rx="235" ry="82" stroke="#f0dfaf" stroke-width="1.8" opacity="0.18"/>
+    <ellipse rx="184" ry="64" stroke="#8cd0d3" stroke-width="1.4" opacity="0.16"/>
+    <ellipse rx="136" ry="46" stroke="#f0dfaf" stroke-width="1.8" opacity="0.22"/>
+    <path d="M -76 10 C -80 -28 -36 -66 10 -62 C 54 -58 84 -18 76 14 C 66 32 -56 32 -76 10 Z" fill="url(#zen-stone-b)"/>
+    <path d="M -68 12 Q -24 -4 34 12 Q 8 28 -44 26 Z" fill="#7f9f7f" opacity="0.36"/>
+  </g>
+  <!-- Delicate muted sage bamboo stalks & leaves entering upper-left -->
+  <g stroke="#7f9f7f" stroke-linecap="round" opacity="0.34">
+    <path d="M 88 -10 Q 112 180 78 430" stroke-width="4.5"/>
+    <path d="M 152 -10 Q 186 150 156 365" stroke-width="3.2"/>
+    <g fill="#7f9f7f" stroke="none">
+      <path d="M 102 128 Q 168 102 222 126 Q 164 142 102 128 Z"/>
+      <path d="M 100 174 Q 156 176 202 214 Q 144 206 100 174 Z"/>
+      <path d="M 164 218 Q 222 196 272 222 Q 216 236 164 218 Z"/>
+      <path d="M 90 278 Q 148 258 192 284 Q 138 296 90 278 Z"/>
+    </g>
+  </g>
+</svg>

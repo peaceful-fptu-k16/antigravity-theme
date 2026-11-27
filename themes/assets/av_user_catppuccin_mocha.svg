@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="muB" cx=".35" cy=".25" r=".75"><stop offset="0" stop-color="#313244"/><stop offset=".65" stop-color="#1e1e2e"/><stop offset="1" stop-color="#11111b"/></radialGradient>
+<linearGradient id="muR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5c2e7"/><stop offset=".5" stop-color="#cba6f7"/><stop offset="1" stop-color="#89b4fa"/></linearGradient>
+<linearGradient id="muF" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#cdd6f4"/><stop offset="1" stop-color="#cba6f7"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="30" fill="url(#muB)" stroke="url(#muR)" stroke-width="2.4"/>
+<circle cx="32" cy="32" r="26.5" stroke="#cba6f7" stroke-width=".7" stroke-dasharray="3 3" opacity=".45"/>
+<path d="M46 14a6.5 6.5 0 1 0 5 9 5 5 0 1 1-5-9z" fill="#f9e2af" opacity=".9"/>
+<circle cx="17" cy="18" r="1.4" fill="#89dceb" opacity=".9"/>
+<circle cx="32" cy="24.5" r="8.5" fill="url(#muF)"/>
+<path d="M16 51.5C17.5 40.5 23.8 36 32 36s14.5 4.5 16 15.5" fill="url(#muF)" opacity=".94"/>
+<path d="M22.5 38.5q9.5 4.7 19 0" stroke="#f5c2e7" stroke-width="2.4" stroke-linecap="round"/>
+<path d="M38.5 39.8L41 47" stroke="#f5c2e7" stroke-width="2.2" stroke-linecap="round"/>
+<path d="M18 27l1-2.6 2.6-1-2.6-1-1-2.6-1 2.6-2.6 1 2.6 1z" fill="#f5c2e7" opacity=".85"/>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="maB" cx=".5" cy=".38" r=".72"><stop offset="0" stop-color="#383452"/><stop offset=".62" stop-color="#1e1e2e"/><stop offset="1" stop-color="#11111b"/></radialGradient>
+<linearGradient id="maR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#89b4fa"/><stop offset=".5" stop-color="#cba6f7"/><stop offset="1" stop-color="#f5c2e7"/></linearGradient>
+<linearGradient id="maC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f5e0dc"/><stop offset=".52" stop-color="#cba6f7"/><stop offset="1" stop-color="#89b4fa"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="30" fill="url(#maB)" stroke="url(#maR)" stroke-width="2.4"/>
+<ellipse cx="32" cy="34" rx="22" ry="11" transform="rotate(-18 32 34)" stroke="#89b4fa" stroke-width="1.1" opacity=".52"/>
+<path d="M19 27l-2-13 10 7h10l10-7-2 13c3 10-3 20-13 20S16 37 19 27z" fill="#252438" stroke="url(#maR)" stroke-width="1.8" stroke-linejoin="round"/>
+<path d="M32 23.5l2.8 7.3 7.2 2.7-7.2 2.7-2.8 7.3-2.8-7.3-7.2-2.7 7.2-2.7z" fill="url(#maC)"/>
+<circle cx="32" cy="33.5" r="2.6" fill="#f9e2af"/>
+<circle cx="24" cy="27.5" r="1.5" fill="#89dceb"/><circle cx="40" cy="27.5" r="1.5" fill="#89dceb"/>
+<circle cx="49" cy="18" r="1.6" fill="#f9e2af"/><circle cx="15" cy="44" r="1.4" fill="#f5c2e7"/>
+</svg>

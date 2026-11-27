@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="hals_wave" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#5ccfe6" stop-opacity="0.14"/>
+      <stop offset="40%" stop-color="#5ccfe6" stop-opacity="0.9"/>
+      <stop offset="74%" stop-color="#ffd76d" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#d4bfff" stop-opacity="0.26"/>
+    </linearGradient>
+    <radialGradient id="hals_moon" cx="40%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#fff4cc"/>
+      <stop offset="60%" stop-color="#ffd76d"/>
+      <stop offset="100%" stop-color="#f0b749"/>
+    </radialGradient>
+  </defs>
+  <path d="M 6 26 Q 64 11 122 24" stroke="url(#hals_wave)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 30 Q 66 18 112 28" stroke="#5ccfe6" stroke-width="0.9" stroke-dasharray="3.5 3" opacity="0.55"/>
+  <g transform="translate(88, 14)">
+    <circle cx="0" cy="0" r="8" fill="#ffd76d" opacity="0.16"/>
+    <circle cx="0" cy="0" r="4.8" fill="url(#hals_moon)"/>
+    <line x1="-8" y1="7.2" x2="8" y2="7.2" stroke="#ffd76d" stroke-width="1.15" stroke-linecap="round" opacity="0.82"/>
+    <line x1="-5" y1="10" x2="5" y2="10" stroke="#5ccfe6" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  </g>
+  <path d="M 28 19 C 35 15, 45 15, 52 19" stroke="#5ccfe6" stroke-width="1.15" stroke-linecap="round" opacity="0.82"/>
+  <path d="M 111 13 L 111.9 10.8 L 114 10 L 111.9 9.2 L 111 7 L 110.1 9.2 L 108 10 L 110.1 10.8 Z" fill="#ffd76d" opacity="0.9"/>
+  <path d="M 20 20 L 20.8 18 L 22.8 17.2 L 20.8 16.4 L 20 14.4 L 19.2 16.4 L 17.2 17.2 L 19.2 18 Z" fill="#5ccfe6" opacity="0.86"/>
+  <circle cx="62" cy="13.5" r="1.2" fill="#d4bfff" opacity="0.82"/>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="ayma_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#282e3d"/>
+      <stop offset="100%" stop-color="#141820"/>
+    </linearGradient>
+    <linearGradient id="ayma_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#73d0ff"/>
+      <stop offset="55%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ffa759"/>
+    </linearGradient>
+    <linearGradient id="ayma_orb" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fff0c2"/>
+      <stop offset="55%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ffa759"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#ayma_bg)"/>
+  <circle cx="32" cy="32" r="21" stroke="#73d0ff" stroke-width="1.1" stroke-opacity="0.35"/>
+  <path d="M 20 33 A 12 12 0 0 1 44 33 Z" fill="url(#ayma_orb)"/>
+  <polygon points="32,14 35.5,24 32,27 28.5,24" fill="#fff0c2" opacity="0.9"/>
+  <path d="M 12 37 C 21 34, 43 34, 52 37" stroke="#73d0ff" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 16 42 C 24 39.5, 40 39.5, 48 42" stroke="#ffcc66" stroke-width="1.35" stroke-linecap="round" opacity="0.84"/>
+  <path d="M 22 46.5 C 27 45, 37 45, 42 46.5" stroke="#73d0ff" stroke-width="1.15" stroke-linecap="round" opacity="0.65"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#ayma_ring)" stroke-width="2"/>
+</svg>

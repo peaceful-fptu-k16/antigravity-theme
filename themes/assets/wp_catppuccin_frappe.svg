@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+<defs>
+<linearGradient id="frS" x1="0" y1="0" x2=".12" y2="1"><stop offset="0" stop-color="#232634"/><stop offset=".38" stop-color="#292c3c"/><stop offset=".68" stop-color="#303446"/><stop offset="1" stop-color="#48425e"/></linearGradient>
+<radialGradient id="frD" cx=".56" cy=".56" r=".54"><stop offset="0" stop-color="#f4b8e4" stop-opacity=".28"/><stop offset=".36" stop-color="#ca9ee6" stop-opacity=".18"/><stop offset=".7" stop-color="#8caaee" stop-opacity=".08"/><stop offset="1" stop-color="#303446" stop-opacity="0"/></radialGradient>
+<radialGradient id="frT" cx=".18" cy=".28" r=".4"><stop offset="0" stop-color="#81c8be" stop-opacity=".16"/><stop offset=".55" stop-color="#8caaee" stop-opacity=".07"/><stop offset="1" stop-color="#292c3c" stop-opacity="0"/></radialGradient>
+<linearGradient id="frP0" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#605b7e" stop-opacity=".72"/><stop offset="1" stop-color="#3a3d55" stop-opacity=".92"/></linearGradient>
+<linearGradient id="frP1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4b4b68"/><stop offset="1" stop-color="#303446"/></linearGradient>
+<linearGradient id="frP2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3b3e55"/><stop offset="1" stop-color="#272a3a"/></linearGradient>
+<linearGradient id="frP3" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2b2e3f"/><stop offset="1" stop-color="#1e202c"/></linearGradient>
+<linearGradient id="frM" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ca9ee6" stop-opacity=".24"/><stop offset=".55" stop-color="#8caaee" stop-opacity=".12"/><stop offset="1" stop-color="#303446" stop-opacity="0"/></linearGradient>
+<radialGradient id="frFG"><stop offset="0" stop-color="#e5c890" stop-opacity=".95"/><stop offset=".38" stop-color="#ef9f76" stop-opacity=".35"/><stop offset="1" stop-color="#ef9f76" stop-opacity="0"/></radialGradient>
+<radialGradient id="frFT"><stop offset="0" stop-color="#81c8be" stop-opacity=".88"/><stop offset=".42" stop-color="#99d1db" stop-opacity=".28"/><stop offset="1" stop-color="#81c8be" stop-opacity="0"/></radialGradient>
+<radialGradient id="frFP"><stop offset="0" stop-color="#f4b8e4" stop-opacity=".72"/><stop offset=".5" stop-color="#ca9ee6" stop-opacity=".2"/><stop offset="1" stop-color="#ca9ee6" stop-opacity="0"/></radialGradient>
+</defs>
+<rect width="1920" height="1080" fill="url(#frS)"/>
+<rect width="1920" height="1080" fill="url(#frD)"/>
+<rect width="1920" height="1080" fill="url(#frT)"/>
+<g opacity=".82">
+<circle cx="176" cy="128" r="1.6" fill="#c6d0f5"/><circle cx="348" cy="196" r="1.4" fill="#ca9ee6"/>
+<circle cx="512" cy="98" r="1.9" fill="#e5c890"/><circle cx="696" cy="174" r="1.5" fill="#81c8be"/>
+<circle cx="884" cy="108" r="1.7" fill="#c6d0f5"/><circle cx="1092" cy="154" r="2" fill="#f4b8e4"/>
+<circle cx="1294" cy="92" r="1.5" fill="#8caaee"/><circle cx="1488" cy="182" r="1.8" fill="#e5c890"/>
+<circle cx="1692" cy="124" r="1.6" fill="#c6d0f5"/><circle cx="1824" cy="212" r="1.4" fill="#81c8be"/>
+<path d="M1364 218l2.8-8 8-2.8-8-2.8-2.8-8-2.8 8-8 2.8 8 2.8z" fill="#e5c890"/>
+<path d="M416 254l2.4-6.5 6.4-2.5-6.4-2.5-2.4-6.5-2.4 6.5-6.4 2.5 6.4 2.5z" fill="#81c8be"/>
+</g>
+<path d="M0 612l194-108 188 58 222-136 228 108 232-122 224 100 228-118 222 104 182-62v644H0z" fill="url(#frP0)"/>
+<path d="M604 426l74 92-52 4-42-46z" fill="#f4b8e4" opacity=".18"/>
+<path d="M1064 412l78 96-58-4-46-42z" fill="#ca9ee6" opacity=".22"/>
+<path d="M1516 394l82 102-60-8-50-42z" fill="#f4b8e4" opacity=".2"/>
+<path d="M-40 604c280-46 550-10 900-36 360-26 680 30 1100-14v166H-40z" fill="url(#frM)"/>
+<path d="M0 698l164-74 184 42 194-102 232 92 212-68 250 80 210-110 238 90 236-64v496H0z" fill="url(#frP1)"/>
+<path d="M-40 730c350-54 660-4 1020-42 340-36 640 30 980-6v168H-40z" fill="url(#frM)" opacity=".85"/>
+<path d="M0 792c210-60 418-28 642-76 216-46 440 62 702 8 210-44 404 32 576 4v352H0z" fill="url(#frP2)"/>
+<path d="M0 882c240-64 486 14 764-28 254-38 504 44 800-10 148-26 270 8 356 30v206H0z" fill="url(#frP3)"/>
+<g>
+<circle cx="242" cy="836" r="34" fill="url(#frFG)"/><circle cx="242" cy="836" r="3.6" fill="#e5c890"/>
+<circle cx="468" cy="762" r="28" fill="url(#frFT)"/><circle cx="468" cy="762" r="3" fill="#81c8be"/>
+<circle cx="694" cy="918" r="42" fill="url(#frFG)"/><circle cx="694" cy="918" r="4.2" fill="#e5c890"/>
+<circle cx="942" cy="814" r="30" fill="url(#frFP)"/><circle cx="942" cy="814" r="3.2" fill="#f4b8e4"/>
+<circle cx="1186" cy="896" r="38" fill="url(#frFT)"/><circle cx="1186" cy="896" r="3.8" fill="#81c8be"/>
+<circle cx="1434" cy="788" r="32" fill="url(#frFG)"/><circle cx="1434" cy="788" r="3.5" fill="#e5c890"/>
+<circle cx="1648" cy="912" r="44" fill="url(#frFP)"/><circle cx="1648" cy="912" r="4" fill="#f4b8e4"/>
+<circle cx="1792" cy="818" r="26" fill="url(#frFG)"/><circle cx="1792" cy="818" r="2.8" fill="#e5c890"/>
+</g>
+</svg>

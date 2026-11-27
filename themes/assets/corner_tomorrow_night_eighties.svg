@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="tnc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6699cc"/>
+      <stop offset="55%" stop-color="#cc99cc"/>
+      <stop offset="100%" stop-color="#66cccc"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 5 L 30 5" stroke="url(#tnc-rim)" stroke-width="1.65" stroke-linecap="square"/>
+  <path d="M 7.5 22 L 7.5 9.5 L 22 9.5" stroke="#cccccc" stroke-width="0.95" opacity="0.5"/>
+  <!-- Stepped Base16 cassette corner bars -->
+  <line x1="11" y1="13" x2="21" y2="13" stroke="#f2777a" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="11" y1="16" x2="18.5" y2="16" stroke="#ffcc66" stroke-width="1.6" stroke-linecap="round"/>
+  <line x1="11" y1="19" x2="16" y2="19" stroke="#66cccc" stroke-width="1.6" stroke-linecap="round"/>
+  <rect x="32.5" y="3.5" width="3" height="3" fill="#99cc99"/>
+  <rect x="1.5" y="32.5" width="3" height="3" fill="#cc99cc"/>
+</svg>

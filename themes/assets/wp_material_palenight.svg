@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="mpBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1b1e2b"/>
+      <stop offset="48%" stop-color="#292d3e"/>
+      <stop offset="100%" stop-color="#1f2334"/>
+    </linearGradient>
+    <radialGradient id="mpOrchidGlow" cx="76%" cy="22%" r="44%">
+      <stop offset="0%" stop-color="#c792ea" stop-opacity="0.28"/>
+      <stop offset="48%" stop-color="#82aaff" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#292d3e" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="mpCyanGlow" cx="20%" cy="76%" r="42%">
+      <stop offset="0%" stop-color="#89ddff" stop-opacity="0.2"/>
+      <stop offset="52%" stop-color="#82aaff" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#1b1e2b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="mpWave1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3c4260" stop-opacity="0.86"/>
+      <stop offset="100%" stop-color="#292d3e" stop-opacity="0.96"/>
+    </linearGradient>
+    <linearGradient id="mpWave2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#343a54"/>
+      <stop offset="100%" stop-color="#222638"/>
+    </linearGradient>
+    <linearGradient id="mpWave3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d3147"/>
+      <stop offset="100%" stop-color="#1a1d2a"/>
+    </linearGradient>
+    <linearGradient id="mpPrismLineA" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c792ea" stop-opacity="0"/>
+      <stop offset="32%" stop-color="#82aaff" stop-opacity="0.72"/>
+      <stop offset="68%" stop-color="#89ddff" stop-opacity="0.82"/>
+      <stop offset="100%" stop-color="#c3e88d" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mpPrismLineB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffcb6b" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#c792ea" stop-opacity="0.68"/>
+      <stop offset="78%" stop-color="#82aaff" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#89ddff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="mpFacetA" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#89ddff" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#c792ea" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="mpFacetB" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c792ea" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#82aaff" stop-opacity="0.05"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#mpBg)"/>
+  <rect width="1920" height="1080" fill="url(#mpOrchidGlow)"/>
+  <rect width="1920" height="1080" fill="url(#mpCyanGlow)"/>
+  <g stroke="#82aaff" stroke-width="1" opacity="0.08">
+    <line x1="0" y1="270" x2="1920" y2="270"/>
+    <line x1="0" y1="540" x2="1920" y2="540"/>
+    <line x1="0" y1="810" x2="1920" y2="810"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/>
+  </g>
+  <path d="M 0 420 L 420 296 L 860 448 L 1380 242 L 1920 388 L 1920 1080 L 0 1080 Z" fill="url(#mpWave1)"/>
+  <path d="M 0 420 L 420 296 L 860 448 L 1380 242 L 1920 388" stroke="#c792ea" stroke-width="2" opacity="0.46"/>
+  <path d="M 0 618 L 360 512 L 792 648 L 1284 468 L 1720 604 L 1920 532 L 1920 1080 L 0 1080 Z" fill="url(#mpWave2)"/>
+  <path d="M 0 618 L 360 512 L 792 648 L 1284 468 L 1720 604 L 1920 532" stroke="#82aaff" stroke-width="2" opacity="0.44"/>
+  <path d="M 0 824 C 320 718 680 732 1040 834 C 1360 924 1660 762 1920 806 L 1920 1080 L 0 1080 Z" fill="url(#mpWave3)"/>
+  <path d="M 0 824 C 320 718 680 732 1040 834 C 1360 924 1660 762 1920 806" stroke="#89ddff" stroke-width="1.8" opacity="0.38"/>
+  <g>
+    <line x1="-60" y1="920" x2="1120" y2="-40" stroke="url(#mpPrismLineA)" stroke-width="2.6"/>
+    <line x1="220" y1="1120" x2="1560" y2="-40" stroke="url(#mpPrismLineA)" stroke-width="1.6" opacity="0.72"/>
+    <line x1="680" y1="1120" x2="1980" y2="110" stroke="url(#mpPrismLineA)" stroke-width="2.2" opacity="0.82"/>
+    <line x1="140" y1="-40" x2="1460" y2="1120" stroke="url(#mpPrismLineB)" stroke-width="1.8" opacity="0.68"/>
+    <line x1="620" y1="-40" x2="1960" y2="980" stroke="url(#mpPrismLineB)" stroke-width="1.4" opacity="0.54"/>
+  </g>
+  <g>
+    <polygon points="1460,152 1584,276 1460,400 1336,276" fill="url(#mpFacetA)" stroke="#89ddff" stroke-width="1.5" opacity="0.82"/>
+    <polygon points="1460,152 1584,276 1460,276" fill="#c792ea" opacity="0.16"/>
+    <polygon points="1460,400 1336,276 1460,276" fill="#82aaff" opacity="0.14"/>
+    <polygon points="416,568 518,670 416,772 314,670" fill="url(#mpFacetB)" stroke="#c792ea" stroke-width="1.4" opacity="0.76"/>
+    <polygon points="416,568 518,670 416,670" fill="#89ddff" opacity="0.14"/>
+    <polygon points="1044,336 1112,404 1044,472 976,404" fill="url(#mpFacetA)" stroke="#82aaff" stroke-width="1.2" opacity="0.68"/>
+    <polygon points="1648,684 1724,760 1648,836 1572,760" fill="url(#mpFacetB)" stroke="#c3e88d" stroke-width="1.2" opacity="0.56"/>
+  </g>
+  <g opacity="0.88">
+    <circle cx="1460" cy="152" r="4.2" fill="#89ddff"/>
+    <circle cx="1584" cy="276" r="3.6" fill="#c792ea"/>
+    <circle cx="1336" cy="276" r="3.6" fill="#82aaff"/>
+    <circle cx="416" cy="568" r="3.8" fill="#c792ea"/>
+    <circle cx="518" cy="670" r="3.2" fill="#ffcb6b"/>
+    <circle cx="1044" cy="336" r="3.2" fill="#c3e88d"/>
+    <circle cx="792" cy="648" r="3.5" fill="#82aaff"/>
+    <circle cx="1284" cy="468" r="4.0" fill="#89ddff"/>
+  </g>
+</svg>

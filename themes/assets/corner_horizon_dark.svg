@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="hdc_g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e95678"/>
+      <stop offset="60%" stop-color="#fab795"/>
+      <stop offset="100%" stop-color="#fac29a"/>
+    </linearGradient>
+    <linearGradient id="hdc_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ffe2c4"/>
+      <stop offset="55%" stop-color="#fab795"/>
+      <stop offset="100%" stop-color="#e95678"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 31 L 3 11 Q 3 3 11 3 L 31 3" stroke="url(#hdc_g)" stroke-width="1.65" stroke-linecap="round"/>
+  <path d="M 7.5 22 L 7.5 12.5 Q 7.5 7.5 12.5 7.5 L 22 7.5" stroke="#fab795" stroke-width="1.05" opacity="0.82"/>
+  <path d="M 8.5 16 A 5 5 0 0 1 18.5 16 Z" fill="url(#hdc_sun)"/>
+  <path d="M 7 17 L 11 13.5 L 14 16 L 17 14 L 20 17" stroke="#e95678" stroke-width="1.15" stroke-linejoin="round"/>
+  <line x1="9" y1="19.2" x2="18" y2="19.2" stroke="#fac29a" stroke-width="1" stroke-linecap="round"/>
+  <circle cx="31" cy="3" r="1.6" fill="#fab795"/>
+  <circle cx="3" cy="31" r="1.6" fill="#e95678"/>
+</svg>

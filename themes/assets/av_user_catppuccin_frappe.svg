@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="cfrAvUBg" cx="38%" cy="24%" r="74%">
+      <stop offset="0%" stop-color="#414559"/>
+      <stop offset="62%" stop-color="#303446"/>
+      <stop offset="100%" stop-color="#232634"/>
+    </radialGradient>
+    <linearGradient id="cfrAvURing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ca9ee6"/>
+      <stop offset="52%" stop-color="#8caaee"/>
+      <stop offset="100%" stop-color="#81c8be"/>
+    </linearGradient>
+    <linearGradient id="cfrAvUFig" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c6d0f5"/>
+      <stop offset="100%" stop-color="#ca9ee6"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#cfrAvUBg)" stroke="url(#cfrAvURing)" stroke-width="2.4"/>
+  <path d="M 8 44 L 20 34 L 32 41 L 46 31 L 56 42 L 56 54 L 8 54 Z" fill="#292c3c" opacity="0.65"/>
+  <circle cx="32" cy="24" r="8.2" fill="url(#cfrAvUFig)"/>
+  <path d="M 16 51.5 C 17.6 40.6 24 36 32 36 C 40 36 46.4 40.6 48 51.5" fill="url(#cfrAvUFig)" opacity="0.94"/>
+  <path d="M 12 46 Q 32 41 52 46" stroke="#81c8be" stroke-width="1.35" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="48" cy="18" r="4.2" fill="#e5c890" opacity="0.28"/>
+  <circle cx="48" cy="18" r="1.8" fill="#e5c890"/>
+  <circle cx="16" cy="21" r="1.5" fill="#81c8be"/>
+</svg>

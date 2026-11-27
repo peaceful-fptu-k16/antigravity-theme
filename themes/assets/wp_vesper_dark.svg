@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="vspw_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090909"/>
+      <stop offset="52%" stop-color="#101010"/>
+      <stop offset="100%" stop-color="#0c0c0c"/>
+    </linearGradient>
+    <radialGradient id="vspw_spot" cx="72%" cy="28%" r="48%">
+      <stop offset="0%" stop-color="#ffc799" stop-opacity="0.28"/>
+      <stop offset="32%" stop-color="#ffc799" stop-opacity="0.11"/>
+      <stop offset="68%" stop-color="#ffc799" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vspw_mint" cx="26%" cy="74%" r="32%">
+      <stop offset="0%" stop-color="#73c991" stop-opacity="0.16"/>
+      <stop offset="45%" stop-color="#73c991" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vspw_arc_peach" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffc799" stop-opacity="0.04"/>
+      <stop offset="45%" stop-color="#ffc799" stop-opacity="0.58"/>
+      <stop offset="78%" stop-color="#ffffff" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#ffc799" stop-opacity="0.06"/>
+    </linearGradient>
+    <linearGradient id="vspw_slab" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1c1c1c"/>
+      <stop offset="55%" stop-color="#141414"/>
+      <stop offset="100%" stop-color="#0b0b0b"/>
+    </linearGradient>
+    <radialGradient id="vspw_pin" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="28%" stop-color="#73c991"/>
+      <stop offset="100%" stop-color="#73c991" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vspw_floor" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#181818" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#070707" stop-opacity="0.95"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#vspw_bg)"/>
+  <rect width="1920" height="1080" fill="url(#vspw_spot)"/>
+  <rect width="1920" height="1080" fill="url(#vspw_mint)"/>
+  <g stroke="#262626" stroke-width="1" opacity="0.52">
+    <line x1="0" y1="270" x2="1920" y2="270"/>
+    <line x1="0" y1="540" x2="1920" y2="540"/>
+    <line x1="0" y1="810" x2="1920" y2="810"/>
+    <line x1="480" y1="0" x2="480" y2="1080"/>
+    <line x1="960" y1="0" x2="960" y2="1080"/>
+    <line x1="1440" y1="0" x2="1440" y2="1080"/>
+  </g>
+  <g transform="translate(1380, 310)">
+    <circle cx="0" cy="0" r="240" fill="url(#vspw_slab)" stroke="#2c2c2c" stroke-width="1.2"/>
+    <circle cx="0" cy="0" r="240" stroke="url(#vspw_arc_peach)" stroke-width="2.2"/>
+    <circle cx="0" cy="0" r="345" stroke="#ffc799" stroke-opacity="0.22" stroke-width="1.15"/>
+    <circle cx="0" cy="0" r="465" stroke="#a0a0a0" stroke-opacity="0.11" stroke-width="1" stroke-dasharray="4 12"/>
+    <path d="M -240 0 A 240 240 0 0 1 0 -240" stroke="#ffc799" stroke-width="2.6" stroke-opacity="0.72" stroke-linecap="round"/>
+  </g>
+  <g fill="none">
+    <path d="M -60 880 C 320 820, 620 680, 960 540 C 1260 416, 1560 325, 1980 265" stroke="url(#vspw_arc_peach)" stroke-width="1.65"/>
+    <path d="M 140 1080 C 480 870, 840 735, 1280 650 C 1540 600, 1760 560, 1960 520" stroke="#ffc799" stroke-opacity="0.2" stroke-width="1.15"/>
+    <path d="M 280 0 C 380 340, 560 660, 960 865 C 1280 1028, 1620 1060, 1920 1015" stroke="#a0a0a0" stroke-opacity="0.14" stroke-width="1"/>
+  </g>
+  <g transform="translate(500, 800)">
+    <circle cx="0" cy="0" r="42" fill="url(#vspw_pin)" opacity="0.65"/>
+    <circle cx="0" cy="0" r="14" stroke="#73c991" stroke-opacity="0.45" stroke-width="1"/>
+    <line x1="-26" y1="0" x2="-10" y2="0" stroke="#73c991" stroke-opacity="0.55" stroke-width="1"/>
+    <line x1="10" y1="0" x2="26" y2="0" stroke="#73c991" stroke-opacity="0.55" stroke-width="1"/>
+    <line x1="0" y1="-26" x2="0" y2="-10" stroke="#73c991" stroke-opacity="0.55" stroke-width="1"/>
+    <line x1="0" y1="10" x2="0" y2="26" stroke="#73c991" stroke-opacity="0.55" stroke-width="1"/>
+    <circle cx="0" cy="0" r="3.6" fill="#73c991"/>
+    <circle cx="0" cy="0" r="1.4" fill="#ffffff"/>
+  </g>
+  <g stroke="#ffc799" stroke-opacity="0.32" stroke-width="1">
+    <line x1="948" y1="540" x2="972" y2="540"/>
+    <line x1="960" y1="528" x2="960" y2="552"/>
+    <circle cx="960" cy="540" r="4" fill="#101010" stroke="#ffc799" stroke-width="1.5"/>
+  </g>
+  <rect y="840" width="1920" height="240" fill="url(#vspw_floor)"/>
+</svg>

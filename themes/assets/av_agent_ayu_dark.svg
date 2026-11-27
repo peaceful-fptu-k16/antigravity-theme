@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="ayda_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#171c24"/>
+      <stop offset="100%" stop-color="#0a0d10"/>
+    </linearGradient>
+    <linearGradient id="ayda_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#53bdfa"/>
+      <stop offset="50%" stop-color="#ff8f40"/>
+      <stop offset="100%" stop-color="#ffcc66"/>
+    </linearGradient>
+    <linearGradient id="ayda_core" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffe5a3"/>
+      <stop offset="55%" stop-color="#ff8f40"/>
+      <stop offset="100%" stop-color="#53bdfa"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#ayda_bg)"/>
+  <circle cx="32" cy="32" r="20" stroke="#53bdfa" stroke-width="1.15" stroke-opacity="0.45" stroke-dasharray="5 3.5"/>
+  <circle cx="32" cy="32" r="13.5" stroke="#ff8f40" stroke-width="1.25" stroke-opacity="0.68"/>
+  <path d="M 32 13 L 35.6 28.4 L 51 32 L 35.6 35.6 L 32 51 L 28.4 35.6 L 13 32 L 28.4 28.4 Z" fill="url(#ayda_core)"/>
+  <circle cx="32" cy="32" r="4.2" fill="#0f1419" stroke="#ffcc66" stroke-width="1.4"/>
+  <circle cx="32" cy="32" r="1.5" fill="#53bdfa"/>
+  <circle cx="46" cy="18" r="2" fill="#53bdfa"/>
+  <circle cx="18" cy="46" r="2" fill="#ffcc66"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#ayda_ring)" stroke-width="2"/>
+</svg>

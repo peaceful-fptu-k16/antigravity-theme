@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="hss_arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#57c7ff" stop-opacity="0.18"/>
+      <stop offset="35%" stop-color="#57c7ff" stop-opacity="0.96"/>
+      <stop offset="68%" stop-color="#ff6ac1" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#5af78e" stop-opacity="0.38"/>
+    </linearGradient>
+    <linearGradient id="hss_prism" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#57c7ff"/>
+      <stop offset="55%" stop-color="#ff6ac1"/>
+      <stop offset="100%" stop-color="#f3f99d"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 7 122 25" stroke="url(#hss_arc)" stroke-width="1.55" stroke-linecap="round"/>
+  <path d="M 18 32 Q 66 15 113 29" stroke="#5af78e" stroke-width="0.9" stroke-dasharray="3.5 3" opacity="0.65"/>
+  <g transform="translate(88, 19)">
+    <polygon points="0,-10 10,7 -10,7" fill="rgba(87,199,255,0.16)" stroke="url(#hss_prism)" stroke-width="1.35" stroke-linejoin="round"/>
+    <polyline points="2,-8 -3,0 2,0 -2,8" stroke="#f3f99d" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <polyline points="28,15 34,20 28,25" stroke="#57c7ff" stroke-width="1.5"/>
+    <line x1="37" y1="25" x2="44" y2="25" stroke="#5af78e" stroke-width="1.5"/>
+    <polyline points="48,20 55,15 59,19 67,13" stroke="#ff6ac1" stroke-width="1.25"/>
+  </g>
+  <circle cx="17" cy="17" r="1.5" fill="#ff5c57"/>
+  <circle cx="22" cy="17" r="1.5" fill="#f3f99d"/>
+  <circle cx="111" cy="13" r="1.5" fill="#5af78e"/>
+  <circle cx="105" cy="19" r="1.1" fill="#9aedfe"/>
+</svg>

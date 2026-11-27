@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="gdmu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2d333b"/>
+      <stop offset="100%" stop-color="#1c2128"/>
+    </linearGradient>
+    <linearGradient id="gdmu_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#539bf5"/>
+      <stop offset="100%" stop-color="#b083f0"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#gdmu_bg)"/>
+  <path d="M 7 40 C 18 34, 46 34, 57 40" stroke="#539bf5" stroke-width="1.2" stroke-opacity="0.35"/>
+  <path d="M 10 45 C 22 40, 42 40, 54 45" stroke="#b083f0" stroke-width="1" stroke-opacity="0.28"/>
+  <circle cx="32" cy="24" r="8" fill="#3a3f47" stroke="#adbac7" stroke-width="1.45" stroke-opacity="0.8"/>
+  <path d="M 17 51 C 19.2 41, 24.8 36.5, 32 36.5 C 39.2 36.5, 44.8 41, 47 51" fill="#22272e" stroke="url(#gdmu_ring)" stroke-width="1.75" stroke-linecap="round"/>
+  <circle cx="17" cy="21" r="1.8" fill="#539bf5" opacity="0.72"/>
+  <circle cx="47" cy="21" r="1.8" fill="#b083f0" opacity="0.72"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#gdmu_ring)" stroke-width="1.9"/>
+  <circle cx="32" cy="32" r="25.8" stroke="#adbac7" stroke-width="0.65" stroke-opacity="0.22"/>
+</svg>

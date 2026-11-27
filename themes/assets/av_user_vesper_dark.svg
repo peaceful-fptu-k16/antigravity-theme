@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="vspu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1a1a1a"/>
+      <stop offset="100%" stop-color="#090909"/>
+    </linearGradient>
+    <radialGradient id="vspu_spot" cx="72%" cy="24%" r="52%">
+      <stop offset="0%" stop-color="#ffc799" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#101010" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vspu_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffc799"/>
+      <stop offset="65%" stop-color="#5a5a5a"/>
+      <stop offset="100%" stop-color="#73c991"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#vspu_bg)"/>
+  <circle cx="32" cy="32" r="29" fill="url(#vspu_spot)"/>
+  <circle cx="32" cy="32" r="21" stroke="#ffc799" stroke-width="0.8" stroke-opacity="0.28"/>
+  <circle cx="32" cy="24.5" r="7.8" fill="#181818" stroke="#ffc799" stroke-width="1.5"/>
+  <path d="M 16.5 51.5 C 18.8 41.2, 24.8 36.8, 32 36.8 C 39.2 36.8, 45.2 41.2, 47.5 51.5" fill="#121212" stroke="url(#vspu_ring)" stroke-width="1.65" stroke-linecap="round"/>
+  <circle cx="46.5" cy="18.5" r="2.2" fill="#73c991"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#vspu_ring)" stroke-width="1.8"/>
+</svg>

@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="mpu-bg" cx="38%" cy="32%" r="72%">
+      <stop offset="0%" stop-color="#444145"/>
+      <stop offset="60%" stop-color="#2d2a2e"/>
+      <stop offset="100%" stop-color="#1e1c1e"/>
+    </radialGradient>
+    <linearGradient id="mpu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd866"/>
+      <stop offset="50%" stop-color="#ff6188"/>
+      <stop offset="100%" stop-color="#78dce8"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#mpu-bg)" stroke="url(#mpu-rim)" stroke-width="2.2"/>
+  <!-- Diagonal Bauhaus light slash -->
+  <polygon points="10,44 48,12 55,20 17,52" fill="#ffd866" opacity="0.14"/>
+  <line x1="12" y1="45" x2="50" y2="14" stroke="#78dce8" stroke-width="1.2" opacity="0.6"/>
+  <circle cx="32" cy="24" r="7.8" fill="#f8f8f2"/>
+  <path d="M 15 51 C 18 40 24 36 32 36 C 40 36 46 40 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#383539" stroke="#ffd866" stroke-width="1.4"/>
+  <polygon points="32,37 36,43 28,43" fill="#ff6188"/>
+  <circle cx="17" cy="18" r="2.2" fill="#a9dc76" opacity="0.88"/>
+</svg>

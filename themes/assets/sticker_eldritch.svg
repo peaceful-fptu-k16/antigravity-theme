@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="elds_arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#37f499" stop-opacity="0.16"/>
+      <stop offset="35%" stop-color="#37f499" stop-opacity="0.95"/>
+      <stop offset="70%" stop-color="#a48cf2" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#04d1f9" stop-opacity="0.32"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 7 122 25" stroke="url(#elds_arc)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 16 32 Q 66 15 113 29" stroke="#a48cf2" stroke-width="0.95" stroke-dasharray="3.5 3" opacity="0.68"/>
+  <g transform="translate(88, 18)">
+    <circle cx="0" cy="0" r="9" stroke="#37f499" stroke-width="1.35"/>
+    <circle cx="0" cy="0" r="6" stroke="#a48cf2" stroke-width="0.95" stroke-dasharray="2.5 2"/>
+    <ellipse cx="0" cy="0" rx="4.2" ry="2" stroke="#f1fc79" stroke-width="1"/>
+    <ellipse cx="0" cy="0" rx="1" ry="2" fill="#37f499"/>
+    <line x1="0" y1="-11" x2="0" y2="-8.2" stroke="#37f499" stroke-width="1.1"/>
+    <line x1="0" y1="8.2" x2="0" y2="11" stroke="#37f499" stroke-width="1.1"/>
+  </g>
+  <path d="M 28 24 C 34 15, 42 15, 47 21 C 51 25, 57 24, 60 19 C 62 15, 59 12, 56 14" stroke="#a48cf2" stroke-width="1.4" stroke-linecap="round"/>
+  <path d="M 33 27 C 40 28, 48 25, 52 20" stroke="#37f499" stroke-width="1" stroke-linecap="round" opacity="0.82"/>
+  <path d="M 18 20 L 19.2 17 L 22.2 15.8 L 19.2 14.6 L 18 11.6 L 16.8 14.6 L 13.8 15.8 L 16.8 17 Z" fill="#f1fc79"/>
+  <path d="M 111 14 L 112 11.6 L 114.4 10.6 L 112 9.6 L 111 7.2 L 110 9.6 L 107.6 10.6 L 110 11.6 Z" fill="#04d1f9"/>
+  <circle cx="67" cy="14" r="1.3" fill="#37f499"/>
+</svg>

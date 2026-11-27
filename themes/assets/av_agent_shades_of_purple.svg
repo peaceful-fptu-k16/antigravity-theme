@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="sopa_bg" cx="50%" cy="48%" r="58%">
+      <stop offset="0%" stop-color="#3a3370"/>
+      <stop offset="100%" stop-color="#191632"/>
+    </radialGradient>
+    <linearGradient id="sopa_star" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fff199"/>
+      <stop offset="50%" stop-color="#fad000"/>
+      <stop offset="100%" stop-color="#b362ff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#sopa_bg)"/>
+  <circle cx="32" cy="32" r="29" stroke="#fad000" stroke-width="2"/>
+  <circle cx="32" cy="32" r="22" stroke="#b362ff" stroke-width="1.1" stroke-dasharray="4 3" opacity="0.82"/>
+  <polygon points="32,12 37.5,24.5 51,26 40.5,35 43.5,49 32,41.5 20.5,49 23.5,35 13,26 26.5,24.5" fill="rgba(250,208,0,0.18)" stroke="url(#sopa_star)" stroke-width="1.6" stroke-linejoin="round"/>
+  <polygon points="32,22 39,32 32,42 25,32" fill="#b362ff" stroke="#ffffff" stroke-width="1"/>
+  <circle cx="32" cy="32" r="2.8" fill="#fad000"/>
+  <circle cx="32" cy="10" r="1.8" fill="#61ffca"/>
+</svg>

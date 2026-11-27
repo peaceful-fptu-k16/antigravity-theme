@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="odp-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181b20"/>
+      <stop offset="50%" stop-color="#282c34"/>
+      <stop offset="100%" stop-color="#1f232b"/>
+    </linearGradient>
+    <radialGradient id="odp-sky-glow" cx="70%" cy="38%" r="45%">
+      <stop offset="0%" stop-color="#61afef" stop-opacity="0.28"/>
+      <stop offset="46%" stop-color="#56b6c2" stop-opacity="0.12"/>
+      <stop offset="85%" stop-color="#282c34" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="odp-orchid-glow" cx="26%" cy="74%" r="46%">
+      <stop offset="0%" stop-color="#c678dd" stop-opacity="0.22"/>
+      <stop offset="52%" stop-color="#61afef" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#282c34" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="odp-ribbon-a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61afef" stop-opacity="0.22"/>
+      <stop offset="50%" stop-color="#c678dd" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#56b6c2" stop-opacity="0.05"/>
+    </linearGradient>
+    <linearGradient id="odp-ribbon-b" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c678dd" stop-opacity="0.22"/>
+      <stop offset="52%" stop-color="#61afef" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#282c34" stop-opacity="0.04"/>
+    </linearGradient>
+    <linearGradient id="odp-orbit-a" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#61afef" stop-opacity="0.92"/>
+      <stop offset="50%" stop-color="#56b6c2" stop-opacity="0.62"/>
+      <stop offset="100%" stop-color="#c678dd" stop-opacity="0.88"/>
+    </linearGradient>
+    <linearGradient id="odp-orbit-b" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c678dd" stop-opacity="0.9"/>
+      <stop offset="55%" stop-color="#61afef" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#98c379" stop-opacity="0.5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#odp-bg)"/>
+  <rect width="1920" height="1080" fill="url(#odp-sky-glow)"/>
+  <rect width="1920" height="1080" fill="url(#odp-orchid-glow)"/>
+  <!-- Layered translucent glass ribbons sweeping gracefully across canvas -->
+  <path d="M -80 760 C 320 560 720 840 1160 660 C 1480 530 1710 610 1980 480 L 1980 650 C 1690 765 1440 690 1140 815 C 690 1005 310 735 -80 915 Z" fill="url(#odp-ribbon-a)"/>
+  <path d="M -80 760 C 320 560 720 840 1160 660 C 1480 530 1710 610 1980 480" stroke="#61afef" stroke-width="1.6" opacity="0.44"/>
+  <path d="M -80 915 C 310 735 690 1005 1140 815 C 1440 690 1690 765 1980 650" stroke="#c678dd" stroke-width="1.3" opacity="0.34"/>
+  <path d="M -60 440 C 360 320 660 540 1040 390 C 1380 255 1660 345 1980 215 L 1980 325 C 1650 450 1370 365 1030 500 C 650 650 350 435 -60 545 Z" fill="url(#odp-ribbon-b)" opacity="0.72"/>
+  <path d="M -60 440 C 360 320 660 540 1040 390 C 1380 255 1660 345 1980 215" stroke="#c678dd" stroke-width="1.35" opacity="0.36"/>
+  <!-- Deep lower glass fold -->
+  <path d="M 0 940 C 440 820 960 995 1480 860 C 1690 805 1820 830 1920 805 L 1920 1080 L 0 1080 Z" fill="#1d2027" opacity="0.72"/>
+  <!-- Iconic Atom Orbital Rings right-of-center -->
+  <g transform="translate(1335, 420)">
+    <!-- Subtle outer harmonic halo -->
+    <circle r="338" stroke="#61afef" stroke-width="1" stroke-dasharray="6 12" opacity="0.22"/>
+    <circle r="248" stroke="#c678dd" stroke-width="1" opacity="0.18"/>
+    <!-- 3 precision tilted Atom electron orbits -->
+    <ellipse rx="320" ry="118" transform="rotate(-30)" stroke="url(#odp-orbit-a)" stroke-width="2.4"/>
+    <ellipse rx="320" ry="118" transform="rotate(30)" stroke="url(#odp-orbit-b)" stroke-width="2.4"/>
+    <ellipse rx="320" ry="118" transform="rotate(90)" stroke="url(#odp-orbit-a)" stroke-width="2.2" opacity="0.82"/>
+    <!-- Soft inner orbital echo rings -->
+    <ellipse rx="292" ry="102" transform="rotate(-30)" stroke="#61afef" stroke-width="1" opacity="0.24"/>
+    <ellipse rx="292" ry="102" transform="rotate(30)" stroke="#c678dd" stroke-width="1" opacity="0.24"/>
+    <!-- Radiant layered Atom nucleus -->
+    <circle r="48" fill="#61afef" opacity="0.16"/>
+    <circle r="26" fill="#282c34" stroke="#61afef" stroke-width="2.2"/>
+    <circle r="13" fill="#c678dd" opacity="0.88"/>
+    <circle r="6" fill="#abb2bf"/>
+    <!-- Orbiting glowing electrons -->
+    <g>
+      <circle cx="277" cy="-160" r="14" fill="#61afef" opacity="0.24"/><circle cx="277" cy="-160" r="6.5" fill="#61afef"/>
+      <circle cx="-277" cy="-160" r="14" fill="#c678dd" opacity="0.24"/><circle cx="-277" cy="-160" r="6.5" fill="#c678dd"/>
+      <circle cx="0" cy="320" r="13" fill="#56b6c2" opacity="0.24"/><circle cx="0" cy="320" r="6" fill="#56b6c2"/>
+      <circle cx="152" cy="212" r="5" fill="#e5c07b" opacity="0.9"/>
+      <circle cx="-164" cy="198" r="4.5" fill="#98c379" opacity="0.85"/>
+    </g>
+  </g>
+  <!-- Soft floating orbital particle dust left -->
+  <g opacity="0.72">
+    <circle cx="265" cy="230" r="2.8" fill="#61afef"/>
+    <circle cx="420" cy="185" r="2" fill="#c678dd"/>
+    <circle cx="595" cy="275" r="2.5" fill="#56b6c2"/>
+    <circle cx="210" cy="690" r="2.6" fill="#c678dd"/>
+    <circle cx="485" cy="790" r="3" fill="#61afef"/>
+    <circle cx="760" cy="725" r="2.2" fill="#e5c07b"/>
+    <circle cx="885" cy="215" r="2.2" fill="#98c379"/>
+  </g>
+</svg>

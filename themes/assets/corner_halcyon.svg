@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="halc_grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5ccfe6"/>
+      <stop offset="60%" stop-color="#ffd76d"/>
+      <stop offset="100%" stop-color="#d4bfff"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3.5 28 L 3.5 9 Q 3.5 3.5 9 3.5 L 28 3.5" stroke="url(#halc_grad)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 7.5 19.5 C 7.5 12, 12 7.5, 19.5 7.5" stroke="#5ccfe6" stroke-width="1" stroke-linecap="round" opacity="0.68"/>
+  <circle cx="14.5" cy="13" r="3.6" fill="#ffd76d"/>
+  <line x1="9.5" y1="18.2" x2="19.5" y2="18.2" stroke="#ffd76d" stroke-width="1.1" stroke-linecap="round" opacity="0.8"/>
+  <line x1="11.5" y1="20.6" x2="17.5" y2="20.6" stroke="#5ccfe6" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  <circle cx="24" cy="9" r="1.2" fill="#d4bfff" opacity="0.84"/>
+  <circle cx="9" cy="24" r="1.2" fill="#5ccfe6" opacity="0.82"/>
+</svg>

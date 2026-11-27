@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="aaNoBg" cx="38%" cy="28%" r="74%"><stop offset="0%" stop-color="#193d5e"/><stop offset="58%" stop-color="#0b2942"/><stop offset="100%" stop-color="#011220"/></radialGradient>
+<linearGradient id="aaNoRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#c792ea"/><stop offset="55%" stop-color="#82aaff"/><stop offset="100%" stop-color="#ecc48d"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="29" fill="url(#aaNoBg)" stroke="url(#aaNoRim)" stroke-width="2.2"/>
+<circle cx="32" cy="32" r="23.5" stroke="#c792ea" stroke-width="0.9" stroke-dasharray="3 4" opacity="0.48"/>
+<g transform="translate(32, 34)">
+<path d="M -14 -12 L -10 -20 L -4 -14.5 C -1.5 -15.6, 1.5 -15.6, 4 -14.5 L 10 -20 L 14 -12 C 18 -4, 17 8, 9 14 L 0 18 L -9 14 C -17 8, -18 -4, -14 -12 Z" fill="#04192c" stroke="url(#aaNoRim)" stroke-width="1.9"/>
+<circle cx="-6" cy="-4.5" r="5" fill="#011627" stroke="#c792ea" stroke-width="1.4"/>
+<circle cx="6" cy="-4.5" r="5" fill="#011627" stroke="#c792ea" stroke-width="1.4"/>
+<circle cx="-6" cy="-4.5" r="2.5" fill="#ecc48d"/>
+<circle cx="6" cy="-4.5" r="2.5" fill="#ecc48d"/>
+<circle cx="-6" cy="-4.5" r="1.1" fill="#011627"/>
+<circle cx="6" cy="-4.5" r="1.1" fill="#011627"/>
+<polygon points="0,-1.2 3,3.2 0,5.2 -3,3.2" fill="#ecc48d"/>
+<path d="M -7 8.5 L 0 11.5 L 7 8.5" stroke="#82aaff" stroke-width="1.5" stroke-linecap="round"/>
+</g>
+</svg>

@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="ods-arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#56b6c2" stop-opacity="0.22"/>
+      <stop offset="38%" stop-color="#61afef" stop-opacity="0.96"/>
+      <stop offset="72%" stop-color="#c678dd" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#e5c07b" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 8 122 24" stroke="url(#ods-arc)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 18 31 Q 66 15 112 28" stroke="#c678dd" stroke-width="0.9" stroke-dasharray="3.5 3" opacity="0.62"/>
+  <!-- Iconic miniature 3-ring Atom orbital emblem -->
+  <g transform="translate(80, 18)">
+    <ellipse rx="13" ry="4.8" transform="rotate(-30)" stroke="#61afef" stroke-width="1.2"/>
+    <ellipse rx="13" ry="4.8" transform="rotate(30)" stroke="#c678dd" stroke-width="1.2"/>
+    <ellipse rx="13" ry="4.8" transform="rotate(90)" stroke="#56b6c2" stroke-width="1.15" opacity="0.88"/>
+    <circle r="2.5" fill="#abb2bf"/>
+    <circle cx="11" cy="-6.2" r="1.5" fill="#61afef"/>
+    <circle cx="-11" cy="-6.2" r="1.5" fill="#c678dd"/>
+    <circle cx="0" cy="12.5" r="1.4" fill="#e5c07b"/>
+  </g>
+  <!-- Sparkles & glass nodes left -->
+  <path d="M 32 18 L 33.4 14.6 L 36.8 13.2 L 33.4 11.8 L 32 8.4 L 30.6 11.8 L 27.2 13.2 L 30.6 14.6 Z" fill="#61afef" opacity="0.92"/>
+  <path d="M 111 15 L 112.1 12.2 L 114.9 11.1 L 112.1 10 L 111 7.2 L 109.9 10 L 107.1 11.1 L 109.9 12.2 Z" fill="#c678dd" opacity="0.9"/>
+  <circle cx="49" cy="12" r="1.4" fill="#98c379" opacity="0.88"/>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="aaPmBg" cx="38%" cy="28%" r="74%">
+      <stop offset="0%" stop-color="#293042"/>
+      <stop offset="58%" stop-color="#1a1e28"/>
+      <stop offset="100%" stop-color="#11141a"/>
+    </radialGradient>
+    <linearGradient id="aaPmRim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5de4c7"/>
+      <stop offset="55%" stop-color="#89ddff"/>
+      <stop offset="100%" stop-color="#add7ff"/>
+    </linearGradient>
+    <radialGradient id="aaPmOrb" cx="32%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#5de4c7"/>
+      <stop offset="48%" stop-color="#2c354b"/>
+      <stop offset="100%" stop-color="#12151e"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="29" fill="url(#aaPmBg)" stroke="url(#aaPmRim)" stroke-width="2.2"/>
+  <g transform="translate(32, 32)">
+    <ellipse cx="0" cy="0" rx="22" ry="8.5" transform="rotate(-26)" stroke="#89ddff" stroke-width="1.3" opacity="0.72"/>
+    <ellipse cx="0" cy="0" rx="21" ry="8" transform="rotate(24)" stroke="#add7ff" stroke-width="1.1" stroke-dasharray="3 3" opacity="0.6"/>
+    <circle cx="0" cy="0" r="11.5" fill="url(#aaPmOrb)" stroke="#5de4c7" stroke-width="1.5"/>
+    <path d="M -20 9.6 A 22 8.5 -26 0 0 20 -9.6" stroke="#5de4c7" stroke-width="2.1" stroke-linecap="round"/>
+    <circle cx="-15" cy="7.5" r="2.2" fill="#5de4c7"/>
+    <circle cx="15.5" cy="-7" r="1.8" fill="#fffac2"/>
+  </g>
+</svg>

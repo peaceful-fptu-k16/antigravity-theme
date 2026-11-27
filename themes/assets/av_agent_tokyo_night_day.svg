@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="aaTndBg" cx="50%" cy="38%" r="68%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="60%" stop-color="#e3ebfa"/>
+      <stop offset="100%" stop-color="#cdd8ee"/>
+    </radialGradient>
+    <linearGradient id="aaTndPrism" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2e7de9"/>
+      <stop offset="52%" stop-color="#9854f1"/>
+      <stop offset="100%" stop-color="#007197"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#aaTndBg)" stroke="url(#aaTndPrism)" stroke-width="2.2"/>
+  <circle cx="32" cy="32" r="22.5" stroke="#2e7de9" stroke-width="0.9" stroke-dasharray="4 3" opacity="0.52"/>
+  <polygon points="32,12 48,32 32,52 16,32" fill="#ffffff" fill-opacity="0.72" stroke="url(#aaTndPrism)" stroke-width="1.6"/>
+  <path d="M 32 16.5 L 35.6 28.4 L 47.5 32 L 35.6 35.6 L 32 47.5 L 28.4 35.6 L 16.5 32 L 28.4 28.4 Z" fill="url(#aaTndPrism)"/>
+  <circle cx="32" cy="32" r="4.2" fill="#ffffff"/>
+  <circle cx="32" cy="32" r="2" fill="#3760bf"/>
+  <circle cx="17" cy="17" r="2" fill="#2e7de9"/>
+  <circle cx="47" cy="47" r="2" fill="#9854f1"/>
+  <circle cx="47" cy="17" r="1.5" fill="#007197"/>
+</svg>

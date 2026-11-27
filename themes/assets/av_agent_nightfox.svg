@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="aaNfBg" cx="38%" cy="28%" r="74%"><stop offset="0%" stop-color="#28394f"/><stop offset="60%" stop-color="#192330"/><stop offset="100%" stop-color="#0e141d"/></radialGradient>
+<linearGradient id="aaNfRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#63cdcf"/><stop offset="55%" stop-color="#719cd6"/><stop offset="100%" stop-color="#dbc074"/></linearGradient>
+<linearGradient id="aaNfFox" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#63cdcf"/><stop offset="65%" stop-color="#719cd6"/><stop offset="100%" stop-color="#29394f"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="29" fill="url(#aaNfBg)" stroke="url(#aaNfRim)" stroke-width="2.2"/>
+<circle cx="32" cy="32" r="23.5" stroke="#719cd6" stroke-width="0.9" stroke-dasharray="3 4" opacity="0.5"/>
+<g transform="translate(32, 34)">
+<path d="M -15 -3 L -18 -19 L -6 -10 C -2 -11.6, 2 -11.6, 6 -10 L 18 -19 L 15 -3 L 0 14.5 Z" fill="#131c27" stroke="url(#aaNfFox)" stroke-width="2" stroke-linejoin="round"/>
+<polygon points="-14.5,-15 -7.5,-9 -12.5,-5.5" fill="#63cdcf" opacity="0.72"/>
+<polygon points="14.5,-15 7.5,-9 12.5,-5.5" fill="#63cdcf" opacity="0.72"/>
+<polygon points="-7,-1 7,-1 0,9.5" fill="#719cd6" opacity="0.35"/>
+<circle cx="-5.5" cy="-2.2" r="1.8" fill="#dbc074"/>
+<circle cx="5.5" cy="-2.2" r="1.8" fill="#dbc074"/>
+<circle cx="0" cy="12" r="2.2" fill="#cdcecf"/>
+</g>
+</svg>

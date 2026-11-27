@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="auWicBg" cx="35%" cy="25%" r="75%"><stop offset="0%" stop-color="#153d63"/><stop offset="58%" stop-color="#0a2540"/><stop offset="100%" stop-color="#011220"/></radialGradient>
+<linearGradient id="auWicRim" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#d6deeb"/><stop offset="48%" stop-color="#219fd5"/><stop offset="100%" stop-color="#82aaff"/></linearGradient>
+<linearGradient id="auWicFig" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" stop-color="#e8eff9"/><stop offset="100%" stop-color="#219fd5"/></linearGradient>
+<clipPath id="auWicClip"><circle cx="32" cy="32" r="28"/></clipPath>
+</defs>
+<circle cx="32" cy="32" r="29" fill="url(#auWicBg)" stroke="url(#auWicRim)" stroke-width="2.2"/>
+<g clip-path="url(#auWicClip)">
+<circle cx="32" cy="24" r="16" stroke="#219fd5" stroke-width="0.9" stroke-dasharray="3 4" opacity="0.45"/>
+<circle cx="32" cy="24.5" r="8.4" fill="url(#auWicFig)"/>
+<path d="M 15 56 C 16 42, 23 36.5, 32 36.5 C 41 36.5, 48 42, 49 56 Z" fill="url(#auWicFig)" opacity="0.94"/>
+<path d="M 24 44.5 L 32 39.5 L 40 44.5" stroke="#011627" stroke-width="1.5" stroke-linecap="round" opacity="0.55"/>
+</g>
+<circle cx="32" cy="32" r="26" stroke="#219fd5" stroke-width="0.7" opacity="0.28"/>
+<path d="M 47.5 13 L 48.5 15.8 L 51.3 16.8 L 48.5 17.8 L 47.5 20.6 L 46.5 17.8 L 43.7 16.8 L 46.5 15.8 Z" fill="#219fd5"/>
+</svg>

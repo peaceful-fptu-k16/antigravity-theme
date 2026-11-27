@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="dc-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff79c6"/>
+      <stop offset="55%" stop-color="#bd93f9"/>
+      <stop offset="100%" stop-color="#8be9fd"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 31 L 3 10 Q 3 3 10 3 L 31 3" stroke="url(#dc-edge)" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M 7 22 L 7 11.5 Q 7 7 11.5 7 L 22 7" stroke="#bd93f9" stroke-width="1.05" stroke-linecap="round" opacity="0.75"/>
+  <!-- Miniature gothic bat crest & ruby diamond -->
+  <g transform="translate(12, 12) rotate(-45)">
+    <path d="M -6.5 0.5 C -4.2 -2.4 -1.8 -2 -0.8 -0.2 L 0 -2 L 0.8 -0.2 C 1.8 -2 4.2 -2.4 6.5 0.5 C 4.2 0.5 2.7 1.6 1.8 3 C 1 1.6 0.4 1.9 0 3.2 C -0.4 1.9 -1 1.6 -1.8 3 C -2.7 1.6 -4.2 0.5 -6.5 0.5 Z" fill="#ff79c6"/>
+  </g>
+  <path d="M 11.5 9.2 L 13.8 11.5 L 11.5 13.8 L 9.2 11.5 Z" fill="#f8f8f2" opacity="0.9"/>
+  <circle cx="34.5" cy="3" r="1.4" fill="#8be9fd" opacity="0.88"/>
+  <circle cx="3" cy="34.5" r="1.4" fill="#f1fa8c" opacity="0.85"/>
+</svg>

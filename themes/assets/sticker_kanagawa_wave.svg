@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="stKwArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#6a9589" stop-opacity="0.16"/>
+      <stop offset="35%" stop-color="#7e9cd8" stop-opacity="0.92"/>
+      <stop offset="70%" stop-color="#dcd7ba" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#ffa066" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="stKwWave" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#dcd7ba"/>
+      <stop offset="55%" stop-color="#7e9cd8"/>
+      <stop offset="100%" stop-color="#6a9589"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 9 122 24" stroke="url(#stKwArc)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 31 Q 66 15 112 27" stroke="#6a9589" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.56"/>
+  <g transform="translate(86, 18)">
+    <path d="M -17 6 C -11 -7, 1 -10, 10 -4 C 15 -1, 15 4, 10 5 C 6 6, 4 2, 7 0 C 3 -3, -3 -2, -7 4 Z" fill="url(#stKwWave)" opacity="0.92"/>
+    <path d="M -14 5 C -8 -4, 2 -6, 9 -2" stroke="#dcd7ba" stroke-width="1.25" stroke-linecap="round"/>
+    <circle cx="15" cy="-4" r="1.4" fill="#dcd7ba"/>
+    <circle cx="18.5" cy="-1.5" r="1" fill="#ffa066"/>
+    <circle cx="12" cy="-7.5" r="1.1" fill="#dcd7ba" opacity="0.82"/>
+  </g>
+  <g transform="translate(45, 19)">
+    <path d="M -11 4 L -2.5 -5 L 2.5 -5 L 11 4 Z" fill="#2a2a37" stroke="#7e9cd8" stroke-width="1"/>
+    <path d="M -2.5 -5 L 2.5 -5 L 4.5 -2 L 1.8 -3 L 0 -1.5 L -1.8 -3 L -4.5 -2 Z" fill="#dcd7ba"/>
+    <circle cx="7.5" cy="-6.5" r="2.2" fill="#ffa066" opacity="0.88"/>
+  </g>
+  <circle cx="22" cy="18" r="1.6" fill="#e6c384" opacity="0.9"/>
+  <circle cx="113" cy="13" r="1.5" fill="#7e9cd8" opacity="0.9"/>
+  <circle cx="64" cy="14" r="1.1" fill="#dcd7ba" opacity="0.82"/>
+</svg>

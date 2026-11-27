@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="sw84s_arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#36f9f6" stop-opacity="0.15"/>
+      <stop offset="32%" stop-color="#36f9f6" stop-opacity="0.95"/>
+      <stop offset="68%" stop-color="#ff7edb" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#fede5d" stop-opacity="0.35"/>
+    </linearGradient>
+    <linearGradient id="sw84s_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fede5d"/>
+      <stop offset="55%" stop-color="#ff7edb"/>
+      <stop offset="100%" stop-color="#fe4450"/>
+    </linearGradient>
+    <clipPath id="sw84s_clip">
+      <circle cx="88" cy="17" r="9.5"/>
+    </clipPath>
+  </defs>
+  <path d="M 6 28 Q 62 9 122 25" stroke="url(#sw84s_arc)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 16 32 Q 64 15 114 29" stroke="#ff7edb" stroke-width="0.9" stroke-dasharray="3.5 3" opacity="0.65"/>
+  <g clip-path="url(#sw84s_clip)">
+    <rect x="78" y="7" width="20" height="11" fill="url(#sw84s_sun)"/>
+    <rect x="78" y="19.3" width="20" height="2" fill="url(#sw84s_sun)"/>
+    <rect x="78" y="22.4" width="20" height="1.8" fill="url(#sw84s_sun)"/>
+    <rect x="78" y="25.2" width="20" height="1.5" fill="url(#sw84s_sun)"/>
+  </g>
+  <path d="M 73 25 L 103 25" stroke="#36f9f6" stroke-width="1.2" stroke-linecap="round"/>
+  <path d="M 28 24 L 35 14 L 41 20 L 47 11 L 55 24" stroke="#36f9f6" stroke-width="1.35" stroke-linejoin="round"/>
+  <path d="M 35 14 L 38 24 M 47 11 L 46 24" stroke="#ff7edb" stroke-width="0.9" opacity="0.78"/>
+  <path d="M 18 20 L 19.2 16.8 L 22.4 15.6 L 19.2 14.4 L 18 11.2 L 16.8 14.4 L 13.6 15.6 L 16.8 16.8 Z" fill="#fede5d"/>
+  <path d="M 111 15 L 112 12.2 L 114.8 11.2 L 112 10.2 L 111 7.4 L 110 10.2 L 107.2 11.2 L 110 12.2 Z" fill="#36f9f6"/>
+  <circle cx="63" cy="14" r="1.2" fill="#72f1b8"/>
+  <circle cx="103" cy="19" r="1" fill="#ff7edb"/>
+</svg>

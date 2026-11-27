@@ -1,0 +1,86 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="klSky" x1="0%" y1="0%" x2="8%" y2="100%">
+      <stop offset="0%" stop-color="#f8f4d9"/>
+      <stop offset="46%" stop-color="#f2ecbc"/>
+      <stop offset="76%" stop-color="#e9e3b3"/>
+      <stop offset="100%" stop-color="#dfd9aa"/>
+    </linearGradient>
+    <radialGradient id="klSunWash" cx="76%" cy="22%" r="45%">
+      <stop offset="0%" stop-color="#fffdf0" stop-opacity="0.9"/>
+      <stop offset="46%" stop-color="#f7f2cf" stop-opacity="0.45"/>
+      <stop offset="100%" stop-color="#f2ecbc" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="klPond" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#e9e6bf" stop-opacity="0"/>
+      <stop offset="32%" stop-color="#dce0c8" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#ccd4c2" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="klPad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8ea66b" stop-opacity="0.65"/>
+      <stop offset="100%" stop-color="#6f894e" stop-opacity="0.52"/>
+    </linearGradient>
+    <linearGradient id="klPetal" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fffdf4"/>
+      <stop offset="56%" stop-color="#f0d9e0"/>
+      <stop offset="100%" stop-color="#c8788a"/>
+    </linearGradient>
+    <linearGradient id="klPetalViolet" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#faf6eb"/>
+      <stop offset="56%" stop-color="#dbd5e8"/>
+      <stop offset="100%" stop-color="#8b7ca8"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#klSky)"/>
+  <rect width="1920" height="1080" fill="url(#klSunWash)"/>
+  <g opacity="0.42">
+    <path d="M 80 230 Q 340 190 620 222 Q 860 248 1120 208 L 1060 256 Q 760 278 460 258 Q 240 272 120 254 Z" fill="#fffdf2"/>
+    <path d="M 1020 175 Q 1280 138 1540 168 Q 1740 190 1900 162 L 1860 212 Q 1600 232 1340 208 Q 1160 222 1050 205 Z" fill="#fffdf2"/>
+  </g>
+  <path d="M -40 570 Q 320 488 680 548 Q 1080 610 1480 512 Q 1720 468 1960 532 L 1960 660 L -40 660 Z" fill="#e2deb5" opacity="0.65"/>
+  <rect x="0" y="540" width="1920" height="540" fill="url(#klPond)"/>
+  <g stroke="#4d699b" fill="none" opacity="0.28">
+    <ellipse cx="1440" cy="835" rx="285" ry="58" stroke-width="2"/>
+    <ellipse cx="1440" cy="835" rx="395" ry="82" stroke-width="1.5" stroke-dasharray="18 12"/>
+    <ellipse cx="1440" cy="835" rx="510" ry="108" stroke-width="1.2" opacity="0.68"/>
+    <ellipse cx="420" cy="885" rx="220" ry="44" stroke-width="1.8"/>
+    <ellipse cx="420" cy="885" rx="330" ry="68" stroke-width="1.4" stroke-dasharray="14 10"/>
+    <ellipse cx="960" cy="760" rx="190" ry="32" stroke="#4e8ca2" stroke-width="1.5"/>
+    <ellipse cx="960" cy="760" rx="280" ry="48" stroke="#4e8ca2" stroke-width="1.1" opacity="0.7"/>
+  </g>
+  <g>
+    <path d="M 1190 845 C 1170 792, 1260 760, 1345 778 C 1412 792, 1432 835, 1390 872 C 1340 912, 1228 906, 1190 845 L 1285 832 Z" fill="url(#klPad)"/>
+    <path d="M 1515 868 C 1502 818, 1590 788, 1678 806 C 1742 820, 1762 862, 1720 896 C 1666 934, 1554 928, 1515 868 L 1620 855 Z" fill="url(#klPad)" opacity="0.88"/>
+    <path d="M 218 892 C 204 848, 286 818, 368 836 C 428 848, 444 888, 405 918 C 356 952, 255 948, 218 892 L 315 882 Z" fill="url(#klPad)"/>
+    <path d="M 520 924 C 510 890, 574 868, 636 882 C 680 892, 692 922, 662 945 C 624 972, 548 968, 520 924 L 592 916 Z" fill="url(#klPad)" opacity="0.78"/>
+    <g stroke="#546c3b" stroke-width="1.2" opacity="0.34">
+      <line x1="1285" y1="832" x2="1220" y2="808"/>
+      <line x1="1285" y1="832" x2="1365" y2="806"/>
+      <line x1="1285" y1="832" x2="1325" y2="886"/>
+      <line x1="315" y1="882" x2="250" y2="862"/>
+      <line x1="315" y1="882" x2="385" y2="866"/>
+    </g>
+  </g>
+  <g transform="translate(1440, 818)">
+    <path d="M 0 12 C -58 -8, -118 -26, -134 -62 C -94 -58, -42 -36, 0 -8 Z" fill="url(#klPetalViolet)" stroke="#5a4785" stroke-width="1.4" stroke-opacity="0.38"/>
+    <path d="M 0 12 C 58 -8, 118 -26, 134 -62 C 94 -58, 42 -36, 0 -8 Z" fill="url(#klPetalViolet)" stroke="#5a4785" stroke-width="1.4" stroke-opacity="0.38"/>
+    <path d="M 0 10 C -44 -28, -76 -78, -68 -126 C -34 -96, -12 -52, 0 -8 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.4" stroke-opacity="0.36"/>
+    <path d="M 0 10 C 44 -28, 76 -78, 68 -126 C 34 -96, 12 -52, 0 -8 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.4" stroke-opacity="0.36"/>
+    <path d="M 0 12 C -34 -34, -34 -96, 0 -144 C 34 -96, 34 -34, 0 12 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.6" stroke-opacity="0.42"/>
+    <ellipse cx="0" cy="4" rx="22" ry="8" fill="#d4b85e" opacity="0.72"/>
+  </g>
+  <g transform="translate(420, 876) scale(0.76)">
+    <path d="M 0 12 C -58 -8, -118 -26, -134 -62 C -94 -58, -42 -36, 0 -8 Z" fill="url(#klPetalViolet)" stroke="#4d699b" stroke-width="1.5" stroke-opacity="0.4"/>
+    <path d="M 0 12 C 58 -8, 118 -26, 134 -62 C 94 -58, 42 -36, 0 -8 Z" fill="url(#klPetalViolet)" stroke="#4d699b" stroke-width="1.5" stroke-opacity="0.4"/>
+    <path d="M 0 10 C -42 -28, -72 -78, -64 -122 C -32 -94, -12 -50, 0 -8 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.5" stroke-opacity="0.36"/>
+    <path d="M 0 10 C 42 -28, 72 -78, 64 -122 C 32 -94, 12 -50, 0 -8 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.5" stroke-opacity="0.36"/>
+    <path d="M 0 12 C -32 -32, -32 -92, 0 -138 C 32 -92, 32 -32, 0 12 Z" fill="url(#klPetal)" stroke="#c84053" stroke-width="1.6" stroke-opacity="0.42"/>
+    <ellipse cx="0" cy="4" rx="20" ry="7" fill="#d4b85e" opacity="0.7"/>
+  </g>
+  <g stroke="#4d699b" stroke-width="2.2" stroke-linecap="round" opacity="0.34">
+    <path d="M 88 1080 Q 108 860 156 680"/>
+    <path d="M 134 1080 Q 145 890 112 720"/>
+    <path d="M 1835 1080 Q 1810 850 1762 665"/>
+    <path d="M 1790 1080 Q 1780 900 1825 745"/>
+  </g>
+</svg>

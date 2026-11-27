@@ -18,7 +18,7 @@ body {
 }
 
 .studio {
-  max-width: 1040px;
+  max-width: 1100px;
   margin: 0 auto;
   padding: 16px;
   display: flex;
@@ -247,6 +247,12 @@ body {
   font-size: 11.5px;
   font-weight: 550;
   cursor: pointer;
+  transition: border-color 0.12s ease, background 0.12s ease, color 0.12s ease;
+}
+
+.filter-tabs button:hover {
+  border-color: var(--color-ring-primary, #c084fc);
+  color: var(--color-text-primary, #ffffff);
 }
 
 .filter-tabs button.selected {
@@ -257,21 +263,26 @@ body {
 
 .preset-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
-  gap: 10px;
-  max-height: 460px;
+  grid-template-columns: repeat(auto-fill, minmax(232px, 1fr));
+  gap: 11px;
+  max-height: 540px;
   overflow-y: auto;
   padding-right: 4px;
 }
 
 .preset-card {
-  border-radius: 10px;
+  border-radius: 11px;
   overflow: hidden;
   border: 1px solid var(--color-border-primary, rgba(255, 255, 255, 0.12));
   background: var(--color-background-primary, #12101c);
   display: flex;
   flex-direction: column;
-  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  transition: border-color 0.14s ease, box-shadow 0.14s ease, transform 0.14s ease;
+}
+
+.preset-card:hover {
+  border-color: var(--color-ring-primary, rgba(192, 132, 252, 0.65));
+  transform: translateY(-1px);
 }
 
 .preset-card.active {
@@ -279,40 +290,161 @@ body {
   box-shadow: 0 0 0 1px var(--color-ring-primary, #e88bb9);
 }
 
-.swatch {
-  height: 48px;
+.card-preview {
+  height: 112px;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 7px 9px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.preview-wp {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+.preview-scrim {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.preview-scrim.dark {
+  background: linear-gradient(
+    180deg,
+    rgba(6, 8, 16, 0.18) 0%,
+    rgba(6, 8, 16, 0.04) 48%,
+    rgba(6, 8, 16, 0.66) 100%
+  );
+}
+
+.preview-scrim.light {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(255, 255, 255, 0.02) 48%,
+    rgba(15, 23, 42, 0.36) 100%
+  );
+}
+
+.preview-corner {
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+  pointer-events: none;
+  z-index: 2;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.35));
+}
+
+.preview-sticker {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.45));
+}
+
+.preview-sticker.ornament {
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 96px;
+  height: 28px;
+}
+
+.preview-sticker.mascot {
+  right: 8px;
+  bottom: 26px;
+  width: 44px;
+  height: 44px;
+}
+
+.preview-top-right {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  min-height: 18px;
+}
+
+.preview-footer {
+  position: relative;
+  z-index: 3;
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  padding: 7px 9px;
+  gap: 8px;
 }
 
 .swatch-dots {
   display: flex;
-  gap: 5px;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 6px;
+  border-radius: 999px;
+  background: rgba(10, 12, 20, 0.56);
+  border: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 .swatch-dot {
-  width: 13px;
-  height: 13px;
+  width: 11px;
+  height: 11px;
   border-radius: 50%;
-  border: 1.5px solid rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  flex-shrink: 0;
+}
+
+.avatar-pair {
+  display: flex;
+  align-items: center;
+}
+
+.avatar-badge {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1.5px solid rgba(255, 255, 255, 0.85);
+  background: rgba(10, 12, 20, 0.75);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+  display: block;
+}
+
+.avatar-badge + .avatar-badge {
+  margin-left: -6px;
 }
 
 .tag {
   font-size: 9.5px;
-  font-weight: 650;
-  padding: 2px 6px;
+  font-weight: 700;
+  padding: 2px 7px;
   border-radius: 999px;
-  background: rgba(0, 0, 0, 0.58);
+  background: rgba(0, 0, 0, 0.62);
   color: #f8fafc;
   text-transform: uppercase;
-  letter-spacing: 0.03em;
+  letter-spacing: 0.04em;
+}
+
+.tag.active-tag {
+  background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(236, 72, 153, 0.45);
 }
 
 .preset-body {
-  padding: 9px 10px;
+  padding: 9px 10px 10px;
   display: flex;
   flex-direction: column;
   gap: 6px;
@@ -328,16 +460,85 @@ body {
   gap: 6px;
 }
 
+.preset-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.source-pill {
+  font-size: 10px;
+  font-weight: 600;
+  padding: 1px 6px;
+  border-radius: 999px;
+  background: rgba(192, 132, 252, 0.16);
+  color: var(--color-text-secondary, #c4b5fd);
+  border: 1px solid rgba(192, 132, 252, 0.35);
+  flex-shrink: 0;
+}
+
 .preset-concept {
   font-size: 11px;
   color: var(--color-text-secondary, #a1a1aa);
-  min-height: 28px;
+  min-height: 30px;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.feature-badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+.fbadge {
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: 5px;
+  letter-spacing: 0.01em;
+  border: 1px solid var(--color-border-secondary, rgba(255, 255, 255, 0.12));
+  background: var(--color-background-secondary, rgba(255, 255, 255, 0.05));
+  color: var(--color-text-secondary, #cbd5e1);
+}
+
+.fbadge.art {
+  border-color: rgba(56, 189, 248, 0.32);
+  background: rgba(56, 189, 248, 0.12);
+  color: var(--color-text-info, #7dd3fc);
+}
+
+.fbadge.ornament {
+  border-color: rgba(232, 121, 249, 0.32);
+  background: rgba(232, 121, 249, 0.11);
+  color: #f0abfc;
+}
+
+.fbadge.avatars {
+  border-color: rgba(52, 211, 153, 0.32);
+  background: rgba(52, 211, 153, 0.11);
+  color: var(--color-text-success, #6ee7b7);
+}
+
+.fbadge.light {
+  border-color: rgba(251, 191, 36, 0.4);
+  background: rgba(251, 191, 36, 0.14);
+  color: var(--color-text-warning, #fcd34d);
+}
+
+.fbadge.dark {
+  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(148, 163, 184, 0.1);
+  color: var(--color-text-secondary, #cbd5e1);
 }
 
 .preset-actions {
   display: flex;
   gap: 6px;
   margin-top: auto;
+  padding-top: 2px;
 }
 
 .preset-actions .btn {
@@ -467,6 +668,7 @@ select {
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.16s ease;
+  z-index: 50;
 }
 
 .toast.show {

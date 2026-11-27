@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="auElBg" cx="38%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#fffdf4"/>
+      <stop offset="60%" stop-color="#fdf6e3"/>
+      <stop offset="100%" stop-color="#ece5c8"/>
+    </radialGradient>
+    <linearGradient id="auElRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#8da101"/>
+      <stop offset="55%" stop-color="#35a77c"/>
+      <stop offset="100%" stop-color="#dfa000"/>
+    </linearGradient>
+    <clipPath id="auElClip"><circle cx="32" cy="32" r="27"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#auElBg)" stroke="url(#auElRing)" stroke-width="2.2"/>
+  <g clip-path="url(#auElClip)">
+    <path d="M 4 49 Q 18 40 32 45 Q 46 50 60 41 L 60 60 L 4 60 Z" fill="#dbe4c8"/>
+    <circle cx="47" cy="17" r="4.8" fill="#dfa000" opacity="0.28"/>
+    <circle cx="32" cy="24.5" r="8" fill="#5c6a72" stroke="#8da101" stroke-width="1.2"/>
+    <path d="M 15.5 54 C 17 42.5, 24 38, 32 38 C 40 38, 47 42.5, 48.5 54 Z" fill="url(#auElRing)" opacity="0.9"/>
+    <path d="M 23 54 C 24.5 47, 28 43.5, 32 43.5 C 36 43.5, 39.5 47, 41 54 Z" fill="#fdf6e3" opacity="0.32"/>
+  </g>
+</svg>

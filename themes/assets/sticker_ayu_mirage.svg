@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="ayms_wave" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#73d0ff" stop-opacity="0.16"/>
+      <stop offset="38%" stop-color="#73d0ff" stop-opacity="0.88"/>
+      <stop offset="72%" stop-color="#ffcc66" stop-opacity="0.95"/>
+      <stop offset="100%" stop-color="#ffa759" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="ayms_sun" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#fff0c2"/>
+      <stop offset="55%" stop-color="#ffcc66"/>
+      <stop offset="100%" stop-color="#ffa759"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 C 28 21, 50 15, 76 21 C 94 25, 110 24, 122 20" stroke="url(#ayms_wave)" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M 16 31 C 40 26, 62 22, 88 27 C 102 30, 112 29, 118 27" stroke="#73d0ff" stroke-width="0.95" stroke-opacity="0.58" stroke-linecap="round"/>
+  <g transform="translate(86, 15)">
+    <path d="M -7 3 A 7.2 7.2 0 0 1 7 3 Z" fill="url(#ayms_sun)"/>
+    <line x1="-8" y1="5.2" x2="8" y2="5.2" stroke="#ffcc66" stroke-width="1.1" stroke-linecap="round" opacity="0.85"/>
+    <line x1="-5.2" y1="7.8" x2="5.2" y2="7.8" stroke="#73d0ff" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  </g>
+  <path d="M 28 19 C 35 14, 45 14, 52 19" stroke="#73d0ff" stroke-width="1.2" stroke-linecap="round" opacity="0.82"/>
+  <path d="M 35 15 C 40 11, 47 11, 52 15" stroke="#ffcc66" stroke-width="1" stroke-linecap="round" opacity="0.72"/>
+  <path d="M 110 13 L 111 10.6 L 113.4 9.6 L 111 8.6 L 110 6.2 L 109 8.6 L 106.6 9.6 L 109 10.6 Z" fill="#ffcc66" opacity="0.9"/>
+  <circle cx="20" cy="20" r="1.4" fill="#73d0ff" opacity="0.85"/>
+  <circle cx="62" cy="14" r="1.2" fill="#cccac2" opacity="0.75"/>
+</svg>

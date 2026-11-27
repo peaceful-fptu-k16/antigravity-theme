@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="hd_sky" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#11131a"/>
+      <stop offset="30%" stop-color="#1c1e26"/>
+      <stop offset="52%" stop-color="#342131"/>
+      <stop offset="65%" stop-color="#692c43"/>
+      <stop offset="73%" stop-color="#a8445c"/>
+      <stop offset="78%" stop-color="#221e2b"/>
+      <stop offset="100%" stop-color="#101117"/>
+    </linearGradient>
+    <radialGradient id="hd_sunGlow" cx="50%" cy="68%" r="44%">
+      <stop offset="0%" stop-color="#fac29a" stop-opacity="0.48"/>
+      <stop offset="38%" stop-color="#e95678" stop-opacity="0.26"/>
+      <stop offset="75%" stop-color="#e95678" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#1c1e26" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="hd_sunOrb" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#ffe2c4"/>
+      <stop offset="42%" stop-color="#fab795"/>
+      <stop offset="100%" stop-color="#e95678"/>
+    </linearGradient>
+    <linearGradient id="hd_band1" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#e95678" stop-opacity="0"/>
+      <stop offset="28%" stop-color="#e95678" stop-opacity="0.42"/>
+      <stop offset="50%" stop-color="#fab795" stop-opacity="0.62"/>
+      <stop offset="72%" stop-color="#e95678" stop-opacity="0.42"/>
+      <stop offset="100%" stop-color="#e95678" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hd_band2" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#fab795" stop-opacity="0"/>
+      <stop offset="32%" stop-color="#fac29a" stop-opacity="0.34"/>
+      <stop offset="50%" stop-color="#ffe2c4" stop-opacity="0.5"/>
+      <stop offset="68%" stop-color="#fac29a" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#fab795" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="hd_lake" x1="50%" y1="0%" x2="50%" y2="100%">
+      <stop offset="0%" stop-color="#261f2d"/>
+      <stop offset="45%" stop-color="#181922"/>
+      <stop offset="100%" stop-color="#0f1016"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#hd_sky)"/>
+  <ellipse cx="960" cy="700" rx="900" ry="380" fill="url(#hd_sunGlow)"/>
+  <g opacity="0.82">
+    <circle cx="178" cy="128" r="1.7" fill="#d5d8da"/>
+    <circle cx="364" cy="196" r="1.4" fill="#fab795"/>
+    <circle cx="558" cy="108" r="1.8" fill="#d5d8da"/>
+    <circle cx="772" cy="172" r="1.3" fill="#21bfc2"/>
+    <circle cx="1046" cy="96" r="1.9" fill="#fac29a"/>
+    <circle cx="1264" cy="162" r="1.5" fill="#d5d8da"/>
+    <circle cx="1478" cy="118" r="1.7" fill="#e95678"/>
+    <circle cx="1692" cy="184" r="1.8" fill="#fab795"/>
+    <circle cx="1814" cy="112" r="1.4" fill="#27d796"/>
+    <circle cx="290" cy="312" r="1.2" fill="#fac29a"/>
+    <circle cx="1595" cy="296" r="1.3" fill="#e95678"/>
+  </g>
+  <g>
+    <rect x="0" y="510" width="1920" height="28" fill="url(#hd_band1)"/>
+    <rect x="0" y="562" width="1920" height="20" fill="url(#hd_band2)"/>
+    <rect x="0" y="610" width="1920" height="16" fill="url(#hd_band1)"/>
+  </g>
+  <circle cx="960" cy="692" r="185" fill="url(#hd_sunOrb)" opacity="0.94"/>
+  <g>
+    <path d="M -20 790 L 180 595 L 365 670 L 580 545 L 785 690 L 960 645 L 1140 695 L 1355 530 L 1560 660 L 1745 580 L 1940 790 Z" fill="#2a2232"/>
+    <polyline points="180,595 365,670 580,545 785,690 960,645 1140,695 1355,530 1560,660 1745,580" stroke="#fab795" stroke-width="1.6" opacity="0.52"/>
+    <path d="M -20 825 L 140 665 L 320 745 L 510 620 L 710 765 L 905 715 L 1090 770 L 1310 615 L 1505 735 L 1715 645 L 1940 825 Z" fill="#1e1c28"/>
+    <polyline points="140,665 320,745 510,620 710,765 905,715 1090,770 1310,615 1505,735 1715,645" stroke="#e95678" stroke-width="1.5" opacity="0.58"/>
+    <path d="M -20 865 L 220 735 L 440 810 L 650 725 L 820 825 L 1110 825 L 1285 720 L 1495 805 L 1720 725 L 1940 865 Z" fill="#14151e"/>
+  </g>
+  <rect x="0" y="818" width="1920" height="262" fill="url(#hd_lake)"/>
+  <g stroke-linecap="round" opacity="0.72">
+    <line x1="720" y1="846" x2="1200" y2="846" stroke="#fac29a" stroke-width="3.2"/>
+    <line x1="650" y1="874" x2="1270" y2="874" stroke="#fab795" stroke-width="2.4" opacity="0.82"/>
+    <line x1="740" y1="904" x2="1180" y2="904" stroke="#e95678" stroke-width="2.2" opacity="0.76"/>
+    <line x1="690" y1="938" x2="1230" y2="938" stroke="#fab795" stroke-width="1.8" opacity="0.58"/>
+    <line x1="790" y1="976" x2="1130" y2="976" stroke="#e95678" stroke-width="1.5" opacity="0.46"/>
+    <line x1="850" y1="1016" x2="1070" y2="1016" stroke="#fac29a" stroke-width="1.3" opacity="0.35"/>
+  </g>
+  <path d="M 0 1080 L 0 855 L 280 885 L 490 955 L 0 1080 Z" fill="#0f1016"/>
+  <path d="M 1920 1080 L 1920 850 L 1640 882 L 1430 955 L 1920 1080 Z" fill="#0f1016"/>
+</svg>

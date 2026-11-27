@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="edSky" x1="0%" y1="0%" x2="8%" y2="100%">
+      <stop offset="0%" stop-color="#1b2125"/>
+      <stop offset="44%" stop-color="#273036"/>
+      <stop offset="76%" stop-color="#2d353b"/>
+      <stop offset="100%" stop-color="#1e2428"/>
+    </linearGradient>
+    <radialGradient id="edMoonGlow" cx="62%" cy="26%" r="42%">
+      <stop offset="0%" stop-color="#d3c6aa" stop-opacity="0.22"/>
+      <stop offset="42%" stop-color="#83c092" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#2d353b" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="edFireflyGlow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#f3e0b2" stop-opacity="0.95"/>
+      <stop offset="35%" stop-color="#dbbc7f" stop-opacity="0.52"/>
+      <stop offset="100%" stop-color="#a7c080" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="edMist" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#83c092" stop-opacity="0"/>
+      <stop offset="45%" stop-color="#7fbbb3" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#2d353b" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="edRidgeFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#3c494d"/>
+      <stop offset="100%" stop-color="#2b3439"/>
+    </linearGradient>
+    <linearGradient id="edRidgeMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#313c41"/>
+      <stop offset="100%" stop-color="#222a2e"/>
+    </linearGradient>
+    <linearGradient id="edRidgeNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#232c30"/>
+      <stop offset="100%" stop-color="#171d20"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#edSky)"/>
+  <rect width="1920" height="1080" fill="url(#edMoonGlow)"/>
+  <circle cx="1192" cy="264" r="76" fill="#d3c6aa" opacity="0.14"/>
+  <circle cx="1192" cy="264" r="46" fill="#d3c6aa" opacity="0.24"/>
+  <path d="M -40 580 Q 220 432 510 502 Q 790 568 1080 438 Q 1370 326 1670 462 Q 1820 524 1960 478 L 1960 1080 L -40 1080 Z" fill="url(#edRidgeFar)" opacity="0.88"/>
+  <rect x="0" y="455" width="1920" height="190" fill="url(#edMist)"/>
+  <path d="M -40 660 Q 260 518 590 605 Q 920 688 1245 548 Q 1560 442 1960 588 L 1960 1080 L -40 1080 Z" fill="url(#edRidgeMid)"/>
+  <path d="M 110 580 Q 480 540 840 595 Q 1240 650 1660 560 Q 1810 532 1920 555 L 1920 690 Q 1460 735 980 688 Q 520 648 110 700 Z" fill="#83c092" opacity="0.09"/>
+  <path d="M -40 780 Q 320 645 680 738 Q 1040 828 1390 676 Q 1680 578 1960 704 L 1960 1080 L -40 1080 Z" fill="url(#edRidgeNear)"/>
+  <path d="M -40 905 Q 420 822 920 885 Q 1440 946 1960 832 L 1960 1080 L -40 1080 Z" fill="#181f22"/>
+  <g fill="#1c2428">
+    <polygon points="95,530 142,670 118,670 156,790 124,790 172,940 18,940 66,790 34,790 72,670 48,670"/>
+    <polygon points="222,605 260,722 240,722 272,825 245,825 282,955 162,955 199,825 172,825 204,722 184,722"/>
+    <polygon points="344,695 374,788 358,788 384,875 304,875 330,788 314,788"/>
+    <polygon points="1812,512 1860,660 1834,660 1874,785 1842,785 1892,945 1732,945 1782,785 1750,785 1790,660 1764,660"/>
+    <polygon points="1668,588 1708,712 1686,712 1720,822 1692,822 1732,955 1604,955 1644,822 1616,822 1650,712 1628,712"/>
+    <polygon points="1536,685 1568,782 1552,782 1580,872 1492,872 1520,782 1504,782"/>
+  </g>
+  <g stroke="#a7c080" stroke-width="1.4" opacity="0.22">
+    <path d="M 380 795 Q 520 715 680 752 Q 820 782 950 708"/>
+    <path d="M 1080 732 Q 1240 662 1410 718 Q 1520 755 1630 688"/>
+  </g>
+  <g>
+    <circle cx="468" cy="686" r="24" fill="url(#edFireflyGlow)"/>
+    <circle cx="468" cy="686" r="3.4" fill="#f3e0b2"/>
+    <circle cx="624" cy="762" r="20" fill="url(#edFireflyGlow)"/>
+    <circle cx="624" cy="762" r="2.8" fill="#dbbc7f"/>
+    <circle cx="818" cy="644" r="28" fill="url(#edFireflyGlow)"/>
+    <circle cx="818" cy="644" r="3.8" fill="#f3e0b2"/>
+    <circle cx="965" cy="728" r="18" fill="url(#edFireflyGlow)"/>
+    <circle cx="965" cy="728" r="2.6" fill="#a7c080"/>
+    <circle cx="1142" cy="668" r="26" fill="url(#edFireflyGlow)"/>
+    <circle cx="1142" cy="668" r="3.5" fill="#f3e0b2"/>
+    <circle cx="1328" cy="754" r="22" fill="url(#edFireflyGlow)"/>
+    <circle cx="1328" cy="754" r="3" fill="#dbbc7f"/>
+    <circle cx="1465" cy="624" r="20" fill="url(#edFireflyGlow)"/>
+    <circle cx="1465" cy="624" r="2.8" fill="#a7c080"/>
+    <circle cx="294" cy="744" r="18" fill="url(#edFireflyGlow)"/>
+    <circle cx="294" cy="744" r="2.5" fill="#dbbc7f"/>
+    <circle cx="1618" cy="738" r="18" fill="url(#edFireflyGlow)"/>
+    <circle cx="1618" cy="738" r="2.5" fill="#dbbc7f"/>
+    <circle cx="712" cy="842" r="16" fill="url(#edFireflyGlow)"/>
+    <circle cx="1220" cy="836" r="16" fill="url(#edFireflyGlow)"/>
+  </g>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <linearGradient id="halu_bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#242730"/>
+      <stop offset="100%" stop-color="#121317"/>
+    </linearGradient>
+    <linearGradient id="halu_ring" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5ccfe6"/>
+      <stop offset="100%" stop-color="#ffd76d"/>
+    </linearGradient>
+    <radialGradient id="halu_halo" cx="68%" cy="28%" r="46%">
+      <stop offset="0%" stop-color="#ffd76d" stop-opacity="0.32"/>
+      <stop offset="100%" stop-color="#1b1d23" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#halu_bg)"/>
+  <circle cx="32" cy="32" r="29" fill="url(#halu_halo)"/>
+  <circle cx="46" cy="18" r="4" fill="#ffd76d" opacity="0.9"/>
+  <line x1="8" y1="40" x2="56" y2="40" stroke="#5ccfe6" stroke-width="1.2" stroke-opacity="0.45"/>
+  <line x1="39" y1="43.5" x2="51" y2="43.5" stroke="#ffd76d" stroke-width="1.1" stroke-opacity="0.52" stroke-linecap="round"/>
+  <circle cx="32" cy="24.5" r="7.8" fill="#31343c" stroke="#5ccfe6" stroke-width="1.5"/>
+  <path d="M 16.5 51.5 C 18.8 41.2, 24.8 36.8, 32 36.8 C 39.2 36.8, 45.2 41.2, 47.5 51.5" fill="#1b1d23" stroke="url(#halu_ring)" stroke-width="1.75" stroke-linecap="round"/>
+  <circle cx="32" cy="32" r="29.2" stroke="url(#halu_ring)" stroke-width="2"/>
+</svg>

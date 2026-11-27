@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="auTnsBg" cx="38%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#2e3552"/>
+      <stop offset="65%" stop-color="#1f2335"/>
+      <stop offset="100%" stop-color="#151826"/>
+    </radialGradient>
+    <linearGradient id="auTnsRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#7dcfff"/>
+      <stop offset="50%" stop-color="#7aa2f7"/>
+      <stop offset="100%" stop-color="#bb9af7"/>
+    </linearGradient>
+    <clipPath id="auTnsClip"><circle cx="32" cy="32" r="27"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#auTnsBg)" stroke="url(#auTnsRing)" stroke-width="2.2"/>
+  <g clip-path="url(#auTnsClip)">
+    <path d="M8 60 V32 H17 V60 M19 60 V25 H26 V60 M46 60 V28 H56 V60 Z" fill="#2b324d" opacity="0.78"/>
+    <path d="M18 10 L13 22 M48 11 L43 23 M54 22 L50 31" stroke="#7dcfff" stroke-width="1" stroke-linecap="round" opacity="0.48"/>
+    <circle cx="32" cy="24.5" r="8.2" fill="#c0caf5" stroke="#7aa2f7" stroke-width="1.3"/>
+    <path d="M15.5 54 C17 42.5,24 37.5,32 37.5 C40 37.5,47 42.5,48.5 54 Z" fill="url(#auTnsRing)" opacity="0.92"/>
+  </g>
+  <circle cx="51" cy="14" r="2" fill="#7dcfff"/>
+</svg>

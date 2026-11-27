@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="zns-arc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#7f9f7f" stop-opacity="0.28"/>
+      <stop offset="38%" stop-color="#f0dfaf" stop-opacity="0.92"/>
+      <stop offset="72%" stop-color="#8cd0d3" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#dfaf8f" stop-opacity="0.28"/>
+    </linearGradient>
+  </defs>
+  <!-- Calm raked Zen sand ripple arcs -->
+  <path d="M 6 27 Q 64 10 122 25" stroke="url(#zns-arc)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 31 Q 64 17 112 29" stroke="#8cd0d3" stroke-width="0.95" stroke-linecap="round" opacity="0.62"/>
+  <!-- Balanced Zen cairn stones + subtle Enso circle -->
+  <g transform="translate(80, 18)">
+    <path d="M -8 -7 A 10 10 0 1 1 -10 2" stroke="#f0dfaf" stroke-width="1.35" stroke-linecap="round" opacity="0.85"/>
+    <ellipse cx="0" cy="5.5" rx="7.5" ry="3.2" fill="#565656" stroke="#f0dfaf" stroke-width="1"/>
+    <ellipse cx="0" cy="0.5" rx="5.2" ry="2.6" fill="#4b4b4b" stroke="#8cd0d3" stroke-width="1"/>
+    <ellipse cx="0" cy="-3.8" rx="3.2" ry="2" fill="#7f9f7f"/>
+  </g>
+  <!-- Muted sage bamboo leaf sprig left -->
+  <g transform="translate(34, 17) rotate(-14)">
+    <path d="M -8 2 Q 0 -3 9 -1" stroke="#7f9f7f" stroke-width="1.1" stroke-linecap="round"/>
+    <path d="M -2 0 Q 2 -5 8 -3 Q 4 1 -2 0 Z" fill="#7f9f7f" opacity="0.88"/>
+    <path d="M -7 1 Q -3 -4 2 -3 Q -2 1 -7 1 Z" fill="#f0dfaf" opacity="0.72"/>
+  </g>
+  <circle cx="110" cy="15" r="1.4" fill="#dfaf8f" opacity="0.85"/>
+  <circle cx="53" cy="13" r="1.2" fill="#8cd0d3" opacity="0.8"/>
+</svg>

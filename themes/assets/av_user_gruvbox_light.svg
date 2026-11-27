@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="glu-bg" cx="38%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#fdf7de"/>
+      <stop offset="65%" stop-color="#f2e5bc"/>
+      <stop offset="100%" stop-color="#e2d1a0"/>
+    </radialGradient>
+    <linearGradient id="glu-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#af3a03"/>
+      <stop offset="55%" stop-color="#b57614"/>
+      <stop offset="100%" stop-color="#427b58"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#glu-bg)" stroke="url(#glu-rim)" stroke-width="2.2"/>
+  <!-- Sunlit ochre arc behind silhouette -->
+  <path d="M 12 36 A 20 20 0 0 1 52 36" stroke="#d79921" stroke-width="2.4" opacity="0.5"/>
+  <circle cx="32" cy="24" r="7.8" fill="#3c3836"/>
+  <path d="M 15 51 C 18 40 24 36 32 36 C 40 36 46 40 49 51 C 44 55 38 57 32 57 C 26 57 20 55 15 51 Z" fill="#3c3836"/>
+  <path d="M 27 36 L 32 42 L 37 36" stroke="#af3a03" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M 45 16 Q 49 12 51 17 Q 46 19 45 16 Z" fill="#427b58"/>
+  <circle cx="17" cy="19" r="1.6" fill="#af3a03" opacity="0.8"/>
+</svg>

@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="clatSky" x1="0%" y1="0%" x2="18%" y2="100%">
+      <stop offset="0%" stop-color="#edf2fc"/>
+      <stop offset="36%" stop-color="#eff1f5"/>
+      <stop offset="72%" stop-color="#f4eefb"/>
+      <stop offset="100%" stop-color="#f9efe8"/>
+    </linearGradient>
+    <radialGradient id="clatSunHalo" cx="76%" cy="22%" r="40%">
+      <stop offset="0%" stop-color="#fff8e6" stop-opacity="0.96"/>
+      <stop offset="28%" stop-color="#fde2c4" stop-opacity="0.48"/>
+      <stop offset="62%" stop-color="#f5d0fe" stop-opacity="0.22"/>
+      <stop offset="100%" stop-color="#eff1f5" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="clatSkyWash" cx="20%" cy="26%" r="44%">
+      <stop offset="0%" stop-color="#bfdbfe" stop-opacity="0.34"/>
+      <stop offset="55%" stop-color="#ddd6fe" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#eff1f5" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="clatCloudHi" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.96"/>
+      <stop offset="100%" stop-color="#e8e4f8" stop-opacity="0.72"/>
+    </linearGradient>
+    <linearGradient id="clatCloudMid" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.92"/>
+      <stop offset="100%" stop-color="#dbeafe" stop-opacity="0.68"/>
+    </linearGradient>
+    <linearGradient id="clatHillFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#dcd2f5"/>
+      <stop offset="100%" stop-color="#e5def7"/>
+    </linearGradient>
+    <linearGradient id="clatHillMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d2daf8"/>
+      <stop offset="100%" stop-color="#dfe6fa"/>
+    </linearGradient>
+    <linearGradient id="clatHillNear" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#d7ece6"/>
+      <stop offset="100%" stop-color="#e6f2ef"/>
+    </linearGradient>
+    <linearGradient id="clatSunDisc" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="55%" stop-color="#fef3c7"/>
+      <stop offset="100%" stop-color="#fed7aa"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#clatSky)"/>
+  <rect width="1920" height="1080" fill="url(#clatSunHalo)"/>
+  <rect width="1920" height="1080" fill="url(#clatSkyWash)"/>
+  <g transform="translate(1456, 224)">
+    <circle cx="0" cy="0" r="142" fill="#fde68a" opacity="0.22"/>
+    <circle cx="0" cy="0" r="88" fill="url(#clatSunDisc)"/>
+    <circle cx="0" cy="0" r="112" stroke="#df8e1d" stroke-width="1.2" stroke-dasharray="6 10" opacity="0.26"/>
+  </g>
+  <g>
+    <path d="M 62 324 C 122 268 228 264 294 302 C 352 246 472 252 536 306 C 606 286 688 308 732 352 L 32 362 Z" fill="url(#clatCloudHi)"/>
+    <path d="M 102 356 C 248 338 518 338 712 354" stroke="#c4b5fd" stroke-width="2" opacity="0.45"/>
+    <path d="M 984 274 C 1054 222 1168 218 1244 260 C 1318 206 1448 214 1524 268 C 1598 248 1684 268 1742 312 L 946 318 Z" fill="url(#clatCloudMid)"/>
+    <path d="M 278 514 C 356 462 478 460 562 498 C 638 446 774 452 862 504 C 942 482 1034 504 1094 548 L 244 558 Z" fill="url(#clatCloudMid)" opacity="0.88"/>
+    <path d="M 1244 484 C 1334 434 1468 432 1558 474 C 1648 424 1786 434 1892 486 L 1952 534 L 1206 538 Z" fill="url(#clatCloudHi)" opacity="0.9"/>
+  </g>
+  <path d="M 0 762 C 260 676 540 688 848 756 C 1152 822 1464 684 1764 724 L 1920 748 L 1920 1080 L 0 1080 Z" fill="url(#clatHillFar)"/>
+  <path d="M 0 834 C 296 764 608 824 944 786 C 1272 748 1588 836 1920 794 L 1920 1080 L 0 1080 Z" fill="url(#clatHillMid)"/>
+  <path d="M 0 912 C 334 854 672 872 1024 926 C 1364 978 1662 866 1920 896 L 1920 1080 L 0 1080 Z" fill="url(#clatHillNear)"/>
+  <g stroke="#8839ef" stroke-linecap="round" opacity="0.34">
+    <path d="M 184 988 Q 176 922 162 868" stroke-width="2.2"/>
+    <ellipse cx="158" cy="878" rx="6" ry="3.2" transform="rotate(-35 158 878)" fill="#8839ef"/>
+    <ellipse cx="171" cy="896" rx="6" ry="3.2" transform="rotate(30 171 896)" fill="#7287fd"/>
+    <ellipse cx="163" cy="916" rx="6.5" ry="3.4" transform="rotate(-28 163 916)" fill="#ea76cb"/>
+    <path d="M 244 1002 Q 252 942 264 892" stroke-width="1.9" stroke="#179299"/>
+    <ellipse cx="268" cy="906" rx="5.5" ry="3" transform="rotate(32 268 906)" fill="#179299"/>
+    <ellipse cx="256" cy="924" rx="5.5" ry="3" transform="rotate(-32 256 924)" fill="#40a02b"/>
+    <path d="M 1692 986 Q 1702 920 1718 864" stroke-width="2.2"/>
+    <ellipse cx="1722" cy="876" rx="6" ry="3.2" transform="rotate(30 1722 876)" fill="#8839ef"/>
+    <ellipse cx="1708" cy="894" rx="6" ry="3.2" transform="rotate(-32 1708 894)" fill="#ea76cb"/>
+    <ellipse cx="1716" cy="916" rx="6.5" ry="3.4" transform="rotate(26 1716 916)" fill="#7287fd"/>
+    <path d="M 1768 1004 Q 1756 948 1744 902" stroke-width="1.9" stroke="#1e66f5"/>
+    <ellipse cx="1740" cy="916" rx="5.5" ry="3" transform="rotate(-30 1740 916)" fill="#1e66f5"/>
+  </g>
+  <g opacity="0.52">
+    <path d="M 548 648 C 556 636 572 642 564 654 C 556 662 544 656 548 648 Z" fill="#ea76cb"/>
+    <path d="M 884 412 C 892 400 908 406 900 418 C 892 426 880 420 884 412 Z" fill="#8839ef"/>
+    <path d="M 1184 624 C 1192 612 1208 618 1200 630 C 1192 638 1180 632 1184 624 Z" fill="#04a5e5"/>
+    <path d="M 1488 684 C 1496 672 1512 678 1504 690 C 1496 698 1484 692 1488 684 Z" fill="#df8e1d"/>
+    <path d="M 684 218 L 686.5 211 L 693.5 208.5 L 686.5 206 L 684 199 L 681.5 206 L 674.5 208.5 L 681.5 211 Z" fill="#8839ef"/>
+    <path d="M 1142 178 L 1144.5 171 L 1151.5 168.5 L 1144.5 166 L 1142 159 L 1139.5 166 L 1132.5 168.5 L 1139.5 171 Z" fill="#df8e1d"/>
+  </g>
+</svg>

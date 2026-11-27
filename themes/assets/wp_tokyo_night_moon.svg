@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" fill="none">
+  <defs>
+    <linearGradient id="tnmSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#131524"/>
+      <stop offset="46%" stop-color="#222436"/>
+      <stop offset="72%" stop-color="#2d314d"/>
+      <stop offset="100%" stop-color="#191b2b"/>
+    </linearGradient>
+    <radialGradient id="tnmHalo" cx="64%" cy="28%" r="36%">
+      <stop offset="0%" stop-color="#c8d3f5" stop-opacity="0.34"/>
+      <stop offset="36%" stop-color="#82aaff" stop-opacity="0.16"/>
+      <stop offset="70%" stop-color="#86e1fc" stop-opacity="0.05"/>
+      <stop offset="100%" stop-color="#222436" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="tnmMoon" cx="38%" cy="35%" r="65%">
+      <stop offset="0%" stop-color="#eef3ff"/>
+      <stop offset="56%" stop-color="#c8d3f5"/>
+      <stop offset="100%" stop-color="#82aaff"/>
+    </radialGradient>
+    <linearGradient id="tnmMist" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#86e1fc" stop-opacity="0"/>
+      <stop offset="30%" stop-color="#86e1fc" stop-opacity="0.16"/>
+      <stop offset="70%" stop-color="#c099ff" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#82aaff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="tnmWater" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c2036"/>
+      <stop offset="48%" stop-color="#16192b"/>
+      <stop offset="100%" stop-color="#101220"/>
+    </linearGradient>
+    <linearGradient id="tnmRefl" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c8d3f5" stop-opacity="0.42"/>
+      <stop offset="56%" stop-color="#86e1fc" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#82aaff" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#tnmSky)"/>
+  <rect width="1920" height="1080" fill="url(#tnmHalo)"/>
+  <g fill="#c8d3f5" opacity="0.68">
+    <circle cx="148" cy="112" r="1.8"/><circle cx="292" cy="186" r="1.3"/><circle cx="445" cy="96" r="2.1"/>
+    <circle cx="628" cy="154" r="1.4"/><circle cx="812" cy="88" r="1.9"/><circle cx="965" cy="162" r="1.3"/>
+    <circle cx="1510" cy="118" r="2"/><circle cx="1665" cy="196" r="1.4"/><circle cx="1792" cy="108" r="1.8"/>
+    <circle cx="372" cy="285" r="1.3"/><circle cx="718" cy="252" r="1.5"/><circle cx="1605" cy="290" r="1.3"/>
+  </g>
+  <g transform="translate(1228, 302)">
+    <circle r="144" fill="#82aaff" opacity="0.1"/>
+    <circle r="112" fill="url(#tnmMoon)"/>
+    <circle cx="-30" cy="-22" r="24" fill="#82aaff" opacity="0.16"/>
+    <circle cx="36" cy="26" r="32" fill="#828bb8" opacity="0.18"/>
+    <circle cx="-12" cy="44" r="16" fill="#82aaff" opacity="0.14"/>
+    <circle cx="24" cy="-38" r="14" fill="#c099ff" opacity="0.12"/>
+  </g>
+  <path d="M0 430 Q320 375 680 422 Q1080 468 1480 402 Q1720 370 1920 412 V515 Q1520 555 1120 508 Q660 465 0 520 Z" fill="url(#tnmMist)"/>
+  <path d="M240 535 Q640 490 1040 532 Q1440 568 1840 512 V578 Q1420 620 1000 584 Q600 555 240 590 Z" fill="url(#tnmMist)" opacity="0.72"/>
+  <path d="M42 720 V545 H118 V720 M132 720 V492 H228 V720 M242 720 V530 H326 V720 M342 720 V452 H452 V720 M468 720 V510 H556 V720 M572 720 V568 H674 V720 M1310 720 V550 H1402 V720 M1418 720 V478 H1456 V432 H1494 V478 H1532 V720 M1552 720 V518 H1650 V720 M1668 720 V465 H1790 V720 M1808 720 V535 H1920 V720 Z" fill="#1c1f33" opacity="0.92"/>
+  <path d="M152 522 h14 M398 488 h18 M364 562 h18 M1442 510 h18 M1696 538 h60" stroke="#82aaff" stroke-width="5" opacity="0.76"/>
+  <path d="M182 522 h14 M364 488 h18 M1478 510 h18 M1696 500 h20" stroke="#86e1fc" stroke-width="5" opacity="0.78"/>
+  <path d="M152 554 h44 M1442 546 h54" stroke="#c099ff" stroke-width="5" opacity="0.68"/>
+  <path d="M364 526 h52 M1736 500 h20" stroke="#ffc777" stroke-width="5" opacity="0.72"/>
+  <path d="M0 692 H1920 V708 H0 Z M652 716 V478 H666 V716 M708 716 V478 H722 V716 M1198 716 V478 H1212 V716 M1254 716 V478 H1268 V716" fill="#161829"/>
+  <path d="M652 522 h70 M652 596 h70 M1198 522 h70 M1198 596 h70" stroke="#1f233b" stroke-width="10"/>
+  <line x1="0" y1="696" x2="1920" y2="696" stroke="#82aaff" stroke-width="2" opacity="0.52"/>
+  <path d="M190 692 Q445 640 659 486 M1261 486 Q1480 640 1730 692" stroke="#82aaff" stroke-width="3" opacity="0.72"/>
+  <path d="M715 486 Q960 662 1205 486" stroke="#86e1fc" stroke-width="3.2" opacity="0.82"/>
+  <path d="M775 534 V692 M835 566 V692 M895 585 V692 M960 590 V692 M1025 585 V692 M1085 566 V692 M1145 534 V692" stroke="#82aaff" stroke-width="1.2" opacity="0.44"/>
+  <path d="M480 696 h1 M600 696 h1 M760 696 h1 M860 696 h1 M960 696 h1 M1060 696 h1 M1160 696 h1 M1320 696 h1 M1440 696 h1" stroke="#ffc777" stroke-width="4.5" stroke-linecap="round" opacity="0.86"/>
+  <rect y="712" width="1920" height="368" fill="url(#tnmWater)"/>
+  <ellipse cx="1228" cy="832" rx="145" ry="128" fill="url(#tnmRefl)"/>
+  <path d="M1115 736 h225 M1162 792 h134 M1188 896 h78" stroke="#c8d3f5" stroke-width="3" stroke-linecap="round" opacity="0.52"/>
+  <path d="M1142 762 h170 M1156 858 h142 M664 782 h48 M140 840 h220 M1440 885 h300" stroke="#86e1fc" stroke-width="2.4" stroke-linecap="round" opacity="0.44"/>
+  <path d="M1178 824 h100 M654 744 h68 M358 756 h80 M780 910 h280" stroke="#82aaff" stroke-width="2.2" stroke-linecap="round" opacity="0.44"/>
+  <path d="M1202 936 h50 M1682 768 h90" stroke="#c099ff" stroke-width="1.8" stroke-linecap="round" opacity="0.42"/>
+</svg>

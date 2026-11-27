@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="mpc-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffd866"/>
+      <stop offset="55%" stop-color="#ff6188"/>
+      <stop offset="100%" stop-color="#78dce8"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 5 L 30 5" stroke="url(#mpc-rim)" stroke-width="1.7" stroke-linecap="square"/>
+  <path d="M 7.5 22 L 7.5 9.5 L 22 9.5" stroke="#78dce8" stroke-width="1.05" opacity="0.72"/>
+  <!-- Mini Bauhaus prism & geometric accents -->
+  <polygon points="14.5,11.5 10.5,18.5 18.5,18.5" fill="#383539" stroke="#ffd866" stroke-width="1.2" stroke-linejoin="round"/>
+  <circle cx="14.5" cy="16" r="1.3" fill="#ff6188"/>
+  <rect x="32.5" y="3.5" width="3" height="3" fill="#a9dc76"/>
+  <circle cx="3" cy="34" r="1.5" fill="#78dce8"/>
+</svg>

@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="auKlBg" cx="38%" cy="28%" r="72%">
+      <stop offset="0%" stop-color="#fbf7e2"/>
+      <stop offset="60%" stop-color="#f2ecbc"/>
+      <stop offset="100%" stop-color="#e3d8a0"/>
+    </radialGradient>
+    <linearGradient id="auKlRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4d699b"/>
+      <stop offset="52%" stop-color="#5a4785"/>
+      <stop offset="100%" stop-color="#6f894e"/>
+    </linearGradient>
+    <clipPath id="auKlClip"><circle cx="32" cy="32" r="27"/></clipPath>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#auKlBg)" stroke="url(#auKlRing)" stroke-width="2.2"/>
+  <g clip-path="url(#auKlClip)">
+    <ellipse cx="32" cy="53" rx="22" ry="6" stroke="#4d699b" stroke-width="1.2" opacity="0.48"/>
+    <circle cx="32" cy="24.5" r="8" fill="#545464" stroke="#4d699b" stroke-width="1.2"/>
+    <path d="M 15.5 53 C 17 42, 24 37.5, 32 37.5 C 40 37.5, 47 42, 48.5 53 Z" fill="url(#auKlRing)" opacity="0.9"/>
+    <path d="M 12 49 C 16 44, 21 44, 25 48 C 20 50, 15 51, 12 49 Z" fill="#6f894e" opacity="0.82"/>
+    <path d="M 52 49 C 48 44, 43 44, 39 48 C 44 50, 49 51, 52 49 Z" fill="#6f894e" opacity="0.82"/>
+  </g>
+  <circle cx="48" cy="16" r="1.9" fill="#c84053" opacity="0.78"/>
+</svg>

@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none">
+  <defs>
+    <linearGradient id="ahSpace" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#060910"/>
+      <stop offset="48%" stop-color="#0b0f19"/>
+      <stop offset="100%" stop-color="#131a2b"/>
+    </linearGradient>
+    <radialGradient id="ahNeb1" cx="74%" cy="30%" r="45%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.22"/>
+      <stop offset="45%" stop-color="#51c4d3" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#0b0f19" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ahNeb2" cx="24%" cy="68%" r="44%">
+      <stop offset="0%" stop-color="#c084fc" stop-opacity="0.2"/>
+      <stop offset="50%" stop-color="#51c4d3" stop-opacity="0.1"/>
+      <stop offset="100%" stop-color="#0b0f19" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ahPlanet" cx="30%" cy="30%" r="72%">
+      <stop offset="0%" stop-color="#51c4d3"/>
+      <stop offset="42%" stop-color="#1e3a5f"/>
+      <stop offset="82%" stop-color="#10182b"/>
+      <stop offset="100%" stop-color="#070b14"/>
+    </radialGradient>
+    <linearGradient id="ahRing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0.9"/>
+      <stop offset="48%" stop-color="#51c4d3" stop-opacity="0.72"/>
+      <stop offset="100%" stop-color="#c084fc" stop-opacity="0.32"/>
+    </linearGradient>
+    <linearGradient id="ahTrail" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#4ade80" stop-opacity="0"/>
+      <stop offset="55%" stop-color="#4ade80" stop-opacity="0.58"/>
+      <stop offset="100%" stop-color="#facc15" stop-opacity="0.95"/>
+    </linearGradient>
+    <filter id="ahGlow" x="-25%" y="-25%" width="150%" height="150%">
+      <feGaussianBlur stdDeviation="24"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#ahSpace)"/>
+  <rect width="1920" height="1080" fill="url(#ahNeb1)"/>
+  <rect width="1920" height="1080" fill="url(#ahNeb2)"/>
+  <g filter="url(#ahGlow)" opacity="0.45">
+    <path d="M 120 740 C 460 560, 820 710, 1210 510 C 1490 365, 1710 475, 1960 340 L 1960 520 C 1680 650, 1420 530, 1140 675 C 760 870, 410 730, 120 885 Z" fill="#51c4d3" opacity="0.22"/>
+    <ellipse cx="420" cy="760" rx="340" ry="110" transform="rotate(-18 420 760)" fill="#c084fc" opacity="0.24"/>
+  </g>
+  <g stroke="#51c4d3" stroke-width="1" stroke-dasharray="4 6" opacity="0.38">
+    <polyline points="190,260 325,185 470,245 610,152 745,212"/>
+    <polyline points="325,185 385,355 540,395"/>
+    <polyline points="265,780 410,695 575,745 715,650"/>
+  </g>
+  <g fill="#e2e8f0">
+    <circle cx="190" cy="260" r="2.6" fill="#4ade80"/>
+    <circle cx="325" cy="185" r="3" fill="#51c4d3"/>
+    <circle cx="470" cy="245" r="2.2"/>
+    <circle cx="610" cy="152" r="3.2" fill="#4ade80"/>
+    <circle cx="745" cy="212" r="2.4" fill="#c084fc"/>
+    <circle cx="385" cy="355" r="2.5" fill="#facc15"/>
+    <circle cx="540" cy="395" r="2.2" fill="#51c4d3"/>
+    <circle cx="265" cy="780" r="2.4" fill="#c084fc"/>
+    <circle cx="410" cy="695" r="2.8" fill="#4ade80"/>
+    <circle cx="575" cy="745" r="2.2"/>
+    <circle cx="715" cy="650" r="2.6" fill="#51c4d3"/>
+    <circle cx="1015" cy="128" r="1.8" opacity="0.8"/>
+    <circle cx="1185" cy="245" r="1.6" opacity="0.7"/>
+    <circle cx="1790" cy="175" r="2" opacity="0.85" fill="#4ade80"/>
+    <circle cx="1695" cy="760" r="2.2" opacity="0.75" fill="#c084fc"/>
+    <path d="M 880 140 L 883 150 L 893 153 L 883 156 L 880 166 L 877 156 L 867 153 L 877 150 Z" fill="#4ade80" opacity="0.9"/>
+    <path d="M 1595 820 L 1597.5 828 L 1605.5 830.5 L 1597.5 833 L 1595 841 L 1592.5 833 L 1584.5 830.5 L 1592.5 828 Z" fill="#facc15" opacity="0.88"/>
+  </g>
+  <g transform="translate(1420, 365)">
+    <ellipse cx="0" cy="0" rx="330" ry="86" transform="rotate(-18)" stroke="url(#ahRing)" stroke-width="5" opacity="0.48"/>
+    <ellipse cx="0" cy="0" rx="280" ry="70" transform="rotate(-18)" stroke="#4ade80" stroke-width="1.6" stroke-dasharray="10 8" opacity="0.55"/>
+    <circle cx="0" cy="0" r="136" fill="#4ade80" opacity="0.16" filter="url(#ahGlow)"/>
+    <circle cx="0" cy="0" r="126" fill="url(#ahPlanet)"/>
+    <path d="M -112 -45 C -38 -15, 45 -35, 118 -68" stroke="#51c4d3" stroke-width="10" stroke-opacity="0.22" stroke-linecap="round"/>
+    <path d="M -120 18 C -25 48, 60 22, 124 -8" stroke="#4ade80" stroke-width="7" stroke-opacity="0.2" stroke-linecap="round"/>
+    <path d="M -312 102 A 330 86 -18 0 0 312 -102" stroke="url(#ahRing)" stroke-width="5.5" stroke-linecap="round"/>
+    <circle cx="-240" cy="116" r="14" fill="#131a2b" stroke="#51c4d3" stroke-width="1.8"/>
+    <circle cx="-244" cy="112" r="5" fill="#4ade80" opacity="0.65"/>
+  </g>
+  <path d="M 620 845 Q 810 735 965 555" stroke="url(#ahTrail)" stroke-width="3.2" stroke-linecap="round"/>
+  <path d="M 670 855 Q 825 752 965 555" stroke="#51c4d3" stroke-width="1.2" stroke-dasharray="4 6" opacity="0.55"/>
+  <g transform="translate(972, 548) rotate(39)">
+    <path d="M 0 -26 C 10 -14, 12 4, 10 18 L -10 18 C -12 4, -10 -14, 0 -26 Z" fill="#e2e8f0"/>
+    <path d="M 0 -26 C 5 -16, 7 -6, 6 2 L -6 2 C -7 -6, -5 -16, 0 -26 Z" fill="#4ade80"/>
+    <circle cx="0" cy="4" r="4" fill="#0b0f19" stroke="#51c4d3" stroke-width="1.5"/>
+    <polygon points="-10,8 -19,22 -9,18" fill="#51c4d3"/>
+    <polygon points="10,8 19,22 9,18" fill="#51c4d3"/>
+    <path d="M -5 18 Q 0 34 5 18 Z" fill="#facc15"/>
+  </g>
+</svg>

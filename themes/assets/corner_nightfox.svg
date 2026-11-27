@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 44 44" fill="none">
+  <defs>
+    <linearGradient id="cnNf" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#63cdcf"/>
+      <stop offset="55%" stop-color="#719cd6"/>
+      <stop offset="100%" stop-color="#dbc074"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3 30 L 3 9 Q 3 3 9 3 L 30 3" stroke="url(#cnNf)" stroke-width="1.6" stroke-linecap="round" opacity="0.92"/>
+  <path d="M 6.8 20 L 6.8 11 Q 6.8 6.8 11 6.8 L 20 6.8" stroke="#719cd6" stroke-width="1" stroke-linecap="round" opacity="0.68"/>
+  <g transform="translate(12.2, 12.6)">
+    <path d="M -4.8 -0.6 L -5.6 -5.4 L -1.8 -2.8 C -0.6 -3.3, 0.6 -3.3, 1.8 -2.8 L 5.6 -5.4 L 4.8 -0.6 L 0 4.4 Z" fill="#192330" stroke="#63cdcf" stroke-width="1.15" stroke-linejoin="round"/>
+    <polygon points="-4.4,-4 -2.2,-2.4 -3.6,-1.4" fill="#719cd6" opacity="0.72"/>
+    <polygon points="4.4,-4 2.2,-2.4 3.6,-1.4" fill="#719cd6" opacity="0.72"/>
+    <circle cx="0" cy="3.5" r="0.9" fill="#dbc074"/>
+  </g>
+  <circle cx="33" cy="3" r="1.35" fill="#dbc074" opacity="0.9"/>
+  <circle cx="3" cy="33" r="1.35" fill="#63cdcf" opacity="0.9"/>
+</svg>

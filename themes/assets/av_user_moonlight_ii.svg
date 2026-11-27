@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <defs>
+    <radialGradient id="ml2AvUBg" cx="38%" cy="24%" r="76%">
+      <stop offset="0%" stop-color="#323758"/>
+      <stop offset="60%" stop-color="#1e2030"/>
+      <stop offset="100%" stop-color="#141520"/>
+    </radialGradient>
+    <linearGradient id="ml2AvURing" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#82aaff"/>
+      <stop offset="52%" stop-color="#fca7ea"/>
+      <stop offset="100%" stop-color="#ff757f"/>
+    </linearGradient>
+    <linearGradient id="ml2AvUFig" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#c8d3f5"/>
+      <stop offset="100%" stop-color="#82aaff"/>
+    </linearGradient>
+  </defs>
+  <circle cx="32" cy="32" r="30" fill="url(#ml2AvUBg)" stroke="url(#ml2AvURing)" stroke-width="2.4"/>
+  <path d="M 45 12 A 7 7 0 1 0 51 22 A 5.4 5.4 0 1 1 45 12 Z" fill="#82aaff" opacity="0.92"/>
+  <path d="M 11 45 Q 32 39 53 45" stroke="#fca7ea" stroke-width="1.35" stroke-linecap="round" opacity="0.62"/>
+  <circle cx="31" cy="24.5" r="8.2" fill="url(#ml2AvUFig)"/>
+  <path d="M 15.5 51.5 C 17.2 40.6 23.4 36 31 36 C 38.8 36 45 40.6 46.8 51.5" fill="url(#ml2AvUFig)" opacity="0.94"/>
+  <path d="M 22 39 Q 31 43.2 40 39" stroke="#fca7ea" stroke-width="2.2" stroke-linecap="round"/>
+  <path d="M 18 22 L 19 19.6 L 21.4 18.6 L 19 17.6 L 18 15.2 L 17 17.6 L 14.6 18.6 L 17 19.6 Z" fill="#ffc777"/>
+  <circle cx="48" cy="27" r="1.5" fill="#ff757f"/>
+</svg>

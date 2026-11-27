@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" fill="none">
+  <defs>
+    <linearGradient id="nssSky" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f7f9fc"/>
+      <stop offset="46%" stop-color="#eceff4"/>
+      <stop offset="82%" stop-color="#dfe6f0"/>
+      <stop offset="100%" stop-color="#e5e9f0"/>
+    </linearGradient>
+    <radialGradient id="nssSun" cx="76%" cy="22%" r="36%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.95"/>
+      <stop offset="32%" stop-color="#88c0d0" stop-opacity="0.22"/>
+      <stop offset="68%" stop-color="#81a1c1" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#eceff4" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="nssFrostLeft" cx="16%" cy="24%" r="34%">
+      <stop offset="0%" stop-color="#5e81ac" stop-opacity="0.14"/>
+      <stop offset="60%" stop-color="#88c0d0" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#eceff4" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="nssGlacFar" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#c8d5e5"/>
+      <stop offset="100%" stop-color="#e2e8f1"/>
+    </linearGradient>
+    <linearGradient id="nssGlacMid" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#b4c5db"/>
+      <stop offset="100%" stop-color="#dae2ee"/>
+    </linearGradient>
+    <linearGradient id="nssShadow" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#5e81ac" stop-opacity="0.34"/>
+      <stop offset="100%" stop-color="#81a1c1" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="nssDrift1" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafd"/>
+      <stop offset="100%" stop-color="#e5e9f0"/>
+    </linearGradient>
+    <linearGradient id="nssDrift2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#dce4ef"/>
+    </linearGradient>
+    <filter id="nssBlur" x="-15%" y="-15%" width="130%" height="130%">
+      <feGaussianBlur stdDeviation="16"/>
+    </filter>
+  </defs>
+  <rect width="1920" height="1080" fill="url(#nssSky)"/>
+  <rect width="1920" height="1080" fill="url(#nssSun)"/>
+  <rect width="1920" height="1080" fill="url(#nssFrostLeft)"/>
+  <g opacity="0.26" stroke="#88c0d0" stroke-width="1.2">
+    <circle cx="1458" cy="238" r="96" stroke-dasharray="6 10"/>
+    <circle cx="1458" cy="238" r="154" stroke="#81a1c1" stroke-opacity="0.55"/>
+    <circle cx="1458" cy="238" r="224" stroke="#5e81ac" stroke-opacity="0.32" stroke-dasharray="3 12"/>
+  </g>
+  <circle cx="1458" cy="238" r="54" fill="#ffffff" opacity="0.92"/>
+  <g filter="url(#nssBlur)" opacity="0.35">
+    <path d="M 100 320 Q 520 265 980 310 T 1820 270 L 1820 355 Q 1340 390 880 355 T 100 385 Z" fill="#ffffff"/>
+  </g>
+  <polygon points="-20,745 200,560 390,645 630,490 865,620 1110,475 1365,610 1620,495 1825,585 1940,540 1940,830 -20,830" fill="url(#nssGlacFar)"/>
+  <g fill="url(#nssShadow)">
+    <polygon points="630,490 630,745 865,620"/>
+    <polygon points="1110,475 1110,760 1365,610"/>
+    <polygon points="1620,495 1620,740 1825,585"/>
+  </g>
+  <g fill="#ffffff" opacity="0.72">
+    <polygon points="200,560 200,715 55,695"/>
+    <polygon points="630,490 630,720 450,665"/>
+    <polygon points="1110,475 1110,730 925,650"/>
+    <polygon points="1620,495 1620,710 1440,645"/>
+  </g>
+  <polygon points="-20,810 175,655 365,735 580,615 805,745 1035,645 1295,750 1530,610 1750,725 1940,645 1940,890 -20,890" fill="url(#nssGlacMid)"/>
+  <g fill="#5e81ac" opacity="0.18">
+    <polygon points="175,655 175,830 365,735"/>
+    <polygon points="580,615 580,840 805,745"/>
+    <polygon points="1035,645 1035,845 1295,750"/>
+    <polygon points="1530,610 1530,845 1750,725"/>
+  </g>
+  <path d="M -20 845 C 320 755, 680 865, 1080 810 C 1420 765, 1690 830, 1940 780 L 1940 1080 L -20 1080 Z" fill="url(#nssDrift1)"/>
+  <path d="M -20 930 C 380 865, 760 960, 1210 895 C 1540 848, 1740 915, 1940 885 L 1940 1080 L -20 1080 Z" fill="url(#nssDrift2)"/>
+  <path d="M -20 845 C 320 755, 680 865, 1080 810 C 1420 765, 1690 830, 1940 780" stroke="#ffffff" stroke-width="3" opacity="0.88"/>
+  <path d="M -20 930 C 380 865, 760 960, 1210 895 C 1540 848, 1740 915, 1940 885" stroke="#88c0d0" stroke-width="1.8" opacity="0.45"/>
+  <g transform="translate(230, 210)" stroke="#5e81ac" stroke-width="1.6" stroke-linecap="round" opacity="0.32">
+    <line x1="0" y1="-64" x2="0" y2="64"/>
+    <line x1="-55.4" y1="-32" x2="55.4" y2="32"/>
+    <line x1="-55.4" y1="32" x2="55.4" y2="-32"/>
+    <polygon points="0,-32 27.7,-16 27.7,16 0,32 -27.7,16 -27.7,-16" stroke="#81a1c1" fill="#88c0d0" fill-opacity="0.1"/>
+    <path d="M -12 -46 L 0 -36 L 12 -46 M -12 46 L 0 36 L 12 46" stroke-width="1.4"/>
+    <circle cx="0" cy="0" r="5" fill="#5e81ac" fill-opacity="0.45"/>
+  </g>
+  <g transform="translate(1735, 340)" stroke="#81a1c1" stroke-width="1.4" stroke-linecap="round" opacity="0.34">
+    <line x1="0" y1="-44" x2="0" y2="44"/>
+    <line x1="-38.1" y1="-22" x2="38.1" y2="22"/>
+    <line x1="-38.1" y1="22" x2="38.1" y2="-22"/>
+    <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11" fill="#88c0d0" fill-opacity="0.14"/>
+  </g>
+  <g fill="#5e81ac" opacity="0.22">
+    <polygon points="410,140 422,158 410,176 398,158"/>
+    <polygon points="1590,125 1600,140 1590,155 1580,140" fill="#88c0d0"/>
+    <polygon points="120,395 130,410 120,425 110,410" fill="#81a1c1"/>
+    <polygon points="1810,195 1819,208 1810,221 1801,208"/>
+  </g>
+</svg>

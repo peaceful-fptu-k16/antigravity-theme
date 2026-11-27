@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 38" fill="none">
+  <defs>
+    <linearGradient id="stTndArc" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#007197" stop-opacity="0.16"/>
+      <stop offset="35%" stop-color="#2e7de9" stop-opacity="0.9"/>
+      <stop offset="72%" stop-color="#9854f1" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#2e7de9" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="stTndCloud" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#d0d5e3"/>
+    </linearGradient>
+  </defs>
+  <path d="M 6 27 Q 64 8 122 23" stroke="url(#stTndArc)" stroke-width="1.45" stroke-linecap="round"/>
+  <path d="M 18 31 Q 66 15 112 26" stroke="#2e7de9" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.52"/>
+  <g transform="translate(87, 19)">
+    <path d="M -14 5 Q -15 -1 -9 -2 Q -6 -8 1 -6 Q 7 -9 11 -3 Q 16 -2 15 5 Z" fill="url(#stTndCloud)" stroke="#2e7de9" stroke-width="1.15" stroke-linejoin="round"/>
+    <path d="M -5 5 L -5 -1 L -1 -1 L -1 5 M 2 5 L 2 -4 L 6 -4 L 6 5" stroke="#3760bf" stroke-width="1" opacity="0.72"/>
+    <circle cx="11" cy="-8.5" r="2.1" fill="#9854f1" opacity="0.72"/>
+  </g>
+  <g transform="translate(45, 16)" stroke="#3760bf" stroke-width="1.1" stroke-linecap="round">
+    <path d="M -8 2 Q -4 -2 0 1 Q 4 -2 8 2"/>
+    <path d="M 5 -4 Q 8 -7 11 -4.5 Q 14 -7 17 -4" stroke="#2e7de9" stroke-width="0.95"/>
+  </g>
+  <path d="M 22 22 L 23.2 19 L 26.2 17.8 L 23.2 16.6 L 22 13.6 L 20.8 16.6 L 17.8 17.8 L 20.8 19 Z" fill="#2e7de9" opacity="0.88"/>
+  <path d="M 111 15 L 112 12.6 L 114.4 11.6 L 112 10.6 L 111 8.2 L 110 10.6 L 107.6 11.6 L 110 12.6 Z" fill="#9854f1" opacity="0.88"/>
+  <circle cx="64" cy="14" r="1.2" fill="#007197" opacity="0.8"/>
+</svg>

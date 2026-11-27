@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+<defs>
+<radialGradient id="laB" cx=".5" cy=".32" r=".74"><stop offset="0" stop-color="#ffffff"/><stop offset=".62" stop-color="#f3e8ff"/><stop offset="1" stop-color="#e0e7ff"/></radialGradient>
+<linearGradient id="laR" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#1e66f5"/><stop offset=".5" stop-color="#8839ef"/><stop offset="1" stop-color="#ea76cb"/></linearGradient>
+<linearGradient id="laC" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8839ef"/><stop offset=".5" stop-color="#1e66f5"/><stop offset="1" stop-color="#179299"/></linearGradient>
+</defs>
+<circle cx="32" cy="32" r="30" fill="url(#laB)" stroke="url(#laR)" stroke-width="2.4"/>
+<circle cx="32" cy="32" r="20" stroke="#7287fd" stroke-width="1.15" stroke-dasharray="3 3" opacity=".62"/>
+<ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(-32 32 32)" stroke="#8839ef" stroke-width="1.3" opacity=".72"/>
+<ellipse cx="32" cy="32" rx="22" ry="9" transform="rotate(32 32 32)" stroke="#179299" stroke-width="1.3" opacity=".72"/>
+<path d="M32 15l4.2 12.8L49 32l-12.8 4.2L32 49l-4.2-12.8L15 32l12.8-4.2z" fill="url(#laC)"/>
+<circle cx="32" cy="32" r="3.4" fill="#ffffff"/><circle cx="32" cy="32" r="1.8" fill="#df8e1d"/>
+<circle cx="48" cy="18" r="1.8" fill="#ea76cb"/><circle cx="16" cy="46" r="1.8" fill="#04a5e5"/>
+</svg>
