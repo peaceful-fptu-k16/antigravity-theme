@@ -855,44 +855,31 @@
         cursor: grab;
         user-select: none;
         touch-action: none;
-        will-change: transform;
+        will-change: transform, clip-path;
         transform: translate3d(var(--agy-mx, 0px), 0px, 0px);
       }
       #agy-living-mascot[data-dragging="1"] {
         cursor: grabbing;
       }
-      #agy-living-mascot[data-phase="ducking"],
-      #agy-living-mascot[data-phase="scurry"],
-      #agy-living-mascot[data-phase="peeking"] {
-        clip-path: inset(-40px -24px ${ledgeOverlap}px -24px);
+      #agy-living-mascot[data-moving="1"] {
         pointer-events: none;
       }
-      #agy-living-mascot[data-phase="ducking"] .agy-mascot-bubble,
-      #agy-living-mascot[data-phase="scurry"] .agy-mascot-bubble {
+      #agy-living-mascot[data-moving="1"] .agy-mascot-sprite {
+        animation: none !important;
+        transition: none !important;
+        transform: none !important;
+      }
+      #agy-living-mascot[data-moving="1"] .agy-mascot-bubble {
         opacity: 0 !important;
+      }
+      #agy-living-mascot[data-clipped="1"] {
+        clip-path: inset(-40px -24px ${ledgeOverlap}px -24px);
       }
       #agy-living-mascot .agy-mascot-stage {
         width: 100%;
         height: 100%;
         transform-origin: 50% 86%;
         will-change: transform, opacity;
-        transform: translate3d(0, 0, 0);
-        opacity: 1;
-        transition: transform 280ms cubic-bezier(0.22, 1, 0.36, 1), opacity 160ms ease;
-      }
-      #agy-living-mascot[data-phase="ducking"] .agy-mascot-stage {
-        transition: transform 250ms cubic-bezier(0.55, 0, 1, 0.45), opacity 180ms ease;
-        transform: translate3d(0, 64px, 0) scale(0.95, 0.94);
-      }
-      #agy-living-mascot[data-phase="scurry"] .agy-mascot-stage {
-        transition: none;
-        transform: translate3d(0, 66px, 0) scale(0.94, 0.94);
-        opacity: 0;
-      }
-      #agy-living-mascot[data-phase="peeking"] .agy-mascot-stage {
-        transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1), opacity 120ms ease;
-        transform: translate3d(0, 24px, 0) scale(0.99, 1.01);
-        opacity: 1;
       }
       #agy-living-mascot .agy-mascot-sprite {
         width: 100%;
@@ -922,9 +909,6 @@
       #agy-living-mascot[data-state="thinking"] .agy-mascot-sprite {
         ${isReducedMotion ? '' : 'animation: agyMascotThink 2.0s ease-in-out infinite;'}
         filter: drop-shadow(0 4px 14px ${effGlow});
-      }
-      #agy-living-mascot[data-state="popup"] .agy-mascot-sprite {
-        ${isReducedMotion ? '' : 'animation: agyMascotPopUp 380ms cubic-bezier(0.34, 1.56, 0.64, 1);'}
       }
       #agy-living-mascot[data-state="success"] .agy-mascot-sprite,
       #agy-living-mascot[data-state="happy"] .agy-mascot-sprite {
@@ -978,12 +962,6 @@
       @keyframes agyMascotThink {
         0%, 100% { transform: rotate(-2.8deg) scale(1.01, 0.99); }
         50% { transform: rotate(2.8deg) scale(0.99, 1.01); }
-      }
-      @keyframes agyMascotPopUp {
-        0% { transform: translateY(18px) scale(0.96, 1.04); }
-        55% { transform: translateY(-2px) scale(0.97, 1.05); }
-        80% { transform: translateY(0) scale(1.03, 0.96); }
-        100% { transform: translateY(0) scale(1, 1); }
       }
       @keyframes agyMascotJoy {
         0% { transform: scale(1, 1); }
@@ -2902,10 +2880,24 @@
 
   const STORAGE_MASCOT_RATIO = 'agy_mascot_x_ratio_v3';
 
+  function cancelMascotAnims() {
+    if (Array.isArray(window.__AGY_MASCOT_ANIMS__)) {
+      window.__AGY_MASCOT_ANIMS__.forEach(a => {
+        try { a.cancel(); } catch (_) {}
+      });
+    }
+    window.__AGY_MASCOT_ANIMS__ = [];
+  }
+
   function cleanupLivingMascot() {
+    cancelMascotAnims();
     if (Array.isArray(window.__AGY_MASCOT_PHASE_TIMERS__)) {
       window.__AGY_MASCOT_PHASE_TIMERS__.forEach(id => clearTimeout(id));
       window.__AGY_MASCOT_PHASE_TIMERS__ = [];
+    }
+    if (window.__AGY_MASCOT_RO__) {
+      try { window.__AGY_MASCOT_RO__.disconnect(); } catch (_) {}
+      window.__AGY_MASCOT_RO__ = null;
     }
     if (window.__AGY_MASCOT_ROAM_RAF__) {
       cancelAnimationFrame(window.__AGY_MASCOT_ROAM_RAF__);
@@ -2997,13 +2989,10 @@
     if (!composer) return;
 
     const mascotW = Number(bubbleTheme.stickerW) || 74;
+    const mascotH = Number(bubbleTheme.stickerH) || 70;
+    const mascotTop = Number(bubbleTheme.stickerTop) || -58;
+    const ledgeOverlap = Math.max(0, mascotH + mascotTop);
     const padX = 16;
-    const getBounds = () => {
-      const cw = composer.clientWidth || 640;
-      const minX = padX;
-      const maxX = Math.max(minX, cw - mascotW - padX);
-      return { minX, maxX };
-    };
 
     let mascot = existing;
     let ctrl = window.__AGY_MASCOT_CTRL__;
@@ -3018,26 +3007,35 @@
       mascot.setAttribute('aria-label', 'Sakura Kitsune Mascot');
       mascot.title = 'Sakura Kitsune • Click to pet · Drag along bar · Double-click for Studio';
       mascot.dataset.state = 'idle';
-      mascot.dataset.phase = 'perched';
       mascot.innerHTML = `
         <div class="agy-mascot-bubble" aria-hidden="true">•••</div>
         <div class="agy-mascot-stage"><div class="agy-mascot-sprite"></div></div>
       `;
       composer.appendChild(mascot);
 
-      const { minX, maxX } = getBounds();
+      const initialWidth = composer.clientWidth || 640;
+      const getBounds = () => {
+        const cw = ctrl.cachedWidth || 640;
+        const minX = padX;
+        const maxX = Math.max(minX, cw - mascotW - padX);
+        return { minX, maxX };
+      };
+
       let savedRatio = parseFloat(localStorage.getItem(STORAGE_MASCOT_RATIO) || '');
       if (!Number.isFinite(savedRatio) || savedRatio < 0 || savedRatio > 1) {
         savedRatio = 0.94;
       }
       ctrl = {
-        x: Math.round(minX + (maxX - minX) * savedRatio),
+        x: 0,
+        cachedWidth: initialWidth,
         dragging: false,
         moving: false,
         lastUserInteraction: 0,
         petCount: 0,
         composer
       };
+      const initB = getBounds();
+      ctrl.x = Math.round(initB.minX + (initB.maxX - initB.minX) * savedRatio);
       window.__AGY_MASCOT_CTRL__ = ctrl;
 
       const clearPhaseTimers = () => {
@@ -3059,18 +3057,33 @@
       ctrl.applyPos = applyPos;
       applyPos(ctrl.x, false);
 
+      if (typeof ResizeObserver !== 'undefined') {
+        const ro = new ResizeObserver((entries) => {
+          const entry = entries[0];
+          const nextW = entry ? Math.round(entry.contentRect.width) : (composer.clientWidth || 640);
+          if (nextW > 0 && nextW !== ctrl.cachedWidth) {
+            ctrl.cachedWidth = nextW;
+            const b = getBounds();
+            const r = parseFloat(localStorage.getItem(STORAGE_MASCOT_RATIO) || '0.94');
+            const safeR = Number.isFinite(r) ? Math.max(0, Math.min(1, r)) : 0.94;
+            applyPos(b.minX + (b.maxX - b.minX) * safeR, false);
+          }
+        });
+        ro.observe(composer);
+        window.__AGY_MASCOT_RO__ = ro;
+      }
+
       const stopMove = () => {
         clearPhaseTimers();
+        cancelMascotAnims();
         ctrl.moving = false;
-        mascot.dataset.phase = 'perched';
-        if (mascot.dataset.state === 'popup') {
-          mascot.dataset.state = 'idle';
-        }
+        delete mascot.dataset.moving;
+        delete mascot.dataset.clipped;
       };
       ctrl.stopMove = stopMove;
       ctrl.stopWalk = stopMove;
 
-      // Natural 4-beat "Peek-a-Boo" relocation along the composer rim
+      // Continuous GPU WAAPI peek-a-boo relocation along the composer rim
       const moveTo = (targetX, onDone) => {
         const curSt = getState();
         const reduced = Boolean(curSt.reducedMotion) || (typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -3080,8 +3093,21 @@
         if (Math.abs(clampedTarget - ctrl.x) < 24) return;
 
         clearPhaseTimers();
+        cancelMascotAnims();
+
+        const stage = mascot.querySelector('.agy-mascot-stage');
+        if (!stage || typeof stage.animate !== 'function' || typeof mascot.animate !== 'function') {
+          applyPos(clampedTarget, true);
+          delete mascot.dataset.moving;
+          delete mascot.dataset.clipped;
+          ctrl.moving = false;
+          if (typeof onDone === 'function') onDone();
+          return;
+        }
+
         ctrl.moving = true;
-        mascot.dataset.phase = 'ducking';
+        mascot.dataset.moving = '1';
+        mascot.dataset.clipped = '1';
 
         const schedulePhase = (ms, fn) => {
           const tid = setTimeout(() => {
@@ -3094,27 +3120,50 @@
           window.__AGY_MASCOT_PHASE_TIMERS__.push(tid);
         };
 
-        schedulePhase(260, () => {
-          mascot.dataset.phase = 'scurry';
-          applyPos(clampedTarget, true);
-        });
+        const duckAnim = stage.animate([
+          { transform: 'translate3d(0, 0px, 0) scale(1, 1)', opacity: 1, offset: 0 },
+          { transform: 'translate3d(0, 5px, 0) scale(1.05, 0.93)', opacity: 1, offset: 0.22 },
+          { transform: 'translate3d(0, 62px, 0) scale(0.94, 0.98)', opacity: 0.95, offset: 0.88 },
+          { transform: 'translate3d(0, 68px, 0) scale(0.92, 0.96)', opacity: 0, offset: 1 }
+        ], { duration: 320, easing: 'cubic-bezier(0.45, 0, 0.85, 0.35)', fill: 'forwards' });
+        window.__AGY_MASCOT_ANIMS__.push(duckAnim);
 
-        schedulePhase(480, () => {
-          mascot.dataset.phase = 'peeking';
-        });
-
-        schedulePhase(920, () => {
-          mascot.dataset.phase = 'perched';
-          mascot.dataset.state = 'popup';
-        });
-
-        schedulePhase(1320, () => {
-          ctrl.moving = false;
-          if (mascot.dataset.state === 'popup') {
-            mascot.dataset.state = 'idle';
+        duckAnim.onfinish = () => {
+          if (!ctrl.moving || ctrl.dragging || document.hidden || !mascot.isConnected) {
+            stopMove();
+            return;
           }
-          if (typeof onDone === 'function') onDone();
-        });
+          applyPos(clampedTarget, true);
+          schedulePhase(130, () => {
+            const riseAnim = stage.animate([
+              { transform: 'translate3d(0, 64px, 0) scale(0.94, 0.96)', opacity: 0, offset: 0 },
+              { transform: 'translate3d(0, 46px, 0) scale(0.96, 1.02)', opacity: 1, offset: 0.14 },
+              { transform: 'translate3d(0, -3px, 0) scale(0.975, 1.045)', opacity: 1, offset: 0.68 },
+              { transform: 'translate3d(0, 1.5px, 0) scale(1.025, 0.97)', opacity: 1, offset: 0.86 },
+              { transform: 'translate3d(0, 0px, 0) scale(1, 1)', opacity: 1, offset: 1 }
+            ], { duration: 520, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', fill: 'forwards' });
+
+            const clipAnim = mascot.animate([
+              { clipPath: `inset(-40px -24px ${ledgeOverlap}px -24px)`, offset: 0 },
+              { clipPath: `inset(-40px -24px ${ledgeOverlap}px -24px)`, offset: 0.54 },
+              { clipPath: 'inset(-40px -24px 0px -24px)', offset: 0.86 },
+              { clipPath: 'inset(-40px -24px 0px -24px)', offset: 1 }
+            ], { duration: 520, easing: 'ease-out', fill: 'forwards' });
+
+            window.__AGY_MASCOT_ANIMS__.push(riseAnim, clipAnim);
+
+            riseAnim.onfinish = () => {
+              cancelMascotAnims();
+              delete mascot.dataset.moving;
+              delete mascot.dataset.clipped;
+              ctrl.moving = false;
+              if (mascot.dataset.state !== 'thinking') {
+                mascot.dataset.state = 'idle';
+              }
+              if (typeof onDone === 'function') onDone();
+            };
+          });
+        };
       };
       ctrl.moveTo = moveTo;
       ctrl.walkTo = moveTo;
@@ -3162,7 +3211,6 @@
         lastClientX = e.clientX;
         dragStartX = ctrl.x;
         movedDist = 0;
-        mascot.dataset.phase = 'perched';
         mascot.dataset.dragging = '1';
         mascot.style.setProperty('--agy-tilt', '0deg');
         try { mascot.setPointerCapture(e.pointerId); } catch (_) {}
@@ -3227,16 +3275,6 @@
           window.__AGY_MASCOT_LISTEN_TIMER__ = 0;
         }, 1600);
       }, { signal: ac.signal });
-
-      window.addEventListener('resize', () => {
-        const b = getBounds();
-        const r = parseFloat(localStorage.getItem(STORAGE_MASCOT_RATIO) || '0.94');
-        const safeR = Number.isFinite(r) ? Math.max(0, Math.min(1, r)) : 0.94;
-        applyPos(b.minX + (b.maxX - b.minX) * safeR, false);
-      }, { signal: ac.signal });
-    } else {
-      // Re-clamp position if composer width changed
-      ctrl.applyPos(ctrl.x, false);
     }
 
     const isThinking = Boolean(
