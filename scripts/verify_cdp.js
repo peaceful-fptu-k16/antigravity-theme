@@ -114,6 +114,48 @@ const INSPECT_EXPR = `(() => {
     const shellBackdrop = shellEl ? (getComputedStyle(shellEl).backdropFilter || 'none') : 'none';
     const hasLiveBlurRule = /blur\\(/i.test(shellBackdrop) || liveBlurScrollers.length > 0;
     const prebakedGlassPresent = shellEl ? Boolean(shellEl.style.getPropertyValue('--agy-l-glass-bg')) : false;
+
+    const rootCs = getComputedStyle(document.documentElement);
+    const designTokens = {
+        bg: rootCs.getPropertyValue('--sakura-bg').trim() || null,
+        surface: rootCs.getPropertyValue('--sakura-surface').trim() || null,
+        code: rootCs.getPropertyValue('--sakura-code').trim() || null,
+        terminal: rootCs.getPropertyValue('--sakura-terminal').trim() || null,
+        accent: rootCs.getPropertyValue('--sakura-accent').trim() || null,
+    };
+
+    const vigEl = document.getElementById('agy-focus-vignette');
+    const vigCs = vigEl ? getComputedStyle(vigEl) : null;
+    const focusVignette = {
+        present: Boolean(vigEl),
+        context: shellEl ? (shellEl.dataset.agyContext || null) : null,
+        mode: shellEl ? (shellEl.dataset.agyMode || null) : null,
+        enabled: shellEl ? (shellEl.dataset.agyFocusVignette || null) : null,
+        pointerEvents: vigCs ? vigCs.pointerEvents : null,
+        opacity: vigCs ? vigCs.opacity : null,
+    };
+
+    const proseP = document.querySelector('.agy-shell [data-testid="agent-response"] [data-markdown-root] p');
+    const proseCs = proseP ? getComputedStyle(proseP) : null;
+    const proseMetrics = proseCs ? {
+        fontSize: proseCs.fontSize,
+        lineHeight: proseCs.lineHeight,
+        fontFamily: proseCs.fontFamily,
+        color: proseCs.color,
+    } : null;
+
+    const codeCard = document.querySelector('.agy-shell [data-testid="agent-response"] pre > div');
+    const codeCardCs = codeCard ? getComputedStyle(codeCard) : null;
+    const codeBody = codeCard ? codeCard.lastElementChild : null;
+    const codeBodyCs = codeBody ? getComputedStyle(codeBody) : null;
+    const codeBlockMetrics = codeCardCs ? {
+        backgroundColor: codeCardCs.backgroundColor,
+        borderRadius: codeCardCs.borderRadius,
+        borderColor: codeCardCs.borderColor,
+        bodyPadding: codeBodyCs ? codeBodyCs.padding : null,
+        bodyOverflowX: codeBodyCs ? codeBodyCs.overflowX : null,
+    } : null;
+
     return {
         url: location.href,
         viewport: { width: window.innerWidth, height: window.innerHeight },
@@ -131,6 +173,10 @@ const INSPECT_EXPR = `(() => {
         hasLiveBlurRule,
         settingsTriggerPresent: Boolean(document.getElementById('agy-custom-theme-sidebar-btn')),
         composerPresent: Boolean(document.querySelector('.surface-composer')),
+        designTokens,
+        focusVignette,
+        proseMetrics,
+        codeBlockMetrics,
     };
 })()`;
 
@@ -170,6 +216,10 @@ async function main() {
     }
     if (themedPages.some((r) => r.hasLiveBlurRule)) {
         console.error('[verify-cdp] FAIL: Detected backdrop-filter blur rule in injected style.');
+        process.exit(1);
+    }
+    if (themedPages.some((r) => r.focusVignette && r.focusVignette.present && r.focusVignette.pointerEvents !== 'none')) {
+        console.error('[verify-cdp] FAIL: #agy-focus-vignette must have pointer-events: none.');
         process.exit(1);
     }
     console.log(`[verify-cdp] PASS: ${themedPages.length}/${results.length} page(s) themed with zero live blur.`);

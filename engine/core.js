@@ -19,6 +19,7 @@
   const STORAGE_ACCENT = 'agy_accent_v3';
   const STORAGE_REDUCED_MOTION = 'agy_reduced_motion_v3';
   const STORAGE_ZEN = 'agy_zen_v3';
+  const STORAGE_FOCUS_VIGNETTE = 'agy_focus_vignette_v3';
 
   const ACCENT_PRESETS = {
     '': { label: 'Theme Default', primary: null, glow: null },
@@ -28,9 +29,9 @@
   };
 
   const MODE_PRESETS = {
-    'focus': { label: 'Focus', desc: 'Deep focus · high contrast', defaultDim: 78, defaultCardAlpha: 0.96, minSidebarAlpha: 0.86 },
-    'balanced': { label: 'Balanced', desc: 'Crisp reading · sakura depth', defaultDim: 62, defaultCardAlpha: 0.92, minSidebarAlpha: 0.72 },
-    'immersive': { label: 'Immersive', desc: 'Vivid scenery · airy glass', defaultDim: 34, defaultCardAlpha: 0.82, minSidebarAlpha: 0.42 }
+    'focus': { label: 'Focus', desc: 'Deep focus · high contrast', defaultDim: 76, defaultCardAlpha: 0.97, minSidebarAlpha: 0.88 },
+    'balanced': { label: 'Balanced', desc: 'Crisp reading · sakura depth', defaultDim: 34, defaultCardAlpha: 0.95, minSidebarAlpha: 0.72 },
+    'immersive': { label: 'Immersive', desc: 'Vivid scenery · airy glass', defaultDim: 26, defaultCardAlpha: 0.86, minSidebarAlpha: 0.44 }
   };
 
   function withRgbaAlpha(colorStr, targetAlpha) {
@@ -112,7 +113,10 @@
     const zenMode = localStorage.getItem(STORAGE_ZEN) !== null
       ? localStorage.getItem(STORAGE_ZEN) === 'true'
       : Boolean(init.zenMode);
-    return { themeName, bubbleName, inputStyle, dimming, wpEnabled, customWp, userAvatar, agentAvatar, glassBlur, avatarSize, avatarRadius, workspaceMode, chatOpacity, accentOverride, reducedMotion, zenMode };
+    const focusVignette = localStorage.getItem(STORAGE_FOCUS_VIGNETTE) !== null
+      ? localStorage.getItem(STORAGE_FOCUS_VIGNETTE) !== 'false'
+      : (init.focusVignette !== undefined ? Boolean(init.focusVignette) : true);
+    return { themeName, bubbleName, inputStyle, dimming, wpEnabled, customWp, userAvatar, agentAvatar, glassBlur, avatarSize, avatarRadius, workspaceMode, chatOpacity, accentOverride, reducedMotion, zenMode, focusVignette };
   }
 
   function isVideoMediaUrl(url) {
@@ -189,6 +193,57 @@
       const el = document.getElementById(id);
       if (el) el.remove();
     });
+  }
+
+  function cleanupFocusVignette() {
+    const el = document.getElementById('agy-focus-vignette');
+    if (el) el.remove();
+    const shell = document.querySelector('.agy-shell');
+    if (shell) {
+      delete shell.dataset.agyContext;
+      delete shell.dataset.agyMode;
+      delete shell.dataset.agyFocusVignette;
+    }
+  }
+
+  function syncFocusVignette(stOverride) {
+    const shell = document.querySelector('.agy-shell');
+    if (!shell) return;
+    const st = stOverride || getState();
+    const mainTheme = THEMES[st.themeName] || THEMES[DEFAULT_THEME_KEY] || {};
+    const enabled = Boolean(st.focusVignette && st.wpEnabled && !mainTheme.isLight);
+
+    const hasTerminal = Boolean(shell.querySelector('[data-testid="bottom-terminal-panel"], .xterm'));
+    const hasSidePanel = shell.dataset.agySideGlass === '1' || Boolean(shell.querySelector('[data-side-panel-body="true"] > *'));
+    const hasConversation = Boolean(shell.querySelector('[data-testid="agent-response"], [data-testid="user-message"], [data-step-list="true"]'));
+
+    const context = (hasTerminal || hasSidePanel)
+      ? 'technical'
+      : (hasConversation ? 'conversation' : 'welcome');
+
+    shell.dataset.agyContext = context;
+    shell.dataset.agyMode = st.workspaceMode || 'balanced';
+    shell.dataset.agyFocusVignette = enabled ? 'on' : 'off';
+
+    let vignette = document.getElementById('agy-focus-vignette');
+    if (!enabled) {
+      if (vignette) vignette.remove();
+      return;
+    }
+
+    const scrim = document.getElementById('agy-bg-scrim');
+    const anchorAfter = scrim && scrim.parentNode === shell ? scrim.nextSibling : shell.firstChild;
+    if (!vignette || vignette.parentNode !== shell) {
+      if (vignette) vignette.remove();
+      vignette = document.createElement('span');
+      vignette.id = 'agy-focus-vignette';
+      vignette.setAttribute('aria-hidden', 'true');
+      if (anchorAfter && anchorAfter.parentNode === shell) {
+        shell.insertBefore(vignette, anchorAfter);
+      } else {
+        shell.insertBefore(vignette, shell.firstChild);
+      }
+    }
   }
 
   function syncVideoWallpaper(cfg) {
@@ -549,6 +604,9 @@
       if (overrides.zenMode !== undefined) {
         localStorage.setItem(STORAGE_ZEN, String(Boolean(overrides.zenMode)));
       }
+      if (overrides.focusVignette !== undefined) {
+        localStorage.setItem(STORAGE_FOCUS_VIGNETTE, String(Boolean(overrides.focusVignette)));
+      }
     } catch (e) {}
 
     if (window.agySaveThemeConfig) {
@@ -581,9 +639,10 @@
     }
 
     const overlayAlpha = mainTheme.clearBackdrop
-      ? Math.min(0.92, Math.max(0.0, ((effDimming - 10) / 82) * 0.85))
+      ? Math.min(0.88, Math.max(0.0, ((effDimming - 10) / 82) * 0.72))
       : Math.min(0.92, Math.max(0.12, (effDimming / 100) * 0.78));
     const overlayRgb = mainTheme.overlayRgb || '10, 7, 6';
+    const vignetteRgb = mainTheme.focusVignetteRgb || overlayRgb;
     const bgPosition = mainTheme.bgPosition || 'center center';
     const secondaryGlowStop = mainTheme.secondaryGlow
       ? `, radial-gradient(circle at 22% 72%, ${mainTheme.secondaryGlow} 0%, transparent 55%)`
@@ -594,8 +653,8 @@
     let videoScrimCss = '';
     if (wpUrl) {
       if (mainTheme.clearBackdrop) {
-        const centerAlpha = Math.min(0.95, overlayAlpha + (mainTheme.isLight ? 0 : 0.12));
-        const edgeAlpha = Math.max(0.06, overlayAlpha - (mainTheme.isLight ? 0 : 0.10));
+        const centerAlpha = Math.min(0.92, overlayAlpha + (mainTheme.isLight ? 0 : 0.08));
+        const edgeAlpha = Math.max(0.06, overlayAlpha - (mainTheme.isLight ? 0 : 0.08));
         videoScrimCss = mainTheme.isLight
           ? `linear-gradient(180deg, rgba(${overlayRgb}, ${overlayAlpha}) 0%, rgba(${overlayRgb}, ${overlayAlpha}) 100%)`
           : `radial-gradient(ellipse 76% 72% at 52% 48%, rgba(${overlayRgb}, ${centerAlpha.toFixed(3)}) 0%, rgba(${overlayRgb}, ${edgeAlpha.toFixed(3)}) 100%)`;
@@ -608,6 +667,7 @@
       bgLayers = mainTheme.pureBg || `radial-gradient(circle at 75% 30%, ${effGlow} 0%, transparent 60%), linear-gradient(160deg, rgba(${overlayRgb}, 0.96) 0%, #070910 100%)`;
     }
 
+    const vignetteTransition = isReducedMotion ? 'none' : 'opacity 300ms cubic-bezier(0.22, 1, 0.36, 1)';
     const wpCss = st.wpEnabled ? `
       .agy-shell {
         background-image: ${bgLayers} !important;
@@ -618,7 +678,8 @@
       }
       #agy-bg-video,
       #agy-bg-video-b,
-      #agy-bg-scrim {
+      #agy-bg-scrim,
+      #agy-focus-vignette {
         display: block !important;
         position: absolute !important;
         inset: 0 !important;
@@ -627,6 +688,40 @@
         z-index: 0 !important;
         pointer-events: none !important;
         clip-path: var(--agy-hole-clip, none) !important;
+      }
+      #agy-focus-vignette {
+        opacity: 0;
+        background-image:
+          radial-gradient(ellipse 70% 82% at 54% 48%, rgba(${vignetteRgb}, 0.56) 0%, rgba(${vignetteRgb}, 0.34) 46%, rgba(${vignetteRgb}, 0.08) 78%, transparent 100%),
+          linear-gradient(180deg, rgba(${vignetteRgb}, 0.14) 0%, rgba(${vignetteRgb}, 0.22) 100%);
+        transition: ${vignetteTransition};
+        will-change: opacity;
+      }
+      .agy-shell[data-agy-focus-vignette="off"] #agy-focus-vignette {
+        opacity: 0 !important;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="welcome"] #agy-focus-vignette {
+        opacity: 0;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="welcome"][data-agy-mode="focus"] #agy-focus-vignette {
+        opacity: 0.38;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="conversation"] #agy-focus-vignette {
+        opacity: 0.86;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="conversation"][data-agy-mode="immersive"] #agy-focus-vignette {
+        opacity: 0.34;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="conversation"][data-agy-mode="focus"] #agy-focus-vignette {
+        opacity: 1;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="technical"] #agy-focus-vignette {
+        background-image:
+          radial-gradient(ellipse 85% 88% at 56% 52%, rgba(${vignetteRgb}, 0.74) 0%, rgba(${vignetteRgb}, 0.52) 60%, rgba(${vignetteRgb}, 0.28) 100%);
+        opacity: 1;
+      }
+      .agy-shell[data-agy-focus-vignette="on"][data-agy-context="technical"][data-agy-mode="immersive"] #agy-focus-vignette {
+        opacity: 0.72;
       }
       #agy-bg-video,
       #agy-bg-video-b {
@@ -996,13 +1091,125 @@
 
     const isLight = Boolean(mainTheme.isLight);
     const uiInk = mainTheme.uiTextColor || (isLight ? '#0f172a' : 'rgba(248, 250, 252, 0.96)');
+    const uiSecondaryInk = mainTheme.uiSecondaryColor || (isLight ? '#334155' : '#C4B6C8');
     const uiMutedInk = mainTheme.uiMutedColor || (isLight ? '#334155' : 'rgba(241, 245, 249, 0.92)');
     const uiShadow = isLight ? 'none' : '0 1px 4px rgba(0, 0, 0, 0.92), 0 0 8px rgba(0, 0, 0, 0.68)';
     const pillBg = mainTheme.pillBg || (isLight ? 'rgba(255, 255, 255, 0.78)' : 'rgba(6, 11, 24, 0.78)');
     const pillHoverBg = mainTheme.pillHoverBg || (isLight ? 'rgba(255, 255, 255, 0.94)' : 'rgba(10, 18, 38, 0.92)');
     const pillText = mainTheme.pillTextColor || (isLight ? '#0f172a' : '#f8fafc');
     const pillBorder = mainTheme.pillBorder || (isLight ? 'rgba(15, 23, 42, 0.16)' : 'rgba(255, 255, 255, 0.16)');
-    const preCodeBg = isLight ? `rgba(${overlayRgb}, 0.72)` : `rgba(${overlayRgb}, 0.56)`;
+    const preCodeBg = isLight ? `rgba(${overlayRgb}, 0.72)` : (mainTheme.codeBg || `rgba(${overlayRgb}, 0.56)`);
+
+    const tokBg = mainTheme.overlayRgb ? `rgb(${mainTheme.overlayRgb})` : '#100D17';
+    const tokSurface = mainTheme.surfaceBg || '#201525';
+    const tokSurfaceRaised = mainTheme.surfaceRaisedBg || '#2B1C30';
+    const tokCode = mainTheme.codeBg || '#17111F';
+    const tokCodeHeader = mainTheme.codeHeaderBg || 'rgba(32, 21, 37, 0.92)';
+    const tokTerminal = mainTheme.terminalBg || '#120E1B';
+    const tokTerminalFg = mainTheme.terminalFg || '#EAE2F0';
+    const tokTerminalCursor = mainTheme.terminalCursor || effPrimary;
+    const tokTerminalSel = mainTheme.terminalSelection || 'rgba(232, 139, 185, 0.28)';
+    const tokSuccess = mainTheme.successColor || '#86D9B5';
+    const tokWarning = mainTheme.warningColor || '#F2C879';
+    const tokError = mainTheme.errorColor || '#F08D9D';
+    const tokInfo = mainTheme.infoColor || '#91C6F5';
+    const tokPopupBg = mainTheme.popupBg || modalBg;
+    const tokPopupBorder = mainTheme.popupBorder || mainTheme.borderColor || 'rgba(232, 139, 185, 0.24)';
+    const tokDiffAddedBg = mainTheme.diffAddedBg || 'rgba(134, 217, 181, 0.12)';
+    const tokDiffAddedTextBg = mainTheme.diffAddedTextBg || 'rgba(134, 217, 181, 0.24)';
+    const tokDiffRemovedBg = mainTheme.diffRemovedBg || 'rgba(240, 141, 157, 0.13)';
+    const tokDiffRemovedTextBg = mainTheme.diffRemovedTextBg || 'rgba(240, 141, 157, 0.25)';
+    const tokDiffModifiedBg = mainTheme.diffModifiedBg || 'rgba(242, 200, 121, 0.12)';
+
+    const designTokensCss = `
+      :root {
+        --sakura-bg: ${tokBg};
+        --sakura-surface: ${tokSurface};
+        --sakura-surface-raised: ${tokSurfaceRaised};
+        --sakura-code: ${tokCode};
+        --sakura-terminal: ${tokTerminal};
+        --sakura-terminal-fg: ${tokTerminalFg};
+        --sakura-terminal-selection: ${tokTerminalSel};
+        --sakura-accent: ${effPrimary};
+        --sakura-accent-soft: ${effGlow};
+        --sakura-text: ${uiInk};
+        --sakura-text-secondary: ${uiSecondaryInk};
+        --sakura-text-muted: ${uiMutedInk};
+        --sakura-success: ${tokSuccess};
+        --sakura-warning: ${tokWarning};
+        --sakura-error: ${tokError};
+        --sakura-info: ${tokInfo};
+        --sakura-radius-sm: 8px;
+        --sakura-radius-md: 12px;
+        --sakura-radius-lg: 18px;
+        --sakura-font-ui: "Inter", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+        --sakura-font-mono: "JetBrains Mono", "Cascadia Code", "Fira Code", "Consolas", ui-monospace, SFMono-Regular, Menlo, monospace;
+        --sakura-transition-fast: ${isReducedMotion ? '0ms' : '160ms ease'};
+        --sakura-transition-base: ${isReducedMotion ? '0ms' : '280ms cubic-bezier(0.22, 1, 0.36, 1)'};
+      }
+      ${(!isLight && mainTheme.refinedSurfaceTokens) ? `
+      :root {
+        --rt-color-dark: ${tokSurface};
+        --rt-color-white: ${uiInk};
+        --rt-color-success: ${tokSuccess};
+        --rt-color-warning: ${tokWarning};
+        --rt-color-error: ${tokError};
+        --rt-color-info: ${tokInfo};
+      }
+      body[data-agy-theme].dark,
+      .agy-shell {
+        --card: ${tokSurface};
+        --color-card: ${tokSurface};
+        --card-border: ${tokPopupBorder};
+        --color-card-border: ${tokPopupBorder};
+        --glass: ${tokPopupBg};
+        --glass-border: ${tokPopupBorder};
+        --glass-highlight: rgba(249, 234, 243, 0.06);
+        --border: rgba(232, 139, 185, 0.14);
+        --color-border: rgba(232, 139, 185, 0.14);
+        --muted: rgba(43, 28, 48, 0.56);
+        --color-muted: rgba(43, 28, 48, 0.56);
+        --muted-foreground: ${uiMutedInk};
+        --color-muted-foreground: ${uiMutedInk};
+        --secondary: rgba(232, 139, 185, 0.12);
+        --color-secondary: rgba(232, 139, 185, 0.12);
+        --secondary-foreground: ${uiSecondaryInk};
+        --color-secondary-foreground: ${uiSecondaryInk};
+        --onyx-well: ${tokTerminal};
+        --onyx-key: ${tokSurfaceRaised};
+        --onyx-frame: rgba(23, 16, 30, 0.96);
+        --onyx-raised: ${tokSurface};
+        --onyx-selected: ${tokSurfaceRaised};
+        --scrim: rgba(12, 9, 24, 0.68);
+        --success: ${tokSuccess};
+        --color-success: ${tokSuccess};
+        --warning: ${tokWarning};
+        --color-warning: ${tokWarning};
+        --error: ${tokError};
+        --color-error: ${tokError};
+        --link: ${effPrimary};
+        --color-link: ${effPrimary};
+        --focus-ring-color: rgba(232, 139, 185, 0.45);
+        --nux-focus-ring: rgba(232, 139, 185, 0.60);
+        --focus-ring-offset-color: ${tokBg};
+        --editor-font-family: var(--sakura-font-mono);
+        --editor-line-number-foreground: ${uiMutedInk};
+        --color-editorLineNumber-foreground: ${uiMutedInk};
+        --editor-selection-background: ${tokTerminalSel};
+        --color-selection-background: ${tokTerminalSel};
+        --editor-diff-inserted-line-background: ${tokDiffAddedBg};
+        --color-diffEditor-insertedLineBackground: ${tokDiffAddedBg};
+        --editor-diff-inserted-text-background: ${tokDiffAddedTextBg};
+        --color-diffEditor-insertedTextBackground: ${tokDiffAddedTextBg};
+        --editor-diff-removed-line-background: ${tokDiffRemovedBg};
+        --color-diffEditor-removedLineBackground: ${tokDiffRemovedBg};
+        --editor-diff-removed-text-background: ${tokDiffRemovedTextBg};
+        --color-diffEditor-removedTextBackground: ${tokDiffRemovedTextBg};
+        --syntax-inserted: ${tokSuccess};
+        --syntax-deleted: ${tokError};
+      }
+      ` : ''}
+    `;
 
     const effectiveUserAvatar = st.userAvatar === 'none' ? '' : (st.userAvatar || mainTheme.userAvatar || '');
     const effectiveAgentAvatar = st.agentAvatar === 'none' ? '' : (st.agentAvatar || mainTheme.agentAvatar || '');
@@ -1072,11 +1279,11 @@
     const aiCardCss = effAiCardBg ? `
       /* Translucent reading card for AI responses (zero live backdrop-filter for max 120fps scroll) */
       .agy-shell {
-        font-family: "Inter", "Geist", system-ui, -apple-system, "Segoe UI", sans-serif;
+        font-family: var(--sakura-font-ui);
       }
       .agy-shell code,
       .agy-shell pre {
-        font-family: "JetBrains Mono", "Cascadia Code", "Fira Code", ui-monospace, SFMono-Regular, Menlo, monospace;
+        font-family: var(--sakura-font-mono);
       }
       .agy-shell [data-testid="agent-response"] {
         background: ${effAiCardBg} !important;
@@ -1084,55 +1291,133 @@
         backdrop-filter: none !important;
         border: 1px solid ${mainTheme.aiCardBorder || (isLight ? 'rgba(15, 23, 42, 0.12)' : 'rgba(255, 255, 255, 0.1)')} !important;
         border-radius: 14px !important;
-        padding: 14px 18px !important;
-        box-shadow: ${isLight ? '0 4px 14px rgba(15, 23, 42, 0.08)' : '0 6px 22px rgba(0, 0, 0, 0.34)'} !important;
+        padding: 24px 26px !important;
+        box-shadow: ${isLight ? '0 4px 14px rgba(15, 23, 42, 0.08)' : '0 8px 26px rgba(6, 4, 12, 0.40)'} !important;
         box-sizing: border-box !important;
         overflow: hidden !important;
       }
-      /* Crisp typography hierarchy & generous readability */
-      .agy-shell [data-testid="agent-response"] :is(p, li) {
+      @media (max-width: 767px) {
+        .agy-shell [data-testid="agent-response"] {
+          padding: 16px 18px !important;
+        }
+      }
+      /* Scoped long-form conversation typography & spacing (preserves sidebar/buttons/inputs) */
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] {
+        font-family: var(--sakura-font-ui);
+        font-size: 14.5px;
+        line-height: 1.68;
+        letter-spacing: -0.004em;
+        row-gap: 0px !important;
+        ${isLight ? '' : `color: ${uiInk};`}
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] > :first-child {
+        margin-top: 0 !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] > :last-child {
+        margin-bottom: 0 !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] p {
+        margin-top: 0 !important;
+        margin-bottom: 14px !important;
         line-height: 1.68;
       }
-      .agy-shell [data-testid="agent-response"] h1 {
-        font-size: 1.3em;
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] p:last-child {
+        margin-bottom: 0 !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] h1 {
+        font-size: 1.38em;
+        font-weight: 700;
+        letter-spacing: -0.022em;
+        line-height: 1.3;
+        margin-top: 26px !important;
+        margin-bottom: 12px !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] h2 {
+        font-size: 1.2em;
         font-weight: 650;
-        letter-spacing: -0.02em;
-        margin-top: 0.75em;
-        margin-bottom: 0.4em;
+        letter-spacing: -0.018em;
+        line-height: 1.35;
+        margin-top: 24px !important;
+        margin-bottom: 10px !important;
+        padding-bottom: 6px;
+        border-bottom: 1px solid ${isLight ? 'rgba(15, 23, 42, 0.12)' : 'rgba(232, 139, 185, 0.15)'};
       }
-      .agy-shell [data-testid="agent-response"] h2 {
-        font-size: 1.15em;
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] h3 {
+        font-size: 1.06em;
         font-weight: 620;
-        letter-spacing: -0.015em;
-        margin-top: 0.7em;
-        margin-bottom: 0.32em;
+        letter-spacing: -0.01em;
+        line-height: 1.4;
+        margin-top: 20px !important;
+        margin-bottom: 8px !important;
       }
-      .agy-shell [data-testid="agent-response"] h3 {
-        font-size: 1.04em;
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] h4 {
+        font-size: 0.98em;
         font-weight: 600;
-        margin-top: 0.6em;
-        margin-bottom: 0.25em;
+        line-height: 1.45;
+        margin-top: 16px !important;
+        margin-bottom: 6px !important;
+        ${isLight ? '' : `color: ${uiSecondaryInk};`}
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] :is(ul, ol) {
+        margin-top: 6px !important;
+        margin-bottom: 14px !important;
+        padding-inline-start: 1.5em !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] li {
+        margin-bottom: 6px !important;
+        line-height: 1.66;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] li:last-child {
+        margin-bottom: 0 !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] li > :is(ul, ol) {
+        margin-top: 6px !important;
+        margin-bottom: 4px !important;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] li::marker {
+        color: ${effPrimary};
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] blockquote {
+        margin: 14px 0 !important;
+        padding: 8px 14px !important;
+        border-inline-start: 3px solid ${effPrimary};
+        background: ${isLight ? 'rgba(15, 23, 42, 0.04)' : 'rgba(43, 28, 48, 0.45)'};
+        border-radius: 0 8px 8px 0;
+        color: ${isLight ? uiMutedInk : uiSecondaryInk};
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] hr {
+        margin: 22px 0 !important;
+        border-color: ${isLight ? 'rgba(15, 23, 42, 0.12)' : 'rgba(232, 139, 185, 0.16)'};
+      }
+      .agy-shell [data-testid="agent-response"] [data-step-list="true"] {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .agy-shell [data-testid="agent-response"] :is([data-testid="worked-for-collapsible"], [data-testid="tool-group-collapsible"]) {
+        font-size: 13px;
+        color: ${isLight ? uiMutedInk : uiMutedInk};
+        border-radius: var(--sakura-radius-sm);
+        transition: background-color var(--sakura-transition-fast), color var(--sakura-transition-fast);
       }
       ${(!isLight && mainTheme.inlineCodeBg) ? `
       .agy-shell [data-testid="agent-response"] :not(pre) > code {
         background: ${mainTheme.inlineCodeBg} !important;
         color: ${mainTheme.inlineCodeColor || '#F9C6E0'} !important;
-        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(232, 139, 185, 0.20)'} !important;
-        border-radius: 5px !important;
-        padding: 1px 6px !important;
-        font-size: 0.88em !important;
+        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(232, 139, 185, 0.22)'} !important;
+        border-radius: 6px !important;
+        padding: 1.5px 6px !important;
+        font-size: 0.875em !important;
       }
       ` : ''}
-      ${(!isLight && mainTheme.codeBg) ? `
-      .agy-shell [data-testid="agent-response"] pre {
-        background: ${mainTheme.codeBg} !important;
-        border: 1px solid ${mainTheme.aiCardBorder || 'rgba(232, 139, 185, 0.18)'} !important;
-        border-radius: 10px !important;
-      }
-      ` : ''}
-      .agy-shell [data-testid="agent-response"] a {
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] a {
         color: ${effPrimary};
         text-underline-offset: 3px;
+      }
+      .agy-shell [data-testid="agent-response"] [data-markdown-root] a:focus-visible {
+        outline: 2px solid ${effPrimary};
+        outline-offset: 2px;
+        border-radius: 3px;
       }
       .agy-shell [data-testid="agent-response"] .md-table-bleed,
       .agy-shell [data-testid="agent-response"] .md-table-host {
@@ -1142,6 +1427,8 @@
         margin-left: 0 !important;
         margin-right: 0 !important;
         margin-inline: 0 !important;
+        margin-top: 16px !important;
+        margin-bottom: 16px !important;
         left: auto !important;
         right: auto !important;
         transform: none !important;
@@ -1171,6 +1458,8 @@
         margin: 0 !important;
         transform: none !important;
         box-sizing: border-box !important;
+        border-color: ${isLight ? 'rgba(15, 23, 42, 0.14)' : 'rgba(232, 139, 185, 0.18)'} !important;
+        border-radius: var(--sakura-radius-md) !important;
       }
       .agy-shell [data-testid="agent-response"] :is(.md-math-display, .katex-display) {
         display: block !important;
@@ -1203,11 +1492,11 @@
         border-radius: 9999px !important;
       }
       .agy-shell [data-testid="agent-response"] :is(.md-table-scroll, :has(> table):not(.md-table-frame), .md-math-display, .katex-display, :not(.md-math-display):not(.katex-display) > .katex)::-webkit-scrollbar-thumb {
-        background: ${isLight ? 'rgba(15, 23, 42, 0.34)' : 'rgba(148, 163, 184, 0.48)'} !important;
+        background: ${isLight ? 'rgba(15, 23, 42, 0.34)' : 'rgba(232, 139, 185, 0.38)'} !important;
         border-radius: 9999px !important;
       }
       .agy-shell [data-testid="agent-response"] :is(.md-table-scroll, :has(> table):not(.md-table-frame), .md-math-display, .katex-display, :not(.md-math-display):not(.katex-display) > .katex)::-webkit-scrollbar-thumb:hover {
-        background: ${isLight ? 'rgba(15, 23, 42, 0.54)' : 'rgba(148, 163, 184, 0.72)'} !important;
+        background: ${isLight ? 'rgba(15, 23, 42, 0.54)' : 'rgba(232, 139, 185, 0.58)'} !important;
       }
       .agy-shell [data-testid="agent-response"] table {
         width: 100% !important;
@@ -1222,8 +1511,16 @@
         white-space: normal !important;
         word-break: normal !important;
         overflow-wrap: break-word !important;
-        padding: 8px 12px !important;
+        padding: 9px 13px !important;
+        border-color: ${isLight ? 'rgba(38, 28, 31, 0.14)' : 'rgba(232, 139, 185, 0.14)'} !important;
       }
+      ${!isLight ? `
+      .agy-shell [data-testid="agent-response"] thead th {
+        background: rgba(43, 28, 48, 0.72) !important;
+        color: ${uiInk};
+        font-weight: 600;
+      }
+      ` : ''}
       .agy-shell [data-testid="agent-response"] :is(td, th) .inline-pill-wrap {
         min-width: 0 !important;
       }
@@ -1278,6 +1575,211 @@
       .agy-shell [data-main-content-body="true"] h1,
       .agy-shell [data-main-content-body="true"] h2 {
         text-shadow: ${isLight ? 'none' : '0 2px 10px rgba(0, 0, 0, 0.85)'};
+      }
+    ` : '';
+
+    const devComponentsCss = (!isLight && (mainTheme.codeBg || mainTheme.refinedSurfaceTokens)) ? `
+      /* 3.1 Code Blocks (single clean plum card, crisp header, horizontal scroll for long lines) */
+      .agy-shell [data-testid="agent-response"] pre:has(> div) {
+        background: transparent !important;
+        border: none !important;
+        padding: 0 !important;
+        margin: 16px 0 !important;
+        border-radius: 0 !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div {
+        background: ${tokCode} !important;
+        border: 1px solid rgba(232, 139, 185, 0.22) !important;
+        border-radius: var(--sakura-radius-md) !important;
+        overflow: hidden !important;
+        margin: 0 !important;
+        box-shadow: 0 4px 16px rgba(8, 5, 14, 0.42), inset 0 1px 0 rgba(249, 234, 243, 0.05) !important;
+        transition: border-color var(--sakura-transition-fast) !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div:hover,
+      .agy-shell [data-testid="agent-response"] pre > div:focus-within {
+        border-color: rgba(232, 139, 185, 0.38) !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:first-child:has(button) {
+        background: ${tokCodeHeader} !important;
+        border-bottom: 1px solid rgba(232, 139, 185, 0.14) !important;
+        padding: 6px 14px !important;
+        min-height: 34px !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:first-child:has(button) > div:first-child {
+        font-family: var(--sakura-font-mono);
+        font-size: 11.5px !important;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: ${uiMutedInk} !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:first-child button {
+        padding: 4px 6px !important;
+        border-radius: 6px !important;
+        color: ${uiSecondaryInk} !important;
+        transition: background-color var(--sakura-transition-fast), color var(--sakura-transition-fast) !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:first-child button:hover {
+        background: rgba(232, 139, 185, 0.16) !important;
+        color: ${uiInk} !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:first-child button:focus-visible {
+        outline: 2px solid ${effPrimary} !important;
+        outline-offset: 1px !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:last-child {
+        padding: 16px !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scrollbar-width: auto !important;
+        scrollbar-color: auto !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:last-child::-webkit-scrollbar {
+        height: 8px !important;
+        display: block !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:last-child::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.04) !important;
+        border-radius: 9999px !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:last-child::-webkit-scrollbar-thumb {
+        background: rgba(232, 139, 185, 0.34) !important;
+        border-radius: 9999px !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre > div > div:last-child::-webkit-scrollbar-thumb:hover {
+        background: rgba(232, 139, 185, 0.56) !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre .code-block {
+        width: max-content;
+        min-width: 100%;
+        font-family: var(--sakura-font-mono) !important;
+        font-size: 13px !important;
+        line-height: 1.62 !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre .code-block .line-content {
+        white-space: pre !important;
+        word-break: normal !important;
+        overflow-wrap: normal !important;
+      }
+      .agy-shell [data-testid="agent-response"] pre:not(:has(> div)) {
+        background: ${tokCode} !important;
+        border: 1px solid rgba(232, 139, 185, 0.22) !important;
+        border-radius: var(--sakura-radius-md) !important;
+        padding: 16px !important;
+        overflow-x: auto !important;
+        margin: 16px 0 !important;
+      }
+
+      ${mainTheme.refinedSurfaceTokens ? `
+      /* 3.2 Terminal */
+      .agy-shell [data-testid="bottom-terminal-panel"],
+      .agy-shell [data-testid="bottom-terminal-panel"] .xterm,
+      .agy-shell [data-testid="bottom-terminal-panel"] .xterm-viewport,
+      .agy-shell [data-testid="bottom-terminal-panel"] .xterm-screen,
+      .agy-shell .xterm-viewport {
+        background-color: ${tokTerminal} !important;
+        color: ${tokTerminalFg};
+        font-family: var(--sakura-font-mono);
+      }
+      .agy-shell [data-testid="bottom-terminal-panel"] {
+        border-top: 1px solid rgba(232, 139, 185, 0.22) !important;
+      }
+      .agy-shell .xterm .xterm-selection div {
+        background-color: ${tokTerminalSel} !important;
+      }
+      .agy-shell .xterm .xterm-cursor-layer .xterm-cursor-bar,
+      .agy-shell .xterm .xterm-cursor-layer .xterm-cursor-block {
+        background-color: ${tokTerminalCursor};
+      }
+      .agy-shell .xterm-viewport::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+      }
+      .agy-shell .xterm-viewport::-webkit-scrollbar-thumb {
+        background: rgba(232, 139, 185, 0.28);
+        border-radius: 9999px;
+      }
+
+      /* 3.3 Diff Review (restrained semantic green/coral/amber; never replaced by pink) */
+      .agy-shell [data-side-panel-body="true"] .code-block,
+      .agy-shell .monaco-diff-editor {
+        background-color: ${tokCode};
+        border-radius: var(--sakura-radius-sm);
+      }
+      .agy-shell .monaco-diff-editor .line-insert,
+      .agy-shell .monaco-diff-editor .char-insert,
+      .agy-shell [data-diff-line="added"] {
+        background-color: ${tokDiffAddedBg};
+      }
+      .agy-shell .monaco-diff-editor .line-delete,
+      .agy-shell .monaco-diff-editor .char-delete,
+      .agy-shell [data-diff-line="removed"] {
+        background-color: ${tokDiffRemovedBg};
+      }
+      .agy-shell [data-diff-line="modified"] {
+        background-color: ${tokDiffModifiedBg};
+      }
+
+      /* 3.4 Shared Elevated Surface System for Popups, Menus, Command Palette, Dialogs & Tooltips */
+      .agy-shell .surface-opaque,
+      .agy-shell .surface-opaque.bg-sidebar,
+      .agy-shell .surface-opaque.border-menu-border,
+      .agy-shell .agy-fastpick.surface-glass,
+      .agy-shell .quick-input-widget.surface-glass,
+      .agy-shell .agy-dialog:not([class*="rounded-none"]),
+      .agy-shell .compact-tooltip,
+      .agy-shell .toast-root,
+      [data-radix-popper-content-wrapper] > :is([role="menu"], [role="listbox"], [data-radix-menu-content]),
+      [role="menu"],
+      [role="listbox"],
+      [role="dialog"]:not(#agy-custom-theme-modal-dialog),
+      [role="alertdialog"],
+      [role="tooltip"],
+      .reactTooltipComponenttooltip.reactTooltipComponentdark {
+        background: ${tokPopupBg} !important;
+        background-color: ${tokPopupBg} !important;
+        color: ${uiInk} !important;
+        border: 1px solid ${tokPopupBorder} !important;
+        border-radius: var(--sakura-radius-md) !important;
+        box-shadow: 0 16px 42px rgba(6, 4, 12, 0.72), inset 0 1px 0 rgba(249, 234, 243, 0.06) !important;
+        backdrop-filter: none !important;
+      }
+      .agy-shell .compact-tooltip,
+      [role="tooltip"],
+      .reactTooltipComponenttooltip.reactTooltipComponentdark {
+        border-radius: var(--sakura-radius-sm) !important;
+      }
+      [data-radix-popper-content-wrapper] :is([role="menuitem"], [role="option"], [data-highlighted="true"]),
+      [role="menu"] :is([role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"]),
+      [role="listbox"] [role="option"] {
+        border-radius: 7px;
+        transition: background-color var(--sakura-transition-fast), color var(--sakura-transition-fast);
+      }
+      [data-radix-popper-content-wrapper] :is([role="menuitem"], [role="option"]):is(:hover, [data-highlighted], [aria-selected="true"]),
+      [role="menu"] [role="menuitem"]:is(:hover, [data-highlighted], [aria-selected="true"]),
+      [role="listbox"] [role="option"]:is(:hover, [data-highlighted], [aria-selected="true"]) {
+        background-color: rgba(232, 139, 185, 0.16) !important;
+        color: ${uiInk} !important;
+      }
+
+      /* Keyboard Focus Visibility */
+      .agy-shell :is(button, a, input, select, textarea, [role="button"], [role="menuitem"], [role="option"], [tabindex]):focus-visible,
+      #agy-custom-theme-modal-dialog :is(button, input, textarea, [tabindex]):focus-visible {
+        outline: 2px solid ${effPrimary} !important;
+        outline-offset: 2px !important;
+      }
+      ` : ''}
+
+      @media (prefers-reduced-motion: reduce) {
+        #agy-focus-vignette,
+        #agy-living-mascot .agy-mascot-stage,
+        #agy-living-mascot .agy-mascot-sprite,
+        .agy-sakura-petal,
+        .surface-composer {
+          animation: none !important;
+          transition: none !important;
+        }
       }
     ` : '';
 
@@ -1425,6 +1927,7 @@
     `;
 
     styleEl.textContent = `
+      ${designTokensCss}
       ${wpCss}
 
       /* Translucent themed glass sidebar (unified via ::before when unifiedGlass is active) */
@@ -1471,6 +1974,7 @@
       ` : ''}
       ${sidebarEnhanceCss}
       ${aiCardCss}
+      ${devComponentsCss}
       ${sidePanelCss}
       ${avatarCss}
       ${headerCss}
@@ -1625,6 +2129,7 @@
 
     syncTitleBarOverlay(st);
     scheduleTitleBarSync(st);
+    syncFocusVignette(st);
     if (typeof syncLivingMascot === 'function') {
       syncLivingMascot(st);
     }
@@ -1691,6 +2196,7 @@
     if (settingsBtn) settingsBtn.remove();
     cleanupLivingMascot();
     cleanupVideoWallpaper();
+    cleanupFocusVignette();
     window.__AGY_VIDEO_WP_CFG__ = null;
     document.querySelectorAll('.agy-sakura-petal').forEach(p => p.remove());
     const modal = document.getElementById('agy-custom-theme-modal-backdrop');
@@ -1833,6 +2339,10 @@
               </div>
             </div>
             <div style="display: flex; align-items: center; gap: 12px; flex-wrap: wrap;">
+              <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: ${mLabel}; cursor: pointer;" title="Dim wallpaper gently behind active conversations & terminal">
+                <input id="agy-focus-vignette-toggle" type="checkbox" ${st.focusVignette ? 'checked' : ''} style="accent-color: ${mainTheme.primary}; cursor: pointer;" />
+                Focus Vignette
+              </label>
               <label style="display: flex; align-items: center; gap: 5px; font-size: 12px; color: ${mLabel}; cursor: pointer;">
                 <input id="agy-zen-toggle" type="checkbox" ${st.zenMode ? 'checked' : ''} style="accent-color: ${mainTheme.primary}; cursor: pointer;" />
                 Zen Mode
@@ -1941,7 +2451,7 @@
               const stickerW = Math.round((th.stickerW || 0) * 0.78);
               const stickerH = th.isOrnament ? Math.round((th.stickerH || 0) * 0.8) : Math.round((th.stickerH || 0) * 0.78);
               return `
-                <div class="agy-bubble-card" data-name="${safeName}" style="position: relative; border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${isSelected ? mCardSelBg : mCardBg}; padding: 24px 18px 14px 18px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 112px; transition: border-color 0.15s ease, background-color 0.15s ease;">
+                <div class="agy-bubble-card" tabindex="0" role="button" aria-pressed="${isSelected}" data-name="${safeName}" style="position: relative; border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${isSelected ? mCardSelBg : mCardBg}; padding: 24px 18px 14px 18px; cursor: pointer; display: flex; flex-direction: column; justify-content: space-between; min-height: 112px; transition: border-color 0.15s ease, background-color 0.15s ease;">
                   <div style="display: flex; justify-content: center; align-items: center; width: 100%; margin-top: 6px; margin-bottom: 10px;">
                     <div style="position: relative; width: 192px; height: 46px; padding: 1.2px; border-radius: ${th.isScroll ? '6px' : '12px'}; background: ${th.frameBg}; box-shadow: 0 4px 14px rgba(0,0,0,0.45), 0 0 10px ${th.glow};">
                       <div style="position: relative; width: 100%; height: 100%; background: ${th.bg}; border: ${th.innerBorder || '1px solid ' + th.borderColor}; border-radius: ${th.isScroll ? '4px' : '11px'}; display: flex; align-items: center; padding: 0 16px;">
@@ -1974,7 +2484,7 @@
                 ? (activeBubbleTh.inputGlassBg || 'rgba(20, 15, 13, 0.45)')
                 : (activeBubbleTh.inputCardBg || 'rgba(26, 18, 15, 0.92)');
               return `
-                <div class="agy-input-card" data-style="${key}" style="border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${isSelected ? mCardSelBg : mCardBg}; padding: 16px 18px; cursor: pointer; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.15s ease, background-color 0.15s ease;">
+                <div class="agy-input-card" tabindex="0" role="button" aria-pressed="${isSelected}" data-style="${key}" style="border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${isSelected ? mCardSelBg : mCardBg}; padding: 16px 18px; cursor: pointer; display: flex; flex-direction: column; gap: 12px; transition: border-color 0.15s ease, background-color 0.15s ease;">
                   <div class="agy-input-preview-outer" style="position: relative; margin-top: 8px; padding: 1.5px; border-radius: 10px; background: ${key === 'double_gold' ? 'linear-gradient(135deg, #f59e0b, #fbbf24)' : activeBubbleTh.frameBg};">
                     <div class="agy-input-preview-sticker" style="position: absolute; ${previewStickerStyle} background-image: url('${safeCssUrl(activeBubbleTh.sticker || '')}'); background-size: contain; background-repeat: no-repeat; display: ${key !== 'minimal' && activeBubbleTh.sticker ? 'block' : 'none'}; pointer-events: none;"></div>
                     <div class="agy-input-preview-inner" style="background: ${previewInnerBg}; border-radius: 9px; padding: 8px 12px; font-size: 12px; color: #a1a1aa; display: flex; justify-content: space-between; align-items: center;">
@@ -2011,7 +2521,7 @@
                 ? 'right: 10px; bottom: 8px; width: 76px; height: 24px; background-position: center;'
                 : 'right: 12px; bottom: 4px; width: 42px; height: 38px; background-position: bottom center;';
               return `
-                <div class="agy-preset-card" data-name="${safeName}" style="border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${mCardBg}; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: border-color 0.15s ease;">
+                <div class="agy-preset-card" tabindex="0" role="button" aria-pressed="${isSelected}" data-name="${safeName}" style="border-radius: 12px; border: ${isSelected ? mCardSelBorder : '1px solid ' + mBorder}; background: ${mCardBg}; overflow: hidden; cursor: pointer; display: flex; flex-direction: column; transition: border-color 0.15s ease;">
                   <div style="height: 68px; width: 100%; background-image: ${thumbBg}; background-size: cover; background-position: ${th.bgPosition || 'center'}; position: relative; display: flex; align-items: flex-end; padding: 8px 14px; overflow: hidden;">
                     ${isVidThumb ? `<video src="${safeCssUrl(getVideoBlobUrl(th.wallpaper))}" autoplay loop muted playsinline style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none;"></video><div style="position: absolute; inset: 0; background: linear-gradient(180deg, rgba(16,13,23,0.12), rgba(16,13,23,0.72)); pointer-events: none;"></div>` : ''}
                     ${th.sticker ? `<div style="position: absolute; ${thumbOrnamentStyle} background-image: url('${safeCssUrl(th.sticker)}'); background-size: contain; background-repeat: no-repeat; pointer-events: none; z-index: 2;"></div>` : ''}
@@ -2110,6 +2620,13 @@
         renderThemePanels(container);
       });
     });
+
+    const focusVignetteToggle = container.querySelector('#agy-focus-vignette-toggle');
+    if (focusVignetteToggle) {
+      focusVignetteToggle.addEventListener('change', (e) => {
+        applyTheme({ focusVignette: e.target.checked });
+      });
+    }
 
     const zenToggle = container.querySelector('#agy-zen-toggle');
     if (zenToggle) {
@@ -2269,7 +2786,7 @@
             throw new Error('Config must be a JSON object');
           }
           const allowed = {};
-          const keys = ['themeName', 'bubbleName', 'inputStyle', 'dimming', 'wpEnabled', 'customWp', 'userAvatar', 'agentAvatar', 'glassBlur', 'avatarSize', 'avatarRadius', 'workspaceMode', 'chatOpacity', 'accentOverride', 'reducedMotion', 'zenMode'];
+          const keys = ['themeName', 'bubbleName', 'inputStyle', 'dimming', 'wpEnabled', 'customWp', 'userAvatar', 'agentAvatar', 'glassBlur', 'avatarSize', 'avatarRadius', 'workspaceMode', 'chatOpacity', 'accentOverride', 'reducedMotion', 'zenMode', 'focusVignette'];
           keys.forEach((k) => {
             if (parsed[k] !== undefined) allowed[k] = parsed[k];
           });
@@ -2299,6 +2816,7 @@
       localStorage.removeItem(STORAGE_ACCENT);
       localStorage.removeItem(STORAGE_REDUCED_MOTION);
       localStorage.removeItem(STORAGE_ZEN);
+      localStorage.removeItem(STORAGE_FOCUS_VIGNETTE);
       const defTheme = THEMES[DEFAULT_THEME_KEY] || {};
       const defDim = Number.isFinite(defTheme.defaultDimming) ? defTheme.defaultDimming : 69;
       const defBlur = parseFiniteInt(String(defTheme.headerBlur || '').replace(/[^\d]/g, ''), 3);
@@ -2318,13 +2836,24 @@
         chatOpacity: 0,
         accentOverride: '',
         reducedMotion: false,
-        zenMode: false
+        zenMode: false,
+        focusVignette: true
       });
       renderThemePanels(container);
     });
 
+    const bindCardActivation = (el, activate) => {
+      el.addEventListener('click', activate);
+      el.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          activate();
+        }
+      });
+    };
+
     container.querySelectorAll('.agy-preset-card').forEach(card => {
-      card.addEventListener('click', () => {
+      bindCardActivation(card, () => {
         const name = card.dataset.name;
         const picked = THEMES[name] || {};
         const nextOverrides = { themeName: name, bubbleName: name, customWp: '', chatOpacity: 0 };
@@ -2337,12 +2866,13 @@
     });
 
     container.querySelectorAll('.agy-bubble-card').forEach(card => {
-      card.addEventListener('click', () => {
+      bindCardActivation(card, () => {
         const name = card.dataset.name;
         applyTheme({ bubbleName: name });
 
         container.querySelectorAll('.agy-bubble-card').forEach(b => {
           const isSel = b.dataset.name === name;
+          b.setAttribute('aria-pressed', String(isSel));
           b.style.border = isSel ? mCardSelBorder : ('1px solid ' + mBorder);
           b.style.background = isSel ? mCardSelBg : mCardBg;
           const slot = b.querySelector('.agy-card-check-slot');
@@ -2354,12 +2884,13 @@
     });
 
     container.querySelectorAll('.agy-input-card').forEach(card => {
-      card.addEventListener('click', () => {
+      bindCardActivation(card, () => {
         const styleKey = card.dataset.style;
         applyTheme({ inputStyle: styleKey });
 
         container.querySelectorAll('.agy-input-card').forEach(c => {
           const isSel = c.dataset.style === styleKey;
+          c.setAttribute('aria-pressed', String(isSel));
           c.style.border = isSel ? mCardSelBorder : ('1px solid ' + mBorder);
           c.style.background = isSel ? mCardSelBg : mCardBg;
           const slot = c.querySelector('.agy-card-check-slot');
@@ -2936,6 +3467,7 @@
       }
     }
     syncShellMetrics();
+    syncFocusVignette();
   }
 
   function tick() {
@@ -2944,6 +3476,7 @@
     injectSettingsModalButton();
     hookSidebarScroll();
     hookShellMetrics();
+    syncFocusVignette();
     syncLivingMascot();
   }
 
@@ -2998,6 +3531,7 @@
     if (staleSettingsBtn) staleSettingsBtn.remove();
     cleanupLivingMascot();
     cleanupVideoWallpaper();
+    cleanupFocusVignette();
 
     window.__AGY_HOLE_EL__ = null;
     window.__AGY_SIDE_EL__ = null;

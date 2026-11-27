@@ -301,17 +301,30 @@ WshShell.Run daemonCmd, 0, False
         }
     }
 
+    $ProgramsDir = [Environment]::GetFolderPath('Programs')
+    $CustomStartShortcutPath = Join-Path $ProgramsDir 'Antigravity (Custom Theme).lnk'
+    $CustomSc = $WshShell.CreateShortcut($CustomStartShortcutPath)
+    $CustomSc.TargetPath = $WscriptExe
+    $CustomSc.Arguments = """$LauncherVbsPath"""
+    $CustomSc.WorkingDirectory = (Split-Path -Parent $AgyExe)
+    $CustomSc.IconLocation = "$AgyExe,0"
+    $CustomSc.WindowStyle = 1
+    $CustomSc.Description = 'Antigravity with Custom Theme (On-Demand)'
+    $CustomSc.Save()
+    Write-Host "[install-win] Created dedicated Start Menu shortcut (immune to Antigravity auto-repair): $CustomStartShortcutPath"
+
     $StateObj = [PSCustomObject]@{
-        mode           = 'on-demand'
-        antigravityExe = $AgyExe
-        launcherVbs    = $LauncherVbsPath
-        shortcuts      = @($SavedShortcuts.Values)
+        mode             = 'on-demand'
+        antigravityExe   = $AgyExe
+        launcherVbs      = $LauncherVbsPath
+        shortcuts        = @($SavedShortcuts.Values)
+        createdShortcuts = @($CustomStartShortcutPath)
     }
     $StateJson = $StateObj | ConvertTo-Json -Depth 5
     Set-Content -Path $LauncherStatePath -Value $StateJson -Encoding UTF8
 
     if ($PatchedCount -eq 0) {
-        Write-Warning "[install-win] No Antigravity.lnk shortcuts found to wrap. You can launch via $LauncherVbsPath directly."
+        Write-Warning "[install-win] No Antigravity.lnk shortcuts found to wrap. You can launch via $CustomStartShortcutPath or $LauncherVbsPath."
     }
 
     $ActivePortFile = Get-ActivePortFile

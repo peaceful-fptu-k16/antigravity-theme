@@ -84,6 +84,12 @@ function restoreWindowsShortcuts() {
             '    Write-Host ("[uninstall] Restored shortcut: " + $entry.shortcutPath)',
             '  }',
             '}',
+            'foreach ($createdPath in @($state.createdShortcuts)) {',
+            '  if ($createdPath -and (Test-Path $createdPath)) {',
+            '    Remove-Item -Path $createdPath -Force -ErrorAction SilentlyContinue',
+            '    Write-Host ("[uninstall] Removed custom shortcut: " + $createdPath)',
+            '  }',
+            '}',
         ].join('\n');
         const encoded = Buffer.from(psScript, 'utf16le').toString('base64');
         execSync(`powershell -NoProfile -NonInteractive -EncodedCommand ${encoded}`, { stdio: 'inherit' });
@@ -104,6 +110,11 @@ function removeAutoStart() {
         if (fs.existsSync(lnk)) {
             fs.unlinkSync(lnk);
             console.log(`[uninstall] Removed Windows Startup shortcut: ${lnk}`);
+        }
+        const customStartLnk = path.join(appData, 'Microsoft', 'Windows', 'Start Menu', 'Programs', 'Antigravity (Custom Theme).lnk');
+        if (fs.existsSync(customStartLnk)) {
+            fs.unlinkSync(customStartLnk);
+            console.log(`[uninstall] Removed Start Menu shortcut: ${customStartLnk}`);
         }
         if (fs.existsSync(VBS_FILE)) {
             fs.unlinkSync(VBS_FILE);

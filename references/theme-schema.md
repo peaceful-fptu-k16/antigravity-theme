@@ -46,12 +46,19 @@
 | `userAvatar` | string | Optional | Circular avatar (`assets/...` or `data:`) rendered next to `[data-testid="user-message"]` |
 | `agentAvatar` | string | Optional | Circular avatar (`assets/...` or `data:`) rendered top-left of `[data-testid="agent-response"]` |
 | `isLight` | boolean | Optional | Enables Light Mode Glass typography (`#0f172a` ink, frosted light pills, dark window controls) |
-| `uiTextColor`, `uiMutedColor` | css color | Optional | Override header/sidebar/body primary and muted ink (defaults adapt to `isLight`) |
+| `uiTextColor`, `uiSecondaryColor`, `uiMutedColor` | css color | Optional | Override header/sidebar/body primary, secondary, and muted ink (defaults adapt to `isLight`) |
 | `pillBg`, `pillHoverBg`, `pillTextColor`, `pillBorder` | css color | Optional | Custom styling for composer strip pills (`No Project`, `Local Checkout`, branch trigger) |
-| `defaultDimming` | number | Optional | Recommended default wallpaper dim % (e.g. `62` for Balanced Midnight presets) |
+| `defaultDimming` | number | Optional | Recommended default wallpaper dim % (e.g. `34` or `62`) |
+| `focusVignetteRgb` | `"R, G, B"` | Optional | Base RGB triplet for the soft radial Focus Vignette behind conversation & technical views |
 | `composerOnlyMascot` | boolean | Optional | Places the interactive living mascot exclusively above the composer (idle/thinking/success animations + petal burst) instead of repeating on every chat bubble |
 | `sidebarActiveBg` | rgba string | Optional | Highlight background for the active sidebar conversation row (paired with a left accent indicator) |
-| `codeBg`, `inlineCodeBg`, `inlineCodeColor` | css color | Optional | Custom surface and text colors for code blocks (`pre`) and inline code pills inside AI responses |
+| `refinedSurfaceTokens` | boolean | Optional | Opt-in flag to map centralized `--sakura-*` tokens and Antigravity native dark-surface, tooltip, terminal, and diff CSS variables |
+| `surfaceBg`, `surfaceRaisedBg` | css color | Optional | Primary and raised surface tokens (`--sakura-surface`, `--sakura-surface-raised`) |
+| `codeBg`, `codeHeaderBg`, `inlineCodeBg`, `inlineCodeColor` | css color | Optional | Custom surface, header, and text colors for code blocks (`pre`) and inline code pills inside AI responses |
+| `terminalBg`, `terminalFg`, `terminalCursor`, `terminalSelection` | css color | Optional | Terminal surface, foreground, cursor accent, and translucent selection highlight |
+| `popupBg`, `popupBorder` | css color | Optional | Shared opaque/elevated surface & border for menus, dropdowns, command palette, tooltips, and dialogs |
+| `successColor`, `warningColor`, `errorColor`, `infoColor` | css color | Optional | Semantic status accents used in design tokens, tooltips, and terminal/UI indicators |
+| `diffAddedBg`, `diffAddedTextBg`, `diffRemovedBg`, `diffRemovedTextBg`, `diffModifiedBg` | css color | Optional | Restrained semantic diff line & inline highlight backgrounds |
 
 ## Asset Resolution (`scripts/build_payload.py`)
 
