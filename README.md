@@ -1,119 +1,101 @@
-# Antigravity Custom Theme Skill
+# Theme Studio — Antigravity Plugin
 
-Turn any wallpaper, aesthetic mood, or color palette into a live, 60fps custom theme inside **Antigravity** — packaged as both a standalone cross-platform CDP theme engine and a drop-in **AI Agent Skill** (`SKILL.md`).
+Turn any wallpaper, 4K live video loop, aesthetic mood, or color palette into a live 60fps glassmorphic theme inside **Antigravity** — packaged as a native **Antigravity Plugin** with an interactive **MCP App UI**, zero-dependency Node.js MCP server, `/theme-studio` skill, `theme-designer` custom agent, and architectural guardrails.
 
-> Give your AI agent an image + vibe ("cosmic violin gold on deep midnight", "cozy Kyoto matcha", "cyberpunk neon cyan"), and let it extract the palette, stage assets, compile the payload, and hot-reload your Antigravity UI cleanly without touching Electron app binaries.
+## What This Plugin Bundles
 
-## Features
-
-- **Zero Live Blur Architecture (60fps Scroll):** Uses pre-baked offscreen canvas glass (`syncPrebakedGlass`) and gradient scrims instead of CSS `backdrop-filter: blur()`, preventing Electron/GPU scroll lag.
-- **Unified L-Glass + Split-Browser Safe:** Automatically detects Antigravity's split embedded Chromium view (`data-has-browser-hole`) and cuts an `evenodd` `clip-path` window so embedded pages never get tinted or blurred.
-- **Live Settings Modal:** Switch presets, upload custom wallpapers or **User / AI Agent circular avatars** (auto-compressed WebP), adjust scrim darkness, and persist choices to `theme_config.json`.
-- **Light & Dark Glass Modes:** Supports both deep dark themes and daytime bright palettes (`isLight: true`) with adaptive ink, frosted pills, and titlebar controls.
-- **Three Built-In Presets Included (default: `Sakura Midnight`):**
-  - `Sakura Midnight` — 4K Magical Sakura Tree seamless Dual-Video Crossfade Loop (`themes/assets/magical_sakura_4k.mp4`), Midnight Plum 92% cards, interactive roaming **Living Sakura Kitsune** mascot (strolls along the composer bar, drag-and-drop placement, click to pet with sakura burst, double-click for Studio, plus `idle` / `listening` / `thinking` / `success` states), Adaptive Workspace Modes (`Focus` / `Balanced` / `Immersive`), and Zen Mode (`Ctrl+Shift+Z`)
-  - `WLOP Cosmic` — 2K starlight wallpaper + custom SVG flourishes (`themes/assets/wlop_cosmic_2k.webp`)
-  - `Midnight Obsidian` — Ultra-light zero-image pure-CSS gradient preset
-- **4K Live Video & GIF Streaming:** Local HTTP Range (`206 Partial Content`) media server inside `daemon/theme_daemon.js` streams large 4K `.mp4`/`.webm` wallpapers on `127.0.0.1` without bloating `dist/theme_payload.js`, paired with GPU Dual-Video Crossfade looping for zero-stutter transitions.
-- **Data/Engine Separation:** Add your own themes solely inside `themes/themes.json` + `themes/assets/` and compile via `scripts/build_payload.py`.
-- **Cross-Platform Daemon (`daemon/theme_daemon.js`):** Windows, macOS, and Linux support using Node >= 22 built-in `WebSocket` (supports `--exit-on-close` On-Demand mode).
+| Component | Path | What It Provides |
+| :--- | :--- | :--- |
+| **Plugin Manifest** | `plugin.json` | Native Antigravity plugin metadata, SVG icon (`assets/logo.svg`), and 3 starter prompt chips. |
+| **MCP Server + App UI** | `mcp_config.json`, `scripts/mcp-server.mjs`, `assets/studio-app.html` | Pure Node.js (>= 22) stdio MCP server (`theme-studio_studio`) exposing 10 theme management tools, an embedded CDP injector + HTTP Range 4K video server, and the **Theme Studio** UI panel in the side pane (`+`) and left sidebar. |
+| **Skill** | `skills/theme-studio/SKILL.md` | `/theme-studio` slash command + full schema reference (`references/theme-schema.md`). |
+| **Custom Agent** | `agents/theme-designer.md` | Dedicated `theme-designer` primary/subagent specialized in crafting cohesive glassmorphic themes. |
+| **Rule** | `rules/theme-architecture.md` | Model-decision guardrails enforcing Zero Live Blur, Split-Browser Cutout, and Data-Only authoring. |
+| **Built-In Presets (63)** | `themes/themes.json`, `themes/assets/` | 3 flagship presets (`Sakura Midnight` 4K video + living kitsune, `WLOP Cosmic` 2K art, `Midnight Obsidian`) + **60 verified iconic developer themes** (Catppuccin, Tokyo Night, Rosé Pine, Kanagawa, Everforest, Nord, Gruvbox, Solarized, GitHub Primer, Ayu, One Dark/Light, Flexoki, Nightfox, Dracula, Monokai Pro, SynthWave '84, Vesper, Oxocarbon, Poimandres, Cobalt2, Aura, Cyberdream, Eldritch, etc. — 51 Dark + 12 Light Glass) with custom SVG corner ornaments. |
 
 ## Prerequisites
 
-- **Antigravity** running with CDP debugging port active (`DevToolsActivePort`)
-- **Node.js >= 22** (uses native `globalThis.WebSocket`, zero `npm install` needed)
-- **Python 3.9+** (optional `Pillow` package recommended for auto-compressing large >2K wallpapers into WebP)
+- **Node.js >= 22** (uses native `globalThis.WebSocket`, zero `npm install` needed at runtime)
+- **Antigravity launched with `--remote-debugging-port=0`** for live Electron shell injection (`DevToolsActivePort`)
+- Optional: **Python 3 + Pillow** for automatic >2K raster downscaling and WebP compression when adding large custom wallpapers (pure Node.js fallback works without Python)
 
-## Quick Start
+## Installation
 
-### 1. Build the Runtime Payload
-
-```bash
-python scripts/build_payload.py
-```
-
-This resolves `themes/themes.json` + `themes/assets/*` and compiles them with `engine/core.js` into gitignored `dist/theme_payload.js`.
-
-### 2. Install & Run the Daemon
-
-**Windows (PowerShell):**
-
-```powershell
-powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1
-```
-
-By default, this installs the **On-Demand Launcher** (no Windows Startup entry, zero background process when Antigravity is closed): it wraps your `Antigravity.lnk` shortcuts (Desktop / Start Menu / Taskbar) via a generated hidden `launch-antigravity.vbs` that launches `Antigravity.exe --remote-debugging-port=0` together with `theme_daemon.js --exit-on-close`, so the daemon starts automatically whenever you open Antigravity and exits automatically once Antigravity closes. Pass `-Startup` if you prefer the legacy always-on Windows Startup daemon, or `-NoStartup` to run only for the current session.
-
-**macOS / Linux (Bash):**
+### From Local Folder or GitHub (Antigravity CLI)
 
 ```bash
-bash scripts/install-unix.sh
+# Validate the plugin bundle
+agy plugin validate --strict .
+
+# Install from this local repository
+agy plugin install .
+
+# Or install directly from GitHub
+agy plugin install https://github.com/peaceful-fptu-k16/antigravity-theme
+
+# Verify installation
+agy plugin list
 ```
 
-- On **macOS**, installs a `~/Library/LaunchAgents/io.antigravity.custom-theme.plist` LaunchAgent.
-- On **Linux**, installs a `systemd --user` service (or falls back to `nohup`).
-- Use `bash scripts/install-unix.sh --foreground` to run interactively in your terminal, `node daemon/theme_daemon.js --exit-on-close` for on-demand single-session use, or `stop` / `status`.
+### Manual Global / Workspace Install
 
-> **Platform Testing Note:** Windows (`install-win.ps1`, CDP hot-reload, uninstall) has been verified live against Antigravity on Windows 11. macOS (`launchd`) and Linux (`systemd --user`) scripts are implemented and shell-syntax verified, and welcome community runtime feedback across macOS/Linux setups (you can override `DevToolsActivePort` location anytime via `AGY_PORT_FILE=/path/to/DevToolsActivePort`).
+- **Global:** Copy this folder to `~/.gemini/config/plugins/theme-studio/`
+- **Workspace:** Copy this folder to `.agents/plugins/theme-studio/`
 
-### 3. Verify Live via CDP
+All user config (`theme_config.json`), custom presets (`themes/themes.json`), staged custom assets (`themes/assets/`), compiled payloads (`dist/theme_payload.js`), and logs live in persistent `${PLUGIN_DATA}` so plugin updates never overwrite your themes.
 
-```bash
-node scripts/verify_cdp.js
-```
+## Usage
 
-### 4. Uninstall Cleanly
+### 1. Open Theme Studio UI
 
-```bash
-node scripts/uninstall.js
-```
+- Open **Theme Studio** from the left sidebar or the side pane **`+`** menu, or ask the agent to call `open_studio`.
+- Switch presets, tune Workspace Mode (`Focus` / `Balanced` / `Immersive`), dimming, pre-baked glass blur, accent overrides, Focus Vignette, Zen Mode (`Ctrl+Shift+Z`), and Reduced Motion live.
 
-Removes auto-start shortcuts/services, stops the background daemon, and immediately restores Antigravity's default styling on open windows.
+### 2. Design Custom Themes with the Agent
 
-## Troubleshooting: Theme Disappeared After an Antigravity Update
+- Invoke `/theme-studio` in chat or select the `theme-designer` agent (`agy --agent theme-designer`).
+- Give the agent a wallpaper image or mood (e.g., *"Create a dark emerald Kyoto night glass theme and activate it"*). It uses `theme_create_preset` to validate tokens, stage assets into `${PLUGIN_DATA}`, compile `theme_payload.js`, hot-reload live windows, and run `theme_verify_cdp`.
 
-Starting with **Antigravity v2.33.0+**, Antigravity no longer creates `DevToolsActivePort` by default unless launched with `--remote-debugging-port=0`, and the built-in auto-updater restarts `Antigravity.exe --updated` without shortcut flags.
+### 3. Enable Live Shell Injection (`--remote-debugging-port=0`)
 
-- **Windows:**
-  1. Re-run `powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1` (it automatically patches `--remote-debugging-port=0` onto your `Antigravity.lnk` shortcuts in Start Menu, Desktop, Startup, and Taskbar).
-  2. **Quit Antigravity completely** (right-click the System Tray icon -> **Quit**) and reopen it from the **Start Menu**.
-  3. If you use a **Taskbar pin**, **Unpin** the old icon and re-pin it from the Start Menu `Antigravity` shortcut so the `--remote-debugging-port=0` flag is preserved.
+Starting with **Antigravity v2.33.0+**, Antigravity only opens `DevToolsActivePort` when started with `--remote-debugging-port=0`.
+
+- **Windows (On-Demand Launcher — zero Windows Startup entries):**
+  ```powershell
+  powershell -ExecutionPolicy Bypass -File scripts/install-win.ps1
+  ```
+  Quit Antigravity completely (**System Tray -> Quit**) and reopen from the Start Menu or Desktop. Pass `-Startup` for always-on OS startup.
 - **macOS / Linux:**
-  - Start Antigravity with `--remote-debugging-port=0` (`open -a Antigravity --args --remote-debugging-port=0` on macOS, or append `--remote-debugging-port=0` to the `Exec=` command in your `.desktop` entry on Linux).
+  ```bash
+  bash scripts/install-unix.sh
+  ```
+  Launch Antigravity with `--remote-debugging-port=0` (`open -a Antigravity --args --remote-debugging-port=0` on macOS, or add it to `Exec=` in your `.desktop` entry on Linux).
 
-## Use as an Antigravity Skill (`SKILL.md`)
+### 4. Standalone CLI & Tests
 
-Copy or clone this repository into either:
+```bash
+# Compile payload manually (pure Node.js)
+node scripts/build-payload.mjs
 
-- **Global skill directory:** `~/.gemini/config/skills/antigravity-custom-theme/`
-- **Workspace skill directory:** `.agents/skills/antigravity-custom-theme/`
+# Verify live CDP injection & Zero-Live-Blur compliance
+node scripts/verify-cdp.mjs
 
-Once installed, simply prompt your Antigravity agent with an image and aesthetic preference (e.g., *"Use `antigravity-custom-theme` to build me a dark emerald studio Ghibli theme from this image"*). The agent reads `SKILL.md` + `references/theme-schema.md`, creates your preset in `themes/`, builds `dist/theme_payload.js`, and verifies it via `verify_cdp.js`.
+# Remove standalone OS launchers, stop daemon, and strip live styles
+node scripts/uninstall.mjs
 
-## Repository Structure
+# Rebuild the bundled Studio MCP App HTML (dev only, requires bun)
+node scripts/build-studio-ui.mjs
 
-```text
-antigravity-custom-theme-skill/
-├── SKILL.md                    # Agent skill definition & workflow
-├── README.md
-├── LICENSE                     # MIT
-├── references/
-│   └── theme-schema.md         # themes.json schema & DOM notes
-├── themes/
-│   ├── themes.json             # Sample theme presets
-│   └── assets/                 # Wallpapers & SVG stickers/corners
-├── engine/
-│   └── core.js                 # Core injection engine (Zero Live Blur + UI)
-├── daemon/
-│   └── theme_daemon.js         # Cross-platform CDP injector & config persistence
-├── scripts/
-│   ├── build_payload.py        # Compiles themes.json + core.js -> dist/theme_payload.js
-│   ├── install-win.ps1         # Windows Startup launcher setup
-│   ├── install-unix.sh         # macOS LaunchAgent / Linux systemd user setup
-│   ├── uninstall.js            # Clean cross-platform removal
-│   └── verify_cdp.js           # Live CDP diagnostic & assertion check
-└── dist/                       # Gitignored compiled runtime output
+# Run automated test suite
+node --test test/plugin.test.mjs
 ```
+
+## Architecture Highlights
+
+- **Zero Live Blur (60fps Scroll):** Pre-bakes blurred sidebar/header strips onto offscreen `<canvas>` instead of applying CSS `backdrop-filter: blur(...)` to scrollable panes.
+- **Split-Browser Safe Cutout:** Detects `body[data-has-browser-hole="true"]` and applies an `evenodd` `clip-path` window so embedded Chromium views stay sharp and untinted.
+- **4K HTTP Range Streaming:** Serves built-in (`${PLUGIN_ROOT}/themes/assets`) and user (`${PLUGIN_DATA}/themes/assets`) `.mp4`/`.webm` wallpapers over `127.0.0.1` with `206 Partial Content` streaming and GPU dual-video crossfade looping.
+- **Read-Only Plugin Safe:** Separates immutable plugin files (`${PLUGIN_ROOT}`) from mutable user state (`${PLUGIN_DATA}`).
 
 ## License
 

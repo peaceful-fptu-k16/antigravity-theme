@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128" fill="none">
+  <defs>
+    <linearGradient id="bgGrad" x1="16" y1="16" x2="112" y2="112" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#221632"/>
+      <stop offset="55%" stop-color="#171126"/>
+      <stop offset="100%" stop-color="#11182c"/>
+    </linearGradient>
+    <linearGradient id="ringGrad" x1="20" y1="18" x2="108" y2="110" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#f472b6"/>
+      <stop offset="50%" stop-color="#c084fc"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="petalGrad" x1="64" y1="28" x2="64" y2="96" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#fdf2f8"/>
+      <stop offset="48%" stop-color="#f472b6"/>
+      <stop offset="100%" stop-color="#c084fc"/>
+    </linearGradient>
+  </defs>
+  <!-- ~10% transparent outer margin around 102x102 rounded square -->
+  <rect x="13" y="13" width="102" height="102" rx="26" fill="url(#bgGrad)" stroke="url(#ringGrad)" stroke-width="4"/>
+  <!-- Frosted inner glass frame -->
+  <rect x="23" y="23" width="82" height="82" rx="18" fill="rgba(255,255,255,0.04)" stroke="rgba(249,234,243,0.16)" stroke-width="1.5"/>
+  <!-- Stylized 4-point star / blossom prism emblem -->
+  <path d="M64 31 C68 49, 79 60, 97 64 C79 68, 68 79, 64 97 C60 79, 49 68, 31 64 C49 60, 60 49, 64 31 Z" fill="url(#petalGrad)"/>
+  <circle cx="64" cy="64" r="9" fill="#171126" stroke="#fde047" stroke-width="3"/>
+  <!-- Accent palette dots -->
+  <circle cx="38" cy="38" r="4.5" fill="#fbbf24"/>
+  <circle cx="90" cy="38" r="4.5" fill="#38bdf8"/>
+  <circle cx="90" cy="90" r="4.5" fill="#f472b6"/>
+</svg>
