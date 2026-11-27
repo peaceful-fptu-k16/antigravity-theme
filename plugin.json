@@ -1,0 +1,27 @@
+{
+  "$schema": "https://antigravity.google/schemas/v1/plugin.json",
+  "name": "theme-studio",
+  "displayName": "Theme Studio",
+  "version": "2.0.0",
+  "description": "Zero-live-blur glassmorphic theme engine, 4K live wallpaper streamer, interactive Studio UI, and custom preset creator.",
+  "logo": "assets/logo.svg",
+  "suggestedPrompts": [
+    "Open Theme Studio and check my current theme and CDP status",
+    "Switch my theme to WLOP Cosmic in Focus mode with 60% dimming",
+    "Design a custom dark emerald Kyoto night glass theme preset and activate it"
+  ],
+  "author": {
+    "name": "peaceful-fptu-k16",
+    "url": "https://github.com/peaceful-fptu-k16"
+  },
+  "homepage": "https://github.com/peaceful-fptu-k16/antigravity-theme",
+  "repository": "https://github.com/peaceful-fptu-k16/antigravity-theme",
+  "license": "MIT",
+  "keywords": [
+    "theme",
+    "wallpaper",
+    "glassmorphism",
+    "customization",
+    "ui"
+  ]
+}

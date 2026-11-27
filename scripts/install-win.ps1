@@ -1,20 +1,34 @@
 param(
     [switch]$Startup,
     [switch]$NoStartup,
-    [string]$NodePath = ''
+    [string]$NodePath = '',
+    [string]$DataDir = ''
 )
 
 $ErrorActionPreference = 'Stop'
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
-$RepoRoot = Split-Path -Parent $ScriptDir
-$DaemonJs = Join-Path $RepoRoot 'daemon\theme_daemon.js'
-$PayloadJs = Join-Path $RepoRoot 'dist\theme_payload.js'
-$BuildPy = Join-Path $RepoRoot 'scripts\build_payload.py'
-$PidFile = Join-Path $RepoRoot 'daemon.pid'
-$VbsPath = Join-Path $RepoRoot 'silent-start.vbs'
-$LauncherVbsPath = Join-Path $RepoRoot 'launch-antigravity.vbs'
-$LauncherStatePath = Join-Path $RepoRoot 'launcher_state.json'
+$PluginRoot = Split-Path -Parent $ScriptDir
+$DaemonJs = Join-Path $PluginRoot 'scripts\theme-daemon.mjs'
+$BuildJs = Join-Path $PluginRoot 'scripts\build-payload.mjs'
+
+if (-not $DataDir) {
+    if ($env:PLUGIN_DATA) {
+        $DataDir = $env:PLUGIN_DATA
+    } elseif ($env:AGY_THEME_DATA_DIR) {
+        $DataDir = $env:AGY_THEME_DATA_DIR
+    } else {
+        $DataDir = Join-Path $env:USERPROFILE '.gemini\antigravity\plugin_data\theme-studio'
+    }
+}
+
+New-Item -ItemType Directory -Force -Path $DataDir | Out-Null
+
+$PayloadJs = Join-Path $DataDir 'dist\theme_payload.js'
+$PidFile = Join-Path $DataDir 'daemon.pid'
+$VbsPath = Join-Path $DataDir 'silent-start.vbs'
+$LauncherVbsPath = Join-Path $DataDir 'launch-antigravity.vbs'
+$LauncherStatePath = Join-Path $DataDir 'launcher_state.json'
 
 function Test-NodeBinary {
     param([string]$CandidatePath)
@@ -68,20 +82,13 @@ function Find-NodeExe {
 
 $NodeExe = Find-NodeExe
 Write-Host "[install-win] Using Node.js: $NodeExe"
+Write-Host "[install-win] Plugin root:   $PluginRoot"
+Write-Host "[install-win] Data dir:      $DataDir"
 
-if (-not (Test-Path $PayloadJs)) {
-    $PyCmd = Get-Command python -ErrorAction SilentlyContinue
-    if (-not $PyCmd) {
-        $PyCmd = Get-Command python3 -ErrorAction SilentlyContinue
-    }
-    if (-not $PyCmd) {
-        Write-Error "dist/theme_payload.js is missing and Python was not found to build it."
-    }
-    Write-Host "[install-win] Building dist/theme_payload.js..."
-    & $PyCmd.Source $BuildPy
-    if ($LASTEXITCODE -ne 0) {
-        Write-Error "build_payload.py failed with exit code $LASTEXITCODE."
-    }
+Write-Host "[install-win] Compiling runtime payload..."
+& $NodeExe $BuildJs --root-dir $PluginRoot --data-dir $DataDir
+if ($LASTEXITCODE -ne 0) {
+    Write-Error "build-payload.mjs failed with exit code $LASTEXITCODE."
 }
 
 if (Test-Path $PidFile) {
@@ -109,7 +116,6 @@ $ShortcutSearchDirs = @(
     (Join-Path $env:APPDATA 'Microsoft\Internet Explorer\Quick Launch\User Pinned\TaskBar')
 ) | Where-Object { $_ -and (Test-Path $_) } | Select-Object -Unique
 
-# Load any previous shortcut backup state so re-running install-win.ps1 stays idempotent.
 $SavedShortcuts = @{}
 $SavedAgyExe = ''
 if (Test-Path $LauncherStatePath) {
@@ -170,16 +176,16 @@ function Get-ActivePortFile {
 
 $EscapedNode = $NodeExe.Replace('"', '""')
 $EscapedDaemon = $DaemonJs.Replace('"', '""')
-$EscapedRepo = $RepoRoot.Replace('"', '""')
+$EscapedRoot = $PluginRoot.Replace('"', '""')
+$EscapedData = $DataDir.Replace('"', '""')
 $StartupDir = [Environment]::GetFolderPath('Startup')
 $StartupShortcutPath = Join-Path $StartupDir 'AntigravityCustomTheme.lnk'
 
 if ($Startup) {
-    # Legacy Always-On Startup Mode (opt-in via -Startup)
     $VbsContent = @"
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = "$EscapedRepo"
-WshShell.Run """$EscapedNode"" ""$EscapedDaemon""", 0, False
+WshShell.CurrentDirectory = "$EscapedRoot"
+WshShell.Run """$EscapedNode"" ""$EscapedDaemon"" --root-dir ""$EscapedRoot"" --data-dir ""$EscapedData""", 0, False
 "@
     Set-Content -Path $VbsPath -Value $VbsContent -Encoding Unicode
 
@@ -201,32 +207,29 @@ WshShell.Run """$EscapedNode"" ""$EscapedDaemon""", 0, False
     $Shortcut = $WshShell.CreateShortcut($StartupShortcutPath)
     $Shortcut.TargetPath = 'wscript.exe'
     $Shortcut.Arguments = """$VbsPath"""
-    $Shortcut.WorkingDirectory = $RepoRoot
+    $Shortcut.WorkingDirectory = $DataDir
     $Shortcut.WindowStyle = 7
-    $Shortcut.Description = 'Antigravity Custom Theme Daemon'
+    $Shortcut.Description = 'Theme Studio CDP Daemon'
     $Shortcut.Save()
     Write-Host "[install-win] Startup shortcut created: $StartupShortcutPath"
 
     Write-Host "[install-win] Launching daemon via wscript.exe..."
-    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $RepoRoot
+    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $DataDir
 } elseif ($NoStartup) {
-    # Current-session only (no OS startup, no shortcut wrapping)
     $VbsContent = @"
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = "$EscapedRepo"
-WshShell.Run """$EscapedNode"" ""$EscapedDaemon"" --exit-on-close", 0, False
+WshShell.CurrentDirectory = "$EscapedRoot"
+WshShell.Run """$EscapedNode"" ""$EscapedDaemon"" --root-dir ""$EscapedRoot"" --data-dir ""$EscapedData"" --exit-on-close", 0, False
 "@
     Set-Content -Path $VbsPath -Value $VbsContent -Encoding Unicode
     Write-Host "[install-win] Launching on-demand daemon for current session..."
-    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $RepoRoot
+    Start-Process -FilePath 'wscript.exe' -ArgumentList """$VbsPath""" -WorkingDirectory $DataDir
 } else {
-    # Default: Fully Automatic On-Demand Launcher (NO Windows Startup, auto-starts with Antigravity, auto-exits on close)
     $AgyExe = Find-AntigravityExe
     if (-not $AgyExe) {
         Write-Error "Antigravity.exe could not be located. Start Antigravity once or pass -Startup."
     }
 
-    # Remove any legacy Windows Startup shortcut so daemon never starts with Windows.
     if (Test-Path $StartupShortcutPath) {
         Remove-Item $StartupShortcutPath -Force -ErrorAction SilentlyContinue
         Write-Host "[install-win] Removed legacy Windows Startup shortcut: $StartupShortcutPath"
@@ -240,7 +243,7 @@ WshShell.Run """$EscapedNode"" ""$EscapedDaemon"" --exit-on-close", 0, False
 Option Explicit
 Dim WshShell, i, extraArgs, agyCmd, daemonCmd
 Set WshShell = CreateObject("WScript.Shell")
-WshShell.CurrentDirectory = "$EscapedRepo"
+WshShell.CurrentDirectory = "$EscapedRoot"
 
 extraArgs = ""
 For i = 0 To WScript.Arguments.Count - 1
@@ -248,7 +251,7 @@ For i = 0 To WScript.Arguments.Count - 1
 Next
 
 agyCmd = """$EscapedAgy"" --remote-debugging-port=0" & extraArgs
-daemonCmd = """$EscapedNode"" ""$EscapedDaemon"" --exit-on-close"
+daemonCmd = """$EscapedNode"" ""$EscapedDaemon"" --root-dir ""$EscapedRoot"" --data-dir ""$EscapedData"" --exit-on-close"
 
 WshShell.Run agyCmd, 1, False
 WshShell.Run daemonCmd, 0, False
@@ -265,7 +268,7 @@ WshShell.Run daemonCmd, 0, False
                 $ScPath = $_.FullName
                 $Sc = $WshShell.CreateShortcut($ScPath)
                 $IsDirectAgy = $Sc.TargetPath -and ($Sc.TargetPath -imatch '\\Antigravity\.exe$')
-                $IsAlreadyWrapped = ($Sc.TargetPath -imatch '\\wscript\.exe$') -and ($Sc.Arguments -like "*$LauncherVbsPath*")
+                $IsAlreadyWrapped = ($Sc.TargetPath -imatch '\\wscript\.exe$') -and ($Sc.Arguments -like "*launch-antigravity.vbs*")
 
                 if ($IsDirectAgy -or $IsAlreadyWrapped) {
                     if ($IsDirectAgy -and -not $SavedShortcuts.ContainsKey($ScPath)) {
@@ -295,9 +298,7 @@ WshShell.Run daemonCmd, 0, False
                     $PatchedCount++
                     Write-Host "[install-win] Bound on-demand launcher to shortcut: $ScPath"
                 }
-            } catch {
-                # Ignore unreadable or protected shortcuts
-            }
+            } catch {}
         }
     }
 
@@ -309,9 +310,9 @@ WshShell.Run daemonCmd, 0, False
     $CustomSc.WorkingDirectory = (Split-Path -Parent $AgyExe)
     $CustomSc.IconLocation = "$AgyExe,0"
     $CustomSc.WindowStyle = 1
-    $CustomSc.Description = 'Antigravity with Custom Theme (On-Demand)'
+    $CustomSc.Description = 'Antigravity with Theme Studio (On-Demand)'
     $CustomSc.Save()
-    Write-Host "[install-win] Created dedicated Start Menu shortcut (immune to Antigravity auto-repair): $CustomStartShortcutPath"
+    Write-Host "[install-win] Created dedicated Start Menu shortcut: $CustomStartShortcutPath"
 
     $StateObj = [PSCustomObject]@{
         mode             = 'on-demand'
@@ -324,21 +325,21 @@ WshShell.Run daemonCmd, 0, False
     Set-Content -Path $LauncherStatePath -Value $StateJson -Encoding UTF8
 
     if ($PatchedCount -eq 0) {
-        Write-Warning "[install-win] No Antigravity.lnk shortcuts found to wrap. You can launch via $CustomStartShortcutPath or $LauncherVbsPath."
+        Write-Warning "[install-win] No Antigravity.lnk shortcuts found to wrap. Launch via $CustomStartShortcutPath or $LauncherVbsPath."
     }
 
     $ActivePortFile = Get-ActivePortFile
     if ($ActivePortFile) {
         Write-Host "[install-win] Active Antigravity CDP session detected; attaching daemon (--exit-on-close)..."
-        $AttachVbs = "Set WshShell = CreateObject(""WScript.Shell""): WshShell.CurrentDirectory = ""$EscapedRepo"": WshShell.Run """"""$EscapedNode"""" """"$EscapedDaemon"""" --exit-on-close"", 0, False"
+        $AttachVbs = "Set WshShell = CreateObject(""WScript.Shell""): WshShell.CurrentDirectory = ""$EscapedRoot"": WshShell.Run """"""$EscapedNode"""" """"$EscapedDaemon"""" --root-dir """"$EscapedRoot"""" --data-dir """"$EscapedData"""" --exit-on-close"", 0, False"
         $TmpAttach = Join-Path $env:TEMP "agy_attach_$(Get-Random).vbs"
         Set-Content -Path $TmpAttach -Value $AttachVbs -Encoding Unicode
-        Start-Process -FilePath 'wscript.exe' -ArgumentList """$TmpAttach""" -WorkingDirectory $RepoRoot
+        Start-Process -FilePath 'wscript.exe' -ArgumentList """$TmpAttach""" -WorkingDirectory $DataDir
         Start-Sleep -Milliseconds 600
         Remove-Item $TmpAttach -Force -ErrorAction SilentlyContinue
     } else {
         Write-Host "[install-win] Setup complete (On-Demand mode, zero Windows Startup)."
-        Write-Host "[install-win] Quit Antigravity completely (System Tray -> Quit) and reopen it from Desktop or Start Menu to activate your theme automatically."
+        Write-Host "[install-win] Quit Antigravity completely (System Tray -> Quit) and reopen from Desktop or Start Menu."
         exit 0
     }
 }
@@ -351,14 +352,11 @@ for ($i = 0; $i -lt 15; $i++) {
         if ([int]::TryParse(($NewPidText -as [string]), [ref]$NewPid) -and $NewPid -gt 0) {
             if (Get-Process -Id $NewPid -ErrorAction SilentlyContinue) {
                 Write-Host "[install-win] Daemon running silently (PID $NewPid)."
-                if (-not (Get-ActivePortFile)) {
-                    Write-Host "[install-win] Note: DevToolsActivePort not found yet. Quit Antigravity completely (System Tray -> Quit) and reopen it from Start Menu."
-                }
                 exit 0
             }
         }
     }
 }
 
-Write-Warning "[install-win] Daemon did not write daemon.pid in time. Check $RepoRoot\daemon.log."
+Write-Warning "[install-win] Daemon did not write daemon.pid in time. Check $DataDir\daemon.log."
 exit 1

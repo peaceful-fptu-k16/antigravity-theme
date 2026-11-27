@@ -2,12 +2,14 @@
 set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
-DAEMON_JS="$REPO_ROOT/daemon/theme_daemon.js"
-PAYLOAD_JS="$REPO_ROOT/dist/theme_payload.js"
-BUILD_PY="$REPO_ROOT/scripts/build_payload.py"
-PID_FILE="$REPO_ROOT/daemon.pid"
-LOG_FILE="$REPO_ROOT/daemon.log"
+PLUGIN_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
+DATA_DIR="${PLUGIN_DATA:-${AGY_THEME_DATA_DIR:-$HOME/.gemini/antigravity/plugin_data/theme-studio}}"
+mkdir -p "$DATA_DIR"
+
+DAEMON_JS="$PLUGIN_ROOT/scripts/theme-daemon.mjs"
+BUILD_JS="$PLUGIN_ROOT/scripts/build-payload.mjs"
+PID_FILE="$DATA_DIR/daemon.pid"
+LOG_FILE="$DATA_DIR/daemon.log"
 
 SERVICE_LABEL="io.antigravity.custom-theme"
 SYSTEMD_UNIT="antigravity-custom-theme.service"
@@ -29,20 +31,9 @@ find_node() {
 }
 
 ensure_payload() {
-    if [ -f "$PAYLOAD_JS" ]; then
-        return 0
-    fi
-    local py_bin=""
-    if command -v python3 >/dev/null 2>&1; then
-        py_bin="$(command -v python3)"
-    elif command -v python >/dev/null 2>&1; then
-        py_bin="$(command -v python)"
-    else
-        echo "[install-unix] Error: dist/theme_payload.js missing and python3/python not found." >&2
-        exit 1
-    fi
-    echo "[install-unix] Building dist/theme_payload.js..."
-    "$py_bin" "$BUILD_PY"
+    local node_bin="$1"
+    echo "[install-unix] Building runtime payload into $DATA_DIR/dist/theme_payload.js..."
+    "$node_bin" "$BUILD_JS" --root-dir "$PLUGIN_ROOT" --data-dir "$DATA_DIR"
 }
 
 stop_existing_pid() {
@@ -75,9 +66,13 @@ install_macos() {
     <array>
         <string>$node_bin</string>
         <string>$DAEMON_JS</string>
+        <string>--root-dir</string>
+        <string>$PLUGIN_ROOT</string>
+        <string>--data-dir</string>
+        <string>$DATA_DIR</string>
     </array>
     <key>WorkingDirectory</key>
-    <string>$REPO_ROOT</string>
+    <string>$PLUGIN_ROOT</string>
     <key>RunAtLoad</key>
     <true/>
     <key>KeepAlive</key>
@@ -110,13 +105,13 @@ install_linux() {
 
         cat > "$unit_path" <<EOF
 [Unit]
-Description=Antigravity Custom Theme Daemon
+Description=Theme Studio CDP Daemon
 After=graphical-session.target
 
 [Service]
 Type=simple
-WorkingDirectory="$REPO_ROOT"
-ExecStart="$node_bin" "$DAEMON_JS"
+WorkingDirectory="$PLUGIN_ROOT"
+ExecStart="$node_bin" "$DAEMON_JS" --root-dir "$PLUGIN_ROOT" --data-dir "$DATA_DIR"
 Restart=always
 RestartSec=3
 
@@ -129,7 +124,7 @@ EOF
         echo "[install-unix] systemd user service active: $unit_path"
     else
         echo "[install-unix] systemd --user unavailable; starting background process with nohup."
-        nohup "$node_bin" "$DAEMON_JS" >> "$LOG_FILE" 2>&1 &
+        nohup "$node_bin" "$DAEMON_JS" --root-dir "$PLUGIN_ROOT" --data-dir "$DATA_DIR" >> "$LOG_FILE" 2>&1 &
         echo "[install-unix] Daemon started (PID $!). Logs: $LOG_FILE"
     fi
 }
@@ -138,9 +133,9 @@ cmd="${1:-install}"
 case "$cmd" in
     --foreground|foreground|run)
         NODE_BIN="$(find_node)"
-        ensure_payload
+        ensure_payload "$NODE_BIN"
         stop_existing_pid
-        exec "$NODE_BIN" "$DAEMON_JS"
+        exec "$NODE_BIN" "$DAEMON_JS" --root-dir "$PLUGIN_ROOT" --data-dir "$DATA_DIR"
         ;;
     stop)
         if [ "$(uname -s)" = "Darwin" ]; then
@@ -164,7 +159,7 @@ case "$cmd" in
         ;;
     install)
         NODE_BIN="$(find_node)"
-        ensure_payload
+        ensure_payload "$NODE_BIN"
         stop_existing_pid
         OS_NAME="$(uname -s)"
         case "$OS_NAME" in
@@ -172,7 +167,7 @@ case "$cmd" in
             Linux)  install_linux "$NODE_BIN" ;;
             *)
                 echo "[install-unix] Unsupported OS '$OS_NAME' for auto-start; running in background."
-                nohup "$NODE_BIN" "$DAEMON_JS" >> "$LOG_FILE" 2>&1 &
+                nohup "$NODE_BIN" "$DAEMON_JS" --root-dir "$PLUGIN_ROOT" --data-dir "$DATA_DIR" >> "$LOG_FILE" 2>&1 &
                 ;;
         esac
         ;;
